@@ -31,7 +31,7 @@
     }
 
     .screen {
-      width: min(100%, 1160px);
+      width: min(100%, 1320px);
       min-width: 0;
     }
 
@@ -44,8 +44,8 @@
     }
 
     .comparison {
-      width: 1069px;
-      height: 685px;
+      width: 1253px;
+      height: 741px;
       margin: 0 auto;
       position: relative;
       background: var(--page);
@@ -66,8 +66,8 @@
       position: absolute;
       left: 0;
       top: 0;
-      width: 1069px;
-      height: 685px;
+      width: 1253px;
+      height: 741px;
       background:
         linear-gradient(
           90deg,
@@ -98,7 +98,7 @@
     }
 
     .segment-title--light {
-      left: 680px;
+      left: 786px;
       color: #000;
     }
 
@@ -118,6 +118,7 @@
     .product:nth-of-type(3) { left: 520px; }
     .product:nth-of-type(4) { left: 704px; }
     .product:nth-of-type(5) { left: 888px; }
+    .product:nth-of-type(6) { left: 1072px; }
 
     .pan-art {
       position: relative;
@@ -261,8 +262,8 @@
       position: absolute;
       left: 0;
       top: 287px;
-      width: 1048px;
-      height: 398px;
+      width: 1232px;
+      height: 454px;
       pointer-events: none;
     }
 
@@ -282,16 +283,17 @@
     .rule:nth-child(6) { top: 286px; }
     .rule:nth-child(7) { top: 342px; }
     .rule:nth-child(8) { top: 398px; }
+    .rule:nth-child(9) { top: 454px; }
 
     .spec-grid {
       position: absolute;
       left: 0;
       top: 287px;
-      width: 1048px;
-      height: 398px;
+      width: 1232px;
+      height: 454px;
       display: grid;
-      grid-template-columns: 128px repeat(5, 160px);
-      grid-template-rows: 61px 56px 57px 56px 56px 56px 56px;
+      grid-template-columns: 128px repeat(6, 160px);
+      grid-template-rows: 61px 56px 57px 56px 56px 56px 56px 56px;
       column-gap: 24px;
     }
 
@@ -338,6 +340,7 @@
     .spec-grid .row-5 { grid-row: 5; }
     .spec-grid .row-6 { grid-row: 6; }
     .spec-grid .row-7 { grid-row: 7; }
+    .spec-grid .row-8 { grid-row: 8; }
 
     .spec-grid .col-label { grid-column: 1; }
     .spec-grid .col-1 { grid-column: 2; }
@@ -345,7 +348,8 @@
     .spec-grid .col-3 { grid-column: 4; }
     .spec-grid .col-4 { grid-column: 5; }
     .spec-grid .col-5 { grid-column: 6; }
-    .spec-grid .spec-label.row-7 { border-bottom: 1px solid var(--rule); }
+    .spec-grid .col-6 { grid-column: 7; }
+    .spec-grid .spec-label.row-8 { border-bottom: 1px solid var(--rule); }
 
     @media (max-width: 900px) {
       body {
@@ -410,6 +414,14 @@
             <div class="pan-art pan-art--nonstick" aria-hidden="true">
               <span class="pan-art__rivet"></span>
             </div>
+            <h3 class="product__name">Ceramic Pro+</h3>
+            <a class="product__button" href="#">Shop Now</a>
+          </article>
+
+          <article class="product">
+            <div class="pan-art pan-art--nonstick" aria-hidden="true">
+              <span class="pan-art__rivet"></span>
+            </div>
             <h3 class="product__name">Non-Stick Pro</h3>
             <a class="product__button" href="#">Shop Now</a>
           </article>
@@ -418,11 +430,12 @@
             <div class="pan-art pan-art--nonstick" aria-hidden="true">
               <span class="pan-art__rivet"></span>
             </div>
-            <h3 class="product__name">Non-Stick Pro<br>Ceramic</h3>
+            <h3 class="product__name">Ceramic Pro</h3>
             <a class="product__button" href="#">Shop Now</a>
           </article>
 
           <div class="rules" aria-hidden="true">
+            <span class="rule"></span>
             <span class="rule"></span>
             <span class="rule"></span>
             <span class="rule"></span>
@@ -440,34 +453,39 @@
             <div class="spec-cell spec-cell--light col-3 row-1" role="cell">Eggs, Vegetables</div>
             <div class="spec-cell spec-cell--light col-4 row-1" role="cell">Eggs, Vegetables</div>
             <div class="spec-cell spec-cell--light col-5 row-1" role="cell">Eggs, Vegetables</div>
+            <div class="spec-cell spec-cell--light col-6 row-1" role="cell">Eggs, Vegetables</div>
 
             <div class="spec-label col-label row-2" role="rowheader">Scratch<br>Resistant</div>
             <div class="spec-cell spec-cell--dark col-1 row-2" role="cell">Metal utensil safe</div>
             <div class="spec-cell spec-cell--dark col-2 row-2" role="cell">Metal utensil safe</div>
             <div class="spec-cell spec-cell--light col-3 row-2" role="cell">-</div>
-            <div class="spec-cell spec-cell--light col-4 row-2" role="cell">Metal utensil safe</div>
+            <div class="spec-cell spec-cell--light col-4 row-2" role="cell">Scratch-resistant ceramic</div>
             <div class="spec-cell spec-cell--light col-5 row-2" role="cell">Metal utensil safe</div>
+            <div class="spec-cell spec-cell--light col-6 row-2" role="cell">Metal utensil safe</div>
 
             <div class="spec-label col-label row-3" role="rowheader">Heat<br>Distribution</div>
             <div class="spec-cell spec-cell--dark col-1 row-3" role="cell">3 Layers</div>
             <div class="spec-cell spec-cell--dark col-2 row-3" role="cell">3 Layers</div>
             <div class="spec-cell spec-cell--light col-3 row-3" role="cell">3 Layers</div>
-            <div class="spec-cell spec-cell--light col-4 row-3" role="cell">Single Layer</div>
+            <div class="spec-cell spec-cell--light col-4 row-3" role="cell">3 Layers</div>
             <div class="spec-cell spec-cell--light col-5 row-3" role="cell">Single Layer</div>
+            <div class="spec-cell spec-cell--light col-6 row-3" role="cell">Single Layer</div>
 
             <div class="spec-label col-label row-4" role="rowheader">Non Stick Technology</div>
             <div class="spec-cell spec-cell--dark col-1 row-4" role="cell">-</div>
             <div class="spec-cell spec-cell--dark col-2 row-4" role="cell">Honeycomb non-stick hybrid</div>
             <div class="spec-cell spec-cell--light col-3 row-4" role="cell">Non-stick</div>
-            <div class="spec-cell spec-cell--light col-4 row-4" role="cell">Lasting non-stick</div>
-            <div class="spec-cell spec-cell--light col-5 row-4" role="cell">Non-stick</div>
+            <div class="spec-cell spec-cell--light col-4 row-4" role="cell">Ceramic non-stick</div>
+            <div class="spec-cell spec-cell--light col-5 row-4" role="cell">Lasting non-stick</div>
+            <div class="spec-cell spec-cell--light col-6 row-4" role="cell">Non-stick</div>
 
             <div class="spec-label col-label row-5" role="rowheader">Coating</div>
             <div class="spec-cell spec-cell--dark col-1 row-5" role="cell">Uncoated</div>
             <div class="spec-cell spec-cell--dark col-2 row-5" role="cell">Ceramic</div>
             <div class="spec-cell spec-cell--light col-3 row-5" role="cell">Ceramic</div>
-            <div class="spec-cell spec-cell--light col-4 row-5" role="cell">PTFE</div>
-            <div class="spec-cell spec-cell--light col-5 row-5" role="cell">Ceramic</div>
+            <div class="spec-cell spec-cell--light col-4 row-5" role="cell">Ceramic</div>
+            <div class="spec-cell spec-cell--light col-5 row-5" role="cell">PTFE</div>
+            <div class="spec-cell spec-cell--light col-6 row-5" role="cell">Ceramic</div>
 
             <div class="spec-label col-label row-6" role="rowheader">Dishwasher &amp; Oven</div>
             <div class="spec-cell spec-cell--dark col-1 row-6" role="cell">Oven-safe to 250°C<br>Dishwasher-safe</div>
@@ -475,6 +493,7 @@
             <div class="spec-cell spec-cell--light col-3 row-6" role="cell">Oven-safe to 250°C<br>Dishwasher-safe</div>
             <div class="spec-cell spec-cell--light col-4 row-6" role="cell">Oven-safe to 250°C<br>Dishwasher-safe</div>
             <div class="spec-cell spec-cell--light col-5 row-6" role="cell">Oven-safe to 250°C<br>Dishwasher-safe</div>
+            <div class="spec-cell spec-cell--light col-6 row-6" role="cell">Oven-safe to 250°C<br>Dishwasher-safe</div>
 
             <div class="spec-label col-label row-7" role="rowheader">Design<br>Features</div>
             <div class="spec-cell spec-cell--dark col-1 row-7" role="cell">Cool-touch handle<br>Drip-free pouring</div>
@@ -482,6 +501,15 @@
             <div class="spec-cell spec-cell--light col-3 row-7" role="cell">Cool-touch handle<br>Drip-free pouring</div>
             <div class="spec-cell spec-cell--light col-4 row-7" role="cell">Cool-touch handle<br>Drip-free pouring</div>
             <div class="spec-cell spec-cell--light col-5 row-7" role="cell">Cool-touch handle<br>Drip-free pouring</div>
+            <div class="spec-cell spec-cell--light col-6 row-7" role="cell">Cool-touch handle<br>Drip-free pouring</div>
+
+            <div class="spec-label col-label row-8" role="rowheader">Warranty</div>
+            <div class="spec-cell spec-cell--dark col-1 row-8" role="cell">20-year warranty</div>
+            <div class="spec-cell spec-cell--dark col-2 row-8" role="cell">10-year warranty</div>
+            <div class="spec-cell spec-cell--light col-3 row-8" role="cell">5-year warranty</div>
+            <div class="spec-cell spec-cell--light col-4 row-8" role="cell">5-year warranty</div>
+            <div class="spec-cell spec-cell--light col-5 row-8" role="cell">5-year warranty</div>
+            <div class="spec-cell spec-cell--light col-6 row-8" role="cell">3-year warranty</div>
           </div>
         </div>
       </section>

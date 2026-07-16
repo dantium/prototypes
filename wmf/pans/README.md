@@ -69,20 +69,24 @@ facets, sort). Each page sets `window.PAGE = { kind, category }`.
 
 Selecting a size variant swaps price, MSRP, Save %, stock, badge **and** image.
 
-### PIM-ready facets (not populated yet)
+### Enriched attributes (until the PIM supplies them)
 
-**Material / Cooking Technique / Surface / Occasion** are on the Figma rail but not exposed by
-the shop; WMF plan to add them in the PIM. They are wired up dormant — add the field to any
-product and the facet group appears automatically (single value or array):
+**Material / Cooking Technique / Surface / Occasion** match the Figma rail. The shop's PLP
+doesn't expose them, so they are **derived** (authorised for the usability test) and will be
+replaced by PIM data when it lands — the facet groups read whatever the JSON contains:
 
-```jsonc
-{ "material": "Stainless Steel 3-ply", "technique": ["Intense Searing", "All Purpose"],
-  "surface": "Uncoated", "occasion": ["Everyday", "Gifting"] }
-```
+- **Material** — from the shop's own datalayer `marketing_subcategory` per SKU:
+  `P&P MULTILAYER` → Stainless Steel 3-ply, `P&P STAINLESS…` → Stainless Steel 1-ply,
+  `P&P SILARGAN` → Fusiontec, `P&P ALU…` → Cast Aluminium, `P&P CAST IRON` → Cast Iron.
+- **Surface** — subcategory (`…CERAMIC`, `…ALU NS`) plus the real PDP description wording
+  (`non-stick`/`PermaDur` → Non-stick, `CeraDur`/ceramic → Ceramic, else Uncoated).
+- **Cooking Technique** — merchandising rule: Profi Resist + Fusiontec → All Purpose,
+  Uncoated → Intense Searing, coated → Gentle Frying.
+- **Occasion** — merchandising rule: everything Everyday; Sets and €150+ also Gifting.
 
-`technique`/`surface` values additionally render as info labels on the product image.
-Nothing is fabricated in the meantime — fake product attributes in front of testers are a
-claims risk.
+The derivation lives in the scrape pipeline (`enrich.mjs`); rules are deterministic and
+re-runnable. `technique`/`surface` also render as info labels on the product image. Size
+options show the Figma serving hints ("28 cm (4 – 6 people)") as display-only text.
 
 ## Behaviour
 

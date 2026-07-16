@@ -573,6 +573,16 @@
     { key: 'occasion',  title: 'Occasion',          open: false }
   ];
 
+  /* option ordering from the Figma rail (alphabetical otherwise) */
+  var OPTION_ORDER = {
+    material:  ['Stainless Steel 3-ply', 'Stainless Steel 1-ply', 'Fusiontec', 'Cast Aluminium', 'Cast Iron'],
+    technique: ['Intense Searing', 'Gentle Frying', 'All Purpose'],
+    surface:   ['Non-stick', 'Ceramic', 'Uncoated'],
+    occasion:  ['Everyday', 'Gifting']
+  };
+  /* serving-size hints shown beside sizes (Figma) */
+  var SIZE_HINTS = { '20 cm': '(1 – 2 people)', '24 cm': '(2 – 4 people)', '28 cm': '(4 – 6 people)' };
+
   function buildFacets() {
     var uniq = function (a) { return Array.from(new Set(a)); };
     var rank = function (s) { var m = s.match(/(\d+)/); var n = m ? +m[1] : 99; return /Set/.test(s) ? 100 + n : n; };
@@ -581,8 +591,17 @@
       if (v === undefined || v === null || v === '') return [];
       return Array.isArray(v) ? v : [v];
     };
+    var orderSort = function (key) {
+      var pref = OPTION_ORDER[key] || [];
+      return function (a, b) {
+        var ia = pref.indexOf(a), ib = pref.indexOf(b);
+        if (ia < 0 && ib < 0) return a < b ? -1 : 1;
+        if (ia < 0) return 1; if (ib < 0) return -1;
+        return ia - ib;
+      };
+    };
     var attrGroup = function (def) {
-      var vals = uniq(LIST.reduce(function (a, p) { return a.concat(valuesOf(p, def.key)); }, [])).sort();
+      var vals = uniq(LIST.reduce(function (a, p) { return a.concat(valuesOf(p, def.key)); }, [])).sort(orderSort(def.key));
       if (!vals.length) return null;
       return { key: def.key, title: def.title, open: def.open, options: vals.map(function (v) {
         return { label: v, test: function (p) { return valuesOf(p, def.key).indexOf(v) >= 0; } }; }) };
@@ -593,31 +612,26 @@
     var sizes = uniq(LIST.reduce(function (a, p) { return a.concat(p.sizes); }, []))
                   .sort(function (a, b) { return rank(a) - rank(b); });
     var series = uniq(LIST.map(function (p) { return p.series; })).sort();
-    var brands = uniq(LIST.map(function (p) { return p.brand; })).sort();
 
+    /* group order and expanded states follow the Figma rail:
+       Material / Size / Cooking Technique open; the rest collapsed */
     FACETS = [
       pim.material,
       { key: 'size', title: 'Size', open: true, options: sizes.map(function (s) {
-        return { label: s, test: function (p) { return p.sizes.indexOf(s) >= 0; } }; }) },
+        return { label: s, hint: SIZE_HINTS[s], test: function (p) { return p.sizes.indexOf(s) >= 0; } }; }) },
       pim.technique,
-      { key: 'price', title: 'Price', open: true, options: [
+      { key: 'price', title: 'Price', open: false, options: [
         { label: 'Under €50',   test: function (p) { return p.minPrice < 50; } },
         { label: '€50 – €100',  test: function (p) { return p.minPrice >= 50 && p.minPrice < 100; } },
         { label: '€100 – €150', test: function (p) { return p.minPrice >= 100 && p.minPrice < 150; } },
         { label: 'Over €150',   test: function (p) { return p.minPrice >= 150; } } ] },
-      { key: 'type', title: 'Type', open: true, options: ['Single pan', 'Set'].map(function (t) {
-        return { label: t, test: function (p) { return p.type === t; } }; }) },
-      pim.surface,
-      pim.occasion,
-      { key: 'offer', title: 'Offer', open: false, options: [
-        { label: 'On sale',      test: onSaleP },
-        { label: 'Bestseller',   test: isBestseller },
-        { label: 'New',          test: isNew },
-        { label: 'In stock',     test: function (p) { return p.variants.some(function (v) { return v.stock; }); } } ] },
       { key: 'series', title: 'Series', open: false, options: series.map(function (s) {
         return { label: s, test: function (p) { return p.series === s; } }; }) },
-      { key: 'brand', title: 'Brand', open: false, options: brands.map(function (b) {
-        return { label: b, test: function (p) { return p.brand === b; } }; }) }
+      { key: 'availability', title: 'Availability', open: false, options: [
+        { label: 'In stock',     test: function (p) { return p.variants.some(function (v) { return v.stock; }); } },
+        { label: 'Out of stock', test: function (p) { return p.variants.some(function (v) { return !v.stock; }); } } ] },
+      pim.surface,
+      pim.occasion
     ].filter(Boolean);
     FACETS.forEach(function (g) { selected[g.key] = selected[g.key] || []; });
   }
@@ -630,7 +644,8 @@
         '<div class="filter-body">' + g.options.map(function (o) {
           var on = selected[g.key].indexOf(o.label) >= 0;
           return '<label class="facet"><input type="checkbox" data-key="' + g.key + '" value="' + esc(o.label) + '"' +
-            (on ? ' checked' : '') + '><span class="box"></span><span class="facet-label">' + esc(o.label) + '</span></label>';
+            (on ? ' checked' : '') + '><span class="box"></span><span class="facet-label">' + esc(o.label) +
+            (o.hint ? ' <span class="facet-hint">' + esc(o.hint) + '</span>' : '') + '</span></label>';
         }).join('') + '</div></div>';
     }).join('');
   }

@@ -1,0 +1,1353 @@
+{
+ "_comment": "Megamenu data (ported from the WMF megamenu prototype). Edit labels/links here — the header renders this file. href '#' = no destination in this prototype.",
+ "nav": [
+  {
+   "label": "PANS",
+   "href": "pans.html",
+   "tile": {
+    "img": "assets/inuse.jpg",
+    "l1": "MY",
+    "l2": "WMF",
+    "sub": "KUNDENCLUB"
+   },
+   "columns": [
+    {
+     "title": "PANS",
+     "links": [
+      {
+       "label": "Pan sets",
+       "href": "pans.html"
+      },
+      {
+       "label": "Frying pans",
+       "href": "frying-pans.html"
+      },
+      {
+       "label": "Grill pans",
+       "href": "pans.html"
+      },
+      {
+       "label": "Induction pans",
+       "href": "pans.html"
+      },
+      {
+       "label": "Pan lids",
+       "href": "pans.html"
+      },
+      {
+       "label": "Pans with lids",
+       "href": "pans.html"
+      },
+      {
+       "label": "Stewing pans",
+       "href": "pans.html"
+      },
+      {
+       "label": "Serving pans",
+       "href": "pans.html"
+      },
+      {
+       "label": "Woks",
+       "href": "pans.html?q=wok"
+      },
+      {
+       "label": "Pan accessories",
+       "href": "pans.html"
+      }
+     ],
+     "viewAll": "pans.html"
+    },
+    {
+     "title": "COOKING STYLE",
+     "links": [
+      {
+       "label": "Intense Searing",
+       "href": "frying-pans.html#compare"
+      },
+      {
+       "label": "Gentle Searing",
+       "href": "frying-pans.html#compare"
+      }
+     ]
+    },
+    {
+     "title": "MATERIAL",
+     "links": [
+      {
+       "label": "Non-stick",
+       "href": "pans.html?q=non-stick"
+      },
+      {
+       "label": "Ceramic",
+       "href": "pans.html?q=ceradur"
+      },
+      {
+       "label": "Hybrid Honeycomb",
+       "href": "pans.html?q=profi resist"
+      },
+      {
+       "label": "Fusiontec",
+       "href": "pans.html?q=fusiontec"
+      },
+      {
+       "label": "Stainless Steel",
+       "href": "pans.html?q=profi"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "label": "POTS",
+   "columns": [
+    {
+     "title": "POTS",
+     "links": [
+      {
+       "label": "All pots",
+       "href": "#"
+      },
+      {
+       "label": "Pot sets",
+       "href": "#"
+      },
+      {
+       "label": "High casseroles",
+       "href": "#"
+      },
+      {
+       "label": "Low casseroles",
+       "href": "#"
+      },
+      {
+       "label": "Stew- & roasting pots",
+       "href": "#"
+      },
+      {
+       "label": "Saucepans",
+       "href": "#"
+      },
+      {
+       "label": "Pressure cooker",
+       "href": "#"
+      },
+      {
+       "label": "Soup & Stockpots",
+       "href": "#"
+      },
+      {
+       "label": "Milk pots",
+       "href": "#"
+      },
+      {
+       "label": "Fondues",
+       "href": "#"
+      }
+     ]
+    },
+    {
+     "title": "COLLECTIONS & TECHNOLOGIES",
+     "links": [
+      {
+       "label": "Pot Guide",
+       "href": "#"
+      },
+      {
+       "label": "Fusiontec",
+       "href": "#"
+      },
+      {
+       "label": "Fusiontec Functional Pro",
+       "href": "#"
+      },
+      {
+       "label": "Functional Pots",
+       "href": "#"
+      },
+      {
+       "label": "Fusiontec Mineral Pro",
+       "href": "#"
+      },
+      {
+       "label": "Design pots",
+       "href": "#"
+      },
+      {
+       "label": "Function 4",
+       "href": "#"
+      },
+      {
+       "label": "Iconic",
+       "href": "#"
+      },
+      {
+       "label": "Variation",
+       "href": "#"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "label": "KITCHEN KNIVES",
+   "columns": [
+    {
+     "title": "KNIVES",
+     "links": [
+      {
+       "label": "View All Knives",
+       "href": "#"
+      },
+      {
+       "label": "Knife Sets",
+       "href": "#"
+      },
+      {
+       "label": "Knife Block Sets",
+       "href": "#"
+      },
+      {
+       "label": "Empty Knife Blocks",
+       "href": "#"
+      },
+      {
+       "label": "Knife Sharpeners",
+       "href": "#"
+      },
+      {
+       "label": "Kitchen Scissors",
+       "href": "#"
+      },
+      {
+       "label": "Cutting Boards",
+       "href": "#"
+      },
+      {
+       "label": "Knife Storage",
+       "href": "#"
+      }
+     ]
+    },
+    {
+     "title": "KNIVES BY TYPE",
+     "links": [
+      {
+       "label": "Chefs Knives",
+       "href": "#"
+      },
+      {
+       "label": "Paring Knives",
+       "href": "#"
+      },
+      {
+       "label": "Vegetable Knives",
+       "href": "#"
+      },
+      {
+       "label": "Bread Knives",
+       "href": "#"
+      },
+      {
+       "label": "Meat Knives",
+       "href": "#"
+      },
+      {
+       "label": "Santoku Knives",
+       "href": "#"
+      },
+      {
+       "label": "Chinese Knives",
+       "href": "#"
+      },
+      {
+       "label": "Tourné Knives",
+       "href": "#"
+      },
+      {
+       "label": "Cheese Knives",
+       "href": "#"
+      },
+      {
+       "label": "Rocking Knives",
+       "href": "#"
+      }
+     ]
+    },
+    {
+     "title": "KNIFE SERIES",
+     "links": [
+      {
+       "label": "Grand Gourmet",
+       "href": "#"
+      },
+      {
+       "label": "Classic Line",
+       "href": "#"
+      },
+      {
+       "label": "Grand Wood",
+       "href": "#"
+      },
+      {
+       "label": "Yari",
+       "href": "#"
+      },
+      {
+       "label": "Ultimate Black",
+       "href": "#"
+      },
+      {
+       "label": "Grand Class",
+       "href": "#"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "label": "CUTLERY",
+   "columns": [
+    {
+     "title": "CUTLERY",
+     "links": [
+      {
+       "label": "Cutlery sets",
+       "href": "#"
+      },
+      {
+       "label": "Cutlery Guide",
+       "href": "#"
+      },
+      {
+       "label": "Forks",
+       "href": "#"
+      },
+      {
+       "label": "Kids Cutlery",
+       "href": "#"
+      },
+      {
+       "label": "Spoons",
+       "href": "#"
+      },
+      {
+       "label": "Table knives",
+       "href": "#"
+      },
+      {
+       "label": "Serving cutlery",
+       "href": "#"
+      }
+     ]
+    },
+    {
+     "title": "COLLECTIONS CROMARGAN PROTECT",
+     "links": [
+      {
+       "label": "All collections",
+       "href": "#"
+      },
+      {
+       "label": "Merit",
+       "href": "#"
+      },
+      {
+       "label": "Grace",
+       "href": "#"
+      }
+     ]
+    },
+    {
+     "title": "COLLECTIONS CROMARGAN",
+     "links": [
+      {
+       "label": "All collections",
+       "href": "#"
+      },
+      {
+       "label": "Alteo",
+       "href": "#"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "label": "DINING",
+   "columns": [
+    {
+     "title": "DRINKWARE & DINNERWARE",
+     "links": [
+      {
+       "label": "Tumbler glasses",
+       "href": "#"
+      },
+      {
+       "label": "Long drink glasses",
+       "href": "#"
+      },
+      {
+       "label": "Whisky glasses",
+       "href": "#"
+      },
+      {
+       "label": "Champagne glasses",
+       "href": "#"
+      },
+      {
+       "label": "White wine glasses",
+       "href": "#"
+      },
+      {
+       "label": "Red wine glasses",
+       "href": "#"
+      },
+      {
+       "label": "Burgundy wine glasses",
+       "href": "#"
+      },
+      {
+       "label": "Latte Macchiato glasses",
+       "href": "#"
+      },
+      {
+       "label": "Espresso glasses",
+       "href": "#"
+      },
+      {
+       "label": "Cappuccino glasses",
+       "href": "#"
+      },
+      {
+       "label": "Smartea glasses",
+       "href": "#"
+      }
+     ]
+    },
+    {
+     "title": "TABLE & BAR",
+     "links": [
+      {
+       "label": "Serving utensils",
+       "href": "#"
+      },
+      {
+       "label": "Glasses & Carafes",
+       "href": "#"
+      },
+      {
+       "label": "Bar accessories",
+       "href": "#"
+      },
+      {
+       "label": "Kineo tray",
+       "href": "#"
+      },
+      {
+       "label": "Club tray",
+       "href": "#"
+      },
+      {
+       "label": "Concept basket",
+       "href": "#"
+      },
+      {
+       "label": "Lounge Living basket",
+       "href": "#"
+      },
+      {
+       "label": "Glass coaster",
+       "href": "#"
+      },
+      {
+       "label": "Pot stand",
+       "href": "#"
+      },
+      {
+       "label": "Butter dish",
+       "href": "#"
+      },
+      {
+       "label": "Egg cup",
+       "href": "#"
+      }
+     ]
+    },
+    {
+     "title": "COFFEE & TEA",
+     "links": [
+      {
+       "label": "Cups, glasses & jugs",
+       "href": "#"
+      },
+      {
+       "label": "Coffee & Tea accessories",
+       "href": "#"
+      },
+      {
+       "label": "Espresso cups",
+       "href": "#"
+      },
+      {
+       "label": "Cafe Creme cups",
+       "href": "#"
+      },
+      {
+       "label": "Cappuccino cups",
+       "href": "#"
+      },
+      {
+       "label": "Coffee cups",
+       "href": "#"
+      },
+      {
+       "label": "Latte Macchiato glasses",
+       "href": "#"
+      },
+      {
+       "label": "Coffee storage jar with spoon",
+       "href": "#"
+      },
+      {
+       "label": "Kineo cream jug",
+       "href": "#"
+      },
+      {
+       "label": "Kineo sugar bowl",
+       "href": "#"
+      },
+      {
+       "label": "Kineo insulated jug",
+       "href": "#"
+      },
+      {
+       "label": "Impulse insulated jug",
+       "href": "#"
+      }
+     ]
+    },
+    {
+     "title": "ON THE GO",
+     "links": [
+      {
+       "label": "Mix On The Go",
+       "href": "#"
+      },
+      {
+       "label": "Food On The Go",
+       "href": "#"
+      },
+      {
+       "label": "Drinking bottles",
+       "href": "#"
+      },
+      {
+       "label": "Travel mugs",
+       "href": "#"
+      },
+      {
+       "label": "Carbonator bottle",
+       "href": "#"
+      },
+      {
+       "label": "Impulse insulated mug",
+       "href": "#"
+      },
+      {
+       "label": "Stainless steel carbonator bottle",
+       "href": "#"
+      },
+      {
+       "label": "Travel Mug Impulse",
+       "href": "#"
+      },
+      {
+       "label": "Waterkant",
+       "href": "#"
+      },
+      {
+       "label": "Insulated food container",
+       "href": "#"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "label": "KITCHEN TOOLS",
+   "columns": [
+    {
+     "title": "KITCHEN TOOLS",
+     "links": [
+      {
+       "label": "Turner",
+       "href": "#"
+      },
+      {
+       "label": "Crepe turner",
+       "href": "#"
+      },
+      {
+       "label": "Cake server",
+       "href": "#"
+      },
+      {
+       "label": "Dough scraper/ Spatula",
+       "href": "#"
+      },
+      {
+       "label": "Pastry brush",
+       "href": "#"
+      },
+      {
+       "label": "Whisk",
+       "href": "#"
+      },
+      {
+       "label": "Broth colander",
+       "href": "#"
+      },
+      {
+       "label": "Colander",
+       "href": "#"
+      },
+      {
+       "label": "Funnel",
+       "href": "#"
+      },
+      {
+       "label": "Jam funnel",
+       "href": "#"
+      },
+      {
+       "label": "Food mill",
+       "href": "#"
+      },
+      {
+       "label": "Salat-Dressing-Shaker",
+       "href": "#"
+      }
+     ]
+    },
+    {
+     "title": "SEASONING",
+     "links": [
+      {
+       "label": "Mortar & Pestle",
+       "href": "#"
+      },
+      {
+       "label": "Sign. Pro spice mill",
+       "href": "#"
+      },
+      {
+       "label": "Spice mill De Luxe",
+       "href": "#"
+      },
+      {
+       "label": "Spice mill Nature",
+       "href": "#"
+      },
+      {
+       "label": "Spice mill Trend",
+       "href": "#"
+      },
+      {
+       "label": "Electric mill",
+       "href": "#"
+      },
+      {
+       "label": "Cheese mill",
+       "href": "#"
+      },
+      {
+       "label": "Mini mill",
+       "href": "#"
+      },
+      {
+       "label": "Salt & pepper mill",
+       "href": "#"
+      },
+      {
+       "label": "Nutmeg mill",
+       "href": "#"
+      }
+     ]
+    },
+    {
+     "title": "STIRRING & FOOD CONSERVATION",
+     "links": [
+      {
+       "label": "Sauce ladle",
+       "href": "#"
+      },
+      {
+       "label": "Pouring ladle",
+       "href": "#"
+      },
+      {
+       "label": "Ladle",
+       "href": "#"
+      },
+      {
+       "label": "Serving spoon",
+       "href": "#"
+      },
+      {
+       "label": "Skimmer",
+       "href": "#"
+      },
+      {
+       "label": "Pasta spoon",
+       "href": "#"
+      },
+      {
+       "label": "Cooking spoon",
+       "href": "#"
+      },
+      {
+       "label": "Serving tongs",
+       "href": "#"
+      },
+      {
+       "label": "Meat fork",
+       "href": "#"
+      },
+      {
+       "label": "Ice cream scoop",
+       "href": "#"
+      }
+     ]
+    },
+    {
+     "title": "GRATING, SLICING & SQUEEZING",
+     "links": [
+      {
+       "label": "Swivel peeler",
+       "href": "#"
+      },
+      {
+       "label": "Vegetable peeler",
+       "href": "#"
+      },
+      {
+       "label": "Peeler",
+       "href": "#"
+      },
+      {
+       "label": "Julienne cutter",
+       "href": "#"
+      },
+      {
+       "label": "Universal grater",
+       "href": "#"
+      },
+      {
+       "label": "Cucumber slicer",
+       "href": "#"
+      },
+      {
+       "label": "Coarse grater",
+       "href": "#"
+      },
+      {
+       "label": "Grater",
+       "href": "#"
+      },
+      {
+       "label": "Silit peeler",
+       "href": "#"
+      },
+      {
+       "label": "Kitchen grater",
+       "href": "#"
+      },
+      {
+       "label": "Cheese grater",
+       "href": "#"
+      },
+      {
+       "label": "Truffle slicer",
+       "href": "#"
+      }
+     ]
+    },
+    {
+     "title": "CLEANING AND MISCELLANEOUS",
+     "links": [
+      {
+       "label": "Cleaning beads",
+       "href": "#"
+      },
+      {
+       "label": "Basic dish brush",
+       "href": "#"
+      },
+      {
+       "label": "Replacement brushes",
+       "href": "#"
+      },
+      {
+       "label": "Large grill cleaning brush",
+       "href": "#"
+      },
+      {
+       "label": "Cleaning brushes",
+       "href": "#"
+      },
+      {
+       "label": "Polishing pads",
+       "href": "#"
+      },
+      {
+       "label": "Kitchen towel",
+       "href": "#"
+      },
+      {
+       "label": "Glass-ceramic scraper",
+       "href": "#"
+      },
+      {
+       "label": "Odor-removing soap",
+       "href": "#"
+      }
+     ]
+    },
+    {
+     "title": "BAKING & BBQ ACCESSORIES",
+     "links": [
+      {
+       "label": "All baking accessories",
+       "href": "#"
+      },
+      {
+       "label": "Casserole Dishes",
+       "href": "#"
+      },
+      {
+       "label": "Baking sheets",
+       "href": "#"
+      },
+      {
+       "label": "Baking pans",
+       "href": "#"
+      },
+      {
+       "label": "Baking tools",
+       "href": "#"
+      },
+      {
+       "label": "Whisks",
+       "href": "#"
+      },
+      {
+       "label": "Cake servers",
+       "href": "#"
+      },
+      {
+       "label": "All BBQ products",
+       "href": "#"
+      },
+      {
+       "label": "Electric bbq",
+       "href": "#"
+      },
+      {
+       "label": "Fondues",
+       "href": "#"
+      },
+      {
+       "label": "Grill tongs",
+       "href": "#"
+      },
+      {
+       "label": "Grill accessories",
+       "href": "#"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "label": "COFFEE MACHINES",
+   "columns": [
+    {
+     "title": "COFFEE MACHINES",
+     "links": [
+      {
+       "label": "All coffee machines",
+       "href": "#"
+      },
+      {
+       "label": "Filter coffee machines",
+       "href": "#"
+      },
+      {
+       "label": "Automatic coffee machines",
+       "href": "#"
+      },
+      {
+       "label": "Espresso machines",
+       "href": "#"
+      },
+      {
+       "label": "Coffee grinders",
+       "href": "#"
+      },
+      {
+       "label": "Milk frothers",
+       "href": "#"
+      }
+     ]
+    },
+    {
+     "title": "AROUND COFFEE",
+     "links": [
+      {
+       "label": "Coffee beans",
+       "href": "#"
+      },
+      {
+       "label": "Coffee glasses",
+       "href": "#"
+      },
+      {
+       "label": "Coffee pots",
+       "href": "#"
+      },
+      {
+       "label": "Coffee accessories",
+       "href": "#"
+      }
+     ]
+    },
+    {
+     "title": "COFFEE TRENDS",
+     "links": [
+      {
+       "label": "Coffee trends",
+       "href": "#"
+      },
+      {
+       "label": "Coffee recipes",
+       "href": "#"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "label": "APPLIANCES",
+   "columns": [
+    {
+     "title": "BREAKFAST",
+     "links": [
+      {
+       "label": "Toasters",
+       "href": "#"
+      },
+      {
+       "label": "Kettles",
+       "href": "#"
+      },
+      {
+       "label": "Egg cooker",
+       "href": "#"
+      },
+      {
+       "label": "Smoothie blenders",
+       "href": "#"
+      },
+      {
+       "label": "Milk frothers",
+       "href": "#"
+      }
+     ]
+    },
+    {
+     "title": "COOKING AND GRILLING",
+     "links": [
+      {
+       "label": "Food processor",
+       "href": "#"
+      },
+      {
+       "label": "Blenders",
+       "href": "#"
+      },
+      {
+       "label": "Immersion blenders",
+       "href": "#"
+      },
+      {
+       "label": "Food chopper",
+       "href": "#"
+      },
+      {
+       "label": "Vacuum Sealers",
+       "href": "#"
+      },
+      {
+       "label": "Sandwich makers",
+       "href": "#"
+      },
+      {
+       "label": "Crepes Maker",
+       "href": "#"
+      },
+      {
+       "label": "Kitchen scales",
+       "href": "#"
+      },
+      {
+       "label": "Kitchen timer",
+       "href": "#"
+      }
+     ]
+    },
+    {
+     "title": "BBQ & ACCESSORIES",
+     "links": [
+      {
+       "label": "Electric bbq",
+       "href": "#"
+      },
+      {
+       "label": "Raclette Grills",
+       "href": "#"
+      },
+      {
+       "label": "Fondues",
+       "href": "#"
+      },
+      {
+       "label": "Grill tongs",
+       "href": "#"
+      },
+      {
+       "label": "Grill accessories",
+       "href": "#"
+      },
+      {
+       "label": "Kitchen thermometers",
+       "href": "#"
+      }
+     ]
+    },
+    {
+     "title": "OTHERS",
+     "links": [
+      {
+       "label": "All kitchen appliances",
+       "href": "#"
+      },
+      {
+       "label": "Other Kitchen Appliances",
+       "href": "#"
+      },
+      {
+       "label": "Food dehydrators",
+       "href": "#"
+      },
+      {
+       "label": "Spiralizer",
+       "href": "#"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "label": "OFFERS",
+   "columns": [
+    {
+     "title": "NOVELTIES",
+     "links": [
+      {
+       "label": "All Novelties",
+       "href": "#"
+      }
+     ]
+    },
+    {
+     "title": "EXCLUSIVES",
+     "links": [
+      {
+       "label": "All Exclusives",
+       "href": "#"
+      }
+     ]
+    },
+    {
+     "title": "BUNDLES",
+     "links": [
+      {
+       "label": "Bundles",
+       "href": "#"
+      }
+     ]
+    },
+    {
+     "title": "OFFERS",
+     "links": [
+      {
+       "label": "All offers",
+       "href": "#"
+      },
+      {
+       "label": "Cutlery",
+       "href": "#"
+      },
+      {
+       "label": "Knives",
+       "href": "#"
+      },
+      {
+       "label": "Pans",
+       "href": "#"
+      },
+      {
+       "label": "Pots",
+       "href": "#"
+      }
+     ]
+    }
+   ]
+  }
+ ],
+ "utility": [
+  {
+   "label": "SERVICE",
+   "columns": [
+    {
+     "title": "SERVICE",
+     "links": [
+      {
+       "label": "FAQ",
+       "href": "#"
+      },
+      {
+       "label": "User guides",
+       "href": "#"
+      },
+      {
+       "label": "Warranty",
+       "href": "#"
+      },
+      {
+       "label": "Repairability",
+       "href": "#"
+      },
+      {
+       "label": "Contact",
+       "href": "#"
+      }
+     ]
+    },
+    {
+     "title": "CARE & SPARE PARTS",
+     "links": [
+      {
+       "label": "Cleaning",
+       "href": "#"
+      },
+      {
+       "label": "Seals",
+       "href": "#"
+      },
+      {
+       "label": "Miscellaneous",
+       "href": "#"
+      },
+      {
+       "label": "Cleaning beads",
+       "href": "#"
+      },
+      {
+       "label": "Barista + Basic seals",
+       "href": "#"
+      },
+      {
+       "label": "Glass carafes",
+       "href": "#"
+      },
+      {
+       "label": "Sealing ring for 3069/3071",
+       "href": "#"
+      },
+      {
+       "label": "Lid for Basic/ Motion carafe",
+       "href": "#"
+      },
+      {
+       "label": "Impulse vacuum jug seal",
+       "href": "#"
+      },
+      {
+       "label": "Glass insert for Impulse coffee & tea pot",
+       "href": "#"
+      },
+      {
+       "label": "Impulse travel mug seal",
+       "href": "#"
+      },
+      {
+       "label": "Replacement glass for Barista + Basic",
+       "href": "#"
+      }
+     ]
+    },
+    {
+     "title": "MY WMF CLUB",
+     "links": [
+      {
+       "label": "MY WMF Loyalty Club",
+       "href": "#"
+      },
+      {
+       "label": "FAQ MY WMF Club",
+       "href": "#"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "label": "DISCOVER",
+   "columns": [
+    {
+     "title": "MASTERPIECES",
+     "links": [
+      {
+       "label": "World of Coffee",
+       "href": "#"
+      },
+      {
+       "label": "Perfection coffee machine",
+       "href": "#"
+      },
+      {
+       "label": "Espresso Pro",
+       "href": "#"
+      },
+      {
+       "label": "Cromargan protect Cutlery",
+       "href": "#"
+      },
+      {
+       "label": "Fusiontec cookware",
+       "href": "#"
+      },
+      {
+       "label": "Cromargan cookware",
+       "href": "#"
+      },
+      {
+       "label": "Ultimate black knives",
+       "href": "#"
+      },
+      {
+       "label": "Damasteel knives",
+       "href": "#"
+      },
+      {
+       "label": "Cast Iron Cookware",
+       "href": "#"
+      },
+      {
+       "label": "One Pot",
+       "href": "#"
+      }
+     ]
+    },
+    {
+     "title": "GIFT FINDER",
+     "links": [
+      {
+       "label": "All Gift Ideas",
+       "href": "#"
+      },
+      {
+       "label": "Gifts for Coffee Lovers",
+       "href": "#"
+      },
+      {
+       "label": "Gifts for hosts",
+       "href": "#"
+      },
+      {
+       "label": "Gifts for home cooks",
+       "href": "#"
+      }
+     ]
+    },
+    {
+     "title": "RECIPES",
+     "links": [
+      {
+       "label": "All recipes",
+       "href": "#"
+      },
+      {
+       "label": "Desserts",
+       "href": "#"
+      },
+      {
+       "label": "Drinks",
+       "href": "#"
+      },
+      {
+       "label": "Healthy Recipes",
+       "href": "#"
+      },
+      {
+       "label": "BBQ Recipes",
+       "href": "#"
+      },
+      {
+       "label": "Coffee Recipes",
+       "href": "#"
+      },
+      {
+       "label": "Recipes for Kids",
+       "href": "#"
+      },
+      {
+       "label": "Salads & Side Dishes",
+       "href": "#"
+      },
+      {
+       "label": "Quick and Easy Recipes",
+       "href": "#"
+      },
+      {
+       "label": "Soups",
+       "href": "#"
+      },
+      {
+       "label": "Vegan Recipes",
+       "href": "#"
+      },
+      {
+       "label": "Appetizers",
+       "href": "#"
+      }
+     ]
+    },
+    {
+     "title": "MY WMF CLUB",
+     "links": [
+      {
+       "label": "MY WMF Loyalty Club",
+       "href": "#"
+      },
+      {
+       "label": "FAQ MY WMF Club",
+       "href": "#"
+      }
+     ]
+    }
+   ]
+  }
+ ]
+}

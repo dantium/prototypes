@@ -5,7 +5,7 @@ design system (Rotis, tokens) and the existing comparison-table/header/search pr
 
 | Page | What it is |
 |---|---|
-| `index.html` | Home — dark hero (search-prototype style), nav with working **PANS megamenu**, search entry |
+| `index.html` | Home — search-prototype style: header + hero banner only |
 | `pans.html` | **Pans** category PLP — subcategory tiles, 34 real products |
 | `frying-pans.html` | **Frying Pans** subcategory PLP — 29 real products, comparison table, FAQ |
 
@@ -90,8 +90,10 @@ options show the Figma serving hints ("28 cm (4 – 6 people)") as display-only 
 
 ## Behaviour
 
-- **Megamenu** — hover PANS for the panel (columns from the megamenu prototype); click navigates.
-  Mobile gets a nav drawer via the hamburger.
+- **Megamenu** — every nav item opens its panel on hover, with the full menu data from the
+  megamenu prototype living in **`assets/menu.json`** (edit that file to change menus; pan links
+  are live, the rest are `#`). Clicking PANS navigates. On mobile the hamburger opens the menu
+  drawer; tapping an item opens its panel with BACK/CLOSE, like the prototype.
 - **Search** — the search prototype's UX, fed by the real catalog. A persistent header search box
   mirrors the active query (× clears it). The overlay is a centered modal with: recent searches
   (per-item remove + Clear all, kept for the session), trending searches, popular-category chips,

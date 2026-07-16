@@ -30,37 +30,35 @@
     searchDark: '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#111" stroke-width="1.6" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg>'
   };
 
-  var NAV = ['PANS', 'POTS', 'KITCHEN KNIVES', 'CUTLERY', 'DINING', 'KITCHEN TOOLS', 'COFFEE MACHINES', 'APPLIANCES', 'OFFERS'];
+  /* Megamenu data lives in assets/menu.json (ported from the WMF megamenu
+     prototype) — edit that file to change the menus. */
+  var MENU = { nav: [{ label: 'PANS', href: 'pans.html', columns: [] }], utility: [] };
 
-  /* PANS megamenu — columns ported from the WMF megamenu prototype.
-     Only pan destinations exist in this prototype, so pan links are live
-     and everything else points at the pans category. */
-  var MM_PANS =
-    '<div class="mm-inner"><div class="mm-grid">' +
-      '<div><div class="mm-colhead">PANS <a href="pans.html">View all</a></div>' +
-        '<a class="mm-link" href="pans.html">Pan sets</a>' +
-        '<a class="mm-link" href="frying-pans.html">Frying pans</a>' +
-        '<a class="mm-link" href="pans.html">Grill pans</a>' +
-        '<a class="mm-link" href="pans.html">Induction pans</a>' +
-        '<a class="mm-link" href="pans.html">Pan lids</a>' +
-        '<a class="mm-link" href="pans.html">Pans with lids</a>' +
-        '<a class="mm-link" href="pans.html">Stewing pans</a>' +
-        '<a class="mm-link" href="pans.html">Serving pans</a>' +
-        '<a class="mm-link" href="pans.html">Woks</a>' +
-        '<a class="mm-link" href="pans.html">Pan accessories</a></div>' +
-      '<div><div class="mm-colhead">COOKING STYLE</div>' +
-        '<a class="mm-link" href="frying-pans.html#compare">Intense Searing</a>' +
-        '<a class="mm-link" href="frying-pans.html#compare">Gentle Searing</a></div>' +
-      '<div><div class="mm-colhead">MATERIAL</div>' +
-        '<a class="mm-link" href="pans.html?q=non-stick">Non-stick</a>' +
-        '<a class="mm-link" href="pans.html?q=ceradur">Ceramic</a>' +
-        '<a class="mm-link" href="pans.html?q=profi resist">Hybrid Honeycomb</a>' +
-        '<a class="mm-link" href="pans.html?q=fusiontec">Fusiontec</a>' +
-        '<a class="mm-link" href="pans.html?q=profi">Stainless Steel</a></div>' +
-      '<div class="mm-col--tile"><div class="mm-tile"><img src="assets/inuse.jpg" alt="">' +
-        '<div class="mm-tile-copy"><div class="mm-tile-frame"><span class="l1">MY</span><span class="l2">WMF</span></div>' +
-        '<span class="mm-tile-sub">KUNDENCLUB</span></div></div></div>' +
-    '</div></div>';
+  function panelHTML(item) {
+    var cols = item.columns || [];
+    if (!cols.length) return '';
+    var n = cols.length + (item.tile ? 1 : 0);
+    var html = cols.map(function (c) {
+      return '<div><div class="mm-colhead">' + esc(c.title) +
+        (c.viewAll ? ' <a href="' + esc(c.viewAll) + '">View all</a>' : '') + '</div>' +
+        (c.links || []).map(function (l) {
+          return '<a class="mm-link" href="' + esc(l.href || '#') + '">' + esc(l.label) + '</a>';
+        }).join('') + '</div>';
+    }).join('');
+    if (item.tile) {
+      html += '<div class="mm-col--tile"><div class="mm-tile"><img src="' + esc(item.tile.img) + '" alt="">' +
+        '<div class="mm-tile-copy"><div class="mm-tile-frame"><span class="l1">' + esc(item.tile.l1) + '</span>' +
+        '<span class="l2">' + esc(item.tile.l2) + '</span></div>' +
+        '<span class="mm-tile-sub">' + esc(item.tile.sub) + '</span></div></div></div>';
+    }
+    return '<div class="mm-inner"><div class="mm-grid" style="--cols:' + n + '">' + html + '</div></div>';
+  }
+
+  function menuItemFor(el) {
+    var mi = el.getAttribute('data-mi'); if (!mi) return null;
+    var p = mi.split(':');
+    return (p[0] === 'u' ? MENU.utility : MENU.nav)[+p[1]] || null;
+  }
 
   function renderChrome() {
     var headerMount = document.getElementById('chrome-header');
@@ -81,25 +79,25 @@
           '</div>' +
         '</div>' +
         '<div class="header-nav"><nav>' +
-          NAV.map(function (n) {
-            var active = n === 'PANS' && PAGE.kind !== 'home';
-            return '<button class="nav-item' + (active ? ' active' : '') + '" data-nav="' + n + '">' + n + '</button>';
+          MENU.nav.map(function (n, i) {
+            var active = n.label === 'PANS' && PAGE.kind !== 'home';
+            return '<button class="nav-item' + (active ? ' active' : '') + '" data-mi="n:' + i + '">' + esc(n.label) + '</button>';
           }).join('') +
         '</nav><div style="display:flex;gap:26px">' +
-          '<button class="nav-item nav-item--muted" data-nav="SERVICE">SERVICE</button>' +
-          '<button class="nav-item nav-item--muted" data-nav="DISCOVER">DISCOVER</button>' +
+          MENU.utility.map(function (n, i) {
+            return '<button class="nav-item nav-item--muted" data-mi="u:' + i + '">' + esc(n.label) + '</button>';
+          }).join('') +
         '</div></div></div>' +
-        '<div class="mm-panel" id="mmPanel">' + MM_PANS + '</div></header>' +
+        '<div class="mm-panel" id="mmPanel"></div></header>' +
 
         '<div class="nav-drawer" id="navDrawer"><div class="nav-drawer-head">Menu' +
           '<button class="icon-btn" style="color:#333" data-act="nav-close">' + I.x + '</button></div>' +
           '<div class="nav-drawer-body">' +
-            '<a href="pans.html">PANS ' + I.chev + '</a>' +
-            '<a href="frying-pans.html" class="sub">Frying pans ' + I.chev + '</a>' +
-            '<a href="pans.html" class="sub">Pan sets ' + I.chev + '</a>' +
-            '<a href="pans.html" class="sub">Woks ' + I.chev + '</a>' +
-            NAV.slice(1).map(function (n) { return '<a href="index.html">' + n + ' ' + I.chev + '</a>'; }).join('') +
-          '</div></div>';
+            MENU.nav.map(function (n, i) { return '<a href="#" data-mi="n:' + i + '">' + esc(n.label) + ' ' + I.chev + '</a>'; }).join('') +
+            '<div style="height:8px"></div>' +
+            MENU.utility.map(function (n, i) { return '<a href="#" class="sub" data-mi="u:' + i + '">' + esc(n.label) + ' ' + I.chev + '</a>'; }).join('') +
+          '</div></div>' +
+        '<div class="mm-mobile-panel" id="mmMobilePanel" hidden></div>';
     }
 
     var searchMount = document.getElementById('chrome-search');
@@ -136,13 +134,29 @@
   }
 
   /* ---- megamenu + drawers behaviour ---- */
+  var mmCurrent = null;
+  function setMenu(item) {
+    var mmPanel = document.getElementById('mmPanel'); if (!mmPanel) return;
+    if (!item || !(item.columns || []).length) { mmPanel.classList.remove('open'); mmCurrent = null; return; }
+    if (mmCurrent !== item) mmPanel.innerHTML = panelHTML(item);
+    mmPanel.classList.add('open');
+    mmCurrent = item;
+  }
+  function openMobilePanel(item) {
+    var el = document.getElementById('mmMobilePanel'); if (!el) return;
+    el.innerHTML = '<div class="mmp-head">' +
+      '<button data-mmp="back">' +
+        '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="m15 6-6 6 6 6"/></svg> BACK</button>' +
+      '<button data-mmp="close">CLOSE ' + I.x + '</button></div>' +
+      '<div class="mmp-body">' + panelHTML(item) + '</div>';
+    el.hidden = false;
+  }
+  function closeMobilePanel() {
+    var el = document.getElementById('mmMobilePanel');
+    if (el) { el.hidden = true; el.innerHTML = ''; }
+  }
+
   function bindChrome() {
-    var mmPanel = document.getElementById('mmPanel');
-    var mmOpen = false;
-    function setMenu(open) {
-      mmOpen = open;
-      if (mmPanel) mmPanel.classList.toggle('open', open);
-    }
     document.addEventListener('click', function (e) {
       // the ×-to-clear sits inside the header search box (which itself opens search)
       if (e.target.closest('[data-hs-clear]') || e.target.closest('[data-sh-clear]')) {
@@ -150,33 +164,49 @@
         updateHeaderSearch();
         return;
       }
+      var mmp = e.target.closest('[data-mmp]');
+      if (mmp) {
+        closeMobilePanel();
+        if (mmp.getAttribute('data-mmp') === 'close') document.body.classList.remove('nav-open');
+        return;
+      }
       var act = e.target.closest('[data-act]');
       if (act) {
         var a = act.getAttribute('data-act');
         if (a === 'search') { openSearch(); return; }
-        if (a === 'search-close') { closeSearch(); return; }
+        if (a === 'search-close') {
+          // one icon clears the query first, then closes (scrim closes outright)
+          var inp = document.getElementById('searchInput');
+          if (act.classList.contains('search-close') && inp && inp.value) { inp.value = ''; renderSuggest(''); inp.focus(); }
+          else closeSearch();
+          return;
+        }
         if (a === 'nav') { document.body.classList.add('nav-open'); return; }
-        if (a === 'nav-close') { document.body.classList.remove('nav-open'); return; }
+        if (a === 'nav-close') { document.body.classList.remove('nav-open'); closeMobilePanel(); return; }
       }
+      // mobile drawer rows open the item's panel (BACK returns to the list)
+      var row = e.target.closest('.nav-drawer [data-mi]');
+      if (row) { e.preventDefault(); var it = menuItemFor(row); if (it) openMobilePanel(it); return; }
       var nav = e.target.closest('.nav-item');
       if (nav) {
-        // click = navigate (hover already opens the panel); PANS is the only live category
-        if (nav.getAttribute('data-nav') === 'PANS') { location.href = 'pans.html'; return; }
-        setMenu(false);
+        var item = menuItemFor(nav);
+        if (item && item.href) { location.href = item.href; return; }   // PANS is the only live category
+        setMenu(mmCurrent === item ? null : item);
         return;
       }
-      if (mmOpen && !e.target.closest('.mm-panel')) setMenu(false);
+      if (mmCurrent && !e.target.closest('.mm-panel')) setMenu(null);
       if (document.body.classList.contains('nav-open') &&
-          !e.target.closest('.nav-drawer') && !e.target.closest('[data-act="nav"]')) {
+          !e.target.closest('.nav-drawer') && !e.target.closest('.mm-mobile-panel') && !e.target.closest('[data-act="nav"]')) {
         document.body.classList.remove('nav-open');
+        closeMobilePanel();
       }
     });
     document.addEventListener('mouseover', function (e) {
-      var nav = e.target.closest('.nav-item');
-      if (nav) setMenu(nav.getAttribute('data-nav') === 'PANS');
+      var nav = e.target.closest('.header-nav .nav-item');
+      if (nav) setMenu(menuItemFor(nav));
     });
     document.addEventListener('keydown', function (e) {
-      if (e.key === 'Escape') { setMenu(false); closeSearch(); document.body.classList.remove('nav-open', 'filters-open'); }
+      if (e.key === 'Escape') { setMenu(null); closeSearch(); closeMobilePanel(); document.body.classList.remove('nav-open', 'filters-open'); }
     });
   }
 
@@ -736,10 +766,17 @@
      BOOT
      ============================================================ */
   document.addEventListener('DOMContentLoaded', function () {
-    renderChrome();
-    updateHeaderSearch();
+    // menu data drives the header; render the chrome as soon as it arrives
+    fetch('assets/menu.json')
+      .then(function (r) { return r.ok ? r.json() : null; })
+      .catch(function () { return null; })
+      .then(function (m) {
+        if (m && m.nav) MENU = m;
+        renderChrome();
+        updateHeaderSearch();
+        bindSearch();
+      });
     bindChrome();
-    bindSearch();
     bindFacets();
 
     // FAQ accordions (frying-pans page only)

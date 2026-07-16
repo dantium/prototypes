@@ -684,3 +684,16 @@ body.rail-collapsed .filters { display: none; }
   .footer-top { grid-template-columns: 1fr; }
   .footer-copy { margin-left: 0; }
 }
+
+/* ============================================================
+   ZERO RESULTS — nothing to browse, filter or sort, so those
+   tools go away; the message and escape routes remain.
+   (Kept after the media queries so it wins the .filters rules;
+   an open mobile drawer stays visible until it is closed.)
+   ============================================================ */
+body.searching-empty .breadcrumb,
+body.searching-empty .toolbar,
+body.searching-empty .active-filters--mobile,
+body.searching-empty .sh-actions,
+body.searching-empty:not(.filters-open) .filters { display: none; }
+body.searching-empty .plp { grid-template-columns: 1fr; }

@@ -97,8 +97,9 @@ claims risk.
   first; description hits show the matched text). Submitting switches the page into results mode:
   a "N results for "q"" head replaces the category head, and the category content (title, hero,
   subcategory tiles, comparison table, FAQ) hides until the search is cleared. `?q=` deep-links
-  work, e.g. the megamenu Material links. No results shows popular searches and popular category
-  tiles.
+  work, e.g. the megamenu Material links. Zero results strips the page to the message and its
+  escape routes — popular searches and popular category tiles — hiding breadcrumbs, toolbar,
+  filters and sort until a search succeeds or is cleared.
 - **Facets** — generated from the catalog per page (OR within group, AND across). Chips + Clear
   all; on mobile a proper drawer: header, scrollable body, sticky "Show N products" apply bar.
 - **Sort** — Recommended (real shop order) / price / top rated / new in.

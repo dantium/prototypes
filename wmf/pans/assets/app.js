@@ -334,6 +334,8 @@
     var cards = list.slice(0, shown).map(cardHTML);
     if (!searchQ && cards.length >= 2 && PAGE.promo !== false) cards.splice(2, 0, PROMO);
     grid.innerHTML = cards.length ? cards.join('') : noResultsHTML();
+    // zero results: strip the page down to the message and its escape routes
+    document.body.classList.toggle('searching-empty', !!searchQ && list.length === 0);
     updateSearchHead(list.length);
     if (showMoreRow) showMoreRow.style.display = list.length > shown ? '' : 'none';
     if (productCountEl) {

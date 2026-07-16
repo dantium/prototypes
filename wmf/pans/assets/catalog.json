@@ -1,0 +1,1691 @@
+{
+ "categories": {
+  "pans": {
+   "title": "Pans",
+   "breadcrumb": [
+    "Home",
+    "Products",
+    "Pans"
+   ]
+  },
+  "frying-pans": {
+   "title": "Frying Pans",
+   "breadcrumb": [
+    "Home",
+    "Products",
+    "Pans",
+    "Frying Pans"
+   ]
+  }
+ },
+ "skuCount": 59,
+ "products": [
+  {
+   "id": "p0",
+   "brand": "WMF",
+   "name": "PermaDur Excellent Fry Pan",
+   "series": "PermaDur Excellent",
+   "type": "Single pan",
+   "minPrice": 59.99,
+   "sizes": [
+    "24 cm",
+    "28 cm"
+   ],
+   "rating": 5,
+   "reviews": 1,
+   "ratingReal": false,
+   "default": 1,
+   "cats": {
+    "frying-pans": 27,
+    "pans": 40
+   },
+   "variants": [
+    {
+     "sku": "3201000336",
+     "size": "24 cm",
+     "price": 59.99,
+     "msrp": 74.99,
+     "stock": true,
+     "label": null
+    },
+    {
+     "sku": "3201000337",
+     "size": "28 cm",
+     "price": 69.99,
+     "msrp": 84.99,
+     "stock": true,
+     "label": null
+    }
+   ],
+   "search": "wmf permadur excellent fry pan permadur excellent 24 cm 28 cm",
+   "description": "WMF manufactures its products with a high level of quality and expertise. The WMF PermaDur Excellent Fry Pan features WMF's robust 3-layer PermaDur coating—perfect for daily use and effortless clean-up. Its thick cast aluminum construction offers exceptionally even cooking results and stands up to even the most demanding use. Compatible with all stovetops, including induction, it is equipped with the TransTherm® universal base for optimal heat distribution and retention, as well as a heat-insulated handle that provides maximum safety and comfort. The result is flawless, reliable cooking—from flash-frying and lower-fat cooking to gentle and refined sautés.",
+   "material": "Cast Aluminium",
+   "surface": "Non-stick",
+   "technique": "Gentle Frying",
+   "occasion": [
+    "Everyday"
+   ]
+  },
+  {
+   "id": "p1",
+   "brand": "WMF",
+   "name": "Profi Resist Fry Pan",
+   "series": "Profi Resist",
+   "type": "Single pan",
+   "minPrice": 69.99,
+   "sizes": [
+    "24 cm",
+    "28 cm"
+   ],
+   "rating": 3,
+   "reviews": 2,
+   "ratingReal": false,
+   "default": 1,
+   "cats": {
+    "pans": 12,
+    "frying-pans": 5
+   },
+   "variants": [
+    {
+     "sku": "3201000357",
+     "size": "24 cm",
+     "price": 69.99,
+     "msrp": 130.48,
+     "stock": true,
+     "label": null
+    },
+    {
+     "sku": "3201000358",
+     "size": "28 cm",
+     "price": 79.99,
+     "msrp": 129.99,
+     "stock": true,
+     "label": "BESTSELLER"
+    }
+   ],
+   "search": "wmf profi resist fry pan profi resist 24 cm 28 cm",
+   "description": "From flash-frying at very high temperatures to cooking delicate ingredients with lower-fat, the WMF Profi Resist Fry Pan brings together the best of two worlds. On the one hand, its scratch-resistant WMF Protection Grid and PermaDur Long-Lasting non-stick coating and effortless clean-up. On the other hand, a multilayer construction with aluminum core and Cromargan® high-quality stainless steel exterior ensures the outstanding results of a traditional uncoated pan. With a design that safely goes from stovetop to oven in an instant, and convenient features including reduced-heat handles and a wide pouring rim, this fry pan promises flawless results every time. Compatible with all stovetops, including induction.",
+   "material": "Stainless Steel 3-ply",
+   "surface": "Non-stick",
+   "technique": "All Purpose",
+   "occasion": [
+    "Everyday"
+   ]
+  },
+  {
+   "id": "p2",
+   "brand": "WMF",
+   "name": "PermaDur Excellent Fry Pan Set",
+   "series": "PermaDur Excellent",
+   "type": "Set",
+   "minPrice": 104.99,
+   "sizes": [
+    "Set of 2"
+   ],
+   "rating": null,
+   "reviews": null,
+   "ratingReal": false,
+   "default": 0,
+   "cats": {
+    "pans": 21,
+    "frying-pans": 13
+   },
+   "variants": [
+    {
+     "sku": "3201000530",
+     "size": "Set of 2",
+     "price": 104.99,
+     "msrp": 149.99,
+     "stock": true,
+     "label": null
+    }
+   ],
+   "search": "wmf permadur excellent fry pan set permadur excellent set of 2",
+   "description": "Experience the difference, with a non-stick coating that was made to last. The WMF PermaDur Excellent Fry Pan features WMF's robust 3-layer PermaDur coating—perfect for daily use and effortless clean-up. Its thick cast aluminum construction offers exceptionally even cooking results and stands up to even the most demanding use. Compatible with all stovetops, including induction, it is equipped with the TransTherm® universal base for optimal heat distribution and retention, as well as a heat-insulated handle that provides maximum safety and comfort. The result is flawless, reliable cooking—from flash-frying and lower-fat cooking with minimal added oil, to gentle and refined sautés.",
+   "material": "Cast Aluminium",
+   "surface": "Non-stick",
+   "technique": "Gentle Frying",
+   "occasion": [
+    "Everyday",
+    "Gifting"
+   ]
+  },
+  {
+   "id": "p3",
+   "brand": "WMF",
+   "name": "PermaDur Premium Fry Pan",
+   "series": "PermaDur Premium",
+   "type": "Single pan",
+   "minPrice": 69.99,
+   "sizes": [
+    "20 cm"
+   ],
+   "rating": null,
+   "reviews": null,
+   "ratingReal": false,
+   "default": 0,
+   "cats": {
+    "frying-pans": 33
+   },
+   "variants": [
+    {
+     "sku": "3201000536",
+     "size": "20 cm",
+     "price": 69.99,
+     "msrp": 89.99,
+     "stock": true,
+     "label": null
+    }
+   ],
+   "search": "wmf permadur premium fry pan permadur premium 20 cm",
+   "description": "Quality that's built to last, performance that never fails to deliver: Made in Germany, the WMF PermaDur Premium Frypan puts the pinnacle of culinary excellence within reach. WMF's expertly crafted PermaDur Premium 3-layer non-stick coating promises long-lasting performance day after day, for great results. Thick squeeze cast aluminum delivers optimal heat retention that keeps your ingredients warm for longer, with exceptional heat distribution. The heat-insulated Bakelite handle ensures safe handling, together with an ergonomic grip to deliver cooking in total comfort. Master that flawless sear for Ahi tuna steaks or choice cuts of meat, as well as mouth-watering vegetable skillets, grilled chicken or shrimp to top Caesar salads, and so much more.",
+   "material": "Cast Aluminium",
+   "surface": "Non-stick",
+   "technique": "Gentle Frying",
+   "occasion": [
+    "Everyday"
+   ]
+  },
+  {
+   "id": "p4",
+   "brand": "WMF",
+   "name": "Casserole stand MISTER X",
+   "series": "Casserole stand MISTER X",
+   "type": "Single pan",
+   "minPrice": 24.99,
+   "sizes": [
+    "One size"
+   ],
+   "rating": null,
+   "reviews": null,
+   "ratingReal": false,
+   "default": 0,
+   "cats": {
+    "pans": 45
+   },
+   "variants": [
+    {
+     "sku": "3201000931",
+     "size": "One size",
+     "price": 24.99,
+     "msrp": null,
+     "stock": true,
+     "label": null
+    }
+   ],
+   "search": "wmf casserole stand mister x casserole stand mister x one size",
+   "description": "The WMF MisterX Stand is the perfect finishing touch for a sophisticated dining experience: practical, comfortable and convenient with eye-catching style. The smart design of this trivet combines premium materials and sophisticated contours with smart design features, in a foldable format for secure stand and effortless storage. Dishwasher-safe Cromargan® high-quality stainless steel ensures exceptional long-lasting performance with an elegant matte finish that never fails to impress. WMF: The art of the table, with strong tradition for over 160 years.",
+   "occasion": [
+    "Everyday"
+   ]
+  },
+  {
+   "id": "p5",
+   "brand": "WMF",
+   "name": "Fry Pan Set",
+   "series": "WMF",
+   "type": "Set",
+   "minPrice": 69.99,
+   "sizes": [
+    "Set of 2",
+    "Set of 3"
+   ],
+   "rating": 5,
+   "reviews": 1,
+   "ratingReal": false,
+   "default": 0,
+   "cats": {
+    "pans": 15,
+    "frying-pans": 7
+   },
+   "variants": [
+    {
+     "sku": "3201113924",
+     "size": "Set of 2",
+     "price": 69.99,
+     "msrp": 169.99,
+     "stock": true,
+     "label": null
+    },
+    {
+     "sku": "3201001278",
+     "size": "Set of 3",
+     "price": 79.99,
+     "msrp": 149.99,
+     "stock": true,
+     "label": null
+    }
+   ],
+   "search": "wmf fry pan set  set of 2 set of 3",
+   "description": "From sautéed vegetables to fresh fish or delicious cuts of meat, this set of WMF Frypans promises multifunctional frying and searing day after day. The secret is their robust ceramic coating coupled with the TransTherm® universal base—ensuring optimal heat distribution and retention while cooking. Crafted from robust, sleek Cromargan® high-quality stainless steel, these essential pans are compatible with all stovetops, including induction, and are oven-safe for that perfect finish. They're also designed with practical features such as reduced-heat handles and wide pouring rims.",
+   "material": "Stainless Steel 1-ply",
+   "surface": "Ceramic",
+   "technique": "Gentle Frying",
+   "occasion": [
+    "Everyday",
+    "Gifting"
+   ]
+  },
+  {
+   "id": "p6",
+   "brand": "WMF",
+   "name": "Durado Grill Pan 28x28 cm",
+   "series": "Durado",
+   "type": "Single pan",
+   "minPrice": 69.99,
+   "sizes": [
+    "28 cm"
+   ],
+   "rating": 1,
+   "reviews": 1,
+   "ratingReal": false,
+   "default": 0,
+   "cats": {
+    "pans": 5
+   },
+   "variants": [
+    {
+     "sku": "3201001437",
+     "size": "28 cm",
+     "price": 69.99,
+     "msrp": 119.99,
+     "stock": true,
+     "label": null
+    }
+   ],
+   "search": "wmf durado grill pan 28x28 cm durado 28 cm",
+   "description": "Resistance and versatility come together in the WMF Durado Grill Pan. This long-lasting all-rounder is the ideal solution for delicious grilling from the comfort of your kitchen. Its robust ceramic coating is heat-resistant up to 400°C, offering excellent cooking results and easy cleaning. At the same time, its TransTherm® universal base ensures optimal heat distribution and retention. It even features a corrugated bottom that efficiently drains oil while giving food that traditional barbecue look. Crafted from sleek Cromargan® high-quality stainless steel, this practical kitchen pan goes straight from stovetop to oven for a flawless finish. Rounding it off are convenient features, including reduced-heat handles and a wide pouring rim for drip-free serving and a spotless kitchen. Compatible with all stovetops, including induction.",
+   "material": "Stainless Steel 1-ply",
+   "surface": "Ceramic",
+   "technique": "Gentle Frying",
+   "occasion": [
+    "Everyday"
+   ]
+  },
+  {
+   "id": "p7",
+   "brand": "WMF",
+   "name": "Wok",
+   "series": "WMF",
+   "type": "Single pan",
+   "minPrice": 89.99,
+   "sizes": [
+    "36 cm"
+   ],
+   "rating": 4,
+   "reviews": 1,
+   "ratingReal": false,
+   "default": 0,
+   "cats": {
+    "pans": 20
+   },
+   "variants": [
+    {
+     "sku": "3201001442",
+     "size": "36 cm",
+     "price": 89.99,
+     "msrp": 179.99,
+     "stock": true,
+     "label": null
+    }
+   ],
+   "search": "wmf wok  36 cm",
+   "description": "Discover the key to Asian cuisine cooked to perfection: The WMF Wok offers premium materials and a special design that's ideal for mastering Asian specialties at restaurant standards of quality every time. Featuring WMF's TransTherm® base for better heat distribution and retention, the wok is crafted of Cromargan® high-quality stainless steel for exceptional durability that is dishwasher safe. Brilliant features round off the package: reduced-heat stainless steel handles for easy handling and oven-safe use, a glass lid for easy monitoring, and a deep and round shape made for sautéing and flipping like a pro. From mouth-watering stir-fries to full-flavored curries, discover a format made for cooking over high heat, for evenly coated results day after day, meal after perfect meal.",
+   "material": "Stainless Steel 1-ply",
+   "surface": "Uncoated",
+   "technique": "Intense Searing",
+   "occasion": [
+    "Everyday"
+   ]
+  },
+  {
+   "id": "p8",
+   "brand": "WMF",
+   "name": "Macao Wok Set",
+   "series": "Macao",
+   "type": "Set",
+   "minPrice": 109.99,
+   "sizes": [
+    "Set of 4"
+   ],
+   "rating": null,
+   "reviews": null,
+   "ratingReal": false,
+   "default": 0,
+   "cats": {
+    "pans": 28
+   },
+   "variants": [
+    {
+     "sku": "3201001511",
+     "size": "Set of 4",
+     "price": 109.99,
+     "msrp": 169.99,
+     "stock": true,
+     "label": "BESTSELLER"
+    }
+   ],
+   "search": "wmf macao wok set macao set of 4",
+   "description": "Discover everything you need for mouth-watering stir-fries, curries and more with the ultimate wok package. The WMF Macao Wok offers delicious results day after day, with a full range of specialized accessories designed for recipes cooked over high heat. Featuring WMF's TransTherm® base for better heat distribution and retention, the wok is crafted from Cromargan® high-quality stainless steel for exceptional durability that is dishwasher safe. The high-quality glass lid ensures effortless monitoring while the tempura rack and steam basket put endless Asian culinary delights within reach, with an included cookbook to round off the package. This wok is oven-safe and compatible with all stovetops including induction.",
+   "material": "Stainless Steel 1-ply",
+   "surface": "Uncoated",
+   "technique": "Intense Searing",
+   "occasion": [
+    "Everyday",
+    "Gifting"
+   ]
+  },
+  {
+   "id": "p9",
+   "brand": "Silit",
+   "name": "Tisch & Party Hongkong Wok",
+   "series": "Tisch & Party Hongkong",
+   "type": "Single pan",
+   "minPrice": 99.99,
+   "sizes": [
+    "36 cm"
+   ],
+   "rating": null,
+   "reviews": null,
+   "ratingReal": false,
+   "default": 0,
+   "cats": {
+    "pans": 26
+   },
+   "variants": [
+    {
+     "sku": "3201003795",
+     "size": "36 cm",
+     "price": 99.99,
+     "msrp": 149.99,
+     "stock": true,
+     "label": null
+    }
+   ],
+   "search": "silit tisch & party hongkong wok tisch & party hongkong 36 cm",
+   "description": "Prepare perfect stir fries and Asian noodles, as well as inventive one-pan recipes—all in the Silit Hongkong Wok. Its ultra-hard CeraProtect coating withstands temperatures of up to 400°C, all while ensuring easy clean-up. At the same time, its Silitherm® universal base delivers optimal heat distribution and retention, for stunning results. Crafted from long-lasting, high-quality polished stainless steel, this practical wok goes straight from stovetop to oven for a flawless finish to your favorite recipes. It also features reduced-heat handles for more comfortable cooking and a wide pouring rim for effortless pouring and serving. Compatible with all stovetops, including induction, the Silit Hongkong Wok comes with a high-quality glass lid for easy monitoring while cooking.",
+   "material": "Stainless Steel 1-ply",
+   "surface": "Ceramic",
+   "technique": "Gentle Frying",
+   "occasion": [
+    "Everyday"
+   ]
+  },
+  {
+   "id": "p10",
+   "brand": "Silit",
+   "name": "Messino Fry Pan",
+   "series": "Messino",
+   "type": "Single pan",
+   "minPrice": 39.99,
+   "sizes": [
+    "24 cm",
+    "28 cm"
+   ],
+   "rating": null,
+   "reviews": null,
+   "ratingReal": false,
+   "default": 1,
+   "cats": {
+    "frying-pans": 42
+   },
+   "variants": [
+    {
+     "sku": "3201005855",
+     "size": "24 cm",
+     "price": 39.99,
+     "msrp": 49.99,
+     "stock": true,
+     "label": null
+    },
+    {
+     "sku": "3201005856",
+     "size": "28 cm",
+     "price": 44.99,
+     "msrp": 59.99,
+     "stock": true,
+     "label": null
+    }
+   ],
+   "search": "silit messino fry pan messino 24 cm 28 cm",
+   "description": "With the Messino Frypan, discover a lightweight pan that holds up to high temperatures—ideal for flash frying, exceptional searing and much more. Its ultra-hard, abrasion-proof CeraProtect ceramic coating is infused with minerals and heat-resistant up to 400°C, for excellent cooking results and easy clean-up. Crafted from lightweight aluminum, this convenient kitchen pan heats-up in a flash and is equipped with a heat-insulated Bakelite handle for safe handling and maximum comfort. It's also compatible with all stovetops, including induction, making it your infallible partner in the kitchen.",
+   "material": "Cast Aluminium",
+   "surface": "Ceramic",
+   "technique": "Gentle Frying",
+   "occasion": [
+    "Everyday"
+   ]
+  },
+  {
+   "id": "p11",
+   "brand": "WMF",
+   "name": "Profi Resist Fry Pan with Spatula",
+   "series": "Profi Resist",
+   "type": "Single pan",
+   "minPrice": 89.99,
+   "sizes": [
+    "28 cm"
+   ],
+   "rating": null,
+   "reviews": null,
+   "ratingReal": false,
+   "default": 0,
+   "cats": {
+    "pans": 2,
+    "frying-pans": 1
+   },
+   "variants": [
+    {
+     "sku": "3201007433",
+     "size": "28 cm",
+     "price": 89.99,
+     "msrp": 129.99,
+     "stock": true,
+     "label": null
+    }
+   ],
+   "search": "wmf profi resist fry pan with spatula profi resist 28 cm",
+   "description": "From flash-frying at very high temperatures to cooking delicate ingredients with lower fat, the WMF Profi Resist Fry Pan brings together the best of two worlds. On the one hand, its scratch-resistant WMF Protection Grid and PermaDur Long-Lasting non-stick coating offer robust use and effortless clean-up. On the other hand, a multilayer construction with aluminum core and Cromargan® high-quality stainless steel exterior ensures the excellent results of a traditional uncoated pan. With a design that safely goes from stovetop to oven in an instant, and convenient features including reduced-heat handles and a wide pouring rim, this fry pan promises flawless results every time. Compatible with all stovetops—including induction—it comes with a high-quality, dishwasher-safe spatula that is safe to use on non-stick cookware and ideal for turning delicate foods.",
+   "material": "Stainless Steel 3-ply",
+   "surface": "Non-stick",
+   "technique": "All Purpose",
+   "occasion": [
+    "Everyday"
+   ]
+  },
+  {
+   "id": "p12",
+   "brand": "WMF",
+   "name": "Profi Resist Fry Pan-Set",
+   "series": "Profi Resist",
+   "type": "Set",
+   "minPrice": 79.99,
+   "sizes": [
+    "Set of 2"
+   ],
+   "rating": null,
+   "reviews": null,
+   "ratingReal": false,
+   "default": 0,
+   "cats": {
+    "pans": 17,
+    "frying-pans": 9
+   },
+   "variants": [
+    {
+     "sku": "3201008479",
+     "size": "Set of 2",
+     "price": 79.99,
+     "msrp": 129.99,
+     "stock": true,
+     "label": "BUNDLE"
+    }
+   ],
+   "search": "wmf profi resist fry pan-set profi resist set of 2",
+   "description": "From flash-frying at very high temperatures to cooking delicate ingredients with lower-fat, the WMF Profi Resist Fry Pan brings together the best of two worlds. On the one hand, its scratch-resistant WMF Protection Grid and PermaDur Long-Lasting non-stick coating and effortless clean-up. On the other hand, a multilayer construction with aluminum core and Cromargan® high-quality stainless steel exterior ensures the outstanding results of a traditional uncoated pan. With a design that safely goes from stovetop to oven in an instant, and convenient features including reduced-heat handles and a wide pouring rim, this fry pan promises flawless results every time. Compatible with all stovetops, including induction.",
+   "material": "Stainless Steel 3-ply",
+   "surface": "Non-stick",
+   "technique": "All Purpose",
+   "occasion": [
+    "Everyday",
+    "Gifting"
+   ]
+  },
+  {
+   "id": "p13",
+   "brand": "WMF",
+   "name": "Steak Profi Fry Pan",
+   "series": "Steak Profi",
+   "type": "Single pan",
+   "minPrice": 84.99,
+   "sizes": [
+    "24 cm"
+   ],
+   "rating": null,
+   "reviews": null,
+   "ratingReal": false,
+   "default": 0,
+   "cats": {
+    "pans": 39,
+    "frying-pans": 26
+   },
+   "variants": [
+    {
+     "sku": "3201010260",
+     "size": "24 cm",
+     "price": 84.99,
+     "msrp": 109.99,
+     "stock": true,
+     "label": null
+    }
+   ],
+   "search": "wmf steak profi fry pan steak profi 24 cm",
+   "description": "The secret weapon for the perfect steak is now within reach. The WMF Steak Profi Fry Pan delivers mouth-watering steaks cooked to perfection, with advanced technology and materials that ensure flawless searing results every time. This high-performance frying pan with convenient features comes enhanced with Rapid Heat Control technology, offering the dual advantages of a fast heat-up time and pinpoint temperature regulation once removed from heat. Whatever the cut, your steak comes out just the way you like it: tender, flavorful and seared to perfection. Finish it off in the oven, with the easy-to-clean Duraquarz® Heat-Resistant coating and a multilayer construction, for delicious roasting and fast, even heating. Compatible with all stovetops, including induction.",
+   "material": "Stainless Steel 1-ply",
+   "surface": "Uncoated",
+   "technique": "Intense Searing",
+   "occasion": [
+    "Everyday"
+   ]
+  },
+  {
+   "id": "p14",
+   "brand": "WMF",
+   "name": "Fusiontec Wok Platinum w. lid",
+   "series": "Fusiontec",
+   "type": "Single pan",
+   "minPrice": 199.99,
+   "sizes": [
+    "32 cm"
+   ],
+   "rating": null,
+   "reviews": null,
+   "ratingReal": false,
+   "default": 0,
+   "cats": {
+    "pans": 41
+   },
+   "variants": [
+    {
+     "sku": "3201111640",
+     "size": "32 cm",
+     "price": 199.99,
+     "msrp": 229,
+     "stock": false,
+     "label": null
+    }
+   ],
+   "search": "wmf fusiontec wok platinum w. lid fusiontec 32 cm",
+   "description": "WMF Fusiontec Cookware is your reliable partner for life in the kitchen with the promise of uncompromising performance and beauty that stands the test of time. Its uniquely crafted alloy combines the best qualities of existing cookware into one versatile material: speed, heat retention, scratch-resistance and homogenous cooking results. Made to stand out from the crowd, the Fusiontec Mineral series is crafted with premium finishes, complete with glimmering particles and metallic shine, plus a unique firing and hardening process that fuses ceramic layers into an exceptionally robust surface. All-rounder for roasting, steaming, braising, deep-frying and blanching. Combines Asian tradition with modern, healthier cuisine. Made in Germany and meticulously crafted with WMF's 130 years of expertise, it's backed by a 30-year warranty and features reduced-heat handles, a wide pouring rim and an elegant glass lid for effortless cooking.",
+   "material": "Fusiontec",
+   "surface": "Uncoated",
+   "technique": "All Purpose",
+   "occasion": [
+    "Everyday",
+    "Gifting"
+   ]
+  },
+  {
+   "id": "p15",
+   "brand": "WMF",
+   "name": "Fusiontec Mineral Frypan Black",
+   "series": "Fusiontec Mineral",
+   "type": "Single pan",
+   "minPrice": 99.99,
+   "sizes": [
+    "24 cm",
+    "28 cm"
+   ],
+   "rating": null,
+   "reviews": null,
+   "ratingReal": false,
+   "default": 1,
+   "cats": {
+    "pans": 18,
+    "frying-pans": 11
+   },
+   "variants": [
+    {
+     "sku": "3201113556",
+     "size": "24 cm",
+     "price": 99.99,
+     "msrp": 119.99,
+     "stock": true,
+     "label": null
+    },
+    {
+     "sku": "3201113557",
+     "size": "28 cm",
+     "price": 119.99,
+     "msrp": 139.99,
+     "stock": true,
+     "label": "NEW"
+    }
+   ],
+   "search": "wmf fusiontec mineral frypan black fusiontec mineral 24 cm 28 cm",
+   "description": "WMF Fusiontec Cookware is your reliable partner for life in the kitchen—with the promise of uncompromising performance and beauty that stands the test of time. Its innovative design features a uniquely crafted alloy, combining the best qualities of existing cookware into one versatile material. Made to stand out from the crowd, the Fusiontec Mineral Frypan is crafted with premium finishes, plus a unique firing and hardening process that fuses ceramic layers into an exceptionally robust surface. This all-rounder is ideal for fish, meat, vegetables, high heat stir-fries and much more. Made in Germany and meticulously crafted with WMF's 130 years of expertise, it's backed by a 30-year warranty and features a reduced-heat handle, wide pouring rim and elegant glass lid for effortless cooking.",
+   "material": "Fusiontec",
+   "surface": "Uncoated",
+   "technique": "All Purpose",
+   "occasion": [
+    "Everyday"
+   ]
+  },
+  {
+   "id": "p16",
+   "brand": "WMF",
+   "name": "Fusiontec Mineral Frypan Platinum",
+   "series": "Fusiontec Mineral",
+   "type": "Single pan",
+   "minPrice": 89.99,
+   "sizes": [
+    "24 cm"
+   ],
+   "rating": null,
+   "reviews": null,
+   "ratingReal": false,
+   "default": 0,
+   "cats": {
+    "pans": 24,
+    "frying-pans": 15
+   },
+   "variants": [
+    {
+     "sku": "3201113558",
+     "size": "24 cm",
+     "price": 89.99,
+     "msrp": 119.99,
+     "stock": true,
+     "label": null
+    }
+   ],
+   "search": "wmf fusiontec mineral frypan platinum fusiontec mineral 24 cm",
+   "description": "WMF Fusiontec Cookware is your reliable partner for life in the kitchen with the promise of uncompromising performance and beauty that stands the test of time. Its uniquely crafted alloy combines the best qualities of existing cookware into one versatile material: speed, heat retention, scratch-resistance and homogenous cooking results. Made to stand out from the crowd, the Fusiontec Mineral series is crafted with premium finishes, complete with glimmering particles and metallic shine, plus a unique firing and hardening process that fuses ceramic layers into an exceptionally robust surface. This all-rounder is ideal for fish, meat, vegetables, high heat stir-fries and much more. Made in Germany and meticulously crafted with WMF's 130 years of expertise, it's backed by a 30-year warranty and features a reduced-heat handle and a wide pouring rim for effortless cooking.",
+   "material": "Fusiontec",
+   "surface": "Uncoated",
+   "technique": "All Purpose",
+   "occasion": [
+    "Everyday"
+   ]
+  },
+  {
+   "id": "p17",
+   "brand": "WMF",
+   "name": "Fusiontec Mineral Frypan Rose Quartz",
+   "series": "Fusiontec Mineral",
+   "type": "Single pan",
+   "minPrice": 99.99,
+   "sizes": [
+    "24 cm",
+    "28 cm"
+   ],
+   "rating": 3,
+   "reviews": 1,
+   "ratingReal": false,
+   "default": 1,
+   "cats": {
+    "pans": 19,
+    "frying-pans": 12
+   },
+   "variants": [
+    {
+     "sku": "3201113560",
+     "size": "24 cm",
+     "price": 99.99,
+     "msrp": 119.99,
+     "stock": true,
+     "label": null
+    },
+    {
+     "sku": "3201113561",
+     "size": "28 cm",
+     "price": 109.99,
+     "msrp": 139.99,
+     "stock": true,
+     "label": "NEW"
+    }
+   ],
+   "search": "wmf fusiontec mineral frypan rose quartz fusiontec mineral 24 cm 28 cm",
+   "description": "WMF Fusiontec Cookware is your reliable partner for life in the kitchen with the promise of uncompromising performance and beauty that stands the test of time. Its uniquely crafted alloy combines the best qualities of existing cookware into one versatile material: speed, heat retention, scratch-resistance and homogenous cooking results. Made to stand out from the crowd, the Fusiontec Mineral series is crafted with premium finishes, complete with glimmering particles and metallic shine, plus a unique firing and hardening process that fuses ceramic layers into an exceptionally robust surface. This all-rounder is ideal for fish, meat, vegetables, high heat stir-fries and much more. Made in Germany and meticulously crafted with WMF's 130 years of expertise, it's backed by a 30-year warranty and features a reduced-heat handle and a wide pouring rim for effortless cooking.",
+   "material": "Fusiontec",
+   "surface": "Uncoated",
+   "technique": "All Purpose",
+   "occasion": [
+    "Everyday"
+   ]
+  },
+  {
+   "id": "p18",
+   "brand": "WMF",
+   "name": "DuraCuisine, Wok",
+   "series": "DuraCuisine",
+   "type": "Single pan",
+   "minPrice": 149.99,
+   "sizes": [
+    "28 cm"
+   ],
+   "rating": null,
+   "reviews": null,
+   "ratingReal": false,
+   "default": 0,
+   "cats": {
+    "pans": 10
+   },
+   "variants": [
+    {
+     "sku": "3201113713",
+     "size": "28 cm",
+     "price": 149.99,
+     "msrp": 199.99,
+     "stock": true,
+     "label": "NEW"
+    }
+   ],
+   "search": "wmf duracuisine, wok duracuisine 28 cm",
+   "description": "Precision and control come together in the DuraCuisine Wok, for flawless cooking and excellent results every time. The secret is the multilayer construction that ensures precise temperature response and even heat-distribution for a fast heat-up time and pinpoint heat regulation. This versatile fry pan also features the heat-resistant Duraquarz® coating, for effortless cooking ad easy-to-clean performance. WMF manufactures its products with a high level of quality and expertise.",
+   "material": "Stainless Steel 3-ply",
+   "surface": "Uncoated",
+   "technique": "Intense Searing",
+   "occasion": [
+    "Everyday"
+   ]
+  },
+  {
+   "id": "p19",
+   "brand": "WMF",
+   "name": "Nordic Profi Fry Pan Set",
+   "series": "Nordic Profi",
+   "type": "Set",
+   "minPrice": 69.99,
+   "sizes": [
+    "Set of 2"
+   ],
+   "rating": null,
+   "reviews": null,
+   "ratingReal": false,
+   "default": 0,
+   "cats": {
+    "pans": 47,
+    "frying-pans": 31
+   },
+   "variants": [
+    {
+     "sku": "3201113738",
+     "size": "Set of 2",
+     "price": 69.99,
+     "msrp": 129,
+     "stock": true,
+     "label": null
+    }
+   ],
+   "search": "wmf nordic profi fry pan set nordic profi set of 2",
+   "description": "The WMF Nordic Profi Fry Pans promise delicate frying and searing day after day. The secret is the high-performance non-stick coating coupled with TransTherm® universal base—ensuring optimal heat distribution and retention while cooking.",
+   "material": "Stainless Steel 1-ply",
+   "surface": "Non-stick",
+   "technique": "Gentle Frying",
+   "occasion": [
+    "Everyday",
+    "Gifting"
+   ]
+  },
+  {
+   "id": "p20",
+   "brand": "WMF",
+   "name": "Non-Stick Fry Pan Set",
+   "series": "Non-Stick",
+   "type": "Set",
+   "minPrice": 84.99,
+   "sizes": [
+    "Set of 3"
+   ],
+   "rating": 5,
+   "reviews": 1,
+   "ratingReal": false,
+   "default": 0,
+   "cats": {
+    "pans": 33,
+    "frying-pans": 21
+   },
+   "variants": [
+    {
+     "sku": "3201113818",
+     "size": "Set of 3",
+     "price": 84.99,
+     "msrp": 179.99,
+     "stock": true,
+     "label": "BESTSELLER"
+    }
+   ],
+   "search": "wmf non-stick fry pan set non-stick set of 3",
+   "description": "From sautéed vegetables to fresh fish or delicious cuts of meat, the WMF Non-Stick Frypan Set promises delicate frying and searing day after day. The secret is its high-performance non-stick coating coupled with TransTherm® universal base—ensuring optimal heat distribution and retention while cooking. Crafted from robust, sleek Cromargan® high-quality stainless steel, these essential pans are compatible with all stovetops, including induction, and are designed with practical features such as heat-insulated handles and wide pouring rim.",
+   "material": "Stainless Steel 1-ply",
+   "surface": "Non-stick",
+   "technique": "Gentle Frying",
+   "occasion": [
+    "Everyday",
+    "Gifting"
+   ]
+  },
+  {
+   "id": "p21",
+   "brand": "WMF",
+   "name": "Ultimate Profi Resist Deep Fry Pan",
+   "series": "Ultimate Profi Resist",
+   "type": "Single pan",
+   "minPrice": 109.99,
+   "sizes": [
+    "28 cm"
+   ],
+   "rating": null,
+   "reviews": null,
+   "ratingReal": false,
+   "default": 0,
+   "cats": {
+    "frying-pans": 40
+   },
+   "variants": [
+    {
+     "sku": "3201114071",
+     "size": "28 cm",
+     "price": 109.99,
+     "msrp": 139.99,
+     "stock": false,
+     "label": "NEW"
+    }
+   ],
+   "search": "wmf ultimate profi resist deep fry pan ultimate profi resist 28 cm",
+   "description": "With Ultimate Profi Resist, enjoy the performance and durability of stainless steel plus the everyday convenience of non-stick. The secret: its honeycomb protection grid, which sears food to perfection while ensuring safe use with metal utensils on the ceramic coating. Heating is fast and even and the oven-safe design offers full versatility.",
+   "material": "Stainless Steel 3-ply",
+   "surface": "Ceramic",
+   "technique": "All Purpose",
+   "occasion": [
+    "Everyday"
+   ]
+  },
+  {
+   "id": "p22",
+   "brand": "WMF",
+   "name": "Ultimate Profi Resist Fry Pan",
+   "series": "Ultimate Profi Resist",
+   "type": "Single pan",
+   "minPrice": 89.99,
+   "sizes": [
+    "24 cm",
+    "28 cm"
+   ],
+   "rating": null,
+   "reviews": null,
+   "ratingReal": false,
+   "default": 1,
+   "cats": {
+    "pans": 8,
+    "frying-pans": 3
+   },
+   "variants": [
+    {
+     "sku": "3201114077",
+     "size": "24 cm",
+     "price": 89.99,
+     "msrp": 119.99,
+     "stock": true,
+     "label": "NEW"
+    },
+    {
+     "sku": "3201114073",
+     "size": "28 cm",
+     "price": 99.99,
+     "msrp": 129.99,
+     "stock": true,
+     "label": "NEW"
+    }
+   ],
+   "search": "wmf ultimate profi resist fry pan ultimate profi resist 24 cm 28 cm",
+   "description": "With Ultimate Profi Resist, enjoy the performance and durability of stainless steel plus the everyday convenience of non-stick. The secret: its honeycomb protection grid, which sears food to perfection while ensuring safe use with metal utensils on the ceramic coating. Heating is fast and even and the oven-safe design offers full versatility.",
+   "material": "Stainless Steel 3-ply",
+   "surface": "Ceramic",
+   "technique": "All Purpose",
+   "occasion": [
+    "Everyday"
+   ]
+  },
+  {
+   "id": "p23",
+   "brand": "WMF",
+   "name": "Ultimate Profi Resist Serving Pan",
+   "series": "Ultimate Profi Resist",
+   "type": "Single pan",
+   "minPrice": 84.99,
+   "sizes": [
+    "24 cm"
+   ],
+   "rating": null,
+   "reviews": null,
+   "ratingReal": false,
+   "default": 0,
+   "cats": {
+    "pans": 22
+   },
+   "variants": [
+    {
+     "sku": "3201114074",
+     "size": "24 cm",
+     "price": 84.99,
+     "msrp": 129.99,
+     "stock": true,
+     "label": "NEW"
+    }
+   ],
+   "search": "wmf ultimate profi resist serving pan ultimate profi resist 24 cm",
+   "description": "With Ultimate Profi Resist, enjoy the performance and durability of stainless steel plus the everyday convenience of non-stick. The secret: its honeycomb protection grid, which sears food to perfection while ensuring safe use with metal utensils on the ceramic coating. Heating is fast and even and the oven-safe design offers full versatility.",
+   "material": "Stainless Steel 3-ply",
+   "surface": "Ceramic",
+   "technique": "All Purpose",
+   "occasion": [
+    "Everyday"
+   ]
+  },
+  {
+   "id": "p24",
+   "brand": "WMF",
+   "name": "Non-Stick Fry Pan",
+   "series": "Non-Stick",
+   "type": "Single pan",
+   "minPrice": 19.99,
+   "sizes": [
+    "18 cm",
+    "20 cm"
+   ],
+   "rating": null,
+   "reviews": null,
+   "ratingReal": false,
+   "default": 0,
+   "cats": {
+    "frying-pans": 35
+   },
+   "variants": [
+    {
+     "sku": "3201114578",
+     "size": "18 cm",
+     "price": 19.99,
+     "msrp": 49.99,
+     "stock": true,
+     "label": "SALE,NEW"
+    },
+    {
+     "sku": "3201114520",
+     "size": "20 cm",
+     "price": 29.99,
+     "msrp": 69.99,
+     "stock": true,
+     "label": null
+    }
+   ],
+   "search": "wmf non-stick fry pan non-stick 18 cm 20 cm",
+   "description": "From sautéed vegetables to fresh fish or delicious egg dishes, the WMF Non-Stick Frypan promises delicate frying and searing day after day. The secret is its high-performance non-stick coating coupled with TransTherm® universal base—ensuring optimal heat distribution and retention while cooking. Crafted from robust, sleek Cromargan® high-quality stainless steel, this essential pan is compatible with all stovetops, including induction, and is designed with practical features such as a heat-insulated handle and wide pouring rim.",
+   "material": "Stainless Steel 1-ply",
+   "surface": "Non-stick",
+   "technique": "Gentle Frying",
+   "occasion": [
+    "Everyday"
+   ]
+  },
+  {
+   "id": "p25",
+   "brand": "WMF",
+   "name": "Devil Fry Pan Set",
+   "series": "Devil",
+   "type": "Set",
+   "minPrice": 69.99,
+   "sizes": [
+    "Set of 2"
+   ],
+   "rating": null,
+   "reviews": null,
+   "ratingReal": false,
+   "default": 0,
+   "cats": {
+    "pans": 42,
+    "frying-pans": 36
+   },
+   "variants": [
+    {
+     "sku": "3201114525",
+     "size": "Set of 2",
+     "price": 69.99,
+     "msrp": 119.99,
+     "stock": true,
+     "label": null
+    }
+   ],
+   "search": "wmf devil fry pan set devil set of 2",
+   "description": "From sautéed vegetables to fresh fish or delicious cuts of meat, the WMF Frypan Set promises multifunctional frying and searing day after day. The secret is its ceramic coating coupled with the TransTherm® universal base—ensuring optimal heat distribution and retention while cooking. Crafted from Cromargan® high-quality stainless steel, these essential pans are compatible with all stovetops, including induction, and are designed with practical features such as heat-insulated handles and wide pouring rim.",
+   "material": "Stainless Steel 1-ply",
+   "surface": "Ceramic",
+   "technique": "Gentle Frying",
+   "occasion": [
+    "Everyday",
+    "Gifting"
+   ]
+  },
+  {
+   "id": "p26",
+   "brand": "WMF",
+   "name": "Oven Pan with lid",
+   "series": "Oven",
+   "type": "Single pan",
+   "minPrice": 49.99,
+   "sizes": [
+    "24 cm",
+    "28 cm"
+   ],
+   "rating": null,
+   "reviews": null,
+   "ratingReal": false,
+   "default": 1,
+   "cats": {
+    "pans": 6
+   },
+   "variants": [
+    {
+     "sku": "3201114802",
+     "size": "24 cm",
+     "price": 49.99,
+     "msrp": 99.99,
+     "stock": true,
+     "label": "SALE"
+    },
+    {
+     "sku": "3201114557",
+     "size": "28 cm",
+     "price": 62.99,
+     "msrp": 119.99,
+     "stock": true,
+     "label": null
+    }
+   ],
+   "search": "wmf oven pan with lid oven 24 cm 28 cm",
+   "description": "Ultimate cooking versatility is now within reach. The WMF Oven Pan offers perfect results on a wide variety of recipes—from stovetop, into the oven (up to 180° C), and onto the table as a stylish serving dish. A smart design featuring two side handles helps you master all your favorite dishes with total ease, with a high-performance Durit Select Pro non-stick coating ensuring perfect frying and effortless clean-up. Monitor your progress and keep ingredients from drying out with a high-quality glass lid. WMF's Cromargan® high-quality stainless steel ensures robust, long-lasting cookware with a full range of benefits—easy cleaning, total flavor retention, and more. With WMF's TransTherm® base for better heat distribution and retention, discover the perfect frying pan for all your cooking needs.",
+   "material": "Stainless Steel 1-ply",
+   "surface": "Non-stick",
+   "technique": "Gentle Frying",
+   "occasion": [
+    "Everyday"
+   ]
+  },
+  {
+   "id": "p27",
+   "brand": "WMF",
+   "name": "Fusiontec Mineral Pro, Wok With Lid, Tim Raue Ocean Blue",
+   "series": "Fusiontec Mineral Pro",
+   "type": "Single pan",
+   "minPrice": 179.99,
+   "sizes": [
+    "28 cm"
+   ],
+   "rating": null,
+   "reviews": null,
+   "ratingReal": false,
+   "default": 0,
+   "cats": {
+    "pans": 7
+   },
+   "variants": [
+    {
+     "sku": "3201114627",
+     "size": "28 cm",
+     "price": 179.99,
+     "msrp": 249,
+     "stock": true,
+     "label": null
+    }
+   ],
+   "search": "wmf fusiontec mineral pro, wok with lid, tim raue ocean blue fusiontec mineral pro 28 cm",
+   "description": "The WMF Mineral Pro Wok offers an exceptional home cooking experience with performance and quality that's built to last. Our hard-wearing Fusiontec Material promises outstanding scratch-resistance, even after intensive use, with superior heat retention for bold, rich flavors and rapid, precise heating for total cooking control.",
+   "material": "Fusiontec",
+   "surface": "Uncoated",
+   "technique": "All Purpose",
+   "occasion": [
+    "Everyday",
+    "Gifting"
+   ]
+  },
+  {
+   "id": "p28",
+   "brand": "WMF",
+   "name": "Click&Serve Fry Pan Value Set*",
+   "series": "Click&Serve",
+   "type": "Set",
+   "minPrice": 179.99,
+   "sizes": [
+    "Set of 3"
+   ],
+   "rating": null,
+   "reviews": null,
+   "ratingReal": false,
+   "default": 0,
+   "cats": {
+    "pans": 1
+   },
+   "variants": [
+    {
+     "sku": "8900540156",
+     "size": "Set of 3",
+     "price": 179.99,
+     "msrp": 219,
+     "stock": true,
+     "label": null
+    }
+   ],
+   "search": "wmf click&serve fry pan value set* click&serve set of 3",
+   "description": "Introducing Click&Serve, WMF's innovative answer to multifunction cookware that streamlines your life—and your kitchen. Thanks to a smart design featuring a removable handle, its pots and pans go seamlessly from stovetop to oven, then straight to the table for elegant serving and into the fridge to conveniently store leftovers. Strong enough to hold up to 10 kg, the handle attaches anywhere on the pan's rim with a simple click, offering exceptional convenience and it's backed with a 10-year warranty. Once removed, the range can be stored away with ease, thanks to a highly stackable design (including practical stackable lids) that saves precious space in your cupboards. And because it's WMF, the best in cooking is assured, with drip-free pouring rims, the TransTherm® universal base for optimal heat distribution and delicious results, and a premium construction in Cromargan® high-quality stainless steel, for long-lasting performance that is dishwasher safe. Compatible with all stovetops, including induction.",
+   "material": "Stainless Steel 1-ply",
+   "surface": "Uncoated",
+   "technique": "Intense Searing",
+   "occasion": [
+    "Everyday",
+    "Gifting"
+   ]
+  },
+  {
+   "id": "p29",
+   "brand": "WMF",
+   "name": "Durado Fry Pan Set",
+   "series": "Durado",
+   "type": "Set",
+   "minPrice": 129.99,
+   "sizes": [
+    "Set of 3"
+   ],
+   "rating": null,
+   "reviews": null,
+   "ratingReal": false,
+   "default": 0,
+   "cats": {
+    "pans": 3,
+    "frying-pans": 10
+   },
+   "variants": [
+    {
+     "sku": "7116002001",
+     "size": "Set of 3",
+     "price": 129.99,
+     "msrp": 199,
+     "stock": true,
+     "label": "BESTSELLER"
+    }
+   ],
+   "search": "wmf durado fry pan set durado set of 3",
+   "description": "Resistance and versatility come together in the WMF Durado Fry Pan. This durable all-rounder is the ideal solution for every kind of dish, from delicate sautés to high-heat stir-fries. Its robust ceramic coating is heat-resistant up to 400°C, offering excellent cooking results and easy cleaning. At the same time, its TransTherm® universal base ensures optimal heat distribution and retention. Crafted from sleek Cromargan® high-quality stainless steel, this practical kitchen pan goes straight from stovetop to oven for a flawless finish. Rounding it off are convenient features, including a reduced-heat handle and a wide pouring rim for drip-free serving and a spotless kitchen. Compatible with all stovetops, including induction.",
+   "material": "Stainless Steel 1-ply",
+   "surface": "Ceramic",
+   "technique": "Gentle Frying",
+   "occasion": [
+    "Everyday",
+    "Gifting"
+   ]
+  },
+  {
+   "id": "p30",
+   "brand": "WMF",
+   "name": "Durado Fry Pan-Set",
+   "series": "Durado",
+   "type": "Set",
+   "minPrice": 94.48,
+   "sizes": [
+    "Set of 2"
+   ],
+   "rating": null,
+   "reviews": null,
+   "ratingReal": false,
+   "default": 0,
+   "cats": {
+    "pans": 9,
+    "frying-pans": 4
+   },
+   "variants": [
+    {
+     "sku": "7115005328",
+     "size": "Set of 2",
+     "price": 94.48,
+     "msrp": null,
+     "stock": true,
+     "label": "BUNDLE"
+    }
+   ],
+   "search": "wmf durado fry pan-set durado set of 2",
+   "description": "#html-body [data-pb-style=U7S9HSC]{justify-content:flex-start;display:flex;flex-direction:column;background-position:left top;background-size:cover;background-repeat:no-repeat;background-attachment:scroll}This set is ideal when you want to cook flexibly and diversely - from small portions like vegetables or omelets (in the 24 cm pan) to larger dishes, family meals or roasts (in the 28 cm pan). It is perfect for households that value quality, durability and comfortable, low-fat frying. &nbsp; Optional accessories (recommended): cooking utensils made of wood or plastic and mild dishwashing liquid - keeping the non-stick coating and stainless steel in good condition for a long time.",
+   "material": "Stainless Steel 1-ply",
+   "surface": "Ceramic",
+   "technique": "Gentle Frying",
+   "occasion": [
+    "Everyday",
+    "Gifting"
+   ]
+  },
+  {
+   "id": "p31",
+   "brand": "WMF",
+   "name": "Profi Fry Pan",
+   "series": "Profi",
+   "type": "Single pan",
+   "minPrice": 49.99,
+   "sizes": [
+    "20 cm",
+    "24 cm",
+    "28 cm"
+   ],
+   "rating": null,
+   "reviews": null,
+   "ratingReal": false,
+   "default": 2,
+   "cats": {
+    "frying-pans": 17,
+    "pans": 27
+   },
+   "variants": [
+    {
+     "sku": "8900536722",
+     "size": "20 cm",
+     "price": 54.99,
+     "msrp": 69.99,
+     "stock": true,
+     "label": null
+    },
+    {
+     "sku": "8900536739",
+     "size": "24 cm",
+     "price": 49.99,
+     "msrp": 79.99,
+     "stock": true,
+     "label": null
+    },
+    {
+     "sku": "8900536746",
+     "size": "28 cm",
+     "price": 69.99,
+     "msrp": 89.99,
+     "stock": true,
+     "label": null
+    }
+   ],
+   "search": "wmf profi fry pan profi 20 cm 24 cm 28 cm",
+   "description": "With classic stainless steel cookware comes the promise of flawless professional results. The WMF Profi Frypan offers uncompromising performance in stunning, yet long-lasting Cromargan® high-quality stainless steel, with a design that goes straight from stovetop to oven—for timeless cooking day after day. Compatible with all stovetops, including induction, its TransTherm® universal base ensures optimal heat distribution and retention for outstanding results, while a range of convenient features make cooking effortless—including comfortable reduced-heat handles and a wide easy-pouring rim. With WMF, mastering new and old recipes like the professionals has never been easier.",
+   "material": "Stainless Steel 1-ply",
+   "surface": "Uncoated",
+   "technique": "Intense Searing",
+   "occasion": [
+    "Everyday"
+   ]
+  },
+  {
+   "id": "p32",
+   "brand": "WMF",
+   "name": "Gourmet Plus Serving Pan",
+   "series": "Gourmet Plus",
+   "type": "Single pan",
+   "minPrice": 99.99,
+   "sizes": [
+    "28 cm"
+   ],
+   "rating": null,
+   "reviews": null,
+   "ratingReal": false,
+   "default": 0,
+   "cats": {
+    "pans": 29
+   },
+   "variants": [
+    {
+     "sku": "8900536661",
+     "size": "28 cm",
+     "price": 99.99,
+     "msrp": 119.99,
+     "stock": true,
+     "label": null
+    }
+   ],
+   "search": "wmf gourmet plus serving pan gourmet plus 28 cm",
+   "description": "Discover exceptional cookware that puts 5-star quality within reach: The WMF Gourmet Plus Serving Pan was designed to bring restaurant-quality results to your home cooking, for elegant cookware that ensures flawless performance day after day. Convenient features come together for an outstanding stainless steel pot: reduced heat handles when used on the stovetop, an oven-proof design, and a extra easy-pouring wide rim. This handy all-rounder is ideal for fish, meat, vegetables and much more, with two space-saving handles for a perfect fit in the oven for melted-cheese gratins and convenient storage. Our premium cookware boasts outstanding robustness, expertly crafted from Cromargan® high-quality stainless steel, dishwasher safe, acid-resistant and oven-proof, ensuring full flavor and performance that's built to last with a sleek matte finish that never fails to impress.",
+   "material": "Stainless Steel 1-ply",
+   "surface": "Uncoated",
+   "technique": "Intense Searing",
+   "occasion": [
+    "Everyday"
+   ]
+  },
+  {
+   "id": "p33",
+   "brand": "WMF",
+   "name": "Ultimate Fry Pan",
+   "series": "Ultimate",
+   "type": "Single pan",
+   "minPrice": 79.99,
+   "sizes": [
+    "20 cm",
+    "24 cm",
+    "28 cm"
+   ],
+   "rating": 1,
+   "reviews": 1,
+   "ratingReal": false,
+   "default": 2,
+   "cats": {
+    "pans": 30,
+    "frying-pans": 18
+   },
+   "variants": [
+    {
+     "sku": "8900544215",
+     "size": "20 cm",
+     "price": 79.99,
+     "msrp": 89.99,
+     "stock": true,
+     "label": null
+    },
+    {
+     "sku": "8900544222",
+     "size": "24 cm",
+     "price": 89.99,
+     "msrp": 99.99,
+     "stock": true,
+     "label": null
+    },
+    {
+     "sku": "8900544239",
+     "size": "28 cm",
+     "price": 99.99,
+     "msrp": 109.99,
+     "stock": true,
+     "label": null
+    }
+   ],
+   "search": "wmf ultimate fry pan ultimate 20 cm 24 cm 28 cm",
+   "description": "Culinary excellence has arrived with the WMF Ultimate Fry Pan. Inspired by chef's pans, its Cromargan® Ultimate high-quality stainless steel material greatly reduces the base's concave shape, ensuring the pan stays ultra flat while cooking and thus evenly distributes heat across the entire base—for meat that is crisp and browned on the outside, yet tender and juicy on the inside. And because WMF knows its way around a kitchen, no detail has gone unattended: a sturdy, professional look that is equally robust in function, with visible welding marks on the handle, a fully satin-finished stainless steel design; a hollow, reduced-heat handle with a closed construction to prevent water from getting inside; a universal base that is fully compatible with all stovetops including induction; and a wide rim for drip-free pouring and serving.",
+   "material": "Stainless Steel 1-ply",
+   "surface": "Uncoated",
+   "technique": "Intense Searing",
+   "occasion": [
+    "Everyday"
+   ]
+  },
+  {
+   "id": "p34",
+   "brand": "WMF",
+   "name": "Compact Cuisine Fry Pan",
+   "series": "Compact Cuisine",
+   "type": "Single pan",
+   "minPrice": 99.99,
+   "sizes": [
+    "28 cm"
+   ],
+   "rating": null,
+   "reviews": null,
+   "ratingReal": false,
+   "default": 0,
+   "cats": {
+    "pans": 31,
+    "frying-pans": 19
+   },
+   "variants": [
+    {
+     "sku": "8900543003",
+     "size": "28 cm",
+     "price": 99.99,
+     "msrp": null,
+     "stock": true,
+     "label": null
+    }
+   ],
+   "search": "wmf compact cuisine fry pan compact cuisine 28 cm",
+   "description": "Save space in your kitchen, without sacrificing on style. With Compact Cuisine cookware by WMF, save up to 30% more space in your cabinets thanks to a clever stackable design—up to four items at a time. Offering versatile, multifunction use thanks to additional available accessories (including a steamer insert and mixing bowl), the pans feature hollow handles for reduced heat transfer and cooler-to-the-touch functionality. Meanwhile wide pouring rims ensure precise cooking and less drips. Crafted from elegant Cromargan® high-quality stainless steel, the pans feature a base for optimal heat distribution and perfect results. Compact Cuisine pans are compatible with all stovetops, including induction.",
+   "material": "Stainless Steel 1-ply",
+   "surface": "Uncoated",
+   "technique": "Intense Searing",
+   "occasion": [
+    "Everyday"
+   ]
+  },
+  {
+   "id": "p35",
+   "brand": "WMF",
+   "name": "Devil Crêpes Pan",
+   "series": "Devil Crêpes",
+   "type": "Single pan",
+   "minPrice": 29.99,
+   "sizes": [
+    "27 cm"
+   ],
+   "rating": null,
+   "reviews": null,
+   "ratingReal": false,
+   "default": 0,
+   "cats": {
+    "pans": 34
+   },
+   "variants": [
+    {
+     "sku": "7115006272",
+     "size": "27 cm",
+     "price": 29.99,
+     "msrp": 59.99,
+     "stock": true,
+     "label": null
+    }
+   ],
+   "search": "wmf devil crêpes pan devil crêpes 27 cm",
+   "description": "The devil is in the details! The WMF Devil Crêpes Pan offers a dedicated design for preparing perfect crêpes and pancakes. Its long-lasting 3-layer PermaDur non-stick coating pairs performance with effortless clean-up, while its thick cast aluminum construction ensures exceptionally even cooking. The result is crisp, golden crêpes and delicious fluffy pancakes every time. Rounding it off are a heat-insulated bakelite handle for safe, comfortable use and dedicated wooden accessories.",
+   "material": "Cast Aluminium",
+   "surface": "Non-stick",
+   "technique": "Gentle Frying",
+   "occasion": [
+    "Everyday"
+   ]
+  },
+  {
+   "id": "p36",
+   "brand": "WMF",
+   "name": "Durado Fry Pan",
+   "series": "Durado",
+   "type": "Single pan",
+   "minPrice": 44.99,
+   "sizes": [
+    "20 cm",
+    "28 cm"
+   ],
+   "rating": 5,
+   "reviews": 1,
+   "ratingReal": false,
+   "default": 1,
+   "cats": {
+    "frying-pans": 22,
+    "pans": 35
+   },
+   "variants": [
+    {
+     "sku": "7115005404",
+     "size": "20 cm",
+     "price": 44.99,
+     "msrp": 79.99,
+     "stock": true,
+     "label": null
+    },
+    {
+     "sku": "7115005330",
+     "size": "28 cm",
+     "price": 49.99,
+     "msrp": 109.99,
+     "stock": true,
+     "label": null
+    }
+   ],
+   "search": "wmf durado fry pan durado 20 cm 28 cm",
+   "description": "Resistance and versatility come together in the WMF Durado Fry Pan. This durable all-rounder is the ideal solution for every kind of dish, from delicate sautés to high-heat stir-fries. Its robust ceramic coating is heat-resistant up to 400°C, offering excellent cooking results and easy cleaning. At the same time, its TransTherm® universal base ensures optimal heat distribution and retention. Crafted from sleek Cromargan® high-quality stainless steel, this practical kitchen pan goes straight from stovetop to oven for a flawless finish. Rounding it off are convenient features, including a reduced-heat handle and a wide pouring rim for drip-free serving and a spotless kitchen. Compatible with all stovetops, including induction.",
+   "material": "Stainless Steel 1-ply",
+   "surface": "Ceramic",
+   "technique": "Gentle Frying",
+   "occasion": [
+    "Everyday"
+   ]
+  },
+  {
+   "id": "p37",
+   "brand": "WMF",
+   "name": "Click&Serve Fry Pan with Coating",
+   "series": "Click&Serve",
+   "type": "Single pan",
+   "minPrice": 79.99,
+   "sizes": [
+    "24 cm"
+   ],
+   "rating": null,
+   "reviews": null,
+   "ratingReal": false,
+   "default": 0,
+   "cats": {
+    "pans": 44,
+    "frying-pans": 30
+   },
+   "variants": [
+    {
+     "sku": "8900540101",
+     "size": "24 cm",
+     "price": 79.99,
+     "msrp": 89.99,
+     "stock": true,
+     "label": null
+    }
+   ],
+   "search": "wmf click&serve fry pan with coating click&serve 24 cm",
+   "description": "Introducing Click&Serve, WMF's answer to multifunction cookware that streamlines your life—and your kitchen. Thanks to a smart design featuring a removable handle, its pots and pans go seamlessly from stovetop to oven, then straight to the table for elegant serving and into the fridge to conveniently store leftovers. Strong enough to hold up to 10 kg, the handle attaches anywhere on the pan's rim with a simple click, offering exceptional convenience. Once removed, the range can be stored away with ease, thanks to a highly stackable design (including practical stackable lids) that saves precious space in your cupboards. And because it's WMF, the best in cooking is assured, with drip-free pouring rims, the TransTherm® universal base for optimal heat distribution and delicious results, and a premium construction in Cromargan® high-quality stainless steel, for long-lasting performance that is dishwasher safe. Compatible with all stovetops, including induction.",
+   "material": "Stainless Steel 1-ply",
+   "surface": "Uncoated",
+   "technique": "Intense Searing",
+   "occasion": [
+    "Everyday"
+   ]
+  },
+  {
+   "id": "p38",
+   "brand": "Silit",
+   "name": "Calabria Fry Pan",
+   "series": "Calabria",
+   "type": "Single pan",
+   "minPrice": 49.99,
+   "sizes": [
+    "28 cm"
+   ],
+   "rating": null,
+   "reviews": null,
+   "ratingReal": false,
+   "default": 0,
+   "cats": {
+    "frying-pans": 41
+   },
+   "variants": [
+    {
+     "sku": "7115005513",
+     "size": "28 cm",
+     "price": 49.99,
+     "msrp": 69.99,
+     "stock": true,
+     "label": null
+    }
+   ],
+   "search": "silit calabria fry pan calabria 28 cm",
+   "description": "The strength of stainless steel comes together with the convenience of non-stick in the Calabria Frypan by Silit. Featuring the three-layer Silitan non-stick coating, it promises high performance and effortless clean-up on a wide range of mouth-watering meals. At the same time, the Silitherm® universal base ensures optimal heat distribution and retention for perfect results day after day. Crafted from high-quality polished stainless steel 18/10, this essential frypan delivers long-lasting performance, as well as a wide array of convenient features that make cooking a pleasure: an oven-safe design that goes from stovetop to oven for a flawless finish, a reduced-heat handle for added comfort, and a wide pouring rim for easy, drip-free serving. Compatible with all stovetops, including induction",
+   "material": "Stainless Steel 1-ply",
+   "surface": "Ceramic",
+   "technique": "Gentle Frying",
+   "occasion": [
+    "Everyday"
+   ]
+  },
+  {
+   "id": "p39",
+   "brand": "WMF",
+   "name": "CeraDur Profi Fry Pan",
+   "series": "CeraDur Profi",
+   "type": "Single pan",
+   "minPrice": 44.99,
+   "sizes": [
+    "20 cm"
+   ],
+   "rating": null,
+   "reviews": null,
+   "ratingReal": false,
+   "default": 0,
+   "cats": {
+    "frying-pans": 43
+   },
+   "variants": [
+    {
+     "sku": "7115005241",
+     "size": "20 cm",
+     "price": 44.99,
+     "msrp": 69.99,
+     "stock": true,
+     "label": null
+    }
+   ],
+   "search": "wmf ceradur profi fry pan ceradur profi 20 cm",
+   "description": "Master multifunction frying with the CeraDur Profi Fry Pan. Its robust CeraDur ceramic coating with its a hard mineral construction holds up to even the highest temperatures—ideal for flash frying, exceptional searing and much more. Achieve delicious results thanks to the TransTherm® universal base, which delivers optimal heat distribution and retention with every use. Crafted from sleek, durable Cromargan® high-quality stainless steel, this kitchen pan is equipped with a heat-insulated Bakelite handle for safe handling and maximum comfort, as well as a wide pouring rim for flawless serving and pouring. It's also compatible with all stovetops, including induction, making it the perfect frying pan solution.",
+   "material": "Stainless Steel 1-ply",
+   "surface": "Ceramic",
+   "technique": "Gentle Frying",
+   "occasion": [
+    "Everyday"
+   ]
+  },
+  {
+   "id": "p40",
+   "brand": "WMF",
+   "name": "Gourmet Plus Fry Pan",
+   "series": "Gourmet Plus",
+   "type": "Single pan",
+   "minPrice": 89.99,
+   "sizes": [
+    "24 cm"
+   ],
+   "rating": null,
+   "reviews": null,
+   "ratingReal": false,
+   "default": 0,
+   "cats": {
+    "frying-pans": 45
+   },
+   "variants": [
+    {
+     "sku": "8900536678",
+     "size": "24 cm",
+     "price": 89.99,
+     "msrp": 99.99,
+     "stock": false,
+     "label": null
+    }
+   ],
+   "search": "wmf gourmet plus fry pan gourmet plus 24 cm",
+   "description": "Discover exceptional cookware that puts 5-star quality within reach: The WMF Gourmet Plus Fry Pan was designed to bring restaurant-quality results to your home cooking, for elegant cookware that ensures flawless performance day after day. Convenient features come together for an outstanding frypan: a reduced heat handle when used on the stovetop and an extra easy-pouring wide rim. Master everything from comfort food like scrambled eggs and bacon to haute cuisine like seared ahi tuna steaks with this classic among frying pans, with a long handle and broad cooking space—a must in every kitchen. Our premium cookware boasts outstanding robustness, expertly crafted from Cromargan® high-quality stainless steel, dishwasher safe, acid-resistant and oven-proof, ensuring full flavor and performance that's built to last with a sleek matte finish that never fails to impress. Cooking is effortless with the TransTherm® universal base, compatible with all stovetops, including induction.",
+   "material": "Stainless Steel 1-ply",
+   "surface": "Uncoated",
+   "technique": "Intense Searing",
+   "occasion": [
+    "Everyday"
+   ]
+  },
+  {
+   "id": "p41",
+   "brand": "Silit",
+   "name": "Talis Fry Pan",
+   "series": "Talis",
+   "type": "Single pan",
+   "minPrice": 39.99,
+   "sizes": [
+    "28 cm"
+   ],
+   "rating": null,
+   "reviews": null,
+   "ratingReal": false,
+   "default": 0,
+   "cats": {
+    "frying-pans": 47
+   },
+   "variants": [
+    {
+     "sku": "7115005280",
+     "size": "28 cm",
+     "price": 39.99,
+     "msrp": 69.99,
+     "stock": true,
+     "label": null
+    }
+   ],
+   "search": "silit talis fry pan talis 28 cm",
+   "material": "Stainless Steel 1-ply",
+   "surface": "Ceramic",
+   "technique": "Gentle Frying",
+   "occasion": [
+    "Everyday"
+   ]
+  }
+ ]
+}

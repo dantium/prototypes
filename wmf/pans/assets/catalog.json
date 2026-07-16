@@ -1,0 +1,1389 @@
+{
+ "categories": {
+  "pans": {
+   "title": "Pans",
+   "breadcrumb": [
+    "Home",
+    "Products",
+    "Pans"
+   ]
+  },
+  "frying-pans": {
+   "title": "Frying Pans",
+   "breadcrumb": [
+    "Home",
+    "Products",
+    "Pans",
+    "Frying Pans"
+   ]
+  }
+ },
+ "skuCount": 59,
+ "products": [
+  {
+   "id": "p0",
+   "brand": "WMF",
+   "name": "PermaDur Excellent Fry Pan",
+   "series": "PermaDur Excellent",
+   "type": "Single pan",
+   "minPrice": 59.99,
+   "sizes": [
+    "24 cm",
+    "28 cm"
+   ],
+   "rating": 5,
+   "reviews": 1,
+   "ratingReal": false,
+   "default": 1,
+   "cats": {
+    "frying-pans": 27,
+    "pans": 40
+   },
+   "variants": [
+    {
+     "sku": "3201000336",
+     "size": "24 cm",
+     "price": 59.99,
+     "msrp": 74.99,
+     "stock": true,
+     "label": null
+    },
+    {
+     "sku": "3201000337",
+     "size": "28 cm",
+     "price": 69.99,
+     "msrp": 84.99,
+     "stock": true,
+     "label": null
+    }
+   ],
+   "search": "wmf permadur excellent fry pan permadur excellent 24 cm 28 cm"
+  },
+  {
+   "id": "p1",
+   "brand": "WMF",
+   "name": "Profi Resist Fry Pan",
+   "series": "Profi Resist",
+   "type": "Single pan",
+   "minPrice": 69.99,
+   "sizes": [
+    "24 cm",
+    "28 cm"
+   ],
+   "rating": 3,
+   "reviews": 2,
+   "ratingReal": false,
+   "default": 1,
+   "cats": {
+    "pans": 12,
+    "frying-pans": 5
+   },
+   "variants": [
+    {
+     "sku": "3201000357",
+     "size": "24 cm",
+     "price": 69.99,
+     "msrp": 130.48,
+     "stock": true,
+     "label": null
+    },
+    {
+     "sku": "3201000358",
+     "size": "28 cm",
+     "price": 79.99,
+     "msrp": 129.99,
+     "stock": true,
+     "label": "BESTSELLER"
+    }
+   ],
+   "search": "wmf profi resist fry pan profi resist 24 cm 28 cm"
+  },
+  {
+   "id": "p2",
+   "brand": "WMF",
+   "name": "PermaDur Excellent Fry Pan Set",
+   "series": "PermaDur Excellent",
+   "type": "Set",
+   "minPrice": 104.99,
+   "sizes": [
+    "Set of 2"
+   ],
+   "rating": null,
+   "reviews": null,
+   "ratingReal": false,
+   "default": 0,
+   "cats": {
+    "pans": 21,
+    "frying-pans": 13
+   },
+   "variants": [
+    {
+     "sku": "3201000530",
+     "size": "Set of 2",
+     "price": 104.99,
+     "msrp": 149.99,
+     "stock": true,
+     "label": null
+    }
+   ],
+   "search": "wmf permadur excellent fry pan set permadur excellent set of 2"
+  },
+  {
+   "id": "p3",
+   "brand": "WMF",
+   "name": "PermaDur Premium Fry Pan",
+   "series": "PermaDur Premium",
+   "type": "Single pan",
+   "minPrice": 69.99,
+   "sizes": [
+    "20 cm"
+   ],
+   "rating": null,
+   "reviews": null,
+   "ratingReal": false,
+   "default": 0,
+   "cats": {
+    "frying-pans": 33
+   },
+   "variants": [
+    {
+     "sku": "3201000536",
+     "size": "20 cm",
+     "price": 69.99,
+     "msrp": 89.99,
+     "stock": true,
+     "label": null
+    }
+   ],
+   "search": "wmf permadur premium fry pan permadur premium 20 cm"
+  },
+  {
+   "id": "p4",
+   "brand": "WMF",
+   "name": "Casserole stand MISTER X",
+   "series": "Casserole stand MISTER X",
+   "type": "Single pan",
+   "minPrice": 24.99,
+   "sizes": [
+    "One size"
+   ],
+   "rating": null,
+   "reviews": null,
+   "ratingReal": false,
+   "default": 0,
+   "cats": {
+    "pans": 45
+   },
+   "variants": [
+    {
+     "sku": "3201000931",
+     "size": "One size",
+     "price": 24.99,
+     "msrp": null,
+     "stock": true,
+     "label": null
+    }
+   ],
+   "search": "wmf casserole stand mister x casserole stand mister x one size"
+  },
+  {
+   "id": "p5",
+   "brand": "WMF",
+   "name": "Fry Pan Set",
+   "series": "WMF",
+   "type": "Set",
+   "minPrice": 69.99,
+   "sizes": [
+    "Set of 2",
+    "Set of 3"
+   ],
+   "rating": 5,
+   "reviews": 1,
+   "ratingReal": false,
+   "default": 0,
+   "cats": {
+    "pans": 15,
+    "frying-pans": 7
+   },
+   "variants": [
+    {
+     "sku": "3201113924",
+     "size": "Set of 2",
+     "price": 69.99,
+     "msrp": 169.99,
+     "stock": true,
+     "label": null
+    },
+    {
+     "sku": "3201001278",
+     "size": "Set of 3",
+     "price": 79.99,
+     "msrp": 149.99,
+     "stock": true,
+     "label": null
+    }
+   ],
+   "search": "wmf fry pan set  set of 2 set of 3"
+  },
+  {
+   "id": "p6",
+   "brand": "WMF",
+   "name": "Durado Grill Pan 28x28 cm",
+   "series": "Durado",
+   "type": "Single pan",
+   "minPrice": 69.99,
+   "sizes": [
+    "28 cm"
+   ],
+   "rating": 1,
+   "reviews": 1,
+   "ratingReal": false,
+   "default": 0,
+   "cats": {
+    "pans": 5
+   },
+   "variants": [
+    {
+     "sku": "3201001437",
+     "size": "28 cm",
+     "price": 69.99,
+     "msrp": 119.99,
+     "stock": true,
+     "label": null
+    }
+   ],
+   "search": "wmf durado grill pan 28x28 cm durado 28 cm"
+  },
+  {
+   "id": "p7",
+   "brand": "WMF",
+   "name": "Wok",
+   "series": "WMF",
+   "type": "Single pan",
+   "minPrice": 89.99,
+   "sizes": [
+    "36 cm"
+   ],
+   "rating": 4,
+   "reviews": 1,
+   "ratingReal": false,
+   "default": 0,
+   "cats": {
+    "pans": 20
+   },
+   "variants": [
+    {
+     "sku": "3201001442",
+     "size": "36 cm",
+     "price": 89.99,
+     "msrp": 179.99,
+     "stock": true,
+     "label": null
+    }
+   ],
+   "search": "wmf wok  36 cm"
+  },
+  {
+   "id": "p8",
+   "brand": "WMF",
+   "name": "Macao Wok Set",
+   "series": "Macao",
+   "type": "Set",
+   "minPrice": 109.99,
+   "sizes": [
+    "Set of 4"
+   ],
+   "rating": null,
+   "reviews": null,
+   "ratingReal": false,
+   "default": 0,
+   "cats": {
+    "pans": 28
+   },
+   "variants": [
+    {
+     "sku": "3201001511",
+     "size": "Set of 4",
+     "price": 109.99,
+     "msrp": 169.99,
+     "stock": true,
+     "label": "BESTSELLER"
+    }
+   ],
+   "search": "wmf macao wok set macao set of 4"
+  },
+  {
+   "id": "p9",
+   "brand": "Silit",
+   "name": "Tisch & Party Hongkong Wok",
+   "series": "Tisch & Party Hongkong",
+   "type": "Single pan",
+   "minPrice": 99.99,
+   "sizes": [
+    "36 cm"
+   ],
+   "rating": null,
+   "reviews": null,
+   "ratingReal": false,
+   "default": 0,
+   "cats": {
+    "pans": 26
+   },
+   "variants": [
+    {
+     "sku": "3201003795",
+     "size": "36 cm",
+     "price": 99.99,
+     "msrp": 149.99,
+     "stock": true,
+     "label": null
+    }
+   ],
+   "search": "silit tisch & party hongkong wok tisch & party hongkong 36 cm"
+  },
+  {
+   "id": "p10",
+   "brand": "Silit",
+   "name": "Messino Fry Pan",
+   "series": "Messino",
+   "type": "Single pan",
+   "minPrice": 39.99,
+   "sizes": [
+    "24 cm",
+    "28 cm"
+   ],
+   "rating": null,
+   "reviews": null,
+   "ratingReal": false,
+   "default": 1,
+   "cats": {
+    "frying-pans": 42
+   },
+   "variants": [
+    {
+     "sku": "3201005855",
+     "size": "24 cm",
+     "price": 39.99,
+     "msrp": 49.99,
+     "stock": true,
+     "label": null
+    },
+    {
+     "sku": "3201005856",
+     "size": "28 cm",
+     "price": 44.99,
+     "msrp": 59.99,
+     "stock": true,
+     "label": null
+    }
+   ],
+   "search": "silit messino fry pan messino 24 cm 28 cm"
+  },
+  {
+   "id": "p11",
+   "brand": "WMF",
+   "name": "Profi Resist Fry Pan with Spatula",
+   "series": "Profi Resist",
+   "type": "Single pan",
+   "minPrice": 89.99,
+   "sizes": [
+    "28 cm"
+   ],
+   "rating": null,
+   "reviews": null,
+   "ratingReal": false,
+   "default": 0,
+   "cats": {
+    "pans": 2,
+    "frying-pans": 1
+   },
+   "variants": [
+    {
+     "sku": "3201007433",
+     "size": "28 cm",
+     "price": 89.99,
+     "msrp": 129.99,
+     "stock": true,
+     "label": null
+    }
+   ],
+   "search": "wmf profi resist fry pan with spatula profi resist 28 cm"
+  },
+  {
+   "id": "p12",
+   "brand": "WMF",
+   "name": "Profi Resist Fry Pan-Set",
+   "series": "Profi Resist",
+   "type": "Set",
+   "minPrice": 79.99,
+   "sizes": [
+    "Set of 2"
+   ],
+   "rating": null,
+   "reviews": null,
+   "ratingReal": false,
+   "default": 0,
+   "cats": {
+    "pans": 17,
+    "frying-pans": 9
+   },
+   "variants": [
+    {
+     "sku": "3201008479",
+     "size": "Set of 2",
+     "price": 79.99,
+     "msrp": 129.99,
+     "stock": true,
+     "label": "BUNDLE"
+    }
+   ],
+   "search": "wmf profi resist fry pan-set profi resist set of 2"
+  },
+  {
+   "id": "p13",
+   "brand": "WMF",
+   "name": "Steak Profi Fry Pan",
+   "series": "Steak Profi",
+   "type": "Single pan",
+   "minPrice": 84.99,
+   "sizes": [
+    "24 cm"
+   ],
+   "rating": null,
+   "reviews": null,
+   "ratingReal": false,
+   "default": 0,
+   "cats": {
+    "pans": 39,
+    "frying-pans": 26
+   },
+   "variants": [
+    {
+     "sku": "3201010260",
+     "size": "24 cm",
+     "price": 84.99,
+     "msrp": 109.99,
+     "stock": true,
+     "label": null
+    }
+   ],
+   "search": "wmf steak profi fry pan steak profi 24 cm"
+  },
+  {
+   "id": "p14",
+   "brand": "WMF",
+   "name": "Fusiontec Wok Platinum w. lid",
+   "series": "Fusiontec",
+   "type": "Single pan",
+   "minPrice": 199.99,
+   "sizes": [
+    "32 cm"
+   ],
+   "rating": null,
+   "reviews": null,
+   "ratingReal": false,
+   "default": 0,
+   "cats": {
+    "pans": 41
+   },
+   "variants": [
+    {
+     "sku": "3201111640",
+     "size": "32 cm",
+     "price": 199.99,
+     "msrp": 229,
+     "stock": false,
+     "label": null
+    }
+   ],
+   "search": "wmf fusiontec wok platinum w. lid fusiontec 32 cm"
+  },
+  {
+   "id": "p15",
+   "brand": "WMF",
+   "name": "Fusiontec Mineral Frypan Black",
+   "series": "Fusiontec Mineral",
+   "type": "Single pan",
+   "minPrice": 99.99,
+   "sizes": [
+    "24 cm",
+    "28 cm"
+   ],
+   "rating": null,
+   "reviews": null,
+   "ratingReal": false,
+   "default": 1,
+   "cats": {
+    "pans": 18,
+    "frying-pans": 11
+   },
+   "variants": [
+    {
+     "sku": "3201113556",
+     "size": "24 cm",
+     "price": 99.99,
+     "msrp": 119.99,
+     "stock": true,
+     "label": null
+    },
+    {
+     "sku": "3201113557",
+     "size": "28 cm",
+     "price": 119.99,
+     "msrp": 139.99,
+     "stock": true,
+     "label": "NEW"
+    }
+   ],
+   "search": "wmf fusiontec mineral frypan black fusiontec mineral 24 cm 28 cm"
+  },
+  {
+   "id": "p16",
+   "brand": "WMF",
+   "name": "Fusiontec Mineral Frypan Platinum",
+   "series": "Fusiontec Mineral",
+   "type": "Single pan",
+   "minPrice": 89.99,
+   "sizes": [
+    "24 cm"
+   ],
+   "rating": null,
+   "reviews": null,
+   "ratingReal": false,
+   "default": 0,
+   "cats": {
+    "pans": 24,
+    "frying-pans": 15
+   },
+   "variants": [
+    {
+     "sku": "3201113558",
+     "size": "24 cm",
+     "price": 89.99,
+     "msrp": 119.99,
+     "stock": true,
+     "label": null
+    }
+   ],
+   "search": "wmf fusiontec mineral frypan platinum fusiontec mineral 24 cm"
+  },
+  {
+   "id": "p17",
+   "brand": "WMF",
+   "name": "Fusiontec Mineral Frypan Rose Quartz",
+   "series": "Fusiontec Mineral",
+   "type": "Single pan",
+   "minPrice": 99.99,
+   "sizes": [
+    "24 cm",
+    "28 cm"
+   ],
+   "rating": 3,
+   "reviews": 1,
+   "ratingReal": false,
+   "default": 1,
+   "cats": {
+    "pans": 19,
+    "frying-pans": 12
+   },
+   "variants": [
+    {
+     "sku": "3201113560",
+     "size": "24 cm",
+     "price": 99.99,
+     "msrp": 119.99,
+     "stock": true,
+     "label": null
+    },
+    {
+     "sku": "3201113561",
+     "size": "28 cm",
+     "price": 109.99,
+     "msrp": 139.99,
+     "stock": true,
+     "label": "NEW"
+    }
+   ],
+   "search": "wmf fusiontec mineral frypan rose quartz fusiontec mineral 24 cm 28 cm"
+  },
+  {
+   "id": "p18",
+   "brand": "WMF",
+   "name": "DuraCuisine, Wok",
+   "series": "DuraCuisine",
+   "type": "Single pan",
+   "minPrice": 149.99,
+   "sizes": [
+    "28 cm"
+   ],
+   "rating": null,
+   "reviews": null,
+   "ratingReal": false,
+   "default": 0,
+   "cats": {
+    "pans": 10
+   },
+   "variants": [
+    {
+     "sku": "3201113713",
+     "size": "28 cm",
+     "price": 149.99,
+     "msrp": 199.99,
+     "stock": true,
+     "label": "NEW"
+    }
+   ],
+   "search": "wmf duracuisine, wok duracuisine 28 cm"
+  },
+  {
+   "id": "p19",
+   "brand": "WMF",
+   "name": "Nordic Profi Fry Pan Set",
+   "series": "Nordic Profi",
+   "type": "Set",
+   "minPrice": 69.99,
+   "sizes": [
+    "Set of 2"
+   ],
+   "rating": null,
+   "reviews": null,
+   "ratingReal": false,
+   "default": 0,
+   "cats": {
+    "pans": 47,
+    "frying-pans": 31
+   },
+   "variants": [
+    {
+     "sku": "3201113738",
+     "size": "Set of 2",
+     "price": 69.99,
+     "msrp": 129,
+     "stock": true,
+     "label": null
+    }
+   ],
+   "search": "wmf nordic profi fry pan set nordic profi set of 2"
+  },
+  {
+   "id": "p20",
+   "brand": "WMF",
+   "name": "Non-Stick Fry Pan Set",
+   "series": "Non-Stick",
+   "type": "Set",
+   "minPrice": 84.99,
+   "sizes": [
+    "Set of 3"
+   ],
+   "rating": 5,
+   "reviews": 1,
+   "ratingReal": false,
+   "default": 0,
+   "cats": {
+    "pans": 33,
+    "frying-pans": 21
+   },
+   "variants": [
+    {
+     "sku": "3201113818",
+     "size": "Set of 3",
+     "price": 84.99,
+     "msrp": 179.99,
+     "stock": true,
+     "label": "BESTSELLER"
+    }
+   ],
+   "search": "wmf non-stick fry pan set non-stick set of 3"
+  },
+  {
+   "id": "p21",
+   "brand": "WMF",
+   "name": "Ultimate Profi Resist Deep Fry Pan",
+   "series": "Ultimate Profi Resist",
+   "type": "Single pan",
+   "minPrice": 109.99,
+   "sizes": [
+    "28 cm"
+   ],
+   "rating": null,
+   "reviews": null,
+   "ratingReal": false,
+   "default": 0,
+   "cats": {
+    "frying-pans": 40
+   },
+   "variants": [
+    {
+     "sku": "3201114071",
+     "size": "28 cm",
+     "price": 109.99,
+     "msrp": 139.99,
+     "stock": false,
+     "label": "NEW"
+    }
+   ],
+   "search": "wmf ultimate profi resist deep fry pan ultimate profi resist 28 cm"
+  },
+  {
+   "id": "p22",
+   "brand": "WMF",
+   "name": "Ultimate Profi Resist Fry Pan",
+   "series": "Ultimate Profi Resist",
+   "type": "Single pan",
+   "minPrice": 89.99,
+   "sizes": [
+    "24 cm",
+    "28 cm"
+   ],
+   "rating": null,
+   "reviews": null,
+   "ratingReal": false,
+   "default": 1,
+   "cats": {
+    "pans": 8,
+    "frying-pans": 3
+   },
+   "variants": [
+    {
+     "sku": "3201114077",
+     "size": "24 cm",
+     "price": 89.99,
+     "msrp": 119.99,
+     "stock": true,
+     "label": "NEW"
+    },
+    {
+     "sku": "3201114073",
+     "size": "28 cm",
+     "price": 99.99,
+     "msrp": 129.99,
+     "stock": true,
+     "label": "NEW"
+    }
+   ],
+   "search": "wmf ultimate profi resist fry pan ultimate profi resist 24 cm 28 cm"
+  },
+  {
+   "id": "p23",
+   "brand": "WMF",
+   "name": "Ultimate Profi Resist Serving Pan",
+   "series": "Ultimate Profi Resist",
+   "type": "Single pan",
+   "minPrice": 84.99,
+   "sizes": [
+    "24 cm"
+   ],
+   "rating": null,
+   "reviews": null,
+   "ratingReal": false,
+   "default": 0,
+   "cats": {
+    "pans": 22
+   },
+   "variants": [
+    {
+     "sku": "3201114074",
+     "size": "24 cm",
+     "price": 84.99,
+     "msrp": 129.99,
+     "stock": true,
+     "label": "NEW"
+    }
+   ],
+   "search": "wmf ultimate profi resist serving pan ultimate profi resist 24 cm"
+  },
+  {
+   "id": "p24",
+   "brand": "WMF",
+   "name": "Non-Stick Fry Pan",
+   "series": "Non-Stick",
+   "type": "Single pan",
+   "minPrice": 19.99,
+   "sizes": [
+    "18 cm",
+    "20 cm"
+   ],
+   "rating": null,
+   "reviews": null,
+   "ratingReal": false,
+   "default": 0,
+   "cats": {
+    "frying-pans": 35
+   },
+   "variants": [
+    {
+     "sku": "3201114578",
+     "size": "18 cm",
+     "price": 19.99,
+     "msrp": 49.99,
+     "stock": true,
+     "label": "SALE,NEW"
+    },
+    {
+     "sku": "3201114520",
+     "size": "20 cm",
+     "price": 29.99,
+     "msrp": 69.99,
+     "stock": true,
+     "label": null
+    }
+   ],
+   "search": "wmf non-stick fry pan non-stick 18 cm 20 cm"
+  },
+  {
+   "id": "p25",
+   "brand": "WMF",
+   "name": "Devil Fry Pan Set",
+   "series": "Devil",
+   "type": "Set",
+   "minPrice": 69.99,
+   "sizes": [
+    "Set of 2"
+   ],
+   "rating": null,
+   "reviews": null,
+   "ratingReal": false,
+   "default": 0,
+   "cats": {
+    "pans": 42,
+    "frying-pans": 36
+   },
+   "variants": [
+    {
+     "sku": "3201114525",
+     "size": "Set of 2",
+     "price": 69.99,
+     "msrp": 119.99,
+     "stock": true,
+     "label": null
+    }
+   ],
+   "search": "wmf devil fry pan set devil set of 2"
+  },
+  {
+   "id": "p26",
+   "brand": "WMF",
+   "name": "Oven Pan with lid",
+   "series": "Oven",
+   "type": "Single pan",
+   "minPrice": 49.99,
+   "sizes": [
+    "24 cm",
+    "28 cm"
+   ],
+   "rating": null,
+   "reviews": null,
+   "ratingReal": false,
+   "default": 1,
+   "cats": {
+    "pans": 6
+   },
+   "variants": [
+    {
+     "sku": "3201114802",
+     "size": "24 cm",
+     "price": 49.99,
+     "msrp": 99.99,
+     "stock": true,
+     "label": "SALE"
+    },
+    {
+     "sku": "3201114557",
+     "size": "28 cm",
+     "price": 62.99,
+     "msrp": 119.99,
+     "stock": true,
+     "label": null
+    }
+   ],
+   "search": "wmf oven pan with lid oven 24 cm 28 cm"
+  },
+  {
+   "id": "p27",
+   "brand": "WMF",
+   "name": "Fusiontec Mineral Pro, Wok With Lid, Tim Raue Ocean Blue",
+   "series": "Fusiontec Mineral Pro",
+   "type": "Single pan",
+   "minPrice": 179.99,
+   "sizes": [
+    "28 cm"
+   ],
+   "rating": null,
+   "reviews": null,
+   "ratingReal": false,
+   "default": 0,
+   "cats": {
+    "pans": 7
+   },
+   "variants": [
+    {
+     "sku": "3201114627",
+     "size": "28 cm",
+     "price": 179.99,
+     "msrp": 249,
+     "stock": true,
+     "label": null
+    }
+   ],
+   "search": "wmf fusiontec mineral pro, wok with lid, tim raue ocean blue fusiontec mineral pro 28 cm"
+  },
+  {
+   "id": "p28",
+   "brand": "WMF",
+   "name": "Click&Serve Fry Pan Value Set*",
+   "series": "Click&Serve",
+   "type": "Set",
+   "minPrice": 179.99,
+   "sizes": [
+    "Set of 3"
+   ],
+   "rating": null,
+   "reviews": null,
+   "ratingReal": false,
+   "default": 0,
+   "cats": {
+    "pans": 1
+   },
+   "variants": [
+    {
+     "sku": "8900540156",
+     "size": "Set of 3",
+     "price": 179.99,
+     "msrp": 219,
+     "stock": true,
+     "label": null
+    }
+   ],
+   "search": "wmf click&serve fry pan value set* click&serve set of 3"
+  },
+  {
+   "id": "p29",
+   "brand": "WMF",
+   "name": "Durado Fry Pan Set",
+   "series": "Durado",
+   "type": "Set",
+   "minPrice": 129.99,
+   "sizes": [
+    "Set of 3"
+   ],
+   "rating": null,
+   "reviews": null,
+   "ratingReal": false,
+   "default": 0,
+   "cats": {
+    "pans": 3,
+    "frying-pans": 10
+   },
+   "variants": [
+    {
+     "sku": "7116002001",
+     "size": "Set of 3",
+     "price": 129.99,
+     "msrp": 199,
+     "stock": true,
+     "label": "BESTSELLER"
+    }
+   ],
+   "search": "wmf durado fry pan set durado set of 3"
+  },
+  {
+   "id": "p30",
+   "brand": "WMF",
+   "name": "Durado Fry Pan-Set",
+   "series": "Durado",
+   "type": "Set",
+   "minPrice": 94.48,
+   "sizes": [
+    "Set of 2"
+   ],
+   "rating": null,
+   "reviews": null,
+   "ratingReal": false,
+   "default": 0,
+   "cats": {
+    "pans": 9,
+    "frying-pans": 4
+   },
+   "variants": [
+    {
+     "sku": "7115005328",
+     "size": "Set of 2",
+     "price": 94.48,
+     "msrp": null,
+     "stock": true,
+     "label": "BUNDLE"
+    }
+   ],
+   "search": "wmf durado fry pan-set durado set of 2"
+  },
+  {
+   "id": "p31",
+   "brand": "WMF",
+   "name": "Profi Fry Pan",
+   "series": "Profi",
+   "type": "Single pan",
+   "minPrice": 49.99,
+   "sizes": [
+    "20 cm",
+    "24 cm",
+    "28 cm"
+   ],
+   "rating": null,
+   "reviews": null,
+   "ratingReal": false,
+   "default": 2,
+   "cats": {
+    "frying-pans": 17,
+    "pans": 27
+   },
+   "variants": [
+    {
+     "sku": "8900536722",
+     "size": "20 cm",
+     "price": 54.99,
+     "msrp": 69.99,
+     "stock": true,
+     "label": null
+    },
+    {
+     "sku": "8900536739",
+     "size": "24 cm",
+     "price": 49.99,
+     "msrp": 79.99,
+     "stock": true,
+     "label": null
+    },
+    {
+     "sku": "8900536746",
+     "size": "28 cm",
+     "price": 69.99,
+     "msrp": 89.99,
+     "stock": true,
+     "label": null
+    }
+   ],
+   "search": "wmf profi fry pan profi 20 cm 24 cm 28 cm"
+  },
+  {
+   "id": "p32",
+   "brand": "WMF",
+   "name": "Gourmet Plus Serving Pan",
+   "series": "Gourmet Plus",
+   "type": "Single pan",
+   "minPrice": 99.99,
+   "sizes": [
+    "28 cm"
+   ],
+   "rating": null,
+   "reviews": null,
+   "ratingReal": false,
+   "default": 0,
+   "cats": {
+    "pans": 29
+   },
+   "variants": [
+    {
+     "sku": "8900536661",
+     "size": "28 cm",
+     "price": 99.99,
+     "msrp": 119.99,
+     "stock": true,
+     "label": null
+    }
+   ],
+   "search": "wmf gourmet plus serving pan gourmet plus 28 cm"
+  },
+  {
+   "id": "p33",
+   "brand": "WMF",
+   "name": "Ultimate Fry Pan",
+   "series": "Ultimate",
+   "type": "Single pan",
+   "minPrice": 79.99,
+   "sizes": [
+    "20 cm",
+    "24 cm",
+    "28 cm"
+   ],
+   "rating": 1,
+   "reviews": 1,
+   "ratingReal": false,
+   "default": 2,
+   "cats": {
+    "pans": 30,
+    "frying-pans": 18
+   },
+   "variants": [
+    {
+     "sku": "8900544215",
+     "size": "20 cm",
+     "price": 79.99,
+     "msrp": 89.99,
+     "stock": true,
+     "label": null
+    },
+    {
+     "sku": "8900544222",
+     "size": "24 cm",
+     "price": 89.99,
+     "msrp": 99.99,
+     "stock": true,
+     "label": null
+    },
+    {
+     "sku": "8900544239",
+     "size": "28 cm",
+     "price": 99.99,
+     "msrp": 109.99,
+     "stock": true,
+     "label": null
+    }
+   ],
+   "search": "wmf ultimate fry pan ultimate 20 cm 24 cm 28 cm"
+  },
+  {
+   "id": "p34",
+   "brand": "WMF",
+   "name": "Compact Cuisine Fry Pan",
+   "series": "Compact Cuisine",
+   "type": "Single pan",
+   "minPrice": 99.99,
+   "sizes": [
+    "28 cm"
+   ],
+   "rating": null,
+   "reviews": null,
+   "ratingReal": false,
+   "default": 0,
+   "cats": {
+    "pans": 31,
+    "frying-pans": 19
+   },
+   "variants": [
+    {
+     "sku": "8900543003",
+     "size": "28 cm",
+     "price": 99.99,
+     "msrp": null,
+     "stock": true,
+     "label": null
+    }
+   ],
+   "search": "wmf compact cuisine fry pan compact cuisine 28 cm"
+  },
+  {
+   "id": "p35",
+   "brand": "WMF",
+   "name": "Devil Crêpes Pan",
+   "series": "Devil Crêpes",
+   "type": "Single pan",
+   "minPrice": 29.99,
+   "sizes": [
+    "27 cm"
+   ],
+   "rating": null,
+   "reviews": null,
+   "ratingReal": false,
+   "default": 0,
+   "cats": {
+    "pans": 34
+   },
+   "variants": [
+    {
+     "sku": "7115006272",
+     "size": "27 cm",
+     "price": 29.99,
+     "msrp": 59.99,
+     "stock": true,
+     "label": null
+    }
+   ],
+   "search": "wmf devil crêpes pan devil crêpes 27 cm"
+  },
+  {
+   "id": "p36",
+   "brand": "WMF",
+   "name": "Durado Fry Pan",
+   "series": "Durado",
+   "type": "Single pan",
+   "minPrice": 44.99,
+   "sizes": [
+    "20 cm",
+    "28 cm"
+   ],
+   "rating": 5,
+   "reviews": 1,
+   "ratingReal": false,
+   "default": 1,
+   "cats": {
+    "frying-pans": 22,
+    "pans": 35
+   },
+   "variants": [
+    {
+     "sku": "7115005404",
+     "size": "20 cm",
+     "price": 44.99,
+     "msrp": 79.99,
+     "stock": true,
+     "label": null
+    },
+    {
+     "sku": "7115005330",
+     "size": "28 cm",
+     "price": 49.99,
+     "msrp": 109.99,
+     "stock": true,
+     "label": null
+    }
+   ],
+   "search": "wmf durado fry pan durado 20 cm 28 cm"
+  },
+  {
+   "id": "p37",
+   "brand": "WMF",
+   "name": "Click&Serve Fry Pan with Coating",
+   "series": "Click&Serve",
+   "type": "Single pan",
+   "minPrice": 79.99,
+   "sizes": [
+    "24 cm"
+   ],
+   "rating": null,
+   "reviews": null,
+   "ratingReal": false,
+   "default": 0,
+   "cats": {
+    "pans": 44,
+    "frying-pans": 30
+   },
+   "variants": [
+    {
+     "sku": "8900540101",
+     "size": "24 cm",
+     "price": 79.99,
+     "msrp": 89.99,
+     "stock": true,
+     "label": null
+    }
+   ],
+   "search": "wmf click&serve fry pan with coating click&serve 24 cm"
+  },
+  {
+   "id": "p38",
+   "brand": "Silit",
+   "name": "Calabria Fry Pan",
+   "series": "Calabria",
+   "type": "Single pan",
+   "minPrice": 49.99,
+   "sizes": [
+    "28 cm"
+   ],
+   "rating": null,
+   "reviews": null,
+   "ratingReal": false,
+   "default": 0,
+   "cats": {
+    "frying-pans": 41
+   },
+   "variants": [
+    {
+     "sku": "7115005513",
+     "size": "28 cm",
+     "price": 49.99,
+     "msrp": 69.99,
+     "stock": true,
+     "label": null
+    }
+   ],
+   "search": "silit calabria fry pan calabria 28 cm"
+  },
+  {
+   "id": "p39",
+   "brand": "WMF",
+   "name": "CeraDur Profi Fry Pan",
+   "series": "CeraDur Profi",
+   "type": "Single pan",
+   "minPrice": 44.99,
+   "sizes": [
+    "20 cm"
+   ],
+   "rating": null,
+   "reviews": null,
+   "ratingReal": false,
+   "default": 0,
+   "cats": {
+    "frying-pans": 43
+   },
+   "variants": [
+    {
+     "sku": "7115005241",
+     "size": "20 cm",
+     "price": 44.99,
+     "msrp": 69.99,
+     "stock": true,
+     "label": null
+    }
+   ],
+   "search": "wmf ceradur profi fry pan ceradur profi 20 cm"
+  },
+  {
+   "id": "p40",
+   "brand": "WMF",
+   "name": "Gourmet Plus Fry Pan",
+   "series": "Gourmet Plus",
+   "type": "Single pan",
+   "minPrice": 89.99,
+   "sizes": [
+    "24 cm"
+   ],
+   "rating": null,
+   "reviews": null,
+   "ratingReal": false,
+   "default": 0,
+   "cats": {
+    "frying-pans": 45
+   },
+   "variants": [
+    {
+     "sku": "8900536678",
+     "size": "24 cm",
+     "price": 89.99,
+     "msrp": 99.99,
+     "stock": false,
+     "label": null
+    }
+   ],
+   "search": "wmf gourmet plus fry pan gourmet plus 24 cm"
+  },
+  {
+   "id": "p41",
+   "brand": "Silit",
+   "name": "Talis Fry Pan",
+   "series": "Talis",
+   "type": "Single pan",
+   "minPrice": 39.99,
+   "sizes": [
+    "28 cm"
+   ],
+   "rating": null,
+   "reviews": null,
+   "ratingReal": false,
+   "default": 0,
+   "cats": {
+    "frying-pans": 47
+   },
+   "variants": [
+    {
+     "sku": "7115005280",
+     "size": "28 cm",
+     "price": 39.99,
+     "msrp": 69.99,
+     "stock": true,
+     "label": null
+    }
+   ],
+   "search": "silit talis fry pan talis 28 cm"
+  }
+ ]
+}

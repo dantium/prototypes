@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>WMF · Pans</title>
+  <link rel="stylesheet" href="assets/styles.css">
+  <script>window.PAGE = { kind: 'plp', category: 'pans', promo: false };</script>
+  <script src="assets/app.js" defer></script>
+</head>
+<body>
+
+  <div id="chrome-header"></div>
+
+  <main>
+    <div class="wrap">
+      <!-- ============= BREADCRUMB ============= -->
+      <nav class="breadcrumb" aria-label="Breadcrumb">
+        <ol>
+          <li><a href="index.html">Home</a></li>
+          <li>Products</li>
+          <li>Pans</li>
+        </ol>
+      </nav>
+
+      <!-- ============= PAGE HEAD ============= -->
+      <div class="page-head">
+        <div>
+          <h1 class="page-title">Pans</h1>
+          <p class="page-sub">From everyday frying to woks, grill and serving pans — the full WMF and Silit pan range. Choose a category below, or browse everything in one place.</p>
+        </div>
+        <div class="page-hero">
+          <img src="assets/hero.png" alt="Chef flambéing in a WMF pan">
+        </div>
+      </div>
+
+      <!-- ============= SUBCATEGORIES ============= -->
+      <section class="subcats" aria-label="Pan categories">
+        <div class="subcats-track">
+          <a class="subcat" href="pans.html"><span class="subcat-thumb"><img src="assets/products/3201000530.jpg" alt=""></span><span class="subcat-label">Pan Sets</span></a>
+          <a class="subcat" href="frying-pans.html"><span class="subcat-thumb"><img src="assets/products/3201000358.jpg" alt=""></span><span class="subcat-label">Frying Pans</span></a>
+          <a class="subcat" href="pans.html"><span class="subcat-thumb"><img src="assets/products/3201001437.jpg" alt=""></span><span class="subcat-label">Grill Pans</span></a>
+          <a class="subcat" href="pans.html"><span class="subcat-thumb"><img src="assets/products/3201113557.jpg" alt=""></span><span class="subcat-label">Induction Pans</span></a>
+          <a class="subcat" href="pans.html"><span class="subcat-thumb"><img src="assets/products/3201111640.jpg" alt=""></span><span class="subcat-label">Pans with Lids</span></a>
+          <a class="subcat" href="pans.html"><span class="subcat-thumb"><img src="assets/products/3201114074.jpg" alt=""></span><span class="subcat-label">Serving Pans</span></a>
+          <a class="subcat" href="pans.html"><span class="subcat-thumb"><img src="assets/products/3201001442.jpg" alt=""></span><span class="subcat-label">Woks</span></a>
+          <a class="subcat" href="pans.html"><span class="subcat-thumb"><img src="assets/products/8900536739.jpg" alt=""></span><span class="subcat-label">Accessories</span></a>
+        </div>
+      </section>
+
+      <!-- ============= TOOLBAR ============= -->
+      <div class="toolbar">
+        <div class="toolbar-left">
+          <button class="pill pill--plain filter-open-btn" onclick="onFilterBtn()">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke-width="1.6" stroke-linecap="round"><path d="M4 7h13"/><path d="M4 12h16"/><path d="M4 17h9"/><circle cx="18" cy="7" r="2.3" fill="#fff"/><circle cx="15" cy="17" r="2.3" fill="#fff"/></svg>
+            Filter
+          </button>
+          <button class="pill">Pan Finder</button>
+          <a class="pill" href="frying-pans.html#compare">Compare Frying Pans</a>
+        </div>
+        <div class="toolbar-right">
+          <span class="product-count" id="productCount"></span>
+          <div class="sort">
+            <select aria-label="Sort by" id="sortSelect">
+              <option>Recommended</option>
+              <option>Price: low to high</option>
+              <option>Price: high to low</option>
+              <option>Top rated</option>
+              <option>New in</option>
+            </select>
+          </div>
+        </div>
+      </div>
+
+      <!-- ============= FILTERS + GRID ============= -->
+      <div class="plp">
+        <aside class="filters" aria-label="Product filters">
+          <div class="drawer-head">Filters
+            <button aria-label="Close filters" onclick="closeFilterDrawer()"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><path d="M6 6l12 12M18 6 6 18"/></svg></button>
+          </div>
+          <div class="drawer-body">
+            <div class="active-filters" id="activeFilters" hidden></div>
+            <div id="facets"></div>
+          </div>
+          <div class="drawer-apply">
+            <button id="drawerApplyBtn" onclick="closeFilterDrawer()">Show products</button>
+          </div>
+        </aside>
+
+        <section aria-label="Products">
+          <div class="active-filters active-filters--mobile" id="activeFiltersMobile" hidden></div>
+          <div class="grid" id="grid"></div>
+
+          <div class="show-more-row" id="showMoreRow">
+            <button class="btn-outline" id="showMoreBtn">Show more</button>
+          </div>
+        </section>
+      </div>
+    </div>
+  </main>
+
+  <div id="chrome-footer"></div>
+  <div id="chrome-search"></div>
+
+</body>
+</html>

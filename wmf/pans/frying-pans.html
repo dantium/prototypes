@@ -1,0 +1,249 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>WMF · Frying Pans</title>
+  <link rel="stylesheet" href="assets/styles.css">
+  <script>window.PAGE = { kind: 'plp', category: 'frying-pans' };</script>
+  <script src="assets/app.js" defer></script>
+</head>
+<body>
+
+  <div id="chrome-header"></div>
+
+  <main>
+    <div class="wrap">
+      <!-- ============= BREADCRUMB ============= -->
+      <nav class="breadcrumb" aria-label="Breadcrumb">
+        <ol>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="pans.html">Products</a></li>
+          <li><a href="pans.html">Pans</a></li>
+          <li>Frying Pans</li>
+        </ol>
+      </nav>
+
+      <!-- ============= PAGE HEAD ============= -->
+      <div class="page-head">
+        <div>
+          <h1 class="page-title">Frying Pans</h1>
+          <p class="page-sub">Engineered for precision. Explore our curated selection of professional-grade cookware designed to master every culinary technique from high-heat browning to delicate reductions.</p>
+        </div>
+        <div class="page-hero">
+          <img src="assets/hero.png" alt="Chef flambéing in a WMF frying pan">
+        </div>
+      </div>
+
+      <!-- ============= TOOLBAR ============= -->
+      <div class="toolbar">
+        <div class="toolbar-left">
+          <button class="pill pill--plain filter-open-btn" onclick="onFilterBtn()">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke-width="1.6" stroke-linecap="round"><path d="M4 7h13"/><path d="M4 12h16"/><path d="M4 17h9"/><circle cx="18" cy="7" r="2.3" fill="#fff"/><circle cx="15" cy="17" r="2.3" fill="#fff"/></svg>
+            Filter
+          </button>
+          <button class="pill">Pan Finder</button>
+          <a class="pill" href="#compare">Compare our Frying Pans</a>
+        </div>
+        <div class="toolbar-right">
+          <span class="product-count" id="productCount"></span>
+          <div class="sort">
+            <select aria-label="Sort by" id="sortSelect">
+              <option>Recommended</option>
+              <option>Price: low to high</option>
+              <option>Price: high to low</option>
+              <option>Top rated</option>
+              <option>New in</option>
+            </select>
+          </div>
+        </div>
+      </div>
+
+      <!-- ============= FILTERS + GRID ============= -->
+      <div class="plp">
+        <aside class="filters" aria-label="Product filters">
+          <div class="drawer-head">Filters
+            <button aria-label="Close filters" onclick="closeFilterDrawer()"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><path d="M6 6l12 12M18 6 6 18"/></svg></button>
+          </div>
+          <div class="drawer-body">
+            <div class="active-filters" id="activeFilters" hidden></div>
+            <div id="facets"></div>
+          </div>
+          <div class="drawer-apply">
+            <button id="drawerApplyBtn" onclick="closeFilterDrawer()">Show products</button>
+          </div>
+        </aside>
+
+        <section aria-label="Products">
+          <div class="active-filters active-filters--mobile" id="activeFiltersMobile" hidden></div>
+          <div class="grid" id="grid"></div>
+
+          <div class="show-more-row" id="showMoreRow">
+            <button class="btn-outline" id="showMoreBtn">Show more</button>
+          </div>
+        </section>
+      </div>
+    </div>
+
+    <!-- ============= COMPARE OUR RANGE (reused prototype) ============= -->
+    <section class="compare-section" id="compare">
+      <div class="wrap">
+        <h2 class="comparison__title">Compare our Range</h2>
+        <div class="comparison-scroll">
+          <div class="comparison">
+            <div class="matrix">
+              <h3 class="segment-title segment-title--dark">Intense Searing</h3>
+              <h3 class="segment-title segment-title--light">Gentle Frying</h3>
+              <p class="segment-subtitle segment-subtitle--dark">Ideal for steaks and anything that needs golden crispy crusts</p>
+              <p class="segment-subtitle segment-subtitle--light">Ideal for anything delicate such as eggs, fish and vegetables.</p>
+
+              <article class="product product--dark">
+                <div class="pan-art pan-art--steel" aria-hidden="true"><span class="pan-art__shine"></span><span class="pan-art__rivet"></span></div>
+                <h4 class="product__name">Steel Pro Uncoated</h4>
+                <a class="product__button" href="#">Shop Now</a>
+              </article>
+              <article class="product product--dark">
+                <div class="pan-art pan-art--honeycomb" aria-hidden="true"><span class="pan-art__rivet"></span></div>
+                <h4 class="product__name">Honeycomb Pro+<br>Ceramic</h4>
+                <a class="product__button" href="#">Shop Now</a>
+              </article>
+              <article class="product">
+                <div class="pan-art pan-art--nonstick" aria-hidden="true"><span class="pan-art__rivet"></span></div>
+                <h4 class="product__name">Non-Stick Pro+<br>Ceramic</h4>
+                <a class="product__button" href="#">Shop Now</a>
+              </article>
+              <article class="product">
+                <div class="pan-art pan-art--nonstick" aria-hidden="true"><span class="pan-art__rivet"></span></div>
+                <h4 class="product__name">Ceramic Pro+</h4>
+                <a class="product__button" href="#">Shop Now</a>
+              </article>
+              <article class="product">
+                <div class="pan-art pan-art--nonstick" aria-hidden="true"><span class="pan-art__rivet"></span></div>
+                <h4 class="product__name">Non-Stick Pro</h4>
+                <a class="product__button" href="#">Shop Now</a>
+              </article>
+              <article class="product">
+                <div class="pan-art pan-art--nonstick" aria-hidden="true"><span class="pan-art__rivet"></span></div>
+                <h4 class="product__name">Ceramic Pro</h4>
+                <a class="product__button" href="#">Shop Now</a>
+              </article>
+
+              <div class="rules" aria-hidden="true">
+                <span class="rule"></span><span class="rule"></span><span class="rule"></span><span class="rule"></span>
+                <span class="rule"></span><span class="rule"></span><span class="rule"></span><span class="rule"></span>
+              </div>
+
+              <div class="spec-grid" role="table" aria-label="Pans range comparison">
+                <div class="spec-label col-label row-1" role="rowheader">Scratch<br>Resistant</div>
+                <div class="spec-cell spec-cell--dark col-1 row-1" role="cell">Metal utensil safe</div>
+                <div class="spec-cell spec-cell--dark col-2 row-1" role="cell">Metal utensil safe</div>
+                <div class="spec-cell spec-cell--light col-3 row-1" role="cell">-</div>
+                <div class="spec-cell spec-cell--light col-4 row-1" role="cell">Scratch-resistant ceramic</div>
+                <div class="spec-cell spec-cell--light col-5 row-1" role="cell">Metal utensil safe</div>
+                <div class="spec-cell spec-cell--light col-6 row-1" role="cell">Metal utensil safe</div>
+
+                <div class="spec-label col-label row-2" role="rowheader">Heat<br>Distribution</div>
+                <div class="spec-cell spec-cell--dark col-1 row-2" role="cell">3 Layers</div>
+                <div class="spec-cell spec-cell--dark col-2 row-2" role="cell">3 Layers</div>
+                <div class="spec-cell spec-cell--light col-3 row-2" role="cell">3 Layers</div>
+                <div class="spec-cell spec-cell--light col-4 row-2" role="cell">3 Layers</div>
+                <div class="spec-cell spec-cell--light col-5 row-2" role="cell">Single Layer</div>
+                <div class="spec-cell spec-cell--light col-6 row-2" role="cell">Single Layer</div>
+
+                <div class="spec-label col-label row-3" role="rowheader">Non Stick Technology</div>
+                <div class="spec-cell spec-cell--dark col-1 row-3" role="cell">-</div>
+                <div class="spec-cell spec-cell--dark col-2 row-3" role="cell">Honeycomb non-stick hybrid</div>
+                <div class="spec-cell spec-cell--light col-3 row-3" role="cell">Non-stick</div>
+                <div class="spec-cell spec-cell--light col-4 row-3" role="cell">Ceramic non-stick</div>
+                <div class="spec-cell spec-cell--light col-5 row-3" role="cell">Lasting non-stick</div>
+                <div class="spec-cell spec-cell--light col-6 row-3" role="cell">Non-stick</div>
+
+                <div class="spec-label col-label row-4" role="rowheader">Coating</div>
+                <div class="spec-cell spec-cell--dark col-1 row-4" role="cell">Uncoated</div>
+                <div class="spec-cell spec-cell--dark col-2 row-4" role="cell">Ceramic</div>
+                <div class="spec-cell spec-cell--light col-3 row-4" role="cell">Ceramic</div>
+                <div class="spec-cell spec-cell--light col-4 row-4" role="cell">Ceramic</div>
+                <div class="spec-cell spec-cell--light col-5 row-4" role="cell">PTFE</div>
+                <div class="spec-cell spec-cell--light col-6 row-4" role="cell">Ceramic</div>
+
+                <div class="spec-label col-label row-5" role="rowheader">Dishwasher &amp; Oven</div>
+                <div class="spec-cell spec-cell--dark col-1 row-5" role="cell">Oven-safe to 250°C<br>Dishwasher-safe</div>
+                <div class="spec-cell spec-cell--dark col-2 row-5" role="cell">Oven-safe to 250°C<br>Dishwasher-safe</div>
+                <div class="spec-cell spec-cell--light col-3 row-5" role="cell">Oven-safe to 250°C<br>Dishwasher-safe</div>
+                <div class="spec-cell spec-cell--light col-4 row-5" role="cell">Oven-safe to 250°C<br>Dishwasher-safe</div>
+                <div class="spec-cell spec-cell--light col-5 row-5" role="cell">Oven-safe to 250°C<br>Dishwasher-safe</div>
+                <div class="spec-cell spec-cell--light col-6 row-5" role="cell">Oven-safe to 250°C<br>Dishwasher-safe</div>
+
+                <div class="spec-label col-label row-6" role="rowheader">Design<br>Features</div>
+                <div class="spec-cell spec-cell--dark col-1 row-6" role="cell">Cool-touch handle<br>Drip-free pouring</div>
+                <div class="spec-cell spec-cell--dark col-2 row-6" role="cell">Professional handle<br>Drip-free pouring</div>
+                <div class="spec-cell spec-cell--light col-3 row-6" role="cell">Cool-touch handle<br>Drip-free pouring</div>
+                <div class="spec-cell spec-cell--light col-4 row-6" role="cell">Cool-touch handle<br>Drip-free pouring</div>
+                <div class="spec-cell spec-cell--light col-5 row-6" role="cell">Cool-touch handle<br>Drip-free pouring</div>
+                <div class="spec-cell spec-cell--light col-6 row-6" role="cell">Cool-touch handle<br>Drip-free pouring</div>
+
+                <div class="spec-label col-label row-7" role="rowheader">Warranty</div>
+                <div class="spec-cell spec-cell--dark col-1 row-7" role="cell">20-year warranty</div>
+                <div class="spec-cell spec-cell--dark col-2 row-7" role="cell">10-year warranty</div>
+                <div class="spec-cell spec-cell--light col-3 row-7" role="cell">5-year warranty</div>
+                <div class="spec-cell spec-cell--light col-4 row-7" role="cell">5-year warranty</div>
+                <div class="spec-cell spec-cell--light col-5 row-7" role="cell">5-year warranty</div>
+                <div class="spec-cell spec-cell--light col-6 row-7" role="cell">3-year warranty</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============= FAQ ============= -->
+    <section class="faq">
+      <div class="wrap">
+        <h2>Frequently Asked Questions</h2>
+        <div class="faq-list">
+          <div class="faq-item open">
+            <button class="faq-q">Which pans for searing steaks? <span class="faq-sign"></span></button>
+            <div class="faq-a">For high-heat searing, choose an uncoated stainless steel or honeycomb hybrid pan. Their multi-layer bases hold and distribute intense heat evenly, producing the golden, crispy crust that defines a great steak — and both are metal-utensil safe.</div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-q">Which pans for cooking eggs? <span class="faq-sign"></span></button>
+            <div class="faq-a">Delicate foods such as eggs, fish and vegetables release best from a ceramic or PTFE non-stick surface. Look for our Gentle Frying range for effortless flipping and easy cleaning.</div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-q">What is the difference between Pro and Pro+ pans? <span class="faq-sign"></span></button>
+            <div class="faq-a">Pro+ pans add an extra performance layer — a more durable coating, a reinforced honeycomb structure or a heavier multi-ply base — along with an extended warranty compared with the standard Pro line.</div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-q">How do you cook with stainless steel? <span class="faq-sign"></span></button>
+            <div class="faq-a">Pre-heat the empty pan over medium heat, add oil and let it shimmer before adding food. Ingredients naturally release once a crust forms, so resist the urge to move them too early.</div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-q">What hobs do the pans work with? <span class="faq-sign"></span></button>
+            <div class="faq-a">Every WMF frying pan is suitable for all hob types, including induction, as well as gas, ceramic and electric. Most are also oven-safe up to 250°C.</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============= SUBCATEGORY STRIP ============= -->
+    <section class="subcats">
+      <div class="wrap">
+        <div class="subcats-track">
+          <a class="subcat" href="pans.html"><span class="subcat-thumb"><img src="assets/products/3201000530.jpg" alt=""></span><span class="subcat-label">Pan Sets</span></a>
+          <a class="subcat current" href="frying-pans.html"><span class="subcat-thumb"><img src="assets/products/3201000358.jpg" alt=""></span><span class="subcat-label">Frying Pans</span></a>
+          <a class="subcat" href="pans.html"><span class="subcat-thumb"><img src="assets/products/3201001437.jpg" alt=""></span><span class="subcat-label">Grill Pans</span></a>
+          <a class="subcat" href="pans.html"><span class="subcat-thumb"><img src="assets/products/3201113557.jpg" alt=""></span><span class="subcat-label">Induction Pans</span></a>
+          <a class="subcat" href="pans.html"><span class="subcat-thumb"><img src="assets/products/3201111640.jpg" alt=""></span><span class="subcat-label">Pans with Lids</span></a>
+          <a class="subcat" href="pans.html"><span class="subcat-thumb"><img src="assets/products/3201114074.jpg" alt=""></span><span class="subcat-label">Serving Pans</span></a>
+          <a class="subcat" href="pans.html"><span class="subcat-thumb"><img src="assets/products/3201001442.jpg" alt=""></span><span class="subcat-label">Woks</span></a>
+          <a class="subcat" href="pans.html"><span class="subcat-thumb"><img src="assets/products/8900536739.jpg" alt=""></span><span class="subcat-label">Accessories</span></a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <div id="chrome-footer"></div>
+  <div id="chrome-search"></div>
+
+</body>
+</html>

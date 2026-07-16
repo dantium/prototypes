@@ -1,0 +1,4 @@
+interface:
+  display_name: "WMF Brand QA"
+  short_description: "Check WMF copy, visuals, and assets"
+  default_prompt: "Use $wmf-brand-qa to review this Figma frame, live landing page, copy, or image against WMF brand guidance."

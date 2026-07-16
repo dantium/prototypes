@@ -36,6 +36,10 @@ Real per-SKU data:
 - **position** — the shop's own category ordering → the "Recommended" sort
 - **ratings** — Bazaarvoice values from PDP JSON-LD. Only 9 of 42 products have reviews on the
   de/en store; the rest show **no stars rather than invented ones** (`rating: null`).
+- **descriptions** — the real PDP copy (JSON-LD `description`, footnotes stripped) on 41 of 42
+  products. Search matches against it, so attribute queries like "induction" or
+  "scratch-resistant" find products; name/series matches rank first, and the overlay shows the
+  matched description text as the row's subtitle.
 
 Shared code: `assets/styles.css` + `assets/app.js` (header/megamenu/search/footer chrome, grid,
 facets, sort). Each page sets `window.PAGE = { kind, category }`.
@@ -89,8 +93,9 @@ claims risk.
   (per-item remove + Clear all, kept for the session), trending searches, popular-category chips,
   and — while typing — query completions with bold match highlighting (built from the real product
   vocabulary), category suggestions with real counts, product rows with photos and prices, and a
-  "See all results" CTA. Submitting filters the PLP (`?q=` deep-links work, e.g. the megamenu
-  Material links); no-results offers popular searches.
+  "See all results" CTA. Queries also match the real product descriptions (name matches rank
+  first; description hits show the matched text). Submitting filters the PLP (`?q=` deep-links
+  work, e.g. the megamenu Material links); no-results offers popular searches.
 - **Facets** — generated from the catalog per page (OR within group, AND across). Chips + Clear
   all; on mobile a proper drawer: header, scrollable body, sticky "Show N products" apply bar.
 - **Sort** — Recommended (real shop order) / price / top rated / new in.

@@ -259,11 +259,36 @@
       '</div></article>';
   }
 
+  /* Name/series matches rank above matches found only in the (real) product
+     description — both tiers keep their existing order. */
   function matchProducts(q, pool) {
     var toks = q.toLowerCase().split(/\s+/).filter(Boolean);
     var src = pool || DATA.products;
     if (!toks.length) return src.slice();
-    return src.filter(function (p) { return toks.every(function (t) { return p.search.indexOf(t) >= 0; }); });
+    var inHay = function (p, t) { return p.search.indexOf(t) >= 0; };
+    var inDesc = function (p, t) { return inHay(p, t) || (p._desc && p._desc.indexOf(t) >= 0); };
+    var byName = [], byDesc = [];
+    src.forEach(function (p) {
+      if (toks.every(function (t) { return inHay(p, t); })) byName.push(p);
+      else if (toks.every(function (t) { return inDesc(p, t); })) byDesc.push(p);
+    });
+    return byName.concat(byDesc);
+  }
+
+  /* short snippet of the description around the first matched token */
+  function descSnippet(p, q) {
+    if (!p.description || !p._desc) return null;
+    var toks = q.toLowerCase().split(/\s+/).filter(Boolean);
+    var t = null, pos = -1;
+    for (var i = 0; i < toks.length; i++) {
+      var at = p._desc.indexOf(toks[i]);
+      if (at >= 0 && (pos < 0 || at < pos)) { pos = at; t = toks[i]; }
+    }
+    if (pos < 0) return null;
+    var start = Math.max(0, pos - 34);
+    var end = Math.min(p.description.length, pos + t.length + 44);
+    var frag = p.description.slice(start, end).replace(/^\S*\s/, '').replace(/\s\S*$/, '');
+    return (start > 0 ? '…' : '') + hi(frag, t) + (end < p.description.length ? '…' : '');
   }
 
   function currentList() {
@@ -345,6 +370,7 @@
     var set = {};
     var add = function (s) { s = String(s || '').toLowerCase().trim(); if (s.length > 2) set[s] = 1; };
     DATA.products.forEach(function (p) {
+      p._desc = (p.description || '').toLowerCase();   // searchable copy of the real PDP description
       add(p.series);
       add(p.brand + ' ' + p.series);
       var m = p.name.toLowerCase().match(/(deep fry pan|fry pan set|fry pan|frypan|grill pan|serving pan|roasting pan|wok)/);
@@ -397,13 +423,19 @@
       '<span class="s-label">' + hi(c.label, q) + '<span class="s-sub">Category · ' + c.count + ' products</span></span>' +
       '<span class="s-end">' + ICO.chev + '</span></a>';
   }
-  function productRow(p) {
+  function productRow(p, q) {
     var v = p.variants[p.default] || p.variants[0];
     var from = Math.min.apply(null, p.variants.map(function (x) { return x.price; }));
-    var meta = (p.variants.length > 1 ? p.variants.length + ' sizes · from ' + eur(from) : v.size);
+    var meta = esc(p.variants.length > 1 ? p.variants.length + ' sizes · from ' + eur(from) : v.size);
+    // when the hit came from the description, show the matched text instead
+    if (q) {
+      var toks = q.toLowerCase().split(/\s+/).filter(Boolean);
+      var nameHit = toks.every(function (t) { return p.search.indexOf(t) >= 0; });
+      if (!nameHit) { var snip = descSnippet(p, q); if (snip) meta = snip; }
+    }
     return '<div class="s-row" data-q="' + esc(p.brand + ' ' + p.name) + '">' +
       '<img class="s-thumb" src="' + img(v.sku) + '" alt="">' +
-      '<span class="s-label">' + esc(p.brand + ' ' + p.name) + '<span class="s-sub">' + esc(meta) + '</span></span>' +
+      '<span class="s-label">' + esc(p.brand + ' ' + p.name) + '<span class="s-sub">' + meta + '</span></span>' +
       '<span class="s-price">' + eur(v.price) + '</span></div>';
   }
   function chipHTML(t) { return '<button class="search-chip" data-q="' + esc(t) + '">' + esc(t) + '</button>'; }
@@ -442,7 +474,7 @@
     var hits = matchProducts(q).slice(0, 4);
     var html = completions.map(function (c) { return completionRow(c, q); }).join('');
     if (cats.length)  html += (html ? '<div class="s-divider"></div>' : '') + cats.map(function (c) { return catRow(c, q); }).join('');
-    if (hits.length)  html += (html ? '<div class="s-divider"></div>' : '') + hits.map(productRow).join('');
+    if (hits.length)  html += (html ? '<div class="s-divider"></div>' : '') + hits.map(function (p) { return productRow(p, q); }).join('');
     if (!html) html = '<div class="search-empty-note">No suggestions — press Enter to search.</div>';
     html += '<button class="search-cta" data-q="' + esc(q) + '">See all results for “' + esc(q) + '” ' + ICO.arrow + '</button>';
     body.innerHTML = html;

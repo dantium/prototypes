@@ -1,0 +1,76 @@
+version: 1
+brand: WMF
+checks:
+  copy:
+    - id: copy-clear-concise
+      severity: high
+      rule: Use plain, concise language and avoid unnecessarily complex sentences.
+      source: [25]
+    - id: copy-direct
+      severity: medium
+      rule: Prefer direct, relevant statements over hollow marketing language.
+      source: [25]
+    - id: copy-superlatives
+      severity: medium
+      rule: Flag excessive or unsupported superlatives.
+      source: [25]
+    - id: copy-brand-terms
+      severity: high
+      rule: Preserve approved phrases and registered marks; verify all product claims.
+      source: [8, 11, 16, 29]
+  logo:
+    - id: logo-treatment
+      severity: high
+      rule: Prefer the white logo on dark backgrounds; use black on light backgrounds only when appropriate.
+      source: [19, 22]
+    - id: logo-distortion
+      severity: critical
+      rule: Flag distortion, changed proportions, outlines, shadows, gradients, or unapproved colours.
+      source: [22]
+    - id: logo-clear-space
+      severity: high
+      rule: Check the required M-height and logo-height clear space and centred placement.
+      source: [20, 21]
+  colour_type:
+    - id: palette
+      severity: high
+      rule: Check use of black, white, cool grey, Signature 4161 C, and eCommerce CTA 7499 C against the intended role.
+      source: [26]
+    - id: typography
+      severity: high
+      rule: Use WMF Rotis Regular, Regular Italic, or Bold; flag Light and Medium.
+      source: [27]
+  imagery:
+    - id: image-language
+      severity: high
+      rule: Check for elevated, minimalistic, modern, confident, design-oriented, bright, product-first imagery.
+      source: [43, 44, 45]
+    - id: image-avoid
+      severity: medium
+      rule: Flag rustic, retro, mainstream, overly commercial, overly dark, or cluttered imagery.
+      source: [44, 46, 47]
+    - id: lighting
+      severity: medium
+      rule: Check strong light-shadow contrast, cool shadows, warm or beige highlights, and overall brightness.
+      source: [48]
+    - id: cromargan
+      severity: high
+      rule: Check that Cromargan is visibly credible and not uniformly black, unnaturally matt, or missing its brushing.
+      source: [49, 50]
+    - id: food
+      severity: medium
+      rule: Food should be recognisable, authentic, inviting, modern, and approachable rather than artificially luxurious.
+      source: [58]
+  legal_and_assets:
+    - id: heritage-label
+      severity: critical
+      rule: Use the Heritage Label only for brand communication with the WMF logo; verify Made in Germany eligibility.
+      source: [29]
+    - id: asset-rights
+      severity: critical
+      rule: Do not approve an asset without confirmed usage rights, restrictions, validity date, and AI-content disclosure where applicable.
+      source: [64, 66]
+    - id: media-specs
+      severity: medium
+      rule: Check resolution, format, colour space, aspect ratio, and clean-video requirements where relevant.
+      source: [63]

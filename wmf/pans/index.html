@@ -1,0 +1,1103 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>WMF · Frying Pans</title>
+  <style>
+    /* ============================================================
+       WMF Rotis — brand typeface (Rotis II Sans W01)
+       ============================================================ */
+    @font-face { font-family:"WMF Rotis"; src:url("assets/fonts/rotis-ii-sans-w01-light.woff2") format("woff2"); font-weight:300; font-style:normal; font-display:swap; }
+    @font-face { font-family:"WMF Rotis"; src:url("assets/fonts/rotis-ii-sans-w01.woff2") format("woff2"); font-weight:400; font-style:normal; font-display:swap; }
+    @font-face { font-family:"WMF Rotis"; src:url("assets/fonts/rotis-ii-sans-w01-italic.woff2") format("woff2"); font-weight:400; font-style:italic; font-display:swap; }
+    @font-face { font-family:"WMF Rotis"; src:url("assets/fonts/rotis-ii-sans-w01-medium.woff2") format("woff2"); font-weight:500; font-style:normal; font-display:swap; }
+    @font-face { font-family:"WMF Rotis"; src:url("assets/fonts/rotis-ii-sans-w01-semi-bold.woff2") format("woff2"); font-weight:600; font-style:normal; font-display:swap; }
+    @font-face { font-family:"WMF Rotis"; src:url("assets/fonts/rotis-ii-sans-w01-bold.woff2") format("woff2"); font-weight:700; font-style:normal; font-display:swap; }
+
+    /* ============================================================
+       Design tokens (from WMF Design System)
+       ============================================================ */
+    :root {
+      --rotis: "WMF Rotis", "DS WMF Rotis", "Rotis II Sans W01", system-ui, Arial, Helvetica, sans-serif;
+
+      --black: #000000;
+      --ink: #212121;            /* neutral / darkest  */
+      --ink-2: #2e2e2e;          /* neutral / darker   */
+      --muted: #53555a;          /* text / secondary   */
+      --line: #d1d1d1;           /* neutral / lighter  */
+      --line-soft: #e6e6e6;
+      --grey-2: #cacaca;
+      --wash: #f4f4f4;           /* neutral / lightest */
+      --page: #f4f4f4;           /* page background (design) */
+      --surface: #ffffff;        /* cards / raised surfaces */
+      --gold: #d7c878;           /* wmf / yellow-light */
+      --gold-deep: #b99c00;
+      --star: #b7a24a;
+      --sale: #c51a1b;
+
+      --header-bg: #101010;
+      --footer-bg: #212121;
+
+      /* comparison-table palette (reused prototype) */
+      --dark-panel: #31322d;
+      --light-panel: #e2e2e2;
+      --button: #ede3b9;
+      --rule: rgba(0,0,0,0.14);
+    }
+
+    * { box-sizing: border-box; }
+    html { -webkit-text-size-adjust: 100%; }
+    body {
+      margin: 0;
+      font-family: var(--rotis);
+      color: var(--black);
+      background: var(--page);
+      font-weight: 400;
+      -webkit-font-smoothing: antialiased;
+      text-rendering: optimizeLegibility;
+    }
+    img { display: block; max-width: 100%; }
+    a { color: inherit; text-decoration: none; }
+    button { font-family: inherit; cursor: pointer; }
+
+    .wrap { max-width: 1520px; margin: 0 auto; padding: 0 40px; }
+
+    /* ============================================================
+       HEADER  (reused from WMF header prototype — compact bar)
+       ============================================================ */
+    .site-header { background: var(--header-bg); color: #fff; }
+    .header-bar {
+      display: grid;
+      grid-template-columns: 1fr auto 1fr;
+      align-items: center;
+      padding: 20px 0 18px;
+    }
+    .header-left { justify-self: start; display: flex; align-items: center; gap: 22px; }
+    .header-logo { justify-self: center; display: flex; }
+    .header-logo svg { width: 46px; height: 57px; }
+    .header-right { justify-self: end; display: flex; align-items: center; gap: 24px; }
+    .icon-btn { background: none; border: 0; padding: 0; color: #fff; display: inline-flex; line-height: 0; position: relative; }
+    .icon-btn svg { display: block; }
+    .cart-count {
+      position: absolute; top: -7px; right: -9px;
+      min-width: 16px; height: 16px; padding: 0 4px;
+      border-radius: 999px; background: var(--gold); color: #101010;
+      font-size: 10px; font-weight: 700; line-height: 16px; text-align: center;
+    }
+    .header-search {
+      display: none; /* desktop-only search box variant */
+    }
+
+    /* ============================================================
+       BREADCRUMB
+       ============================================================ */
+    .breadcrumb { padding: 22px 0 8px; }
+    .breadcrumb ol { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+    .breadcrumb li { font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: #8a8a8a; }
+    .breadcrumb li::after { content: "/"; margin-left: 8px; color: #c5c5c5; }
+    .breadcrumb li:last-child { color: var(--black); }
+    .breadcrumb li:last-child::after { content: ""; }
+
+    /* ============================================================
+       PAGE HEAD  (title + subtitle + hero)
+       ============================================================ */
+    .page-head {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(0, 540px);
+      gap: 40px;
+      align-items: center;
+      padding: 18px 0 34px;
+    }
+    .page-title { margin: 0 0 18px; font-size: 46px; line-height: 1.04; font-weight: 300; letter-spacing: 0.06em; text-transform: uppercase; }
+    .page-sub { margin: 0; max-width: 640px; font-size: 16px; line-height: 1.55; font-weight: 300; color: #1c1c1c; }
+    .page-hero { width: 100%; aspect-ratio: 634 / 214; overflow: hidden; }
+    .page-hero img { width: 100%; height: 100%; object-fit: cover; }
+
+    /* ============================================================
+       TOOLBAR
+       ============================================================ */
+    .toolbar {
+      display: flex; align-items: center; justify-content: space-between; gap: 20px;
+      padding: 14px 0 18px;
+      border-top: 1px solid var(--line-soft);
+      flex-wrap: wrap;
+    }
+    .toolbar-left { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
+    .toolbar-right { display: flex; align-items: center; gap: 22px; }
+    .pill {
+      display: inline-flex; align-items: center; gap: 9px;
+      height: 40px; padding: 0 20px;
+      border: 1px solid var(--black); border-radius: 999px;
+      background: #fff; color: var(--black);
+      font-size: 13px; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase;
+      white-space: nowrap; transition: background .15s, color .15s;
+    }
+    .pill:hover { background: var(--black); color: #fff; }
+    .pill:hover svg { stroke: #fff; }
+    .pill svg { stroke: var(--black); }
+    .pill--plain { text-transform: none; letter-spacing: 0.02em; font-weight: 500; }
+    .product-count { font-size: 12px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); }
+    .sort {
+      position: relative; display: inline-flex; align-items: center;
+      height: 40px; border: 1px solid var(--line); border-radius: 6px; background: #fff;
+    }
+    .sort select {
+      appearance: none; -webkit-appearance: none;
+      border: 0; background: transparent; font-family: inherit;
+      height: 100%; padding: 0 40px 0 16px; font-size: 14px; color: var(--black); cursor: pointer;
+    }
+    .sort::after {
+      content: ""; position: absolute; right: 15px; top: 50%; width: 9px; height: 9px;
+      border-right: 1.6px solid #444; border-bottom: 1.6px solid #444;
+      transform: translateY(-70%) rotate(45deg); pointer-events: none;
+    }
+
+    /* ============================================================
+       PLP LAYOUT  (filters + grid)
+       ============================================================ */
+    .plp { display: grid; grid-template-columns: 246px minmax(0, 1fr); gap: 44px; padding: 6px 0 40px; }
+
+    /* ---- Filters ---- */
+    .filters { align-self: start; }
+    .filter-group { border-bottom: 1px solid var(--line-soft); }
+    .filter-group:first-child { border-top: 1px solid var(--line-soft); }
+    .filter-head {
+      width: 100%; background: none; border: 0; padding: 18px 2px 16px;
+      display: flex; align-items: center; justify-content: space-between;
+      font-size: 12px; font-weight: 600; letter-spacing: 0.16em; text-transform: uppercase; color: var(--black);
+      transition: color .15s ease;
+    }
+    .filter-head:hover { color: var(--gold-deep); }
+    .filter-toggle { position: relative; width: 14px; height: 14px; flex: none; }
+    .filter-toggle::before, .filter-toggle::after {
+      content: ""; position: absolute; background: #4a4a4a; transition: background .15s ease;
+    }
+    .filter-toggle::before { left: 0; top: 6px; width: 14px; height: 1.5px; }
+    .filter-toggle::after  { left: 6px; top: 0; width: 1.5px; height: 14px; transition: transform .2s, background .15s ease; }
+    .filter-head:hover .filter-toggle::before,
+    .filter-head:hover .filter-toggle::after { background: var(--gold-deep); }
+    .filter-group.open .filter-toggle::after { transform: scaleY(0); }
+    .filter-body { display: none; padding: 0 2px 18px; }
+    .filter-group.open .filter-body { display: block; }
+    .facet { display: flex; align-items: center; gap: 12px; padding: 7px 0; font-size: 14px; font-weight: 300; color: #1a1a1a; cursor: pointer; }
+    .facet input { position: absolute; opacity: 0; pointer-events: none; }
+    .facet .box { width: 17px; height: 17px; border: 1px solid #9a9a9a; flex: none; display: grid; place-items: center; background: #fff; }
+    .facet .box::after { content: ""; width: 9px; height: 9px; background: var(--black); transform: scale(0); transition: transform .12s; }
+    .facet input:checked + .box::after { transform: scale(1); }
+    .facet input:checked ~ .facet-label { color: #000; }
+
+    /* ---- Active filter chips ---- */
+    .active-filters { display: flex; flex-wrap: wrap; gap: 8px; padding: 0 0 18px; }
+    .active-filters[hidden] { display: none; }
+    .af-head { width: 100%; display: flex; align-items: center; justify-content: space-between; margin-bottom: 2px; }
+    .af-title { font-size: 12px; font-weight: 600; letter-spacing: 0.16em; text-transform: uppercase; }
+    .af-clear { background: none; border: 0; padding: 0; font-family: inherit; font-size: 12px; font-weight: 300; color: #666; text-decoration: underline; cursor: pointer; }
+    .chip {
+      display: inline-flex; align-items: center; gap: 7px; height: 30px; padding: 0 7px 0 13px;
+      border: 1px solid var(--ink-2); border-radius: 999px; background: var(--surface);
+      font-size: 12px; font-weight: 300; color: #1a1a1a; line-height: 1;
+    }
+    .chip button { background: none; border: 0; padding: 3px; display: inline-flex; color: #555; cursor: pointer; border-radius: 50%; }
+    .chip button:hover { color: #000; background: rgba(0,0,0,.06); }
+    .chip button svg { display: block; }
+
+    /* ---- Product grid ---- */
+    .grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 40px 34px; }
+    .card { display: flex; flex-direction: column; }
+    .card-media {
+      position: relative; aspect-ratio: 1 / 1; background: #fff; overflow: hidden;
+    }
+    .card-media > .pan {
+      position: absolute; inset: 7% 7%; width: 86%; height: 86%;
+      object-fit: contain; margin: auto; z-index: 0;
+    }
+    .card-media > .pan-inuse {
+      position: absolute; inset: 0; width: 100%; height: 100%;
+      object-fit: cover; opacity: 0; transition: opacity .4s ease; z-index: 1;
+    }
+    .card-media:hover > .pan-inuse { opacity: 1; }
+    .badge {
+      position: absolute; top: 19px; left: 0;
+      display: inline-flex; align-items: center; height: 24px; padding: 0 16px 0 26px;
+      background: var(--muted); color: #fff; border-radius: 0 18px 18px 0;
+      font-size: 10px; font-weight: 300; letter-spacing: 0.2em; text-transform: uppercase;
+      z-index: 3;
+    }
+    .badge--new { background: #2f5d3b; }
+    .badge--sale { background: var(--sale); }
+    .card-actions { position: absolute; top: 12px; right: 13px; display: flex; gap: 9px; z-index: 3; }
+    .round {
+      width: 44px; height: 44px; border-radius: 50%; background: #fff;
+      border: 0; display: grid; place-items: center; color: #1c1c1c;
+      box-shadow: 0 2px 6px rgba(0,0,0,.13);
+      transition: box-shadow .15s, background .15s;
+    }
+    .round:hover { background: #fff; box-shadow: 0 3px 11px rgba(0,0,0,.22); }
+    .round svg { display: block; }
+    .card-labels { position: absolute; left: 12px; bottom: 13px; display: flex; gap: 7px; flex-wrap: wrap; z-index: 3; }
+    .label {
+      display: inline-flex; align-items: center; height: 21px; padding: 0 12px;
+      border: 1px solid var(--black); background: rgba(255,255,255,.86);
+      font-size: 12px; font-weight: 300; letter-spacing: 0.02em; text-transform: uppercase; color: var(--black);
+    }
+    .award { position: absolute; right: 14px; bottom: 13px; width: 48px; height: auto; z-index: 3; }
+
+    .card-body { padding-top: 12px; display: flex; flex-direction: column; gap: 4px; }
+    .card-eyebrow { font-size: 12px; font-weight: 300; letter-spacing: 0.04em; text-transform: uppercase; color: #6a6a6a; min-height: 15px; }
+    .card-name { margin: 0; font-size: 16px; font-weight: 500; line-height: 1.25; text-transform: uppercase; }
+    .card-rating { display: flex; align-items: center; gap: 8px; margin-top: 2px; }
+    .stars { --pct: 100%; position: relative; width: 78px; height: 14px; }
+    .stars::before, .stars::after {
+      content: "★★★★★"; position: absolute; inset: 0; font-size: 14px; line-height: 14px; letter-spacing: 1px;
+    }
+    .stars::before { color: #d9d9d9; }
+    .stars::after { color: var(--star); width: var(--pct); overflow: hidden; white-space: nowrap; }
+    .rating-count { font-size: 12px; font-weight: 300; color: #333; }
+    .card-price { display: flex; align-items: center; gap: 8px; padding: 8px 0 2px; }
+    .price { font-size: 20px; font-weight: 700; }
+    .msrp { font-size: 15px; font-weight: 300; color: #333; }
+    .discount {
+      display: inline-flex; align-items: center; height: 22px; padding: 0 12px;
+      background: var(--sale); color: #fff; font-size: 12px; font-weight: 300; text-transform: uppercase;
+    }
+    .card-sizes { display: flex; align-items: center; gap: 7px; flex-wrap: wrap; padding-top: 4px; }
+    .card-sizes .lbl { font-size: 12px; font-weight: 300; color: #333; }
+    .swatch {
+      display: inline-flex; align-items: center; justify-content: center;
+      min-width: 37px; height: 21px; padding: 0 6px;
+      border: 1px solid var(--line); border-radius: 6px; background: #fff;
+      font-size: 12px; font-weight: 300; color: #000; cursor: pointer;
+    }
+    .swatch.sel { border-color: var(--ink-2); box-shadow: inset 0 0 0 1px var(--ink-2); }
+
+    /* ---- Promo tile inside grid ---- */
+    .promo-tile {
+      position: relative; overflow: hidden; min-height: 100%;
+      display: grid; place-items: center; text-align: center; color: #fff;
+      background: #1c1c1c;
+    }
+    .promo-tile img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+    .promo-tile::after { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(0,0,0,.28), rgba(0,0,0,.5)); }
+    .promo-tile .promo-copy { position: relative; z-index: 1; padding: 26px; }
+    .promo-tile h3 { margin: 0; font-size: 30px; line-height: 1.15; font-weight: 300; letter-spacing: 0.06em; text-transform: uppercase; }
+    .promo-tile a { position: relative; z-index: 1; }
+
+    .show-more-row { display: flex; justify-content: center; padding: 46px 0 8px; }
+    .btn-outline {
+      display: inline-flex; align-items: center; gap: 10px; height: 44px; padding: 0 30px;
+      border: 1px solid var(--black); border-radius: 999px; background: #fff; color: var(--black);
+      font-size: 13px; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase; transition: background .15s, color .15s;
+    }
+    .btn-outline:hover { background: var(--black); color: #fff; }
+
+    /* ============================================================
+       COMPARE OUR RANGE  (reused comparison-table prototype)
+       ============================================================ */
+    .compare-section { background: transparent; padding: 40px 0 20px; }
+    .comparison__title {
+      margin: 0 0 70px; text-align: center;
+      font-size: 30px; line-height: 34px; font-weight: 400; letter-spacing: 6px; text-transform: uppercase;
+    }
+    .comparison-scroll { width: 100%; overflow-x: auto; overflow-y: hidden; padding-bottom: 12px; }
+    .comparison { width: 1253px; height: 685px; margin: 0 auto; position: relative; background: var(--page); }
+    .matrix {
+      position: absolute; left: 0; top: 0; width: 1253px; height: 685px;
+      background: linear-gradient(90deg, transparent 0, transparent 128px,
+        var(--dark-panel) 128px, var(--dark-panel) 506px,
+        var(--light-panel) 506px, var(--light-panel) 100%);
+    }
+    .segment-title { position: absolute; top: 17px; margin: 0; font-size: 20px; line-height: 34px; font-weight: 400; letter-spacing: 5.2px; text-transform: uppercase; white-space: nowrap; }
+    .segment-title--dark { left: 200px; color: #fff; }
+    .segment-title--light { left: 786px; color: #000; }
+    .segment-subtitle { position: absolute; top: 49px; margin: 0; font-size: 12px; line-height: 15px; font-weight: 300; text-align: center; white-space: nowrap; }
+    .segment-subtitle--dark { left: 138px; width: 360px; color: #fff; }
+    .segment-subtitle--light { left: 530px; width: 690px; color: #000; }
+    .comparison .product { position: absolute; top: 80px; width: 160px; color: #000; }
+    .comparison .product--dark { color: #fff; }
+    .comparison .product:nth-of-type(1) { left: 152px; }
+    .comparison .product:nth-of-type(2) { left: 336px; }
+    .comparison .product:nth-of-type(3) { left: 520px; }
+    .comparison .product:nth-of-type(4) { left: 704px; }
+    .comparison .product:nth-of-type(5) { left: 888px; }
+    .comparison .product:nth-of-type(6) { left: 1072px; }
+    .pan-art { position: relative; width: 141px; height: 85px; margin-left: 10px; }
+    .pan-art::before, .pan-art::after { content: ""; position: absolute; display: block; }
+    .pan-art::before { left: 0; top: 1px; width: 76px; height: 76px; border-radius: 50%; border: 3px solid rgba(255,255,255,0.36); box-shadow: inset 0 0 0 4px rgba(0,0,0,0.22), 0 4px 8px rgba(0,0,0,0.28); }
+    .pan-art::after { left: 74px; top: 36px; width: 60px; height: 7px; border: 1px solid rgba(0,0,0,0.36); border-radius: 999px; background: linear-gradient(180deg, #f6f6f6, #aeb2b4 45%, #f7f7f7 100%); box-shadow: inset 14px 0 0 rgba(255,255,255,0.68); }
+    .pan-art__rivet { position: absolute; left: 82px; top: 38px; z-index: 2; width: 3px; height: 3px; border-radius: 50%; background: #6a6a6a; box-shadow: 7px 0 0 rgba(255,255,255,0.75); }
+    .pan-art--steel::before { background: conic-gradient(from 0deg, #fbfbfb, #85898c, #f7f7f7, #9fa4a7, #fdfdfd, #82868a, #f8f8f8); border-color: #d8d9da; box-shadow: inset 0 0 0 4px rgba(255,255,255,0.44), inset 0 0 0 8px rgba(50,50,50,0.18), 0 4px 8px rgba(0,0,0,0.28); }
+    .pan-art--steel .pan-art__shine { position: absolute; left: 11px; top: 11px; width: 54px; height: 54px; border-radius: 50%; background: radial-gradient(circle, rgba(255,255,255,0.88) 0 8%, transparent 9% 100%); opacity: 0.9; }
+    .pan-art--honeycomb::before { background: radial-gradient(circle at center, rgba(255,255,255,0.06) 0 28%, transparent 29%), repeating-linear-gradient(0deg, rgba(255,255,255,0.12) 0 1px, transparent 1px 7px), repeating-linear-gradient(60deg, rgba(255,255,255,0.1) 0 1px, transparent 1px 7px), #22282a; border-color: #565f62; box-shadow: inset 0 0 0 5px #111, inset 0 0 18px rgba(255,255,255,0.16), 0 4px 8px rgba(0,0,0,0.34); }
+    .pan-art--nonstick::before { background: radial-gradient(circle at 45% 42%, rgba(255,255,255,0.08), transparent 0 38%), radial-gradient(circle at center, rgba(10,10,10,0.8), #202020 58%, #0d0d0d 59% 100%), repeating-radial-gradient(circle, rgba(255,255,255,0.09) 0 1px, transparent 1px 5px); border-color: #2a2a2a; box-shadow: inset 0 0 0 5px #111, inset 0 0 9px rgba(255,255,255,0.12), 0 5px 10px rgba(0,0,0,0.34); }
+    .pan-art--nonstick::after, .pan-art--honeycomb::after { background: linear-gradient(180deg, #f4f4f4, #9fa3a6 48%, #f8f8f8 100%); }
+    .comparison .product__name { margin: 21px 0 0 7px; min-height: 44px; font-size: 16px; line-height: 22px; font-weight: 600; text-transform: uppercase; }
+    .comparison .product__button { display: grid; place-items: center; width: 160px; height: 36px; margin-top: 13px; border: 0; border-radius: 36px; background: var(--button); color: #000; font: inherit; font-size: 16px; line-height: 18px; font-weight: 300; text-transform: uppercase; }
+    .rules { position: absolute; left: 0; top: 287px; width: 1232px; height: 398px; pointer-events: none; }
+    .rule { position: absolute; left: 0; width: 100%; height: 1px; background: var(--rule); }
+    .rule:nth-child(1){top:0}.rule:nth-child(2){top:61px}.rule:nth-child(3){top:117px}.rule:nth-child(4){top:174px}.rule:nth-child(5){top:230px}.rule:nth-child(6){top:286px}.rule:nth-child(7){top:342px}.rule:nth-child(8){top:398px}
+    .spec-grid { position: absolute; left: 0; top: 287px; width: 1232px; height: 398px; display: grid; grid-template-columns: 128px repeat(6, 160px); grid-template-rows: 61px 56px 57px 56px 56px 56px 56px; column-gap: 24px; }
+    .spec-label, .spec-cell { align-self: center; min-width: 0; font-size: 14px; line-height: 16px; }
+    .spec-label { position: sticky; left: 0; z-index: 4; align-self: stretch; display: flex; align-items: center; width: 128px; border-top: 1px solid var(--rule); background: var(--page); color: #000; font-weight: 600; line-height: 17px; text-transform: uppercase; }
+    .spec-cell { font-weight: 300; }
+    .spec-cell--dark { color: #fff; }
+    .spec-cell--light { color: #000; }
+    .spec-grid .row-1{grid-row:1}.spec-grid .row-2{grid-row:2}.spec-grid .row-3{grid-row:3}.spec-grid .row-4{grid-row:4}.spec-grid .row-5{grid-row:5}.spec-grid .row-6{grid-row:6}.spec-grid .row-7{grid-row:7}
+    .spec-grid .col-label{grid-column:1}.spec-grid .col-1{grid-column:2}.spec-grid .col-2{grid-column:3}.spec-grid .col-3{grid-column:4}.spec-grid .col-4{grid-column:5}.spec-grid .col-5{grid-column:6}.spec-grid .col-6{grid-column:7}
+    .spec-grid .spec-label.row-7 { border-bottom: 1px solid var(--rule); }
+
+    /* ============================================================
+       FAQ
+       ============================================================ */
+    .faq { padding: 40px 0 30px; }
+    .faq h2 { text-align: center; margin: 0 0 40px; font-size: 30px; font-weight: 400; letter-spacing: 6px; text-transform: uppercase; }
+    .faq-list { max-width: 810px; margin: 0 auto; }
+    .faq-item { border-bottom: 1px solid var(--line-soft); }
+    .faq-item:first-child { border-top: 1px solid var(--line-soft); }
+    .faq-q {
+      width: 100%; background: none; border: 0; padding: 22px 4px;
+      display: flex; align-items: center; justify-content: space-between; gap: 20px; text-align: left;
+      font-size: 20px; font-weight: 500; color: var(--black);
+      transition: color .15s ease;
+    }
+    .faq-q:hover { color: var(--gold-deep); }
+    .faq-sign { position: relative; width: 18px; height: 18px; flex: none; }
+    .faq-sign::before, .faq-sign::after { content: ""; position: absolute; background: #2a2a2a; transition: background .15s ease; }
+    .faq-sign::before { left: 0; top: 8px; width: 18px; height: 2px; }
+    .faq-sign::after { left: 8px; top: 0; width: 2px; height: 18px; transition: transform .2s, background .15s ease; }
+    .faq-q:hover .faq-sign::before,
+    .faq-q:hover .faq-sign::after { background: var(--gold-deep); }
+    .faq-item.open .faq-sign::after { transform: scaleY(0); }
+    .faq-a { display: none; padding: 0 4px 24px; max-width: 720px; font-size: 15px; font-weight: 300; line-height: 1.6; color: #333; }
+    .faq-item.open .faq-a { display: block; }
+
+    /* ============================================================
+       CATEGORY STRIP
+       ============================================================ */
+    .cats { padding: 26px 0 44px; }
+    .cats-track { display: flex; gap: 10px; overflow-x: auto; padding-bottom: 8px; scrollbar-width: thin; }
+    .cat {
+      flex: 0 0 auto; width: 132px; text-align: center;
+      display: flex; flex-direction: column; align-items: center; gap: 10px;
+    }
+    .cat-thumb { width: 132px; height: 96px; background: var(--surface); border-radius: 4px; display: grid; place-items: center; overflow: hidden; }
+    .cat-thumb img { width: 82%; height: 82%; object-fit: contain; mix-blend-mode: multiply; }
+    .cat-label { font-size: 11px; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; color: #2a2a2a; }
+
+    /* ============================================================
+       FOOTER
+       ============================================================ */
+    .site-footer { background: var(--footer-bg); color: #e8e8e8; margin-top: 20px; }
+    .footer-top { display: grid; grid-template-columns: repeat(4, minmax(0,1fr)) auto; gap: 30px; padding: 70px 0 44px; }
+    .footer-col h4 { margin: 0 0 20px; font-size: 13px; font-weight: 500; letter-spacing: 0.22em; text-transform: uppercase; color: #fff; }
+    .footer-col a { display: block; padding: 6px 0; font-size: 14px; font-weight: 300; color: #cfcfcf; }
+    .footer-col a:hover { color: #fff; }
+    .socials { display: flex; gap: 14px; align-items: flex-start; }
+    .social { width: 38px; height: 38px; border: 1px solid #6f6f6f; border-radius: 50%; display: grid; place-items: center; color: #fff; }
+    .social:hover { border-color: #fff; background: rgba(255,255,255,.06); }
+    .footer-bottom {
+      display: flex; align-items: center; gap: 28px; flex-wrap: wrap;
+      padding: 22px 0 30px; border-top: 1px solid rgba(255,255,255,.12);
+    }
+    .footer-bottom .fb-logo svg { width: 34px; height: 42px; color: #fff; }
+    .footer-bottom nav { display: flex; gap: 28px; flex-wrap: wrap; }
+    .footer-bottom nav a { font-size: 13px; font-weight: 300; color: #cfcfcf; }
+    .footer-copy { margin-left: auto; font-size: 12px; font-weight: 300; color: #9a9a9a; }
+
+    /* ============================================================
+       RESPONSIVE
+       ============================================================ */
+    /* Filter pill is shown on all sizes (matches design toolbar) */
+    body.rail-collapsed .plp { grid-template-columns: minmax(0, 1fr); }
+    body.rail-collapsed .filters { display: none; }
+
+    @media (max-width: 1180px) {
+      .grid { grid-template-columns: repeat(2, minmax(0,1fr)); }
+      .plp { grid-template-columns: 220px minmax(0,1fr); gap: 32px; }
+      body.rail-collapsed .grid { grid-template-columns: repeat(3, minmax(0,1fr)); }
+    }
+    @media (max-width: 900px) {
+      .wrap { padding: 0 22px; }
+      .page-head { grid-template-columns: 1fr; }
+      .page-title { font-size: 38px; }
+      .plp { grid-template-columns: 1fr; }
+      .filters {
+        position: fixed; z-index: 60; inset: 0 auto 0 0; width: 300px; max-width: 88vw;
+        background: #fff; padding: 20px; overflow-y: auto; transform: translateX(-100%);
+        transition: transform .25s; box-shadow: 0 0 40px rgba(0,0,0,.2);
+      }
+      body.filters-open .filters { transform: none; }
+      body.filters-open::after { content: ""; position: fixed; inset: 0; background: rgba(0,0,0,.35); z-index: 55; }
+      .filter-open-btn { display: inline-flex; }
+      .footer-top { grid-template-columns: repeat(2, 1fr); }
+      .footer-top .socials { grid-column: 1 / -1; }
+    }
+    @media (max-width: 560px) {
+      .grid { grid-template-columns: 1fr; }
+      .header-right { gap: 18px; }
+      .page-title { font-size: 32px; }
+      .comparison__title, .faq h2 { font-size: 22px; letter-spacing: 4px; }
+      .footer-top { grid-template-columns: 1fr; }
+      .footer-copy { margin-left: 0; }
+    }
+    /* ============================================================
+       SEARCH OVERLAY
+       ============================================================ */
+    .search-overlay { position: fixed; inset: 0; z-index: 100; display: none; }
+    .search-overlay[aria-hidden="false"] { display: block; }
+    .search-scrim { position: absolute; inset: 0; background: rgba(0,0,0,.45); }
+    .search-panel { position: relative; background: #fff; max-height: 90vh; display: flex; flex-direction: column; box-shadow: 0 24px 60px rgba(0,0,0,.28); animation: searchDrop .2s ease; }
+    @keyframes searchDrop { from { transform: translateY(-14px); opacity: .6; } to { transform: none; opacity: 1; } }
+    .search-bar { display: flex; align-items: center; gap: 16px; padding: 22px 40px; border-bottom: 1px solid var(--line-soft); }
+    .search-bar > svg { flex: none; }
+    .search-bar input { flex: 1; min-width: 0; border: 0; outline: 0; font-family: var(--rotis); font-size: 20px; font-weight: 300; color: #111; background: transparent; }
+    .search-bar input::placeholder { color: #9a9a96; }
+    .search-close { background: none; border: 0; cursor: pointer; font-family: var(--rotis); font-size: 12px; letter-spacing: .12em; text-transform: uppercase; color: #555; display: inline-flex; align-items: center; gap: 8px; white-space: nowrap; }
+    .search-close:hover { color: #000; }
+    .search-body { overflow-y: auto; padding: 26px 40px 44px; }
+    .search-section-title { font-size: 11px; font-weight: 600; letter-spacing: .18em; text-transform: uppercase; color: #9a9a96; margin: 0 0 14px; }
+    .search-chips { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 30px; }
+    .search-chip { border: 1px solid var(--line); border-radius: 999px; background: #fff; padding: 9px 16px; font-family: var(--rotis); font-size: 14px; color: #1a1a1a; cursor: pointer; transition: border-color .15s, background .15s; }
+    .search-chip:hover { border-color: var(--ink-2); background: var(--wash); }
+    .suggest-head { display: flex; align-items: center; gap: 10px; padding: 10px 8px; font-size: 16px; font-weight: 300; cursor: pointer; border-radius: 6px; }
+    .suggest-head:hover { background: var(--wash); }
+    .suggest-row { display: flex; align-items: center; gap: 16px; padding: 10px 8px; border-radius: 6px; cursor: pointer; text-decoration: none; color: inherit; }
+    .suggest-row:hover { background: var(--wash); }
+    .suggest-row img { width: 54px; height: 54px; object-fit: contain; background: #fff; flex: none; }
+    .suggest-row .sr-name { font-size: 15px; font-weight: 500; }
+    .suggest-row .sr-meta { font-size: 13px; font-weight: 300; color: #6a6a6a; }
+    .suggest-row .sr-price { margin-left: auto; font-size: 16px; font-weight: 700; white-space: nowrap; }
+    .search-clear { background: none; border: 0; cursor: pointer; font-family: var(--rotis); font-size: 12px; letter-spacing: .08em; text-transform: uppercase; color: #666; text-decoration: underline; padding: 0 0 0 4px; }
+    .no-results { grid-column: 1 / -1; padding: 60px 0; text-align: center; color: #666; font-size: 16px; }
+    @media (max-width: 700px) {
+      .search-bar { padding: 16px 20px; }
+      .search-bar input { font-size: 17px; }
+      .search-body { padding: 20px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ================= HEADER ================= -->
+  <header class="site-header">
+    <div class="wrap">
+      <div class="header-bar">
+        <div class="header-left">
+          <button class="icon-btn filter-open-btn-hdr" aria-label="Menu" onclick="document.body.classList.toggle('filters-open')">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.6" stroke-linecap="round"><path d="M4 7h16"/><path d="M4 12h12"/><path d="M4 17h16"/></svg>
+          </button>
+          <button class="icon-btn" aria-label="Search" onclick="openSearch()">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg>
+          </button>
+        </div>
+        <a class="header-logo" href="#" aria-label="WMF home">
+          <svg viewBox="0 0 49.995 61.999" fill="currentColor" aria-hidden="true"><path d="M 43.096 42.17 L 48.3 42.17 L 48.3 46.449 L 43.096 46.449 L 43.096 61.896 L 34.895 61.896 L 34.895 36.121 L 39.696 27.562 L 48.995 27.562 L 48.995 36.121 L 43.196 36.121 L 43.196 42.176 L 43.096 42.17 Z M 9.495 0 L 19.595 18.265 L 27.295 4.274 L 34.996 18.265 L 45.196 0 L 49.995 0 L 32.696 31.209 L 24.995 17.218 L 17.295 31.209 L 0 0 L 9.495 0 Z M 7.296 39.141 L 7.296 61.999 L 3.196 61.999 L 3.196 27.555 L 10.395 27.555 L 17.195 39.871 L 24.995 25.88 L 30.695 36.109 L 30.695 61.896 L 22.496 61.896 L 22.496 39.141 L 14.993 52.815 L 7.293 39.142 L 7.296 39.141 Z"/></svg>
+        </a>
+        <div class="header-right">
+          <button class="icon-btn" aria-label="Wishlist">
+            <svg width="23" height="23" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20.8 5.6a5 5 0 0 0-7.1 0L12 7.3l-1.7-1.7a5 5 0 0 0-7.1 7.1L12 21.5l8.8-8.8a5 5 0 0 0 0-7.1Z"/></svg>
+          </button>
+          <button class="icon-btn" aria-label="Stores">
+            <svg width="23" height="23" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s7-5.2 7-11a7 7 0 0 0-14 0c0 5.8 7 11 7 11Z"/><circle cx="12" cy="10" r="2.6"/></svg>
+          </button>
+          <button class="icon-btn" aria-label="Account">
+            <svg width="23" height="23" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="3.6"/><path d="M5 20.5a7 7 0 0 1 14 0"/></svg>
+          </button>
+          <button class="icon-btn" aria-label="Basket">
+            <svg width="23" height="23" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 8h12l1 12.5H5L6 8Z"/><path d="M9 8a3 3 0 0 1 6 0"/></svg>
+            <span class="cart-count">1</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <div class="wrap">
+      <!-- ============= BREADCRUMB ============= -->
+      <nav class="breadcrumb" aria-label="Breadcrumb">
+        <ol>
+          <li>Home</li>
+          <li>Products</li>
+          <li>Pans</li>
+          <li>Frying Pans</li>
+        </ol>
+      </nav>
+
+      <!-- ============= PAGE HEAD ============= -->
+      <div class="page-head">
+        <div>
+          <h1 class="page-title">Frying Pans</h1>
+          <p class="page-sub">Engineered for precision. Explore our curated selection of professional-grade cookware designed to master every culinary technique from high-heat browning to delicate reductions.</p>
+        </div>
+        <div class="page-hero">
+          <img src="assets/hero.png" alt="Chef flambéing in a WMF frying pan">
+        </div>
+      </div>
+
+      <!-- ============= TOOLBAR ============= -->
+      <div class="toolbar">
+        <div class="toolbar-left">
+          <button class="pill pill--plain filter-open-btn" onclick="onFilterBtn()">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke-width="1.6" stroke-linecap="round"><path d="M4 7h13"/><path d="M4 12h16"/><path d="M4 17h9"/><circle cx="18" cy="7" r="2.3" fill="#fff"/><circle cx="15" cy="17" r="2.3" fill="#fff"/></svg>
+            Filter
+          </button>
+          <button class="pill">Pan Finder</button>
+          <a class="pill" href="#compare">Compare our Frying Pans</a>
+        </div>
+        <div class="toolbar-right">
+          <span class="product-count" id="productCount">Products</span>
+          <div class="sort">
+            <select aria-label="Sort by" id="sortSelect">
+              <option>Bestseller</option>
+              <option>Price: low to high</option>
+              <option>Price: high to low</option>
+              <option>Newest</option>
+              <option>Top rated</option>
+            </select>
+          </div>
+        </div>
+      </div>
+
+      <!-- ============= FILTERS + GRID ============= -->
+      <div class="plp">
+        <!-- Filters -->
+        <aside class="filters" aria-label="Product filters">
+          <div class="active-filters" id="activeFilters" hidden></div>
+          <div id="facets"></div>
+        </aside>
+
+        <!-- Grid -->
+        <section aria-label="Products">
+          <div class="grid" id="grid"></div>
+
+          <div class="show-more-row" id="showMoreRow">
+            <button class="btn-outline" id="showMoreBtn">Show more</button>
+          </div>
+        </section>
+      </div>
+    </div>
+
+    <!-- ============= COMPARE OUR RANGE (reused prototype) ============= -->
+    <section class="compare-section" id="compare">
+      <div class="wrap">
+        <h2 class="comparison__title">Compare our Range</h2>
+        <div class="comparison-scroll">
+          <div class="comparison">
+            <div class="matrix">
+              <h3 class="segment-title segment-title--dark">Intense Searing</h3>
+              <h3 class="segment-title segment-title--light">Gentle Frying</h3>
+              <p class="segment-subtitle segment-subtitle--dark">Ideal for steaks and anything that needs golden crispy crusts</p>
+              <p class="segment-subtitle segment-subtitle--light">Ideal for anything delicate such as eggs, fish and vegetables.</p>
+
+              <article class="product product--dark">
+                <div class="pan-art pan-art--steel" aria-hidden="true"><span class="pan-art__shine"></span><span class="pan-art__rivet"></span></div>
+                <h4 class="product__name">Steel Pro Uncoated</h4>
+                <a class="product__button" href="#">Shop Now</a>
+              </article>
+              <article class="product product--dark">
+                <div class="pan-art pan-art--honeycomb" aria-hidden="true"><span class="pan-art__rivet"></span></div>
+                <h4 class="product__name">Honeycomb Pro+<br>Ceramic</h4>
+                <a class="product__button" href="#">Shop Now</a>
+              </article>
+              <article class="product">
+                <div class="pan-art pan-art--nonstick" aria-hidden="true"><span class="pan-art__rivet"></span></div>
+                <h4 class="product__name">Non-Stick Pro+<br>Ceramic</h4>
+                <a class="product__button" href="#">Shop Now</a>
+              </article>
+              <article class="product">
+                <div class="pan-art pan-art--nonstick" aria-hidden="true"><span class="pan-art__rivet"></span></div>
+                <h4 class="product__name">Ceramic Pro+</h4>
+                <a class="product__button" href="#">Shop Now</a>
+              </article>
+              <article class="product">
+                <div class="pan-art pan-art--nonstick" aria-hidden="true"><span class="pan-art__rivet"></span></div>
+                <h4 class="product__name">Non-Stick Pro</h4>
+                <a class="product__button" href="#">Shop Now</a>
+              </article>
+              <article class="product">
+                <div class="pan-art pan-art--nonstick" aria-hidden="true"><span class="pan-art__rivet"></span></div>
+                <h4 class="product__name">Ceramic Pro</h4>
+                <a class="product__button" href="#">Shop Now</a>
+              </article>
+
+              <div class="rules" aria-hidden="true">
+                <span class="rule"></span><span class="rule"></span><span class="rule"></span><span class="rule"></span>
+                <span class="rule"></span><span class="rule"></span><span class="rule"></span><span class="rule"></span>
+              </div>
+
+              <div class="spec-grid" role="table" aria-label="Pans range comparison">
+                <div class="spec-label col-label row-1" role="rowheader">Scratch<br>Resistant</div>
+                <div class="spec-cell spec-cell--dark col-1 row-1" role="cell">Metal utensil safe</div>
+                <div class="spec-cell spec-cell--dark col-2 row-1" role="cell">Metal utensil safe</div>
+                <div class="spec-cell spec-cell--light col-3 row-1" role="cell">-</div>
+                <div class="spec-cell spec-cell--light col-4 row-1" role="cell">Scratch-resistant ceramic</div>
+                <div class="spec-cell spec-cell--light col-5 row-1" role="cell">Metal utensil safe</div>
+                <div class="spec-cell spec-cell--light col-6 row-1" role="cell">Metal utensil safe</div>
+
+                <div class="spec-label col-label row-2" role="rowheader">Heat<br>Distribution</div>
+                <div class="spec-cell spec-cell--dark col-1 row-2" role="cell">3 Layers</div>
+                <div class="spec-cell spec-cell--dark col-2 row-2" role="cell">3 Layers</div>
+                <div class="spec-cell spec-cell--light col-3 row-2" role="cell">3 Layers</div>
+                <div class="spec-cell spec-cell--light col-4 row-2" role="cell">3 Layers</div>
+                <div class="spec-cell spec-cell--light col-5 row-2" role="cell">Single Layer</div>
+                <div class="spec-cell spec-cell--light col-6 row-2" role="cell">Single Layer</div>
+
+                <div class="spec-label col-label row-3" role="rowheader">Non Stick Technology</div>
+                <div class="spec-cell spec-cell--dark col-1 row-3" role="cell">-</div>
+                <div class="spec-cell spec-cell--dark col-2 row-3" role="cell">Honeycomb non-stick hybrid</div>
+                <div class="spec-cell spec-cell--light col-3 row-3" role="cell">Non-stick</div>
+                <div class="spec-cell spec-cell--light col-4 row-3" role="cell">Ceramic non-stick</div>
+                <div class="spec-cell spec-cell--light col-5 row-3" role="cell">Lasting non-stick</div>
+                <div class="spec-cell spec-cell--light col-6 row-3" role="cell">Non-stick</div>
+
+                <div class="spec-label col-label row-4" role="rowheader">Coating</div>
+                <div class="spec-cell spec-cell--dark col-1 row-4" role="cell">Uncoated</div>
+                <div class="spec-cell spec-cell--dark col-2 row-4" role="cell">Ceramic</div>
+                <div class="spec-cell spec-cell--light col-3 row-4" role="cell">Ceramic</div>
+                <div class="spec-cell spec-cell--light col-4 row-4" role="cell">Ceramic</div>
+                <div class="spec-cell spec-cell--light col-5 row-4" role="cell">PTFE</div>
+                <div class="spec-cell spec-cell--light col-6 row-4" role="cell">Ceramic</div>
+
+                <div class="spec-label col-label row-5" role="rowheader">Dishwasher &amp; Oven</div>
+                <div class="spec-cell spec-cell--dark col-1 row-5" role="cell">Oven-safe to 250°C<br>Dishwasher-safe</div>
+                <div class="spec-cell spec-cell--dark col-2 row-5" role="cell">Oven-safe to 250°C<br>Dishwasher-safe</div>
+                <div class="spec-cell spec-cell--light col-3 row-5" role="cell">Oven-safe to 250°C<br>Dishwasher-safe</div>
+                <div class="spec-cell spec-cell--light col-4 row-5" role="cell">Oven-safe to 250°C<br>Dishwasher-safe</div>
+                <div class="spec-cell spec-cell--light col-5 row-5" role="cell">Oven-safe to 250°C<br>Dishwasher-safe</div>
+                <div class="spec-cell spec-cell--light col-6 row-5" role="cell">Oven-safe to 250°C<br>Dishwasher-safe</div>
+
+                <div class="spec-label col-label row-6" role="rowheader">Design<br>Features</div>
+                <div class="spec-cell spec-cell--dark col-1 row-6" role="cell">Cool-touch handle<br>Drip-free pouring</div>
+                <div class="spec-cell spec-cell--dark col-2 row-6" role="cell">Professional handle<br>Drip-free pouring</div>
+                <div class="spec-cell spec-cell--light col-3 row-6" role="cell">Cool-touch handle<br>Drip-free pouring</div>
+                <div class="spec-cell spec-cell--light col-4 row-6" role="cell">Cool-touch handle<br>Drip-free pouring</div>
+                <div class="spec-cell spec-cell--light col-5 row-6" role="cell">Cool-touch handle<br>Drip-free pouring</div>
+                <div class="spec-cell spec-cell--light col-6 row-6" role="cell">Cool-touch handle<br>Drip-free pouring</div>
+
+                <div class="spec-label col-label row-7" role="rowheader">Warranty</div>
+                <div class="spec-cell spec-cell--dark col-1 row-7" role="cell">20-year warranty</div>
+                <div class="spec-cell spec-cell--dark col-2 row-7" role="cell">10-year warranty</div>
+                <div class="spec-cell spec-cell--light col-3 row-7" role="cell">5-year warranty</div>
+                <div class="spec-cell spec-cell--light col-4 row-7" role="cell">5-year warranty</div>
+                <div class="spec-cell spec-cell--light col-5 row-7" role="cell">5-year warranty</div>
+                <div class="spec-cell spec-cell--light col-6 row-7" role="cell">3-year warranty</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============= FAQ ============= -->
+    <section class="faq">
+      <div class="wrap">
+        <h2>Frequently Asked Questions</h2>
+        <div class="faq-list">
+          <div class="faq-item open">
+            <button class="faq-q">Which pans for searing steaks? <span class="faq-sign"></span></button>
+            <div class="faq-a">For high-heat searing, choose an uncoated stainless steel or honeycomb hybrid pan. Their multi-layer bases hold and distribute intense heat evenly, producing the golden, crispy crust that defines a great steak — and both are metal-utensil safe.</div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-q">Which pans for cooking eggs? <span class="faq-sign"></span></button>
+            <div class="faq-a">Delicate foods such as eggs, fish and vegetables release best from a ceramic or PTFE non-stick surface. Look for our Gentle Frying range for effortless flipping and easy cleaning.</div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-q">What is the difference between Pro and Pro+ pans? <span class="faq-sign"></span></button>
+            <div class="faq-a">Pro+ pans add an extra performance layer — a more durable coating, a reinforced honeycomb structure or a heavier multi-ply base — along with an extended warranty compared with the standard Pro line.</div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-q">How do you cook with stainless steel? <span class="faq-sign"></span></button>
+            <div class="faq-a">Pre-heat the empty pan over medium heat, add oil and let it shimmer before adding food. Ingredients naturally release once a crust forms, so resist the urge to move them too early.</div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-q">What hobs do the pans work with? <span class="faq-sign"></span></button>
+            <div class="faq-a">Every WMF frying pan is suitable for all hob types, including induction, as well as gas, ceramic and electric. Most are also oven-safe up to 250°C.</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============= CATEGORY STRIP ============= -->
+    <section class="cats">
+      <div class="wrap">
+        <div class="cats-track">
+          <a class="cat"><span class="cat-thumb"><img src="assets/pan-twin.png" alt=""></span><span class="cat-label">Pan Sets</span></a>
+          <a class="cat"><span class="cat-thumb"><img src="assets/pan-honeycomb.png" alt=""></span><span class="cat-label">Frying Pans</span></a>
+          <a class="cat"><span class="cat-thumb"><img src="assets/pan-resist.png" alt=""></span><span class="cat-label">Grill Pans</span></a>
+          <a class="cat"><span class="cat-thumb"><img src="assets/pan-honeycomb.png" alt=""></span><span class="cat-label">Induction Pans</span></a>
+          <a class="cat"><span class="cat-thumb"><img src="assets/pan-resist.png" alt=""></span><span class="cat-label">Pan Lids</span></a>
+          <a class="cat"><span class="cat-thumb"><img src="assets/pan-honeycomb.png" alt=""></span><span class="cat-label">Pans with Lids</span></a>
+          <a class="cat"><span class="cat-thumb"><img src="assets/pan-resist.png" alt=""></span><span class="cat-label">Stewing Pans</span></a>
+          <a class="cat"><span class="cat-thumb"><img src="assets/pan-twin.png" alt=""></span><span class="cat-label">Serving Pans</span></a>
+          <a class="cat"><span class="cat-thumb"><img src="assets/pan-honeycomb.png" alt=""></span><span class="cat-label">Woks</span></a>
+          <a class="cat"><span class="cat-thumb"><img src="assets/pan-resist.png" alt=""></span><span class="cat-label">Accessories</span></a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ============= FOOTER ============= -->
+  <footer class="site-footer">
+    <div class="wrap">
+      <div class="footer-top">
+        <div class="footer-col">
+          <h4>Our Brands</h4>
+          <a href="#">Silit</a>
+          <a href="#">Kaiser</a>
+        </div>
+        <div class="footer-col">
+          <h4>Our Services</h4>
+          <a href="#">Payment methods</a>
+          <a href="#">Shipping and delivery</a>
+          <a href="#">Cancellation policy</a>
+        </div>
+        <div class="footer-col">
+          <h4>Help &amp; Contact</h4>
+          <a href="#">FAQ</a>
+          <a href="#">Contact</a>
+          <a href="#">Online live consultation</a>
+        </div>
+        <div class="footer-col">
+          <h4>About Us</h4>
+          <a href="#">WMF brand</a>
+          <a href="#">Story</a>
+          <a href="#">Career</a>
+        </div>
+        <div class="socials">
+          <a class="social" href="#" aria-label="YouTube"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M23 12s0-3.2-.4-4.7a2.5 2.5 0 0 0-1.8-1.8C19.3 5 12 5 12 5s-7.3 0-8.8.5A2.5 2.5 0 0 0 1.4 7.3C1 8.8 1 12 1 12s0 3.2.4 4.7a2.5 2.5 0 0 0 1.8 1.8C4.7 19 12 19 12 19s7.3 0 8.8-.5a2.5 2.5 0 0 0 1.8-1.8C23 15.2 23 12 23 12Zm-13 3V9l5.2 3-5.2 3Z"/></svg></a>
+          <a class="social" href="#" aria-label="Instagram"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="3.5" y="3.5" width="17" height="17" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.2" cy="6.8" r="1.1" fill="currentColor" stroke="none"/></svg></a>
+          <a class="social" href="#" aria-label="Facebook"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M14 9V7c0-.9.6-1 1-1h2V2.5h-3C11.2 2.5 10 4.2 10 6.4V9H7.5v3.6H10V22h4v-9.4h2.6l.4-3.6H14Z"/></svg></a>
+          <a class="social" href="#" aria-label="Pinterest"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 0 0-3.6 19.3c-.1-.8-.2-2 .0-2.9l1.2-5s-.3-.6-.3-1.5c0-1.4.8-2.5 1.9-2.5.9 0 1.3.7 1.3 1.5 0 .9-.6 2.2-.9 3.5-.2 1 .5 1.9 1.6 1.9 1.9 0 3.2-2.4 3.2-5.3 0-2.2-1.5-3.8-4.1-3.8a4.7 4.7 0 0 0-4.9 4.7c0 .9.3 1.5.7 2 .2.2.2.3.1.5l-.2.9c-.1.3-.3.4-.6.2-1.2-.5-1.8-1.9-1.8-3.5 0-2.6 2.2-5.7 6.5-5.7 3.5 0 5.8 2.5 5.8 5.2 0 3.6-2 6.2-4.9 6.2-1 0-1.9-.5-2.2-1.1l-.6 2.4c-.2.8-.7 1.7-1.1 2.3A10 10 0 1 0 12 2Z"/></svg></a>
+          <a class="social" href="#" aria-label="WhatsApp"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a9.9 9.9 0 0 0-8.5 15l-1.1 4 4.1-1.1A10 10 0 1 0 12 2Zm5.8 14.1c-.2.7-1.4 1.3-2 1.4-.5.1-1.2.1-1.9-.1-.4-.1-1-.3-1.8-.6-3-1.3-5-4.4-5.2-4.6-.1-.2-1.2-1.6-1.2-3s.7-2.1 1-2.4c.2-.3.5-.4.7-.4h.5c.2 0 .4 0 .6.5l.8 2c.1.2.1.4 0 .5l-.4.5-.3.3c-.1.1-.3.3-.1.6.2.3.8 1.3 1.7 2.1 1.2 1 2.1 1.4 2.4 1.5.3.1.4.1.6-.1l.8-1c.2-.3.4-.2.6-.1l2 .9c.2.1.4.2.4.3.1.1.1.6-.1 1.2Z"/></svg></a>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span class="fb-logo"><svg viewBox="0 0 49.995 61.999" fill="currentColor" aria-label="WMF"><path d="M 43.096 42.17 L 48.3 42.17 L 48.3 46.449 L 43.096 46.449 L 43.096 61.896 L 34.895 61.896 L 34.895 36.121 L 39.696 27.562 L 48.995 27.562 L 48.995 36.121 L 43.196 36.121 L 43.196 42.176 L 43.096 42.17 Z M 9.495 0 L 19.595 18.265 L 27.295 4.274 L 34.996 18.265 L 45.196 0 L 49.995 0 L 32.696 31.209 L 24.995 17.218 L 17.295 31.209 L 0 0 L 9.495 0 Z M 7.296 39.141 L 7.296 61.999 L 3.196 61.999 L 3.196 27.555 L 10.395 27.555 L 17.195 39.871 L 24.995 25.88 L 30.695 36.109 L 30.695 61.896 L 22.496 61.896 L 22.496 39.141 L 14.993 52.815 L 7.293 39.142 L 7.296 39.141 Z"/></svg></span>
+        <nav>
+          <a href="#">Data protection</a>
+          <a href="#">Terms and Conditions</a>
+          <a href="#">Imprint</a>
+        </nav>
+        <span class="footer-copy">© 2026 WMF – All rights reserved</span>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ============= SEARCH OVERLAY ============= -->
+  <div class="search-overlay" id="searchOverlay" aria-hidden="true" role="dialog" aria-label="Search">
+    <div class="search-scrim" onclick="closeSearch()"></div>
+    <div class="search-panel">
+      <div class="search-bar">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#111" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg>
+        <input id="searchInput" type="search" placeholder="Search products, collections and more" autocomplete="off" spellcheck="false">
+        <button class="search-close" onclick="closeSearch()">Close <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><path d="M6 6l12 12M18 6 6 18"/></svg></button>
+      </div>
+      <div class="search-body" id="searchBody"></div>
+    </div>
+  </div>
+
+
+  <script>
+    // Filter pill: open drawer on mobile, collapse the rail on desktop
+    function onFilterBtn() {
+      if (window.matchMedia('(max-width: 900px)').matches) {
+        document.body.classList.toggle('filters-open');
+      } else {
+        document.body.classList.toggle('rail-collapsed');
+      }
+    }
+    // Accordion (FAQ) + collapsible filter groups
+    document.querySelectorAll('.faq-q').forEach(function (b) {
+      b.addEventListener('click', function () { b.closest('.faq-item').classList.toggle('open'); });
+    });
+    // Filter group open/close (delegated — groups are rendered from the catalog)
+    document.addEventListener('click', function (e) {
+      var fh = e.target.closest('.filter-head');
+      if (fh) fh.closest('.filter-group').classList.toggle('open');
+    });
+    /* ===================== Data-driven product grid (real WMF catalog) =====================
+       Catalog lives in assets/products.json and is fetched at runtime, so it must be served
+       over http (GitHub Pages, or: python3 -m http.server). Opening index.html straight from
+       disk will not work — browsers block fetch() of file:// URLs. */
+    var DATA = { count: 0, skuCount: 0, products: [] };
+    var grid = document.getElementById('grid');
+    var productCountEl = document.getElementById('productCount');
+    var showMoreRow = document.getElementById('showMoreRow');
+    var showMoreBtn = document.getElementById('showMoreBtn');
+    var PAGE = 12, shown = PAGE, searchQ = '';
+    var eur = function (n) { return '€' + n.toFixed(2); };
+    var starPct = function (r) { return Math.round(r / 5 * 100) + '%'; };
+    var esc = function (s) { return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/"/g, '&quot;'); };
+    var img = function (sku) { return 'assets/products/' + sku + '.jpg'; };
+    var BAG = '<svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="#1c1c1c" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 8h12l1 12.5H5L6 8Z"/><path d="M9 8a3 3 0 0 1 6 0"/></svg>';
+    var HEART = '<svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="#1c1c1c" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20.8 5.6a5 5 0 0 0-7.1 0L12 7.3l-1.7-1.7a5 5 0 0 0-7.1 7.1L12 21.5l8.8-8.8a5 5 0 0 0 0-7.1Z"/></svg>';
+    var PROMO = '<article class="promo-tile"><img src="assets/promo-bg.png" alt=""><div class="promo-copy"><h3>Choose the right pan for the job</h3></div><a class="btn-outline" href="#compare" style="border-color:#fff;color:#fff;background:transparent;margin-top:22px">Compare range</a></article>';
+
+    function cardHTML(p) {
+      var sel = p._sel == null ? p.default : p._sel;
+      var v = p.variants[sel] || p.variants[0];
+      var onSale = v.msrp && v.msrp > v.price;
+      var save = onSale ? Math.round((1 - v.price / v.msrp) * 100) : 0;
+      var swatches = p.variants.map(function (vv, i) {
+        return '<span class="swatch' + (i === sel ? ' sel' : '') + '" data-i="' + i + '">' + esc(vv.size) + '</span>';
+      }).join('');
+      return '<article class="card" data-id="' + p.id + '">' +
+        '<div class="card-media">' +
+          '<img class="pan-inuse" src="assets/inuse.jpg" alt="" aria-hidden="true">' +
+          (p.bestseller ? '<span class="badge">Bestseller</span>' : '') +
+          '<div class="card-actions"><button class="round" aria-label="Add to basket">' + BAG + '</button>' +
+          '<button class="round" aria-label="Add to wishlist">' + HEART + '</button></div>' +
+          '<img class="pan" src="' + img(v.sku) + '" alt="' + esc(p.brand + ' ' + p.name) + '" loading="lazy">' +
+        '</div>' +
+        '<div class="card-body">' +
+          '<span class="card-eyebrow">' + esc(p.brand) + '</span>' +
+          '<h3 class="card-name">' + esc(p.name) + '</h3>' +
+          '<div class="card-rating"><span class="stars" style="--pct:' + starPct(p.rating) + '"></span>' +
+          '<span class="rating-count">' + p.rating.toFixed(1) + ' (' + p.reviews + ')</span></div>' +
+          '<div class="card-price"><span class="price">' + eur(v.price) + '</span>' +
+          (onSale ? '<span class="msrp">MSRP ' + eur(v.msrp) + '</span><span class="discount">Save ' + save + '%</span>' : '') + '</div>' +
+          '<div class="card-sizes"><span class="lbl">Size:</span>' + swatches + '</div>' +
+        '</div></article>';
+    }
+
+    function matchProducts(q) {
+      var toks = q.toLowerCase().split(/\s+/).filter(Boolean);
+      if (!toks.length) return DATA.products.slice();
+      return DATA.products.filter(function (p) { return toks.every(function (t) { return p.search.indexOf(t) >= 0; }); });
+    }
+
+    function currentList() {
+      var list = searchQ ? matchProducts(searchQ) : DATA.products;
+      return list.filter(passFacets);
+    }
+
+    function renderGrid() {
+      var list = currentList();
+      var cards = list.slice(0, shown).map(cardHTML);
+      if (!searchQ && cards.length >= 2) cards.splice(2, 0, PROMO);
+      grid.innerHTML = cards.length ? cards.join('')
+        : '<p class="no-results">' + (searchQ
+            ? 'No pans match “' + esc(searchQ) + '”. Try a different term.'
+            : 'No pans match the selected filters. Try removing one.') + '</p>';
+      showMoreRow.style.display = list.length > shown ? '' : 'none';
+      if (searchQ) {
+        productCountEl.innerHTML = list.length + ' result' + (list.length === 1 ? '' : 's') + ' for “' + esc(searchQ) + '”<button class="search-clear" id="clearSearch">Clear</button>';
+      } else {
+        productCountEl.textContent = list.length + ' Product' + (list.length === 1 ? '' : 's');
+      }
+    }
+
+    grid.addEventListener('click', function (e) {
+      var sw = e.target.closest('.swatch'); if (!sw) return;
+      var card = sw.closest('.card');
+      var p = DATA.products.find(function (x) { return x.id === card.getAttribute('data-id'); });
+      if (!p) return;
+      p._sel = parseInt(sw.dataset.i, 10);
+      card.outerHTML = cardHTML(p);
+    });
+    productCountEl.addEventListener('click', function (e) { if (e.target.id === 'clearSearch') setSearch(''); });
+    showMoreBtn.addEventListener('click', function () { shown += PAGE; renderGrid(); });
+
+    function setSearch(q) {
+      searchQ = (q || '').trim(); shown = PAGE;
+      document.body.classList.toggle('searching', !!searchQ);
+      renderGrid();
+      if (searchQ) window.scrollTo({ top: grid.getBoundingClientRect().top + window.scrollY - 120, behavior: 'smooth' });
+    }
+
+    /* ===================== Search overlay ===================== */
+    var overlay = document.getElementById('searchOverlay');
+    var searchInput = document.getElementById('searchInput');
+    var searchBody = document.getElementById('searchBody');
+    var TRENDING = ['Profi Resist', 'Fusiontec', 'Non-stick', 'Pan set', 'Devil', 'Durado', 'Induction', 'Silit'];
+    var recent = [];
+    try { recent = JSON.parse(sessionStorage.getItem('wmf_recent') || '[]'); } catch (e) {}
+
+    function openSearch() { overlay.setAttribute('aria-hidden', 'false'); document.body.style.overflow = 'hidden'; renderSuggest(''); setTimeout(function () { searchInput.focus(); }, 40); }
+    function closeSearch() { overlay.setAttribute('aria-hidden', 'true'); document.body.style.overflow = ''; }
+    window.openSearch = openSearch; window.closeSearch = closeSearch;
+
+    function suggestRow(p) {
+      var v = p.variants[p.default] || p.variants[0];
+      var from = Math.min.apply(null, p.variants.map(function (x) { return x.price; }));
+      var meta = (p.variants.length > 1 ? p.variants.length + ' sizes · from ' + eur(from) : v.size);
+      return '<a class="suggest-row" data-q="' + esc(p.brand + ' ' + p.name) + '">' +
+        '<img src="' + img(v.sku) + '" alt=""><span><span class="sr-name">' + esc(p.brand + ' ' + p.name) + '</span>' +
+        '<br><span class="sr-meta">' + esc(meta) + '</span></span>' +
+        '<span class="sr-price">' + eur(v.price) + '</span></a>';
+    }
+    function chip(t) { return '<button class="search-chip" data-q="' + esc(t) + '">' + esc(t) + '</button>'; }
+
+    function renderSuggest(q) {
+      q = (q || '').trim();
+      if (!q) {
+        var rec = recent.length ? '<p class="search-section-title">Recent searches</p><div class="search-chips">' + recent.map(chip).join('') + '</div>' : '';
+        searchBody.innerHTML = rec + '<p class="search-section-title">Trending searches</p><div class="search-chips">' + TRENDING.map(chip).join('') + '</div>';
+        return;
+      }
+      var hits = matchProducts(q).slice(0, 6);
+      var head = '<div class="suggest-head" data-q="' + esc(q) + '"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#111" stroke-width="1.6" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg> Search for “' + esc(q) + '”</div>';
+      searchBody.innerHTML = head + (hits.length
+        ? '<p class="search-section-title" style="margin-top:22px">Products</p>' + hits.map(suggestRow).join('')
+        : '<div style="padding:18px 8px;color:#8a8a86;font-size:14px">No matching pans — press Enter to search anyway.</div>');
+    }
+    if (searchInput) {
+      searchInput.addEventListener('input', function () { renderSuggest(searchInput.value); });
+      searchInput.addEventListener('keydown', function (e) {
+        if (e.key === 'Enter') submitSearch(searchInput.value);
+        else if (e.key === 'Escape') closeSearch();
+      });
+      searchBody.addEventListener('click', function (e) {
+        var el = e.target.closest('[data-q]'); if (!el) return;
+        submitSearch(el.getAttribute('data-q'));
+      });
+    }
+    function submitSearch(q) {
+      q = (q || '').trim(); if (!q) return;
+      recent = [q].concat(recent.filter(function (r) { return r.toLowerCase() !== q.toLowerCase(); })).slice(0, 6);
+      try { sessionStorage.setItem('wmf_recent', JSON.stringify(recent)); } catch (e) {}
+      searchInput.value = q;
+      closeSearch();
+      setSearch(q);
+    }
+    document.addEventListener('keydown', function (e) { if (e.key === 'Escape') closeSearch(); });
+
+    function priceOf(p) { var v = p.variants[p.default] || p.variants[0]; return v.price; }
+    function sortProducts(mode) {
+      var a = DATA.products;
+      if (mode === 'Price: low to high') a.sort(function (x, y) { return priceOf(x) - priceOf(y); });
+      else if (mode === 'Price: high to low') a.sort(function (x, y) { return priceOf(y) - priceOf(x); });
+      else if (mode === 'Top rated') a.sort(function (x, y) { return (y.rating - x.rating) || (y.reviews - x.reviews); });
+      else if (mode === 'Newest') a.sort(function (x, y) { return y.variants[0].sku > x.variants[0].sku ? 1 : -1; });
+      else a.sort(function (x, y) { return (y.bestseller - x.bestseller) || (y.reviews - x.reviews); });
+      shown = PAGE; renderGrid();
+    }
+    var sortSelect = document.getElementById('sortSelect');
+    if (sortSelect) sortSelect.addEventListener('change', function () { sortProducts(sortSelect.value); });
+
+    // Load the real catalog, then build the facet rail from it and render.
+    fetch('assets/products.json')
+      .then(function (r) { if (!r.ok) throw new Error('HTTP ' + r.status); return r.json(); })
+      .then(function (d) {
+        DATA = d;
+        buildFacets();
+        renderFacets();
+        sortProducts('Bestseller');
+      })
+      .catch(function (err) {
+        console.error('Could not load assets/products.json:', err);
+        grid.innerHTML = '<p class="no-results"><strong>Couldn’t load assets/products.json</strong><br>' +
+          'This page reads its catalog over http. Serve the folder — e.g. <code>python3 -m http.server</code> — ' +
+          'and reload. Opening index.html directly from disk won’t work.</p>';
+        productCountEl.textContent = '';
+        showMoreRow.style.display = 'none';
+      });
+
+    /* ===================== Facets (built from the real catalog) =====================
+       Every option is derived from real product data, so each one actually filters.
+       Attributes the shop doesn't expose on the PLP (material, coating, occasion) are
+       deliberately not faked. */
+    var afEl = document.getElementById('activeFilters');
+    var facetsEl = document.getElementById('facets');
+    var FACETS = [];
+    var selected = {};
+
+    function buildFacets() {
+      var uniq = function (a) { return Array.from(new Set(a)); };
+      var rank = function (s) { var m = s.match(/(\d+)/); var n = m ? +m[1] : 99; return /Set/.test(s) ? 100 + n : n; };
+      var sizes = uniq(DATA.products.reduce(function (a, p) { return a.concat(p.sizes); }, []))
+                    .sort(function (a, b) { return rank(a) - rank(b); });
+      var series = uniq(DATA.products.map(function (p) { return p.series; })).sort();
+      var brands = uniq(DATA.products.map(function (p) { return p.brand; })).sort();
+      FACETS = [
+        { key: 'size', title: 'Size', open: true, options: sizes.map(function (s) {
+          return { label: s, test: function (p) { return p.sizes.indexOf(s) >= 0; } }; }) },
+        { key: 'price', title: 'Price', open: true, options: [
+          { label: 'Under €50',    test: function (p) { return p.minPrice < 50; } },
+          { label: '€50 – €100',   test: function (p) { return p.minPrice >= 50 && p.minPrice < 100; } },
+          { label: '€100 – €150',  test: function (p) { return p.minPrice >= 100 && p.minPrice < 150; } },
+          { label: 'Over €150',    test: function (p) { return p.minPrice >= 150; } } ] },
+        { key: 'type', title: 'Type', open: true, options: ['Single pan', 'Set'].map(function (t) {
+          return { label: t, test: function (p) { return p.type === t; } }; }) },
+        { key: 'offer', title: 'Offer', open: false, options: [
+          { label: 'On sale',    test: function (p) { return p.variants.some(function (v) { return v.msrp && v.msrp > v.price; }); } },
+          { label: 'Bestseller', test: function (p) { return !!p.bestseller; } } ] },
+        { key: 'series', title: 'Series', open: false, options: series.map(function (s) {
+          return { label: s, test: function (p) { return p.series === s; } }; }) },
+        { key: 'brand', title: 'Brand', open: false, options: brands.map(function (b) {
+          return { label: b, test: function (p) { return p.brand === b; } }; }) }
+      ];
+      FACETS.forEach(function (g) { selected[g.key] = selected[g.key] || []; });
+    }
+
+    function renderFacets() {
+      facetsEl.innerHTML = FACETS.map(function (g) {
+        return '<div class="filter-group' + (g.open ? ' open' : '') + '">' +
+          '<button class="filter-head">' + esc(g.title) + ' <span class="filter-toggle"></span></button>' +
+          '<div class="filter-body">' + g.options.map(function (o) {
+            var on = selected[g.key].indexOf(o.label) >= 0;
+            return '<label class="facet"><input type="checkbox" data-key="' + g.key + '" value="' + esc(o.label) + '"' +
+              (on ? ' checked' : '') + '><span class="box"></span><span class="facet-label">' + esc(o.label) + '</span></label>';
+          }).join('') + '</div></div>';
+      }).join('');
+    }
+
+    function passFacets(p) {
+      return FACETS.every(function (g) {
+        var chosen = selected[g.key];
+        if (!chosen || !chosen.length) return true;              // group unused -> no constraint
+        return g.options.some(function (o) {                     // OR within a group, AND across groups
+          return chosen.indexOf(o.label) >= 0 && o.test(p);
+        });
+      });
+    }
+
+    function renderChips() {
+      var chips = [];
+      FACETS.forEach(function (g) {
+        selected[g.key].forEach(function (label) {
+          chips.push('<span class="chip">' + esc(label) +
+            '<button aria-label="Remove ' + esc(label) + '" data-key="' + g.key + '" data-label="' + esc(label) + '">' +
+            '<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 6l12 12M18 6 6 18"/></svg>' +
+            '</button></span>');
+        });
+      });
+      if (!chips.length) { afEl.hidden = true; afEl.innerHTML = ''; return; }
+      afEl.hidden = false;
+      afEl.innerHTML = '<div class="af-head"><span class="af-title">Active filters</span>' +
+        '<button class="af-clear" id="afClear">Clear all</button></div>' + chips.join('');
+    }
+
+    function applyFilters() { shown = PAGE; renderChips(); renderGrid(); }
+
+    facetsEl.addEventListener('change', function (e) {
+      var cb = e.target.closest('input[type="checkbox"]'); if (!cb) return;
+      var arr = selected[cb.dataset.key]; if (!arr) return;
+      var i = arr.indexOf(cb.value);
+      if (cb.checked && i < 0) arr.push(cb.value);
+      else if (!cb.checked && i >= 0) arr.splice(i, 1);
+      applyFilters();
+    });
+    afEl.addEventListener('click', function (e) {
+      var btn = e.target.closest('button'); if (!btn) return;
+      if (btn.id === 'afClear') {
+        Object.keys(selected).forEach(function (k) { selected[k] = []; });
+        renderFacets(); applyFilters(); return;
+      }
+      var arr = selected[btn.dataset.key]; if (!arr) return;
+      var i = arr.indexOf(btn.dataset.label);
+      if (i >= 0) arr.splice(i, 1);
+      renderFacets(); applyFilters();
+    });
+    // Close filter drawer when tapping the scrim (mobile)
+    document.addEventListener('click', function (e) {
+      if (document.body.classList.contains('filters-open') &&
+          !e.target.closest('.filters') && !e.target.closest('.filter-open-btn') &&
+          !e.target.closest('.filter-open-btn-hdr')) {
+        document.body.classList.remove('filters-open');
+      }
+    });
+  </script>
+</body>
+</html>

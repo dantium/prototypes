@@ -1,0 +1,4 @@
+interface:
+  display_name: "Environmental Claims Review"
+  short_description: "Spot green-claims risk in creative"
+  default_prompt: "Use $environmental-claims-review to assess this landing page or campaign for environmental-claims risk."

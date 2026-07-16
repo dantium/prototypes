@@ -135,7 +135,9 @@
 
   /* ---- megamenu + drawers behaviour ---- */
   var mmCurrent = null;
+  var mmCloseTimer = null;
   function setMenu(item) {
+    clearTimeout(mmCloseTimer);
     var mmPanel = document.getElementById('mmPanel'); if (!mmPanel) return;
     if (!item || !(item.columns || []).length) { mmPanel.classList.remove('open'); mmCurrent = null; return; }
     if (mmCurrent !== item) mmPanel.innerHTML = panelHTML(item);
@@ -201,9 +203,21 @@
         closeMobilePanel();
       }
     });
+    /* Hover behaviour: the panel stays open while the pointer is anywhere in
+       the header (nav row or panel). Leaving the header closes it after a
+       short grace period, so the diagonal move into the panel — or a brief
+       overshoot — doesn't snap it shut. */
     document.addEventListener('mouseover', function (e) {
       var nav = e.target.closest('.header-nav .nav-item');
-      if (nav) setMenu(menuItemFor(nav));
+      if (nav) { setMenu(menuItemFor(nav)); return; }
+      if (e.target.closest('.site-header')) { clearTimeout(mmCloseTimer); return; }
+      if (mmCurrent) {
+        clearTimeout(mmCloseTimer);
+        mmCloseTimer = setTimeout(function () { setMenu(null); }, 200);
+      }
+    });
+    document.documentElement.addEventListener('mouseleave', function () {
+      if (mmCurrent) setMenu(null);
     });
     document.addEventListener('keydown', function (e) {
       if (e.key === 'Escape') { setMenu(null); closeSearch(); closeMobilePanel(); document.body.classList.remove('nav-open', 'filters-open'); }

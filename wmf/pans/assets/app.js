@@ -145,7 +145,7 @@
     }
     document.addEventListener('click', function (e) {
       // the ×-to-clear sits inside the header search box (which itself opens search)
-      if (e.target.closest('[data-hs-clear]')) {
+      if (e.target.closest('[data-hs-clear]') || e.target.closest('[data-sh-clear]')) {
         setSearch('');
         updateHeaderSearch();
         return;
@@ -296,23 +296,49 @@
     return list.filter(passFacets);
   }
 
+  /* popular category tiles for the no-results state (real pages, real photos) */
+  var NR_CATS = [
+    { label: 'Pans',        href: 'pans.html',                                        sku: '3201113557' },
+    { label: 'Frying Pans', href: 'frying-pans.html',                                 sku: '3201000358' },
+    { label: 'Pan Sets',    href: 'pans.html?q=' + encodeURIComponent('fry pan set'), sku: '3201000530' },
+    { label: 'Woks',        href: 'pans.html?q=wok',                                  sku: '3201001442' }
+  ];
+
+  function noResultsHTML() {
+    if (!searchQ) return '<div class="no-results">No pans match the selected filters. Try removing one.</div>';
+    return '<div class="no-results">' +
+      '<div class="nr-ico"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg></div>' +
+      '<p class="nr-title">No results for “' + esc(searchQ) + '”</p>' +
+      '<p class="nr-copy">Check your spelling or try a more general term. Here are some popular searches.</p>' +
+      '<div class="search-chips">' + TRENDING.slice(0, 4).map(chipHTML).join('') + '</div>' +
+      '<p class="search-section-title">Popular categories</p>' +
+      '<div class="nr-cats">' + NR_CATS.map(function (c) {
+        return '<a class="subcat" href="' + c.href + '"><span class="subcat-thumb"><img src="' + img(c.sku) + '" alt=""></span>' +
+          '<span class="subcat-label">' + esc(c.label) + '</span></a>';
+      }).join('') + '</div></div>';
+  }
+
+  /* the results head replaces the category page head while searching */
+  function updateSearchHead(count) {
+    var el = document.getElementById('searchHead'); if (!el) return;
+    if (!searchQ) { el.innerHTML = ''; return; }
+    el.innerHTML = '<div class="search-head">' +
+      '<p class="sh-eyebrow">Search results</p>' +
+      '<h1>' + count + ' result' + (count === 1 ? '' : 's') + ' for <b>“' + esc(searchQ) + '”</b></h1>' +
+      '<div class="sh-actions"><button class="sh-clear" data-sh-clear>Clear search</button></div></div>';
+  }
+
   function renderGrid() {
     if (!grid) return;
     var list = currentList();
     var cards = list.slice(0, shown).map(cardHTML);
     if (!searchQ && cards.length >= 2 && PAGE.promo !== false) cards.splice(2, 0, PROMO);
-    grid.innerHTML = cards.length ? cards.join('')
-      : '<div class="no-results">' + (searchQ
-          ? 'No pans match “' + esc(searchQ) + '”. Check the spelling or try one of these popular searches.' +
-            '<div class="search-chips">' + TRENDING.slice(0, 4).map(chipHTML).join('') + '</div>'
-          : 'No pans match the selected filters. Try removing one.') + '</div>';
+    grid.innerHTML = cards.length ? cards.join('') : noResultsHTML();
+    updateSearchHead(list.length);
     if (showMoreRow) showMoreRow.style.display = list.length > shown ? '' : 'none';
     if (productCountEl) {
-      if (searchQ) {
-        productCountEl.innerHTML = list.length + ' result' + (list.length === 1 ? '' : 's') + ' for “' + esc(searchQ) + '”<button class="search-clear" id="clearSearch">Clear</button>';
-      } else {
-        productCountEl.textContent = list.length + ' Product' + (list.length === 1 ? '' : 's');
-      }
+      // while searching, the results head above carries the count
+      productCountEl.textContent = searchQ ? '' : list.length + ' Product' + (list.length === 1 ? '' : 's');
     }
     var applyBtn = document.getElementById('drawerApplyBtn');
     if (applyBtn) applyBtn.textContent = 'Show ' + list.length + ' product' + (list.length === 1 ? '' : 's');
@@ -330,7 +356,6 @@
       card.outerHTML = cardHTML(p);
     });
   }
-  if (productCountEl) productCountEl.addEventListener('click', function (e) { if (e.target.id === 'clearSearch') setSearch(''); });
   if (showMoreBtn) showMoreBtn.addEventListener('click', function () { shown += PAGE_SIZE; renderGrid(); });
 
   function setSearch(q, skipScroll) {
@@ -338,9 +363,10 @@
     var url = new URL(location.href);
     if (searchQ) url.searchParams.set('q', searchQ); else url.searchParams.delete('q');
     history.replaceState(null, '', url);
+    document.body.classList.toggle('searching', !!searchQ);   // category content only in category mode
     renderGrid();
     updateHeaderSearch();
-    if (searchQ && !skipScroll && grid) window.scrollTo({ top: grid.getBoundingClientRect().top + window.scrollY - 140, behavior: 'smooth' });
+    if (!skipScroll) window.scrollTo({ top: 0, behavior: searchQ ? 'auto' : 'smooth' });
   }
 
   /* ============================================================
@@ -730,6 +756,7 @@
           searchQ = q.trim();
           var input = document.getElementById('searchInput'); if (input) input.value = searchQ;
         }
+        document.body.classList.toggle('searching', !!searchQ);
         updateHeaderSearch();
         var sortSelect = document.getElementById('sortSelect');
         if (sortSelect) sortSelect.addEventListener('change', function () { sortProducts(sortSelect.value); });

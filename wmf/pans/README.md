@@ -94,8 +94,11 @@ claims risk.
   and — while typing — query completions with bold match highlighting (built from the real product
   vocabulary), category suggestions with real counts, product rows with photos and prices, and a
   "See all results" CTA. Queries also match the real product descriptions (name matches rank
-  first; description hits show the matched text). Submitting filters the PLP (`?q=` deep-links
-  work, e.g. the megamenu Material links); no-results offers popular searches.
+  first; description hits show the matched text). Submitting switches the page into results mode:
+  a "N results for "q"" head replaces the category head, and the category content (title, hero,
+  subcategory tiles, comparison table, FAQ) hides until the search is cleared. `?q=` deep-links
+  work, e.g. the megamenu Material links. No results shows popular searches and popular category
+  tiles.
 - **Facets** — generated from the catalog per page (OR within group, AND across). Chips + Clear
   all; on mobile a proper drawer: header, scrollable body, sticky "Show N products" apply bar.
 - **Sort** — Recommended (real shop order) / price / top rated / new in.

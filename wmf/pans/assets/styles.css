@@ -555,8 +555,31 @@ body.nav-open::before { content: ""; position: fixed; inset: 0; background: rgba
 .search-empty-note { padding: 16px 14px; font-size: 14px; font-weight: 300; color: #8a8a86; }
 
 .search-clear { background: none; border: 0; cursor: pointer; font-family: var(--rotis); font-size: 12px; letter-spacing: .08em; text-transform: uppercase; color: #666; text-decoration: underline; padding: 0 0 0 4px; }
-.no-results { grid-column: 1 / -1; padding: 50px 0 60px; text-align: center; color: #666; font-size: 16px; }
-.no-results .search-chips { justify-content: center; padding-top: 18px; }
+
+/* ============================================================
+   SEARCH RESULTS MODE — the results head replaces the category
+   head; category content shows only when browsing a category
+   ============================================================ */
+.search-head { padding: 20px 0 26px; }
+.search-head .sh-eyebrow { margin: 0 0 8px; font-size: 12px; letter-spacing: .14em; text-transform: uppercase; color: #8a8a8a; }
+.search-head h1 { margin: 0; font-size: 40px; font-weight: 300; letter-spacing: .01em; }
+.search-head h1 b { font-weight: 500; }
+.search-head .sh-actions { margin: 12px 0 0; display: flex; align-items: center; gap: 18px; }
+.sh-clear { background: none; border: 0; padding: 0; font-family: inherit; font-size: 13px; font-weight: 300; color: #666; text-decoration: underline; cursor: pointer; }
+.sh-clear:hover { color: #000; }
+body.searching .page-head,
+body.searching .subcats,
+body.searching .compare-section,
+body.searching .faq { display: none; }
+
+/* ---- no results ---- */
+.no-results { grid-column: 1 / -1; padding: 44px 0 60px; text-align: center; color: #666; font-size: 16px; }
+.no-results .nr-ico { width: 64px; height: 64px; border-radius: 50%; background: #ececea; display: grid; place-items: center; margin: 0 auto 22px; color: #9a9a96; }
+.no-results .nr-title { margin: 0 0 10px; font-size: 28px; font-weight: 300; color: #1a1a1a; }
+.no-results .nr-copy { margin: 0 auto; max-width: 480px; font-size: 15px; font-weight: 300; line-height: 1.5; color: #7a7a76; }
+.no-results .search-chips { justify-content: center; padding-top: 22px; }
+.no-results .search-section-title { margin: 34px 0 16px; }
+.nr-cats { display: flex; justify-content: center; gap: 10px; flex-wrap: wrap; }
 
 /* ============================================================
    HOME PAGE

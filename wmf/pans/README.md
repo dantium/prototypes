@@ -84,8 +84,13 @@ claims risk.
 
 - **Megamenu** — hover PANS for the panel (columns from the megamenu prototype); click navigates.
   Mobile gets a nav drawer via the hamburger.
-- **Search** — overlay on every page: live autocomplete over the whole catalog, trending/recent;
-  submit filters the PLP (`?q=` deep-links work, e.g. the megamenu Material links).
+- **Search** — the search prototype's UX, fed by the real catalog. A persistent header search box
+  mirrors the active query (× clears it). The overlay is a centered modal with: recent searches
+  (per-item remove + Clear all, kept for the session), trending searches, popular-category chips,
+  and — while typing — query completions with bold match highlighting (built from the real product
+  vocabulary), category suggestions with real counts, product rows with photos and prices, and a
+  "See all results" CTA. Submitting filters the PLP (`?q=` deep-links work, e.g. the megamenu
+  Material links); no-results offers popular searches.
 - **Facets** — generated from the catalog per page (OR within group, AND across). Chips + Clear
   all; on mobile a proper drawer: header, scrollable body, sticky "Show N products" apply bar.
 - **Sort** — Recommended (real shop order) / price / top rated / new in.

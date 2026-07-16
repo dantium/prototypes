@@ -69,7 +69,8 @@
         '<header class="site-header"><div class="wrap"><div class="header-bar">' +
           '<div class="header-left">' +
             '<button class="icon-btn header-hamburger" aria-label="Menu" data-act="nav">' + I.menu + '</button>' +
-            '<button class="icon-btn" aria-label="Search" data-act="search">' + I.search + '</button>' +
+            '<button class="icon-btn header-search-icon" aria-label="Search" data-act="search">' + I.search + '</button>' +
+            '<button class="header-searchbox" aria-label="Search" data-act="search" id="headerSearchbox"></button>' +
           '</div>' +
           '<a class="header-logo" href="index.html" aria-label="WMF home">' + WMF_LOGO + '</a>' +
           '<div class="header-right">' +
@@ -108,7 +109,7 @@
           '<div class="search-scrim" data-act="search-close"></div>' +
           '<div class="search-panel"><div class="search-bar">' + I.searchDark.replace(/18/g, '22') +
             '<input id="searchInput" type="search" placeholder="Search products, collections and more" autocomplete="off" spellcheck="false">' +
-            '<button class="search-close" data-act="search-close">Close ' + I.x + '</button>' +
+            '<button class="search-close" aria-label="Close search" data-act="search-close">' + I.x + '</button>' +
           '</div><div class="search-body" id="searchBody"></div></div></div>';
     }
 
@@ -143,6 +144,12 @@
       if (mmPanel) mmPanel.classList.toggle('open', open);
     }
     document.addEventListener('click', function (e) {
+      // the ×-to-clear sits inside the header search box (which itself opens search)
+      if (e.target.closest('[data-hs-clear]')) {
+        setSearch('');
+        updateHeaderSearch();
+        return;
+      }
       var act = e.target.closest('[data-act]');
       if (act) {
         var a = act.getAttribute('data-act');
@@ -270,9 +277,10 @@
     var cards = list.slice(0, shown).map(cardHTML);
     if (!searchQ && cards.length >= 2 && PAGE.promo !== false) cards.splice(2, 0, PROMO);
     grid.innerHTML = cards.length ? cards.join('')
-      : '<p class="no-results">' + (searchQ
-          ? 'No pans match “' + esc(searchQ) + '”. Try a different term.'
-          : 'No pans match the selected filters. Try removing one.') + '</p>';
+      : '<div class="no-results">' + (searchQ
+          ? 'No pans match “' + esc(searchQ) + '”. Check the spelling or try one of these popular searches.' +
+            '<div class="search-chips">' + TRENDING.slice(0, 4).map(chipHTML).join('') + '</div>'
+          : 'No pans match the selected filters. Try removing one.') + '</div>';
     if (showMoreRow) showMoreRow.style.display = list.length > shown ? '' : 'none';
     if (productCountEl) {
       if (searchQ) {
@@ -287,6 +295,8 @@
 
   if (grid) {
     grid.addEventListener('click', function (e) {
+      var chip = e.target.closest('.search-chip[data-q]');
+      if (chip) { submitSearch(chip.getAttribute('data-q')); return; }
       var sw = e.target.closest('.swatch'); if (!sw) return;
       var card = sw.closest('.card');
       var p = DATA.products.find(function (x) { return x.id === card.getAttribute('data-id'); });
@@ -304,21 +314,57 @@
     if (searchQ) url.searchParams.set('q', searchQ); else url.searchParams.delete('q');
     history.replaceState(null, '', url);
     renderGrid();
+    updateHeaderSearch();
     if (searchQ && !skipScroll && grid) window.scrollTo({ top: grid.getBoundingClientRect().top + window.scrollY - 140, behavior: 'smooth' });
   }
 
   /* ============================================================
-     SEARCH OVERLAY  (works on every page; searches the whole catalog)
+     SEARCH OVERLAY  (UX ported from the search prototype;
+     completions, categories and products all come from the catalog)
      ============================================================ */
-  var TRENDING = ['Profi Resist', 'Fusiontec', 'Non-stick', 'Pan set', 'Devil', 'Durado', 'Wok', 'Silit'];
+  var TRENDING = ['Profi Resist fry pan', 'Fusiontec', 'Non-stick fry pan', 'Fry pan set', 'Devil', 'Wok'];
   var recent = [];
   try { recent = JSON.parse(sessionStorage.getItem('wmf_recent') || '[]'); } catch (e) {}
+  function saveRecent() { try { sessionStorage.setItem('wmf_recent', JSON.stringify(recent)); } catch (e) {} }
+
+  var ICO = {
+    clock:  '<svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>',
+    trend:  '<svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17 9 11l4 4 8-8"/><path d="M17 7h4v4"/></svg>',
+    insert: '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M17 17 7 7"/><path d="M7 13V7h6"/></svg>',
+    grid:   '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>',
+    chev:   '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="m9 6 6 6-6 6"/></svg>',
+    search: '<svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg>',
+    arrow:  '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m13 6 6 6-6 6"/></svg>'
+  };
+
+  /* search aids derived from the real catalog after it loads */
+  var VOCAB = [];        // query completions (real product vocabulary)
+  var SEARCH_CATS = [];  // category suggestions with real counts
+
+  function buildSearchAids() {
+    var set = {};
+    var add = function (s) { s = String(s || '').toLowerCase().trim(); if (s.length > 2) set[s] = 1; };
+    DATA.products.forEach(function (p) {
+      add(p.series);
+      add(p.brand + ' ' + p.series);
+      var m = p.name.toLowerCase().match(/(deep fry pan|fry pan set|fry pan|frypan|grill pan|serving pan|roasting pan|wok)/);
+      if (m) { add(m[1]); add(p.series + ' ' + m[1]); }
+    });
+    VOCAB = Object.keys(set).sort();
+    var count = function (c) { return DATA.products.filter(function (p) { return p.cats && (c in p.cats); }).length; };
+    SEARCH_CATS = [
+      { label: 'Pans',        href: 'pans.html',        count: count('pans'),        keys: 'pans pan cookware pot' },
+      { label: 'Frying Pans', href: 'frying-pans.html', count: count('frying-pans'), keys: 'frying pans fry pan frypan' }
+    ];
+  }
 
   function openSearch() {
     var o = document.getElementById('searchOverlay'); if (!o) return;
     o.setAttribute('aria-hidden', 'false'); document.body.style.overflow = 'hidden';
-    renderSuggest('');
-    setTimeout(function () { var i = document.getElementById('searchInput'); if (i) i.focus(); }, 40);
+    var i = document.getElementById('searchInput');
+    if (i) i.value = searchQ;
+    renderSuggest(searchQ);
+    setTimeout(function () { if (i) { i.focus(); i.select(); } }, 40);
   }
   function closeSearch() {
     var o = document.getElementById('searchOverlay'); if (!o) return;
@@ -326,40 +372,102 @@
   }
   window.openSearch = openSearch; window.closeSearch = closeSearch;
 
-  function suggestRow(p) {
+  /* bold the part of `text` that matches `q` (all parts escaped) */
+  function hi(text, q) {
+    var i = text.toLowerCase().indexOf(q.toLowerCase());
+    if (i < 0 || !q) return esc(text);
+    return esc(text.slice(0, i)) + '<b>' + esc(text.slice(i, i + q.length)) + '</b>' + esc(text.slice(i + q.length));
+  }
+
+  function recentRow(r) {
+    return '<div class="s-row" data-q="' + esc(r) + '"><span class="s-ico">' + ICO.clock + '</span>' +
+      '<span class="s-label">' + esc(r) + '</span>' +
+      '<button class="s-remove" data-remove="' + esc(r) + '" aria-label="Remove ' + esc(r) + '">' + I.xs + '</button></div>';
+  }
+  function trendRow(t) {
+    return '<div class="s-row" data-q="' + esc(t) + '"><span class="s-ico">' + ICO.trend + '</span>' +
+      '<span class="s-label">' + esc(t) + '</span></div>';
+  }
+  function completionRow(c, q) {
+    return '<div class="s-row" data-q="' + esc(c) + '"><span class="s-ico">' + ICO.search + '</span>' +
+      '<span class="s-label">' + hi(c, q) + '</span><span class="s-end">' + ICO.insert + '</span></div>';
+  }
+  function catRow(c, q) {
+    return '<a class="s-row" href="' + c.href + '"><span class="s-ico">' + ICO.grid + '</span>' +
+      '<span class="s-label">' + hi(c.label, q) + '<span class="s-sub">Category · ' + c.count + ' products</span></span>' +
+      '<span class="s-end">' + ICO.chev + '</span></a>';
+  }
+  function productRow(p) {
     var v = p.variants[p.default] || p.variants[0];
     var from = Math.min.apply(null, p.variants.map(function (x) { return x.price; }));
     var meta = (p.variants.length > 1 ? p.variants.length + ' sizes · from ' + eur(from) : v.size);
-    return '<a class="suggest-row" data-q="' + esc(p.brand + ' ' + p.name) + '">' +
-      '<img src="' + img(v.sku) + '" alt=""><span><span class="sr-name">' + esc(p.brand + ' ' + p.name) + '</span>' +
-      '<br><span class="sr-meta">' + esc(meta) + '</span></span>' +
-      '<span class="sr-price">' + eur(v.price) + '</span></a>';
+    return '<div class="s-row" data-q="' + esc(p.brand + ' ' + p.name) + '">' +
+      '<img class="s-thumb" src="' + img(v.sku) + '" alt="">' +
+      '<span class="s-label">' + esc(p.brand + ' ' + p.name) + '<span class="s-sub">' + esc(meta) + '</span></span>' +
+      '<span class="s-price">' + eur(v.price) + '</span></div>';
   }
   function chipHTML(t) { return '<button class="search-chip" data-q="' + esc(t) + '">' + esc(t) + '</button>'; }
+
+  /* popular categories on the empty state — real destinations only */
+  var POPULAR_CATS = [
+    { label: 'Pans', href: 'pans.html' },
+    { label: 'Frying Pans', href: 'frying-pans.html' },
+    { label: 'Pan Sets', href: 'pans.html?q=' + encodeURIComponent('fry pan set') },
+    { label: 'Woks', href: 'pans.html?q=wok' },
+    { label: 'Fusiontec', href: 'pans.html?q=fusiontec' }
+  ];
 
   function renderSuggest(q) {
     var body = document.getElementById('searchBody'); if (!body) return;
     q = (q || '').trim();
     if (!q) {
-      var rec = recent.length ? '<p class="search-section-title">Recent searches</p><div class="search-chips">' + recent.map(chipHTML).join('') + '</div>' : '';
-      body.innerHTML = rec + '<p class="search-section-title">Trending searches</p><div class="search-chips">' + TRENDING.map(chipHTML).join('') + '</div>';
+      var html = '';
+      if (recent.length) {
+        html += '<div class="search-section-head"><p class="search-section-title">Recent searches</p>' +
+          '<button class="search-clear-recents" data-clear-recents>Clear all</button></div>' +
+          recent.map(recentRow).join('');
+      }
+      html += '<div class="search-section-head"><p class="search-section-title">Trending searches</p></div>' +
+        TRENDING.map(trendRow).join('') +
+        '<div class="search-section-head"><p class="search-section-title">Popular categories</p></div>' +
+        '<div class="search-chips">' + POPULAR_CATS.map(function (c) {
+          return '<a class="search-chip" href="' + c.href + '">' + esc(c.label) + '</a>';
+        }).join('') + '</div>';
+      body.innerHTML = html;
       return;
     }
-    var hits = matchProducts(q).slice(0, 6);
-    var head = '<div class="suggest-head" data-q="' + esc(q) + '">' + I.searchDark + ' Search for “' + esc(q) + '”</div>';
-    body.innerHTML = head + (hits.length
-      ? '<p class="search-section-title" style="margin-top:22px">Products</p>' + hits.map(suggestRow).join('')
-      : '<div style="padding:18px 8px;color:#8a8a86;font-size:14px">No matching pans — press Enter to search anyway.</div>');
+    var ql = q.toLowerCase();
+    var completions = VOCAB.filter(function (v) { return v.indexOf(ql) >= 0 && v !== ql; }).slice(0, 4);
+    var cats = SEARCH_CATS.filter(function (c) { return (c.label + ' ' + c.keys).toLowerCase().indexOf(ql) >= 0; }).slice(0, 2);
+    var hits = matchProducts(q).slice(0, 4);
+    var html = completions.map(function (c) { return completionRow(c, q); }).join('');
+    if (cats.length)  html += (html ? '<div class="s-divider"></div>' : '') + cats.map(function (c) { return catRow(c, q); }).join('');
+    if (hits.length)  html += (html ? '<div class="s-divider"></div>' : '') + hits.map(productRow).join('');
+    if (!html) html = '<div class="search-empty-note">No suggestions — press Enter to search.</div>';
+    html += '<button class="search-cta" data-q="' + esc(q) + '">See all results for “' + esc(q) + '” ' + ICO.arrow + '</button>';
+    body.innerHTML = html;
+  }
+
+  /* header search box mirrors the active query (search prototype pattern) */
+  function updateHeaderSearch() {
+    var box = document.getElementById('headerSearchbox'); if (!box) return;
+    if (searchQ) {
+      box.innerHTML = I.search + '<span class="hs-query">' + esc(searchQ) + '</span>' +
+        '<span class="hs-clear" data-hs-clear role="button" aria-label="Clear search">' + I.xs + '</span>';
+    } else {
+      box.innerHTML = I.search + '<span class="hs-placeholder">Search</span>';
+    }
   }
 
   function submitSearch(q) {
     q = (q || '').trim(); if (!q) return;
     recent = [q].concat(recent.filter(function (r) { return r.toLowerCase() !== q.toLowerCase(); })).slice(0, 6);
-    try { sessionStorage.setItem('wmf_recent', JSON.stringify(recent)); } catch (e) {}
+    saveRecent();
     closeSearch();
     if (PAGE.kind === 'home') { location.href = 'pans.html?q=' + encodeURIComponent(q); return; }
     var input = document.getElementById('searchInput'); if (input) input.value = q;
     setSearch(q);
+    updateHeaderSearch();
   }
 
   function bindSearch() {
@@ -372,6 +480,18 @@
       else if (e.key === 'Escape') closeSearch();
     });
     body.addEventListener('click', function (e) {
+      var rm = e.target.closest('[data-remove]');
+      if (rm) {
+        var label = rm.getAttribute('data-remove');
+        recent = recent.filter(function (r) { return r !== label; });
+        saveRecent(); renderSuggest(input.value);
+        return;
+      }
+      if (e.target.closest('[data-clear-recents]')) {
+        recent = []; saveRecent(); renderSuggest(input.value);
+        return;
+      }
+      if (e.target.closest('a.s-row') || e.target.closest('a.search-chip')) return;  // real links navigate
       var el = e.target.closest('[data-q]'); if (!el) return;
       submitSearch(el.getAttribute('data-q'));
     });
@@ -542,6 +662,7 @@
      ============================================================ */
   document.addEventListener('DOMContentLoaded', function () {
     renderChrome();
+    updateHeaderSearch();
     bindChrome();
     bindSearch();
     bindFacets();
@@ -567,6 +688,7 @@
       .then(function (r) { if (!r.ok) throw new Error('HTTP ' + r.status); return r.json(); })
       .then(function (d) {
         DATA = d;
+        buildSearchAids();
         if (PAGE.kind === 'home') return;
         LIST = DATA.products.filter(function (p) { return p.cats && (PAGE.category in p.cats); });
         buildFacets();
@@ -576,6 +698,7 @@
           searchQ = q.trim();
           var input = document.getElementById('searchInput'); if (input) input.value = searchQ;
         }
+        updateHeaderSearch();
         var sortSelect = document.getElementById('sortSelect');
         if (sortSelect) sortSelect.addEventListener('change', function () { sortProducts(sortSelect.value); });
         sortProducts('Recommended');

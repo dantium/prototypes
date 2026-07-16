@@ -440,6 +440,40 @@
       .footer-top { grid-template-columns: 1fr; }
       .footer-copy { margin-left: 0; }
     }
+    /* ============================================================
+       SEARCH OVERLAY
+       ============================================================ */
+    .search-overlay { position: fixed; inset: 0; z-index: 100; display: none; }
+    .search-overlay[aria-hidden="false"] { display: block; }
+    .search-scrim { position: absolute; inset: 0; background: rgba(0,0,0,.45); }
+    .search-panel { position: relative; background: #fff; max-height: 90vh; display: flex; flex-direction: column; box-shadow: 0 24px 60px rgba(0,0,0,.28); animation: searchDrop .2s ease; }
+    @keyframes searchDrop { from { transform: translateY(-14px); opacity: .6; } to { transform: none; opacity: 1; } }
+    .search-bar { display: flex; align-items: center; gap: 16px; padding: 22px 40px; border-bottom: 1px solid var(--line-soft); }
+    .search-bar > svg { flex: none; }
+    .search-bar input { flex: 1; min-width: 0; border: 0; outline: 0; font-family: var(--rotis); font-size: 20px; font-weight: 300; color: #111; background: transparent; }
+    .search-bar input::placeholder { color: #9a9a96; }
+    .search-close { background: none; border: 0; cursor: pointer; font-family: var(--rotis); font-size: 12px; letter-spacing: .12em; text-transform: uppercase; color: #555; display: inline-flex; align-items: center; gap: 8px; white-space: nowrap; }
+    .search-close:hover { color: #000; }
+    .search-body { overflow-y: auto; padding: 26px 40px 44px; }
+    .search-section-title { font-size: 11px; font-weight: 600; letter-spacing: .18em; text-transform: uppercase; color: #9a9a96; margin: 0 0 14px; }
+    .search-chips { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 30px; }
+    .search-chip { border: 1px solid var(--line); border-radius: 999px; background: #fff; padding: 9px 16px; font-family: var(--rotis); font-size: 14px; color: #1a1a1a; cursor: pointer; transition: border-color .15s, background .15s; }
+    .search-chip:hover { border-color: var(--ink-2); background: var(--wash); }
+    .suggest-head { display: flex; align-items: center; gap: 10px; padding: 10px 8px; font-size: 16px; font-weight: 300; cursor: pointer; border-radius: 6px; }
+    .suggest-head:hover { background: var(--wash); }
+    .suggest-row { display: flex; align-items: center; gap: 16px; padding: 10px 8px; border-radius: 6px; cursor: pointer; text-decoration: none; color: inherit; }
+    .suggest-row:hover { background: var(--wash); }
+    .suggest-row img { width: 54px; height: 54px; object-fit: contain; background: #fff; flex: none; }
+    .suggest-row .sr-name { font-size: 15px; font-weight: 500; }
+    .suggest-row .sr-meta { font-size: 13px; font-weight: 300; color: #6a6a6a; }
+    .suggest-row .sr-price { margin-left: auto; font-size: 16px; font-weight: 700; white-space: nowrap; }
+    .search-clear { background: none; border: 0; cursor: pointer; font-family: var(--rotis); font-size: 12px; letter-spacing: .08em; text-transform: uppercase; color: #666; text-decoration: underline; padding: 0 0 0 4px; }
+    .no-results { grid-column: 1 / -1; padding: 60px 0; text-align: center; color: #666; font-size: 16px; }
+    @media (max-width: 700px) {
+      .search-bar { padding: 16px 20px; }
+      .search-bar input { font-size: 17px; }
+      .search-body { padding: 20px; }
+    }
   </style>
 </head>
 <body>
@@ -452,7 +486,7 @@
           <button class="icon-btn filter-open-btn-hdr" aria-label="Menu" onclick="document.body.classList.toggle('filters-open')">
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.6" stroke-linecap="round"><path d="M4 7h16"/><path d="M4 12h12"/><path d="M4 17h16"/></svg>
           </button>
-          <button class="icon-btn" aria-label="Search">
+          <button class="icon-btn" aria-label="Search" onclick="openSearch()">
             <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg>
           </button>
         </div>
@@ -512,9 +546,9 @@
           <a class="pill" href="#compare">Compare our Frying Pans</a>
         </div>
         <div class="toolbar-right">
-          <span class="product-count">35 Products</span>
+          <span class="product-count" id="productCount">Products</span>
           <div class="sort">
-            <select aria-label="Sort by">
+            <select aria-label="Sort by" id="sortSelect">
               <option>Bestseller</option>
               <option>Price: low to high</option>
               <option>Price: high to low</option>
@@ -530,181 +564,15 @@
         <!-- Filters -->
         <aside class="filters" aria-label="Product filters">
           <div class="active-filters" id="activeFilters" hidden></div>
-          <div class="filter-group open">
-            <button class="filter-head">Material <span class="filter-toggle"></span></button>
-            <div class="filter-body">
-              <label class="facet"><input type="checkbox"><span class="box"></span><span class="facet-label">Stainless Steel 3-ply</span></label>
-              <label class="facet"><input type="checkbox"><span class="box"></span><span class="facet-label">Stainless Steel 1-ply</span></label>
-              <label class="facet"><input type="checkbox"><span class="box"></span><span class="facet-label">Fusiontec</span></label>
-              <label class="facet"><input type="checkbox"><span class="box"></span><span class="facet-label">Cast Aluminium</span></label>
-              <label class="facet"><input type="checkbox"><span class="box"></span><span class="facet-label">Cast Iron</span></label>
-            </div>
-          </div>
-          <div class="filter-group open">
-            <button class="filter-head">Size <span class="filter-toggle"></span></button>
-            <div class="filter-body">
-              <label class="facet"><input type="checkbox"><span class="box"></span><span class="facet-label">20 cm (1 – 2 people)</span></label>
-              <label class="facet"><input type="checkbox"><span class="box"></span><span class="facet-label">24 cm (2 – 4 people)</span></label>
-              <label class="facet"><input type="checkbox" checked><span class="box"></span><span class="facet-label">28 cm (4 – 6 people)</span></label>
-            </div>
-          </div>
-          <div class="filter-group open">
-            <button class="filter-head">Cooking Technique <span class="filter-toggle"></span></button>
-            <div class="filter-body">
-              <label class="facet"><input type="checkbox"><span class="box"></span><span class="facet-label">Intense Searing</span></label>
-              <label class="facet"><input type="checkbox"><span class="box"></span><span class="facet-label">Gentle Frying</span></label>
-              <label class="facet"><input type="checkbox"><span class="box"></span><span class="facet-label">All Purpose</span></label>
-            </div>
-          </div>
-          <div class="filter-group"><button class="filter-head">Price <span class="filter-toggle"></span></button><div class="filter-body">
-            <label class="facet"><input type="checkbox"><span class="box"></span><span class="facet-label">Under €50</span></label>
-            <label class="facet"><input type="checkbox"><span class="box"></span><span class="facet-label">€50 – €100</span></label>
-            <label class="facet"><input type="checkbox"><span class="box"></span><span class="facet-label">€100 – €150</span></label>
-            <label class="facet"><input type="checkbox"><span class="box"></span><span class="facet-label">Over €150</span></label>
-          </div></div>
-          <div class="filter-group"><button class="filter-head">Series <span class="filter-toggle"></span></button><div class="filter-body">
-            <label class="facet"><input type="checkbox"><span class="box"></span><span class="facet-label">Profi Resist</span></label>
-            <label class="facet"><input type="checkbox"><span class="box"></span><span class="facet-label">Permadur</span></label>
-            <label class="facet"><input type="checkbox"><span class="box"></span><span class="facet-label">Fusiontec</span></label>
-          </div></div>
-          <div class="filter-group"><button class="filter-head">Availability <span class="filter-toggle"></span></button><div class="filter-body">
-            <label class="facet"><input type="checkbox"><span class="box"></span><span class="facet-label">In stock</span></label>
-            <label class="facet"><input type="checkbox"><span class="box"></span><span class="facet-label">Available to order</span></label>
-          </div></div>
-          <div class="filter-group"><button class="filter-head">Surface <span class="filter-toggle"></span></button><div class="filter-body">
-            <label class="facet"><input type="checkbox"><span class="box"></span><span class="facet-label">Non-stick</span></label>
-            <label class="facet"><input type="checkbox"><span class="box"></span><span class="facet-label">Ceramic</span></label>
-            <label class="facet"><input type="checkbox"><span class="box"></span><span class="facet-label">Uncoated</span></label>
-          </div></div>
-          <div class="filter-group"><button class="filter-head">Occasion <span class="filter-toggle"></span></button><div class="filter-body">
-            <label class="facet"><input type="checkbox"><span class="box"></span><span class="facet-label">Everyday</span></label>
-            <label class="facet"><input type="checkbox"><span class="box"></span><span class="facet-label">Gifting</span></label>
-          </div></div>
+          <div id="facets"></div>
         </aside>
 
         <!-- Grid -->
         <section aria-label="Products">
-          <div class="grid">
+          <div class="grid" id="grid"></div>
 
-            <!-- Card 1 -->
-            <article class="card">
-              <div class="card-media">
-                <img class="pan-inuse" src="assets/inuse.jpg" alt="" aria-hidden="true">
-                <span class="badge">Bestseller</span>
-                <div class="card-actions">
-                  <button class="round" aria-label="Add to basket"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="#1c1c1c" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 8h12l1 12.5H5L6 8Z"/><path d="M9 8a3 3 0 0 1 6 0"/></svg></button>
-                  <button class="round" aria-label="Add to wishlist"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="#1c1c1c" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20.8 5.6a5 5 0 0 0-7.1 0L12 7.3l-1.7-1.7a5 5 0 0 0-7.1 7.1L12 21.5l8.8-8.8a5 5 0 0 0 0-7.1Z"/></svg></button>
-                </div>
-                <img class="pan" src="assets/pan-honeycomb.png" alt="Honeycomb Pro Plus Hybrid Frying Pan">
-                <div class="card-labels"><span class="label">Oven Proof</span><span class="label">Intense Sear</span></div>
-                <img class="award" src="assets/reddot.png" alt="Red Dot Design Award">
-              </div>
-              <div class="card-body">
-                <span class="card-eyebrow">Profi Resist</span>
-                <h3 class="card-name">Honeycomb Pro Plus Hybrid Frying Pan</h3>
-                <div class="card-rating"><span class="stars" style="--pct:92%"></span><span class="rating-count">4.6 (605)</span></div>
-                <div class="card-price"><span class="price">€89.99</span></div>
-                <div class="card-sizes"><span class="lbl">Size Variants:</span><span class="swatch" data-price="€69.99">20 cm</span><span class="swatch" data-price="€79.99">24 cm</span><span class="swatch sel" data-price="€89.99">28 cm</span></div>
-              </div>
-            </article>
-
-            <!-- Card 2 -->
-            <article class="card">
-              <div class="card-media">
-                <img class="pan-inuse" src="assets/inuse.jpg" alt="" aria-hidden="true">
-                <span class="badge">Bestseller</span>
-                <div class="card-actions">
-                  <button class="round" aria-label="Add to basket"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="#1c1c1c" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 8h12l1 12.5H5L6 8Z"/><path d="M9 8a3 3 0 0 1 6 0"/></svg></button>
-                  <button class="round" aria-label="Add to wishlist"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="#1c1c1c" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20.8 5.6a5 5 0 0 0-7.1 0L12 7.3l-1.7-1.7a5 5 0 0 0-7.1 7.1L12 21.5l8.8-8.8a5 5 0 0 0 0-7.1Z"/></svg></button>
-                </div>
-                <img class="pan" src="assets/pan-resist.png" alt="Resist Pro+ Frypan 28cm">
-                <div class="card-labels"><span class="label">Searing Grid</span><span class="label">Intense Sear</span></div>
-                <img class="award" src="assets/reddot.png" alt="Red Dot Design Award">
-              </div>
-              <div class="card-body">
-                <span class="card-eyebrow">Resist Pro+</span>
-                <h3 class="card-name">Resist Pro+ Frypan 28 cm</h3>
-                <div class="card-rating"><span class="stars" style="--pct:92%"></span><span class="rating-count">4.6 (605)</span></div>
-                <div class="card-price"><span class="price">€109.99</span><span class="msrp">MSRP €129.99</span></div>
-                <div class="card-sizes"><span class="lbl">Size Variants:</span><span class="swatch" data-price="€89.99" data-msrp="€109.99">20 cm</span><span class="swatch" data-price="€99.99" data-msrp="€119.99">24 cm</span><span class="swatch sel" data-price="€109.99" data-msrp="€129.99">28 cm</span></div>
-              </div>
-            </article>
-
-            <!-- Promo tile -->
-            <article class="promo-tile">
-              <img src="assets/promo-bg.png" alt="">
-              <div class="promo-copy">
-                <h3>Choose the right pan for the job</h3>
-              </div>
-              <a class="btn-outline" href="#compare" style="border-color:#fff;color:#fff;background:transparent;margin-top:22px">Compare range</a>
-            </article>
-
-            <!-- Card 4 -->
-            <article class="card">
-              <div class="card-media">
-                <img class="pan-inuse" src="assets/inuse.jpg" alt="" aria-hidden="true">
-                <span class="badge">New In</span>
-                <div class="card-actions">
-                  <button class="round" aria-label="Add to basket"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="#1c1c1c" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 8h12l1 12.5H5L6 8Z"/><path d="M9 8a3 3 0 0 1 6 0"/></svg></button>
-                  <button class="round" aria-label="Add to wishlist"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="#1c1c1c" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20.8 5.6a5 5 0 0 0-7.1 0L12 7.3l-1.7-1.7a5 5 0 0 0-7.1 7.1L12 21.5l8.8-8.8a5 5 0 0 0 0-7.1Z"/></svg></button>
-                </div>
-                <img class="pan" src="assets/pan-honeycomb.png" alt="Gentle Fry Ceramic Frying Pan">
-                <div class="card-labels"><span class="label">Gentle Fry</span><span class="label">Ceramic</span></div>
-              </div>
-              <div class="card-body">
-                <span class="card-eyebrow">Permadur Element</span>
-                <h3 class="card-name">Ceramic Pro Gentle Frying Pan</h3>
-                <div class="card-rating"><span class="stars" style="--pct:86%"></span><span class="rating-count">4.3 (318)</span></div>
-                <div class="card-price"><span class="price">€79.99</span></div>
-                <div class="card-sizes"><span class="lbl">Size Variants:</span><span class="swatch" data-price="€59.99">20 cm</span><span class="swatch sel" data-price="€79.99">24 cm</span><span class="swatch" data-price="€89.99">28 cm</span></div>
-              </div>
-            </article>
-
-            <!-- Card 5 -->
-            <article class="card">
-              <div class="card-media">
-                <img class="pan-inuse" src="assets/inuse.jpg" alt="" aria-hidden="true">
-                <div class="card-actions">
-                  <button class="round" aria-label="Add to basket"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="#1c1c1c" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 8h12l1 12.5H5L6 8Z"/><path d="M9 8a3 3 0 0 1 6 0"/></svg></button>
-                  <button class="round" aria-label="Add to wishlist"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="#1c1c1c" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20.8 5.6a5 5 0 0 0-7.1 0L12 7.3l-1.7-1.7a5 5 0 0 0-7.1 7.1L12 21.5l8.8-8.8a5 5 0 0 0 0-7.1Z"/></svg></button>
-                </div>
-                <img class="pan" src="assets/pan-resist.png" alt="Steel Pro Uncoated Frying Pan">
-                <div class="card-labels"><span class="label">Uncoated</span><span class="label">Metal Safe</span></div>
-                <img class="award" src="assets/reddot.png" alt="Red Dot Design Award">
-              </div>
-              <div class="card-body">
-                <span class="card-eyebrow">Profi Steel</span>
-                <h3 class="card-name">Steel Pro Uncoated Frying Pan</h3>
-                <div class="card-rating"><span class="stars" style="--pct:96%"></span><span class="rating-count">4.8 (204)</span></div>
-                <div class="card-price"><span class="price">€99.99</span></div>
-                <div class="card-sizes"><span class="lbl">Size Variants:</span><span class="swatch" data-price="€89.99">24 cm</span><span class="swatch sel" data-price="€99.99">28 cm</span><span class="swatch" data-price="€119.99">32 cm</span></div>
-              </div>
-            </article>
-
-            <!-- Card 6 -->
-            <article class="card">
-              <div class="card-media">
-                <img class="pan-inuse" src="assets/inuse.jpg" alt="" aria-hidden="true">
-                <div class="card-actions">
-                  <button class="round" aria-label="Add to basket"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="#1c1c1c" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 8h12l1 12.5H5L6 8Z"/><path d="M9 8a3 3 0 0 1 6 0"/></svg></button>
-                  <button class="round" aria-label="Add to wishlist"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="#1c1c1c" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20.8 5.6a5 5 0 0 0-7.1 0L12 7.3l-1.7-1.7a5 5 0 0 0-7.1 7.1L12 21.5l8.8-8.8a5 5 0 0 0 0-7.1Z"/></svg></button>
-                </div>
-                <img class="pan" src="assets/pan-twin.png" alt="Honeycomb Pro Plus Frying Pan Set">
-                <div class="card-labels"><span class="label">Oven Proof</span></div>
-              </div>
-              <div class="card-body">
-                <span class="card-eyebrow">Profi Resist</span>
-                <h3 class="card-name">Honeycomb Pro Plus Frying Pan Set</h3>
-                <div class="card-rating"><span class="stars" style="--pct:90%"></span><span class="rating-count">4.5 (512)</span></div>
-                <div class="card-price"><span class="price">€89.99</span><span class="msrp">MSRP €179.99</span><span class="discount">Save 40%</span></div>
-                <div class="card-sizes"><span class="lbl">Size Variants:</span><span class="swatch sel" data-price="€89.99" data-msrp="€179.99">Set of 2</span><span class="swatch" data-price="€129.99" data-msrp="€239.99">Set of 3</span></div>
-              </div>
-            </article>
-
-          </div>
-
-          <div class="show-more-row">
-            <button class="btn-outline">Show more</button>
+          <div class="show-more-row" id="showMoreRow">
+            <button class="btn-outline" id="showMoreBtn">Show more</button>
           </div>
         </section>
       </div>
@@ -916,6 +784,20 @@
     </div>
   </footer>
 
+  <!-- ============= SEARCH OVERLAY ============= -->
+  <div class="search-overlay" id="searchOverlay" aria-hidden="true" role="dialog" aria-label="Search">
+    <div class="search-scrim" onclick="closeSearch()"></div>
+    <div class="search-panel">
+      <div class="search-bar">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#111" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg>
+        <input id="searchInput" type="search" placeholder="Search products, collections and more" autocomplete="off" spellcheck="false">
+        <button class="search-close" onclick="closeSearch()">Close <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><path d="M6 6l12 12M18 6 6 18"/></svg></button>
+      </div>
+      <div class="search-body" id="searchBody"></div>
+    </div>
+  </div>
+
+
   <script>
     // Filter pill: open drawer on mobile, collapse the rail on desktop
     function onFilterBtn() {
@@ -929,64 +811,285 @@
     document.querySelectorAll('.faq-q').forEach(function (b) {
       b.addEventListener('click', function () { b.closest('.faq-item').classList.toggle('open'); });
     });
-    document.querySelectorAll('.filter-head').forEach(function (b) {
-      b.addEventListener('click', function () { b.closest('.filter-group').classList.toggle('open'); });
+    // Filter group open/close (delegated — groups are rendered from the catalog)
+    document.addEventListener('click', function (e) {
+      var fh = e.target.closest('.filter-head');
+      if (fh) fh.closest('.filter-group').classList.toggle('open');
     });
-    // Size variant selection updates price / MSRP / discount
-    document.querySelectorAll('.card-sizes').forEach(function (row) {
-      var card = row.closest('.card');
-      var priceEl = card.querySelector('.price');
-      var msrpEl = card.querySelector('.msrp');
-      var discEl = card.querySelector('.discount');
-      var num = function (s) { return parseFloat(String(s).replace(/[^0-9.]/g, '')); };
-      row.querySelectorAll('.swatch').forEach(function (s) {
-        s.addEventListener('click', function () {
-          row.querySelectorAll('.swatch').forEach(function (x) { x.classList.remove('sel'); });
-          s.classList.add('sel');
-          if (priceEl && s.dataset.price) priceEl.textContent = s.dataset.price;
-          if (msrpEl) {
-            if (s.dataset.msrp) { msrpEl.textContent = 'MSRP ' + s.dataset.msrp; msrpEl.style.display = ''; }
-            else { msrpEl.style.display = 'none'; }
-          }
-          if (discEl) {
-            if (s.dataset.price && s.dataset.msrp && num(s.dataset.msrp) > num(s.dataset.price)) {
-              discEl.textContent = 'Save ' + Math.round((1 - num(s.dataset.price) / num(s.dataset.msrp)) * 100) + '%';
-              discEl.style.display = '';
-            } else { discEl.style.display = 'none'; }
-          }
+    /* ===================== Data-driven product grid (real WMF catalog) =====================
+       Catalog lives in assets/products.json and is fetched at runtime, so it must be served
+       over http (GitHub Pages, or: python3 -m http.server). Opening index.html straight from
+       disk will not work — browsers block fetch() of file:// URLs. */
+    var DATA = { count: 0, skuCount: 0, products: [] };
+    var grid = document.getElementById('grid');
+    var productCountEl = document.getElementById('productCount');
+    var showMoreRow = document.getElementById('showMoreRow');
+    var showMoreBtn = document.getElementById('showMoreBtn');
+    var PAGE = 12, shown = PAGE, searchQ = '';
+    var eur = function (n) { return '€' + n.toFixed(2); };
+    var starPct = function (r) { return Math.round(r / 5 * 100) + '%'; };
+    var esc = function (s) { return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/"/g, '&quot;'); };
+    var img = function (sku) { return 'assets/products/' + sku + '.jpg'; };
+    var BAG = '<svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="#1c1c1c" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 8h12l1 12.5H5L6 8Z"/><path d="M9 8a3 3 0 0 1 6 0"/></svg>';
+    var HEART = '<svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="#1c1c1c" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20.8 5.6a5 5 0 0 0-7.1 0L12 7.3l-1.7-1.7a5 5 0 0 0-7.1 7.1L12 21.5l8.8-8.8a5 5 0 0 0 0-7.1Z"/></svg>';
+    var PROMO = '<article class="promo-tile"><img src="assets/promo-bg.png" alt=""><div class="promo-copy"><h3>Choose the right pan for the job</h3></div><a class="btn-outline" href="#compare" style="border-color:#fff;color:#fff;background:transparent;margin-top:22px">Compare range</a></article>';
+
+    function cardHTML(p) {
+      var sel = p._sel == null ? p.default : p._sel;
+      var v = p.variants[sel] || p.variants[0];
+      var onSale = v.msrp && v.msrp > v.price;
+      var save = onSale ? Math.round((1 - v.price / v.msrp) * 100) : 0;
+      var swatches = p.variants.map(function (vv, i) {
+        return '<span class="swatch' + (i === sel ? ' sel' : '') + '" data-i="' + i + '">' + esc(vv.size) + '</span>';
+      }).join('');
+      return '<article class="card" data-id="' + p.id + '">' +
+        '<div class="card-media">' +
+          '<img class="pan-inuse" src="assets/inuse.jpg" alt="" aria-hidden="true">' +
+          (p.bestseller ? '<span class="badge">Bestseller</span>' : '') +
+          '<div class="card-actions"><button class="round" aria-label="Add to basket">' + BAG + '</button>' +
+          '<button class="round" aria-label="Add to wishlist">' + HEART + '</button></div>' +
+          '<img class="pan" src="' + img(v.sku) + '" alt="' + esc(p.brand + ' ' + p.name) + '" loading="lazy">' +
+        '</div>' +
+        '<div class="card-body">' +
+          '<span class="card-eyebrow">' + esc(p.brand) + '</span>' +
+          '<h3 class="card-name">' + esc(p.name) + '</h3>' +
+          '<div class="card-rating"><span class="stars" style="--pct:' + starPct(p.rating) + '"></span>' +
+          '<span class="rating-count">' + p.rating.toFixed(1) + ' (' + p.reviews + ')</span></div>' +
+          '<div class="card-price"><span class="price">' + eur(v.price) + '</span>' +
+          (onSale ? '<span class="msrp">MSRP ' + eur(v.msrp) + '</span><span class="discount">Save ' + save + '%</span>' : '') + '</div>' +
+          '<div class="card-sizes"><span class="lbl">Size:</span>' + swatches + '</div>' +
+        '</div></article>';
+    }
+
+    function matchProducts(q) {
+      var toks = q.toLowerCase().split(/\s+/).filter(Boolean);
+      if (!toks.length) return DATA.products.slice();
+      return DATA.products.filter(function (p) { return toks.every(function (t) { return p.search.indexOf(t) >= 0; }); });
+    }
+
+    function currentList() {
+      var list = searchQ ? matchProducts(searchQ) : DATA.products;
+      return list.filter(passFacets);
+    }
+
+    function renderGrid() {
+      var list = currentList();
+      var cards = list.slice(0, shown).map(cardHTML);
+      if (!searchQ && cards.length >= 2) cards.splice(2, 0, PROMO);
+      grid.innerHTML = cards.length ? cards.join('')
+        : '<p class="no-results">' + (searchQ
+            ? 'No pans match “' + esc(searchQ) + '”. Try a different term.'
+            : 'No pans match the selected filters. Try removing one.') + '</p>';
+      showMoreRow.style.display = list.length > shown ? '' : 'none';
+      if (searchQ) {
+        productCountEl.innerHTML = list.length + ' result' + (list.length === 1 ? '' : 's') + ' for “' + esc(searchQ) + '”<button class="search-clear" id="clearSearch">Clear</button>';
+      } else {
+        productCountEl.textContent = list.length + ' Product' + (list.length === 1 ? '' : 's');
+      }
+    }
+
+    grid.addEventListener('click', function (e) {
+      var sw = e.target.closest('.swatch'); if (!sw) return;
+      var card = sw.closest('.card');
+      var p = DATA.products.find(function (x) { return x.id === card.getAttribute('data-id'); });
+      if (!p) return;
+      p._sel = parseInt(sw.dataset.i, 10);
+      card.outerHTML = cardHTML(p);
+    });
+    productCountEl.addEventListener('click', function (e) { if (e.target.id === 'clearSearch') setSearch(''); });
+    showMoreBtn.addEventListener('click', function () { shown += PAGE; renderGrid(); });
+
+    function setSearch(q) {
+      searchQ = (q || '').trim(); shown = PAGE;
+      document.body.classList.toggle('searching', !!searchQ);
+      renderGrid();
+      if (searchQ) window.scrollTo({ top: grid.getBoundingClientRect().top + window.scrollY - 120, behavior: 'smooth' });
+    }
+
+    /* ===================== Search overlay ===================== */
+    var overlay = document.getElementById('searchOverlay');
+    var searchInput = document.getElementById('searchInput');
+    var searchBody = document.getElementById('searchBody');
+    var TRENDING = ['Profi Resist', 'Fusiontec', 'Non-stick', 'Pan set', 'Devil', 'Durado', 'Induction', 'Silit'];
+    var recent = [];
+    try { recent = JSON.parse(sessionStorage.getItem('wmf_recent') || '[]'); } catch (e) {}
+
+    function openSearch() { overlay.setAttribute('aria-hidden', 'false'); document.body.style.overflow = 'hidden'; renderSuggest(''); setTimeout(function () { searchInput.focus(); }, 40); }
+    function closeSearch() { overlay.setAttribute('aria-hidden', 'true'); document.body.style.overflow = ''; }
+    window.openSearch = openSearch; window.closeSearch = closeSearch;
+
+    function suggestRow(p) {
+      var v = p.variants[p.default] || p.variants[0];
+      var from = Math.min.apply(null, p.variants.map(function (x) { return x.price; }));
+      var meta = (p.variants.length > 1 ? p.variants.length + ' sizes · from ' + eur(from) : v.size);
+      return '<a class="suggest-row" data-q="' + esc(p.brand + ' ' + p.name) + '">' +
+        '<img src="' + img(v.sku) + '" alt=""><span><span class="sr-name">' + esc(p.brand + ' ' + p.name) + '</span>' +
+        '<br><span class="sr-meta">' + esc(meta) + '</span></span>' +
+        '<span class="sr-price">' + eur(v.price) + '</span></a>';
+    }
+    function chip(t) { return '<button class="search-chip" data-q="' + esc(t) + '">' + esc(t) + '</button>'; }
+
+    function renderSuggest(q) {
+      q = (q || '').trim();
+      if (!q) {
+        var rec = recent.length ? '<p class="search-section-title">Recent searches</p><div class="search-chips">' + recent.map(chip).join('') + '</div>' : '';
+        searchBody.innerHTML = rec + '<p class="search-section-title">Trending searches</p><div class="search-chips">' + TRENDING.map(chip).join('') + '</div>';
+        return;
+      }
+      var hits = matchProducts(q).slice(0, 6);
+      var head = '<div class="suggest-head" data-q="' + esc(q) + '"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#111" stroke-width="1.6" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg> Search for “' + esc(q) + '”</div>';
+      searchBody.innerHTML = head + (hits.length
+        ? '<p class="search-section-title" style="margin-top:22px">Products</p>' + hits.map(suggestRow).join('')
+        : '<div style="padding:18px 8px;color:#8a8a86;font-size:14px">No matching pans — press Enter to search anyway.</div>');
+    }
+    if (searchInput) {
+      searchInput.addEventListener('input', function () { renderSuggest(searchInput.value); });
+      searchInput.addEventListener('keydown', function (e) {
+        if (e.key === 'Enter') submitSearch(searchInput.value);
+        else if (e.key === 'Escape') closeSearch();
+      });
+      searchBody.addEventListener('click', function (e) {
+        var el = e.target.closest('[data-q]'); if (!el) return;
+        submitSearch(el.getAttribute('data-q'));
+      });
+    }
+    function submitSearch(q) {
+      q = (q || '').trim(); if (!q) return;
+      recent = [q].concat(recent.filter(function (r) { return r.toLowerCase() !== q.toLowerCase(); })).slice(0, 6);
+      try { sessionStorage.setItem('wmf_recent', JSON.stringify(recent)); } catch (e) {}
+      searchInput.value = q;
+      closeSearch();
+      setSearch(q);
+    }
+    document.addEventListener('keydown', function (e) { if (e.key === 'Escape') closeSearch(); });
+
+    function priceOf(p) { var v = p.variants[p.default] || p.variants[0]; return v.price; }
+    function sortProducts(mode) {
+      var a = DATA.products;
+      if (mode === 'Price: low to high') a.sort(function (x, y) { return priceOf(x) - priceOf(y); });
+      else if (mode === 'Price: high to low') a.sort(function (x, y) { return priceOf(y) - priceOf(x); });
+      else if (mode === 'Top rated') a.sort(function (x, y) { return (y.rating - x.rating) || (y.reviews - x.reviews); });
+      else if (mode === 'Newest') a.sort(function (x, y) { return y.variants[0].sku > x.variants[0].sku ? 1 : -1; });
+      else a.sort(function (x, y) { return (y.bestseller - x.bestseller) || (y.reviews - x.reviews); });
+      shown = PAGE; renderGrid();
+    }
+    var sortSelect = document.getElementById('sortSelect');
+    if (sortSelect) sortSelect.addEventListener('change', function () { sortProducts(sortSelect.value); });
+
+    // Load the real catalog, then build the facet rail from it and render.
+    fetch('assets/products.json')
+      .then(function (r) { if (!r.ok) throw new Error('HTTP ' + r.status); return r.json(); })
+      .then(function (d) {
+        DATA = d;
+        buildFacets();
+        renderFacets();
+        sortProducts('Bestseller');
+      })
+      .catch(function (err) {
+        console.error('Could not load assets/products.json:', err);
+        grid.innerHTML = '<p class="no-results"><strong>Couldn’t load assets/products.json</strong><br>' +
+          'This page reads its catalog over http. Serve the folder — e.g. <code>python3 -m http.server</code> — ' +
+          'and reload. Opening index.html directly from disk won’t work.</p>';
+        productCountEl.textContent = '';
+        showMoreRow.style.display = 'none';
+      });
+
+    /* ===================== Facets (built from the real catalog) =====================
+       Every option is derived from real product data, so each one actually filters.
+       Attributes the shop doesn't expose on the PLP (material, coating, occasion) are
+       deliberately not faked. */
+    var afEl = document.getElementById('activeFilters');
+    var facetsEl = document.getElementById('facets');
+    var FACETS = [];
+    var selected = {};
+
+    function buildFacets() {
+      var uniq = function (a) { return Array.from(new Set(a)); };
+      var rank = function (s) { var m = s.match(/(\d+)/); var n = m ? +m[1] : 99; return /Set/.test(s) ? 100 + n : n; };
+      var sizes = uniq(DATA.products.reduce(function (a, p) { return a.concat(p.sizes); }, []))
+                    .sort(function (a, b) { return rank(a) - rank(b); });
+      var series = uniq(DATA.products.map(function (p) { return p.series; })).sort();
+      var brands = uniq(DATA.products.map(function (p) { return p.brand; })).sort();
+      FACETS = [
+        { key: 'size', title: 'Size', open: true, options: sizes.map(function (s) {
+          return { label: s, test: function (p) { return p.sizes.indexOf(s) >= 0; } }; }) },
+        { key: 'price', title: 'Price', open: true, options: [
+          { label: 'Under €50',    test: function (p) { return p.minPrice < 50; } },
+          { label: '€50 – €100',   test: function (p) { return p.minPrice >= 50 && p.minPrice < 100; } },
+          { label: '€100 – €150',  test: function (p) { return p.minPrice >= 100 && p.minPrice < 150; } },
+          { label: 'Over €150',    test: function (p) { return p.minPrice >= 150; } } ] },
+        { key: 'type', title: 'Type', open: true, options: ['Single pan', 'Set'].map(function (t) {
+          return { label: t, test: function (p) { return p.type === t; } }; }) },
+        { key: 'offer', title: 'Offer', open: false, options: [
+          { label: 'On sale',    test: function (p) { return p.variants.some(function (v) { return v.msrp && v.msrp > v.price; }); } },
+          { label: 'Bestseller', test: function (p) { return !!p.bestseller; } } ] },
+        { key: 'series', title: 'Series', open: false, options: series.map(function (s) {
+          return { label: s, test: function (p) { return p.series === s; } }; }) },
+        { key: 'brand', title: 'Brand', open: false, options: brands.map(function (b) {
+          return { label: b, test: function (p) { return p.brand === b; } }; }) }
+      ];
+      FACETS.forEach(function (g) { selected[g.key] = selected[g.key] || []; });
+    }
+
+    function renderFacets() {
+      facetsEl.innerHTML = FACETS.map(function (g) {
+        return '<div class="filter-group' + (g.open ? ' open' : '') + '">' +
+          '<button class="filter-head">' + esc(g.title) + ' <span class="filter-toggle"></span></button>' +
+          '<div class="filter-body">' + g.options.map(function (o) {
+            var on = selected[g.key].indexOf(o.label) >= 0;
+            return '<label class="facet"><input type="checkbox" data-key="' + g.key + '" value="' + esc(o.label) + '"' +
+              (on ? ' checked' : '') + '><span class="box"></span><span class="facet-label">' + esc(o.label) + '</span></label>';
+          }).join('') + '</div></div>';
+      }).join('');
+    }
+
+    function passFacets(p) {
+      return FACETS.every(function (g) {
+        var chosen = selected[g.key];
+        if (!chosen || !chosen.length) return true;              // group unused -> no constraint
+        return g.options.some(function (o) {                     // OR within a group, AND across groups
+          return chosen.indexOf(o.label) >= 0 && o.test(p);
         });
       });
-    });
+    }
 
-    // Active filter chips, synced to the filter checkboxes
-    var facets = Array.prototype.slice.call(document.querySelectorAll('.filters .facet input[type="checkbox"]'));
-    var afEl = document.getElementById('activeFilters');
     function renderChips() {
-      var checked = facets.filter(function (f) { return f.checked; });
-      if (!checked.length) { afEl.hidden = true; afEl.innerHTML = ''; return; }
+      var chips = [];
+      FACETS.forEach(function (g) {
+        selected[g.key].forEach(function (label) {
+          chips.push('<span class="chip">' + esc(label) +
+            '<button aria-label="Remove ' + esc(label) + '" data-key="' + g.key + '" data-label="' + esc(label) + '">' +
+            '<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 6l12 12M18 6 6 18"/></svg>' +
+            '</button></span>');
+        });
+      });
+      if (!chips.length) { afEl.hidden = true; afEl.innerHTML = ''; return; }
       afEl.hidden = false;
-      var html = '<div class="af-head"><span class="af-title">Active filters</span>' +
-                 '<button class="af-clear" id="afClear">Clear all</button></div>';
-      checked.forEach(function (f) {
-        var label = f.closest('.facet').querySelector('.facet-label').textContent;
-        html += '<span class="chip">' + label +
-          '<button aria-label="Remove ' + label + '" data-i="' + facets.indexOf(f) + '">' +
-          '<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 6l12 12M18 6 6 18"/></svg>' +
-          '</button></span>';
-      });
-      afEl.innerHTML = html;
+      afEl.innerHTML = '<div class="af-head"><span class="af-title">Active filters</span>' +
+        '<button class="af-clear" id="afClear">Clear all</button></div>' + chips.join('');
     }
-    if (afEl) {
-      afEl.addEventListener('click', function (e) {
-        var btn = e.target.closest('button');
-        if (!btn) return;
-        if (btn.id === 'afClear') { facets.forEach(function (f) { f.checked = false; }); renderChips(); return; }
-        var i = parseInt(btn.dataset.i, 10);
-        if (!isNaN(i) && facets[i]) { facets[i].checked = false; renderChips(); }
-      });
-      facets.forEach(function (f) { f.addEventListener('change', renderChips); });
-      renderChips();
-    }
+
+    function applyFilters() { shown = PAGE; renderChips(); renderGrid(); }
+
+    facetsEl.addEventListener('change', function (e) {
+      var cb = e.target.closest('input[type="checkbox"]'); if (!cb) return;
+      var arr = selected[cb.dataset.key]; if (!arr) return;
+      var i = arr.indexOf(cb.value);
+      if (cb.checked && i < 0) arr.push(cb.value);
+      else if (!cb.checked && i >= 0) arr.splice(i, 1);
+      applyFilters();
+    });
+    afEl.addEventListener('click', function (e) {
+      var btn = e.target.closest('button'); if (!btn) return;
+      if (btn.id === 'afClear') {
+        Object.keys(selected).forEach(function (k) { selected[k] = []; });
+        renderFacets(); applyFilters(); return;
+      }
+      var arr = selected[btn.dataset.key]; if (!arr) return;
+      var i = arr.indexOf(btn.dataset.label);
+      if (i >= 0) arr.splice(i, 1);
+      renderFacets(); applyFilters();
+    });
     // Close filter drawer when tapping the scrim (mobile)
     document.addEventListener('click', function (e) {
       if (document.body.classList.contains('filters-open') &&

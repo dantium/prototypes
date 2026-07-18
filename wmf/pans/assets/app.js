@@ -279,10 +279,12 @@
         (vv.stock ? '' : ' title="Out of stock"') + '>' + esc(vv.size) + '</span>';
     }).join('');
     var labels = infoLabels(p, v);
+    var pdpHref = 'product.html?id=' + p.id;
     return '<article class="card" data-id="' + p.id + '">' +
       '<div class="card-media">' +
         '<img class="pan-inuse" src="assets/inuse.jpg" alt="" aria-hidden="true">' +
         badgeFor(v) +
+        '<a class="card-link" href="' + pdpHref + '" aria-label="' + esc(p.brand + ' ' + p.name) + '"></a>' +
         '<div class="card-actions"><button class="round" aria-label="Add to basket">' + BAG_S + '</button>' +
         '<button class="round" aria-label="Add to wishlist">' + HEART_S + '</button></div>' +
         '<img class="pan" src="' + img(v.sku) + '" alt="' + esc(p.brand + ' ' + p.name) + '" loading="lazy">' +
@@ -290,7 +292,7 @@
       '</div>' +
       '<div class="card-body">' +
         '<span class="card-eyebrow">' + esc(p.series || p.brand) + '</span>' +
-        '<h3 class="card-name">' + esc(p.name) + '</h3>' +
+        '<h3 class="card-name"><a href="' + pdpHref + '">' + esc(p.name) + '</a></h3>' +
         /* real Bazaarvoice ratings from the PDPs; products without reviews show none */
         (p.rating != null
           ? '<div class="card-rating"><span class="stars" style="--pct:' + Math.round(p.rating / 5 * 100) + '%"></span>' +
@@ -505,10 +507,11 @@
       var nameHit = toks.every(function (t) { return p.search.indexOf(t) >= 0; });
       if (!nameHit) { var snip = descSnippet(p, q); if (snip) meta = snip; }
     }
-    return '<div class="s-row" data-q="' + esc(p.brand + ' ' + p.name) + '">' +
+    // product suggestions link straight to the PDP
+    return '<a class="s-row" href="product.html?id=' + p.id + '">' +
       '<img class="s-thumb" src="' + img(v.sku) + '" alt="">' +
       '<span class="s-label">' + esc(p.brand + ' ' + p.name) + '<span class="s-sub">' + meta + '</span></span>' +
-      '<span class="s-price">' + eur(v.price) + '</span></div>';
+      '<span class="s-price">' + eur(v.price) + '</span></a>';
   }
   function chipHTML(t) { return '<button class="search-chip" data-q="' + esc(t) + '">' + esc(t) + '</button>'; }
 
@@ -568,7 +571,8 @@
     recent = [q].concat(recent.filter(function (r) { return r.toLowerCase() !== q.toLowerCase(); })).slice(0, 6);
     saveRecent();
     closeSearch();
-    if (PAGE.kind === 'home') { location.href = 'pans.html?q=' + encodeURIComponent(q); return; }
+    // home and PDP have no results grid — searching lands on the Pans PLP
+    if (PAGE.kind === 'home' || PAGE.kind === 'pdp') { location.href = 'pans.html?q=' + encodeURIComponent(q); return; }
     var input = document.getElementById('searchInput'); if (input) input.value = q;
     setSearch(q);
     updateHeaderSearch();
@@ -816,6 +820,11 @@
         DATA = d;
         buildSearchAids();
         if (PAGE.kind === 'home') return;
+        if (PAGE.kind === 'pdp') {
+          // product.html renders itself from the catalog (assets/pdp.js)
+          if (window.renderPDP) window.renderPDP({ data: DATA, cardHTML: cardHTML, eur: eur, img: img, esc: esc });
+          return;
+        }
         LIST = DATA.products.filter(function (p) { return p.cats && (PAGE.category in p.cats); });
         buildFacets();
         renderFacets();

@@ -1,6 +1,6 @@
-# WMF — shop journey prototype (Home → Pans → Frying Pans)
+# WMF — shop journey prototype (Home → Pans → Frying Pans → PDP)
 
-A three-page usability-test prototype fed from the **real wmf.com catalog**, built with the WMF
+A four-page usability-test prototype fed from the **real wmf.com catalog**, built with the WMF
 design system (Rotis, tokens) and the existing comparison-table/header/search prototypes.
 
 | Page | What it is |
@@ -8,9 +8,11 @@ design system (Rotis, tokens) and the existing comparison-table/header/search pr
 | `index.html` | Home — search-prototype style: header + hero banner only |
 | `pans.html` | **Pans** category PLP — subcategory tiles, 34 real products |
 | `frying-pans.html` | **Frying Pans** subcategory PLP — 29 real products, comparison table, FAQ |
+| `product.html?id=…` | **PDP** — Figma "PDP - HoneyComb Pro+" design, rendered from the catalog for any product (defaults to `p1`, the Profi Resist Fry Pan the mock depicts) |
 
 The journey works both ways: megamenu/tiles drill down, breadcrumbs go back up.
-Search works on every page (submitting from Home lands on `pans.html?q=…`).
+Every product tile (grid + search overlay) links to `product.html?id=…`.
+Search works on every page (submitting from Home or a PDP lands on `pans.html?q=…`).
 
 ## Running it
 
@@ -88,6 +90,37 @@ The derivation lives in the scrape pipeline (`enrich.mjs`); rules are determinis
 re-runnable. `technique`/`surface` also render as info labels on the product image. Size
 options show the Figma serving hints ("28 cm (4 – 6 people)") as display-only text.
 
+## PDP (`product.html`)
+
+Built from the Figma **"PDP - HoneyComb Pro+ (Version 1)"** mock (file `8oCPrBtDcVBGzxhSrNYlTT`,
+node `2:2`), as one template that renders **any catalog product** via `?id=`:
+
+- **Data-driven** (from `catalog.json`): breadcrumb trail, series eyebrow, title (+ selected
+  size), real PDP description behind Read more, real rating/review count (none shown when the
+  shop has none), price/UVP/-% chip, Klarna 3-way split and Club Points (computed from price),
+  set upsell (appears when the series has a Set — links to its PDP), size chips with serving
+  hints + per-variant stock, stock-aware delivery block and CTA, Technical Data accordion
+  (per-variant SKU), "Suitable alternatives" (same category, real shop order, live tiles).
+- **Figma example content** — the below-fold marketing (SearProtect®/3-ply banners, Product
+  Advantages, UGC row, VOGUE testimonial, recipes) describes the honeycomb Profi Resist build,
+  so it renders **only for the Profi Resist series** (`p1`, `p11`, `p12`); other products get the
+  standard PDP without it. The gallery works the same way: Profi Resist gets the mock's
+  lifestyle shots (steak main + honeycomb/3-ply/cleaning/heating thumbs, "Watch video" flag),
+  everything else gets its packshot + the shared in-use shot.
+- **Example content, shared across products** (same precedent as the shared hover shot):
+  the 3 reviews from the mock (capped at the product's *real* review count, so `p1` shows 2),
+  the buy-box accessory (Profi Plus spatula) and the "Ideally complements" accessories with
+  prices from the mock, Use & Care copy keyed off the product's surface attribute, and the
+  how-to video card. FAQ = the same 5 Q&As as the frying-pans PLP.
+- Images live in `assets/pdp/` (downloaded from the Figma mock, resized ≤1100px, ~1.2 MB
+  total). Two mock thumbs carry German captions baked into the artwork.
+- Cart clicks bump the header count; size switches swap price/UVP/Klarna/points/SKU/packshot.
+- **Popups**: Size Guide (rim-diameter note + serves/use table, the product's own sizes ticked,
+  others dimmed) and Club Points ((i) on the myWMF bar — how points work + the points this
+  purchase earns). Scrim click, × and Esc close them.
+- **Accessory slider**: the buy-box "Add Accessories" row pages through 4 example accessories
+  with the ‹ › arrows from the mock (clamped at the ends, position kept across size switches).
+
 ## Behaviour
 
 - **Megamenu** — every nav item opens its panel on hover, with the full menu data from the
@@ -115,3 +148,6 @@ options show the Figma serving hints ("28 cm (4 – 6 people)") as display-only 
 - The hover "in-use" shot is one shared lifestyle image, not per-product.
 - Non-pan nav items (POTS, CUTLERY, …) are present but not built out.
 - `assets/reddot.png` unused — award dropped rather than guess which products won it.
+- PDP: Watch video / Size Guide / Klarna Learn more / recipe cards / document downloads are
+  visual affordances only (nothing to open in a static prototype); the wishlist heart toggles
+  but persists nothing; the design mock's "HEAT-RESPOSIVE" typo is corrected to RESPONSIVE.

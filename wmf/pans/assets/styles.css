@@ -332,6 +332,9 @@ body.nav-open::before { content: ""; position: fixed; inset: 0; background: rgba
 }
 .round:hover { background: #fff; box-shadow: 0 3px 11px rgba(0,0,0,.22); }
 .round svg { display: block; }
+/* whole media area links to the PDP (sits above the hover shot, below the buttons) */
+.card-link { position: absolute; inset: 0; z-index: 2; }
+.card-name a:hover { color: var(--gold-deep); }
 .card-labels { position: absolute; left: 12px; bottom: 13px; display: flex; gap: 7px; flex-wrap: wrap; z-index: 3; }
 .label {
   display: inline-flex; align-items: center; height: 21px; padding: 0 12px;

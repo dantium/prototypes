@@ -77,12 +77,14 @@ body.pdp .site-footer { margin-top: 0; }
 .bb-rating .rating-count { font-size: 12px; }
 .bb-rating:hover .rating-count { text-decoration: underline; }
 
+/* Price Display (Figma component 1621:6329 — Default / Discount variants) */
 .bb-price-row { display: flex; align-items: center; gap: 12px; margin: 14px 0 0; flex-wrap: wrap; }
 .bb-price { font-size: 32px; font-weight: 700; line-height: 1.1; }
 .bb-price.sale { color: #b91c1c; }
 .bb-price-row .discount { background: #b91c1c; height: 24px; }
-.bb-uvp { font-size: 16px; font-weight: 300; color: #4f4f4f; }
-.bb-vat { margin: 4px 0 0; font-size: 12px; font-weight: 300; }
+.bb-was { margin: 3px 0 0; font-size: 14px; font-weight: 300; font-style: italic; }
+.bb-vat { margin: 3px 0 0; font-size: 12px; font-weight: 300; }
+.bb-shiphint { text-decoration: underline; text-underline-position: from-font; }
 
 .bb-bar {
   display: flex; align-items: center; gap: 14px;

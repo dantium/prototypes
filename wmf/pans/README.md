@@ -32,7 +32,13 @@ from the live shop (`/de/en/products/pans.html` + `/products/pans/frying-pans.ht
 each). Product photos are in `assets/products/<sku>.jpg` (filename = SKU).
 
 Real per-SKU data:
-- **names, prices, MSRP** (tile markup; sale price renders red with italic MSRP, like the shop)
+- **names, prices, MSRP** — price rendering follows the Figma Price Display component
+  (`1621:6329`): the Discount variant (red price, "Save N%" chip, italic "€… (last 30 days
+  lowest price)") shows only for variants flagged `"sale": true` in the JSON. Nearly every
+  scraped product carries an MSRP, so sale display is opt-in — flagged today: the two products
+  the shop itself labels SALE (p24, p26) plus the two the mock features discounted (p1, p10).
+  Everything else renders the Default variant (black price, "Including VAT"); MSRPs stay in
+  the data.
 - **labels** — `NEW` / `BESTSELLER` / `BUNDLE` / `SALE` from the shop's datalayer → corner badges
 - **stock** — datalayer `product_stock` + PDP `offers.availability` → per-variant In/Out of stock
 - **position** — the shop's own category ordering → the "Recommended" sort
@@ -97,7 +103,10 @@ node `2:2`), as one template that renders **any catalog product** via `?id=`:
 
 - **Data-driven** (from `catalog.json`): breadcrumb trail, series eyebrow, title (+ selected
   size), real PDP description behind Read more, real rating/review count (none shown when the
-  shop has none), price/UVP/-% chip, Klarna 3-way split and Club Points (computed from price),
+  shop has none), the Price Display component (Figma `1621:6329`, Default and Discount
+  variants) — red price + "Save N%" chip + italic "€… (last 30 days lowest price)" when
+  discounted, otherwise black price with the underlined free-shipping hint —
+  Klarna 3-way split and Club Points (computed from price),
   set upsell (appears when the series has a Set — links to its PDP), size chips with serving
   hints + per-variant stock, stock-aware delivery block and CTA, Technical Data accordion
   (per-variant SKU), "Suitable alternatives" (same category, real shop order, live tiles).

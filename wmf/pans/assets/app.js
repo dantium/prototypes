@@ -233,7 +233,10 @@
   function variantOf(p) { return p.variants[p._sel == null ? p.default : p._sel] || p.variants[0]; }
   function isBestseller(p) { return p.variants.some(function (v) { return /BESTSELLER/i.test(v.label || ''); }); }
   function isNew(p) { return p.variants.some(function (v) { return /NEW/i.test(v.label || ''); }); }
-  function onSaleP(p) { return p.variants.some(function (v) { return v.msrp && v.msrp > v.price; }); }
+  /* Discount presentation is opt-in per variant (`sale` flag in catalog.json) —
+     most scraped products carry an MSRP, but only a few should read as on sale. */
+  function isSale(v) { return !!(v.sale && v.msrp && v.msrp > v.price); }
+  function onSaleP(p) { return p.variants.some(isSale); }
 
   /* ============================================================
      PRODUCT GRID
@@ -271,7 +274,7 @@
 
   function cardHTML(p) {
     var v = variantOf(p);
-    var onSale = v.msrp && v.msrp > v.price;
+    var onSale = isSale(v);
     var save = onSale ? Math.round((1 - v.price / v.msrp) * 100) : 0;
     var swatches = p.variants.map(function (vv, i) {
       var sel = i === (p._sel == null ? p.default : p._sel);
@@ -298,8 +301,11 @@
           ? '<div class="card-rating"><span class="stars" style="--pct:' + Math.round(p.rating / 5 * 100) + '%"></span>' +
             '<span class="rating-count">' + p.rating.toFixed(1) + ' (' + p.reviews + ')</span></div>'
           : '') +
+        /* Price Display component (Figma 1621:6329) — Default / Discount variants */
         '<div class="card-price"><span class="price' + (onSale ? ' sale' : '') + '">' + eur(v.price) + '</span>' +
-        (onSale ? '<span class="msrp">MSRP ' + eur(v.msrp) + '</span><span class="discount">Save ' + save + '%</span>' : '') + '</div>' +
+        (onSale ? '<span class="discount">Save ' + save + '%</span>' : '') + '</div>' +
+        (onSale ? '<p class="card-was">' + eur(v.msrp) + ' (last 30 days lowest price)</p>' : '') +
+        '<p class="card-vat">Including VAT</p>' +
         '<div class="stock' + (v.stock ? '' : ' out') + '"><span class="dot"></span>' + (v.stock ? 'In stock' : 'Out of stock') + '</div>' +
         '<div class="card-sizes"><span class="lbl">Size:</span>' + swatches + '</div>' +
       '</div></article>';
@@ -822,7 +828,7 @@
         if (PAGE.kind === 'home') return;
         if (PAGE.kind === 'pdp') {
           // product.html renders itself from the catalog (assets/pdp.js)
-          if (window.renderPDP) window.renderPDP({ data: DATA, cardHTML: cardHTML, eur: eur, img: img, esc: esc });
+          if (window.renderPDP) window.renderPDP({ data: DATA, cardHTML: cardHTML, eur: eur, img: img, esc: esc, isSale: isSale });
           return;
         }
         LIST = DATA.products.filter(function (p) { return p.cats && (PAGE.category in p.cats); });

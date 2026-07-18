@@ -3,13 +3,18 @@
    (home / pans category / frying-pans subcategory)
    ============================================================ */
 
-/* ---- WMF Rotis — brand typeface (Rotis II Sans W01) ---- */
-@font-face { font-family:"WMF Rotis"; src:url("fonts/rotis-ii-sans-w01-light.woff2") format("woff2"); font-weight:300; font-style:normal; font-display:swap; }
-@font-face { font-family:"WMF Rotis"; src:url("fonts/rotis-ii-sans-w01.woff2") format("woff2"); font-weight:400; font-style:normal; font-display:swap; }
-@font-face { font-family:"WMF Rotis"; src:url("fonts/rotis-ii-sans-w01-italic.woff2") format("woff2"); font-weight:400; font-style:italic; font-display:swap; }
-@font-face { font-family:"WMF Rotis"; src:url("fonts/rotis-ii-sans-w01-medium.woff2") format("woff2"); font-weight:500; font-style:normal; font-display:swap; }
-@font-face { font-family:"WMF Rotis"; src:url("fonts/rotis-ii-sans-w01-semi-bold.woff2") format("woff2"); font-weight:600; font-style:normal; font-display:swap; }
-@font-face { font-family:"WMF Rotis"; src:url("fonts/rotis-ii-sans-w01-bold.woff2") format("woff2"); font-weight:700; font-style:normal; font-display:swap; }
+/* ---- WMF Rotis — brand typeface (Rotis II Sans W01) ----
+   The Light/Medium cuts ship with ascent == cap-height (69% em) and a 21% descent,
+   so vertically-centered ALL-CAPS text (badges, chips, CTAs) rides high with empty
+   space under it. The metric overrides give caps equal room above and below
+   (cap 69% + 23% each side); WMF's own Figma components compensate the same way
+   with asymmetric padding. */
+@font-face { font-family:"WMF Rotis"; src:url("fonts/rotis-ii-sans-w01-light.woff2") format("woff2"); font-weight:300; font-style:normal; font-display:swap; ascent-override:92%; descent-override:23%; line-gap-override:0%; }
+@font-face { font-family:"WMF Rotis"; src:url("fonts/rotis-ii-sans-w01.woff2") format("woff2"); font-weight:400; font-style:normal; font-display:swap; ascent-override:92%; descent-override:23%; line-gap-override:0%; }
+@font-face { font-family:"WMF Rotis"; src:url("fonts/rotis-ii-sans-w01-italic.woff2") format("woff2"); font-weight:400; font-style:italic; font-display:swap; ascent-override:92%; descent-override:23%; line-gap-override:0%; }
+@font-face { font-family:"WMF Rotis"; src:url("fonts/rotis-ii-sans-w01-medium.woff2") format("woff2"); font-weight:500; font-style:normal; font-display:swap; ascent-override:92%; descent-override:23%; line-gap-override:0%; }
+@font-face { font-family:"WMF Rotis"; src:url("fonts/rotis-ii-sans-w01-semi-bold.woff2") format("woff2"); font-weight:600; font-style:normal; font-display:swap; ascent-override:92%; descent-override:23%; line-gap-override:0%; }
+@font-face { font-family:"WMF Rotis"; src:url("fonts/rotis-ii-sans-w01-bold.woff2") format("woff2"); font-weight:700; font-style:normal; font-display:swap; ascent-override:92%; descent-override:23%; line-gap-override:0%; }
 
 /* ---- Design tokens (WMF Design System) ---- */
 :root {
@@ -355,10 +360,12 @@ body.nav-open::before { content: ""; position: fixed; inset: 0; background: rgba
 .stars::after { color: var(--star); width: var(--pct); overflow: hidden; white-space: nowrap; }
 .rating-count { font-size: 12px; font-weight: 300; color: #333; }
 
-/* pricing — matches the live shop: sale price red, MSRP italic beside it */
-.card-price { display: flex; align-items: center; gap: 8px; padding: 8px 0 2px; flex-wrap: wrap; }
+/* pricing — Price Display component (Figma 1621:6329): Default / Discount */
+.card-price { display: flex; align-items: center; gap: 8px; padding: 8px 0 0; flex-wrap: wrap; }
 .price { font-size: 20px; font-weight: 700; }
 .price.sale { color: var(--sale); }
+.card-was { margin: 2px 0 0; font-size: 12px; font-weight: 300; font-style: italic; color: #1a1a1a; }
+.card-vat { margin: 1px 0 2px; font-size: 11px; font-weight: 300; color: #8a8a8a; }
 .msrp { font-size: 14px; font-weight: 300; font-style: italic; color: #4a4a4a; }
 .discount {
   display: inline-flex; align-items: center; height: 22px; padding: 0 12px;

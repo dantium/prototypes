@@ -61,7 +61,7 @@
   };
 
   function renderPDP(api) {
-    var DATA = api.data, esc = api.esc, eur = api.eur, img = api.img;
+    var DATA = api.data, esc = api.esc, eur = api.eur, img = api.img, isSale = api.isSale;
     var products = DATA.products;
 
     var id = new URLSearchParams(location.search).get('id') || 'p1';
@@ -146,7 +146,7 @@
 
     function buyBoxHTML() {
       var v = p.variants[sel];
-      var onSale = v.msrp && v.msrp > v.price;
+      var onSale = isSale(v);
       var save = onSale ? Math.round((1 - v.price / v.msrp) * 100) : 0;
       var klarna = (v.price / 3).toFixed(2);
       var points = Math.round(v.price);
@@ -168,10 +168,15 @@
           '<span class="rating-count">(' + p.rating.toFixed(1) + ') ' + p.reviews + ' Review' + (p.reviews === 1 ? '' : 's') + '</span></a>';
       }
 
+      /* Price Display component (Figma 1621:6329) — Default / Discount variants */
       h += '<div class="bb-price-row">' +
         '<span class="bb-price' + (onSale ? ' sale' : '') + '">' + eur(v.price) + '</span>' +
-        (onSale ? '<span class="discount">-' + save + '%</span><span class="bb-uvp">UVP ' + eur(v.msrp) + '</span>' : '') +
-        '</div><p class="bb-vat">incl. VAT 19%</p>';
+        (onSale ? '<span class="discount">Save ' + save + '%</span>' : '') +
+        '</div>';
+      if (onSale) h += '<p class="bb-was">' + eur(v.msrp) + ' (last 30 days lowest price)</p>';
+      h += '<p class="bb-vat">Including VAT <span class="bb-shiphint">' +
+        (onSale ? 'shipping (free shipping on orders over €49)' : '(free shipping on orders over €49)') +
+        '</span></p>';
 
       h += '<div class="bb-bar bb-bar--klarna"><img src="assets/pdp/klarna.png" alt="Klarna">' +
         '<span>3 payments of ' + klarna + ' € at 0% interest with Klarna <a href="#">Learn more</a></span>' +
@@ -183,7 +188,7 @@
 
       if (setProduct) {
         var sv = setProduct.variants[setProduct.default] || setProduct.variants[0];
-        var sSave = sv.msrp && sv.msrp > sv.price ? Math.round(sv.msrp - sv.price) : 0;
+        var sSave = isSale(sv) ? Math.round(sv.msrp - sv.price) : 0;
         h += '<a class="bb-set" href="product.html?id=' + setProduct.id + '">' +
           '<img src="' + img(sv.sku) + '" alt="">' +
           '<span><span class="bb-set-name">' + esc(setProduct.name) + ' <small>(' + esc(sv.size) + ')</small></span>' +

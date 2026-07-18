@@ -92,7 +92,8 @@
      "price": 69.99,
      "msrp": 130.48,
      "stock": true,
-     "label": null
+     "label": null,
+     "sale": true
     },
     {
      "sku": "3201000358",
@@ -100,7 +101,8 @@
      "price": 79.99,
      "msrp": 129.99,
      "stock": true,
-     "label": "BESTSELLER"
+     "label": "BESTSELLER",
+     "sale": true
     }
    ],
    "search": "wmf profi resist fry pan profi resist 24 cm 28 cm",
@@ -436,7 +438,8 @@
      "price": 39.99,
      "msrp": 49.99,
      "stock": true,
-     "label": null
+     "label": null,
+     "sale": true
     },
     {
      "sku": "3201005856",
@@ -444,7 +447,8 @@
      "price": 44.99,
      "msrp": 59.99,
      "stock": true,
-     "label": null
+     "label": null,
+     "sale": true
     }
    ],
    "search": "silit messino fry pan messino 24 cm 28 cm",
@@ -989,7 +993,8 @@
      "price": 19.99,
      "msrp": 49.99,
      "stock": true,
-     "label": "SALE,NEW"
+     "label": "SALE,NEW",
+     "sale": true
     },
     {
      "sku": "3201114520",
@@ -997,7 +1002,8 @@
      "price": 29.99,
      "msrp": 69.99,
      "stock": true,
-     "label": null
+     "label": null,
+     "sale": true
     }
    ],
    "search": "wmf non-stick fry pan non-stick 18 cm 20 cm",
@@ -1072,7 +1078,8 @@
      "price": 49.99,
      "msrp": 99.99,
      "stock": true,
-     "label": "SALE"
+     "label": "SALE",
+     "sale": true
     },
     {
      "sku": "3201114557",
@@ -1080,7 +1087,8 @@
      "price": 62.99,
      "msrp": 119.99,
      "stock": true,
-     "label": null
+     "label": null,
+     "sale": true
     }
    ],
    "search": "wmf oven pan with lid oven 24 cm 28 cm",
@@ -1233,7 +1241,7 @@
     }
    ],
    "search": "wmf durado fry pan-set durado set of 2",
-   "description": "#html-body [data-pb-style=U7S9HSC]{justify-content:flex-start;display:flex;flex-direction:column;background-position:left top;background-size:cover;background-repeat:no-repeat;background-attachment:scroll}This set is ideal when you want to cook flexibly and diversely - from small portions like vegetables or omelets (in the 24 cm pan) to larger dishes, family meals or roasts (in the 28 cm pan). It is perfect for households that value quality, durability and comfortable, low-fat frying. &nbsp; Optional accessories (recommended): cooking utensils made of wood or plastic and mild dishwashing liquid - keeping the non-stick coating and stainless steel in good condition for a long time.",
+   "description": "This set is ideal when you want to cook flexibly and diversely - from small portions like vegetables or omelets (in the 24 cm pan) to larger dishes, family meals or roasts (in the 28 cm pan). It is perfect for households that value quality, durability and comfortable, low-fat frying. &nbsp; Optional accessories (recommended): cooking utensils made of wood or plastic and mild dishwashing liquid - keeping the non-stick coating and stainless steel in good condition for a long time.",
    "material": "Stainless Steel 1-ply",
    "surface": "Ceramic",
    "technique": "Gentle Frying",

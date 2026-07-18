@@ -1,0 +1,21 @@
+WMF Brand Assistant portable knowledge pack
+Version: 2026-07-18
+
+Paste into platform project/custom-assistant instructions:
+- PROJECT_INSTRUCTIONS.txt
+
+Persistent knowledge files:
+- knowledge/wmf-brand-guide.md
+- knowledge/wmf-brand-rules.json
+- knowledge/wmf-qa-checks.yaml
+- knowledge/wmf-visual-reference-index.md
+- WMF_Visual_Reference_Book.pdf
+
+Raw visual references for close image-to-image work:
+- visuals/01-approved-background-warm-greige.png
+- visuals/02-approved-product-hero.png
+- visuals/03-avoid-too-cool-and-bright.png
+- visuals/04-lighting-mood-reference-only.png
+
+Platform setup:
+- UPLOAD_GUIDE.md

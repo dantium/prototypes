@@ -1,6 +1,6 @@
 ---
 name: wmf-brand-qa
-description: Review WMF copy, images, Figma designs, live landing pages, layouts, logos, colours, typography, packaging, web content, social content, and media assets against the WMF brand book. Use when checking brand adherence, assessing potential environmental or green-claims risk, rewriting content in the WMF voice, preparing a brand-compliance report, comparing Figma with a live page, or ingesting a revised WMF brand-book PDF locally.
+description: Review, generate, or edit WMF copy and visual creative using the WMF brand book and bundled visual references. Use for WMF image generation or editing, creative direction, prompts, backgrounds, product lighting, do/don't comparisons, Figma designs, landing pages, layouts, logos, colours, typography, packaging, web or social content, brand-compliance reports, environmental-claims risk checks, WMF voice rewrites, or ingesting a revised WMF brand-book PDF locally.
 ---
 
 # WMF Brand QA
@@ -10,6 +10,7 @@ Use this skill as the WMF brand source of truth for content and creative review.
 - `references/brand-guide.md` for narrative guidance and source-page citations.
 - `references/brand-rules.json` for structured rules, colours, logo clear space, media specifications, and unresolved questions.
 - `references/qa-checks.yaml` for review checks and severity levels.
+- `references/visual-reference-index.md` for approved and avoid imagery, backgrounds, lighting, product treatment, and the exact role of each bundled image.
 
 ## Review workflow
 
@@ -49,6 +50,10 @@ Treat these as approved brand anchors, not mandatory text in every asset:
 Check the logo, clear space, placement, colour treatment, typography, hierarchy, contrast, cropping, product focus, lighting, setting, props, food, casting, and overall look. The desired visual language is elevated, minimalistic, modern, confident, design-oriented, cosmopolitan, bright, and product-first. Flag rustic, retro, mainstream, overly commercial, overly dark, playful, or cluttered treatments.
 
 For Cromargan® imagery, inspect whether the material reads as credible: glossy products need shaped highlights and hard edges; matt products need matt highlights and shadows; brushing must remain visible. Flag uniformly black, unnaturally matt, or visually flat metal.
+
+For image generation, editing, background replacement, or mood matching, read `references/visual-reference-index.md` and inspect the relevant images with the available image-viewing tool before writing a prompt or judging an output. Treat approved images as visual evidence, not as permission to reproduce protected product geometry or campaign artwork outside authorised WMF work. Use avoid examples diagnostically: identify the specific colour, lighting, composition, or material problem instead of copying the whole image.
+
+When editing a supplied product image, preserve product geometry, labels, marks, red Function 4 lid rings, handles, edges, and proportions unless the user explicitly asks to change them. State edit invariants in the generation prompt. Do not let a mood reference reintroduce background architecture, props, text, callouts, or other elements excluded by the brief.
 
 ## Asset and legal review
 

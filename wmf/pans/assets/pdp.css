@@ -25,16 +25,42 @@ body.pdp .site-footer { margin-top: 0; }
   padding: 10px 0 46px;
 }
 
-/* ---- gallery ---- */
+/* ---- gallery (live-shop style: arrows on the stage, progress bar, bordered thumbs) ---- */
 .pdp-stage {
   position: relative; aspect-ratio: 1 / 1;
-  background: #fff; border: 1px solid var(--line-soft); border-radius: 6px;
-  overflow: hidden;
+  background: #fff; overflow: hidden;
 }
-.pdp-stage img { width: 100%; height: 100%; object-fit: cover; }
+.pdp-stage img { width: 100%; height: 100%; object-fit: cover; cursor: zoom-in; }
 .pdp-stage.is-packshot img { object-fit: contain; padding: 7%; }
+.pdp-zoom {
+  position: absolute; top: 8px; right: 8px; z-index: 2;
+  width: 40px; height: 40px; border: 0; padding: 0; background: none; color: #2e2e2e;
+  display: grid; place-items: center;
+}
+.pdp-zoom:hover { color: #000; }
+.pdp-nav {
+  position: absolute; top: 50%; transform: translateY(-50%);
+  width: 46px; height: 46px; border-radius: 50%; border: 0; padding: 0;
+  background: #4f4f4f; color: #fff;
+  display: grid; place-items: center; z-index: 2;
+  transition: background .15s, color .15s, opacity .15s;
+}
+.pdp-nav--prev { left: 14px; }
+.pdp-nav--next { right: 14px; }
+.pdp-nav:hover:not(:disabled) { background: #2e2e2e; }
+.pdp-nav:disabled { background: #e2e2e2; color: #7c7c7c; cursor: default; }
+.pdp-nav[hidden] { display: none; }
+.pdp-progress {
+  position: relative; width: 62%; height: 3px; margin: 24px auto 0;
+  background: #ececec; overflow: hidden;
+}
+.pdp-progress[hidden] { display: none; }
+.pdp-progress span {
+  display: block; height: 100%; background: #111;
+  transition: transform .25s ease;
+}
 .pdp-videoflag {
-  position: absolute; top: 22px; right: 22px;
+  position: absolute; top: 22px; left: 22px;
   display: inline-flex; align-items: center; gap: 9px;
   height: 35px; padding: 0 18px 0 12px; border: 0; border-radius: 999px;
   background: rgba(90, 90, 90, .55); color: #fff;
@@ -44,15 +70,20 @@ body.pdp .site-footer { margin-top: 0; }
 }
 .pdp-videoflag:hover { background: rgba(60, 60, 60, .65); }
 .pdp-videoflag[hidden] { display: none; }
-.pdp-thumbs { display: flex; gap: 18px; margin-top: 18px; overflow-x: auto; padding-bottom: 6px; scrollbar-width: thin; }
+.pdp-thumbs { display: flex; gap: 18px; margin-top: 24px; overflow-x: auto; padding-bottom: 6px; scrollbar-width: thin; }
+/* centered when the row fits, scrollable when it doesn't */
+.pdp-thumb:first-child { margin-left: auto; }
+.pdp-thumb:last-child { margin-right: auto; }
 .pdp-thumb {
-  flex: none; width: 112px; height: 112px;
-  border: 1px solid var(--line-soft); border-radius: 6px; background: #fff;
+  flex: none; width: 142px; height: 142px;
+  border: 1px solid #d9d9d9; background: #fff;
   padding: 0; overflow: hidden; cursor: pointer;
+  transition: border-color .15s;
 }
+.pdp-thumb:hover { border-color: #9a9a9a; }
 .pdp-thumb img { width: 100%; height: 100%; object-fit: cover; }
-.pdp-thumb.is-packshot img { object-fit: contain; padding: 8%; }
-.pdp-thumb.sel { outline: 2px solid var(--black); outline-offset: -2px; }
+.pdp-thumb.is-packshot img { object-fit: contain; padding: 9%; }
+.pdp-thumb.sel { border-color: #1a1a1a; box-shadow: inset 0 0 0 .5px #1a1a1a; }
 
 /* ---- buy box ---- */
 .buy-box { display: flex; flex-direction: column; }
@@ -198,6 +229,20 @@ body.pdp .site-footer { margin-top: 0; }
 .bb-trust-tile svg { margin-bottom: 3px; }
 .bb-trust-tile .t1 { font-size: 13px; font-weight: 700; letter-spacing: .04em; text-transform: uppercase; }
 .bb-trust-tile .t2 { font-size: 11px; font-weight: 300; color: #333; }
+
+/* ============================================================
+   FEATURE USP ICON STRIP
+   ============================================================ */
+.usp-strip {
+  display: flex; flex-wrap: wrap; justify-content: center;
+  gap: 34px 26px; padding: 44px 0 2px;
+}
+.usp { width: 122px; display: flex; flex-direction: column; align-items: center; gap: 13px; }
+.usp svg { display: block; color: #1a1a1a; }
+.usp span {
+  font-size: 11.5px; font-weight: 600; letter-spacing: .06em; text-transform: uppercase;
+  text-align: center; line-height: 1.45;
+}
 
 /* ============================================================
    FEATURE BANNERS (black cards)
@@ -404,6 +449,29 @@ body.pdp .site-footer { margin-top: 0; }
 .sg-row.dim { color: #9a9a96; }
 
 /* ============================================================
+   FULLSCREEN LIGHTBOX  (gallery zoom, like the live shop)
+   ============================================================ */
+.pdp-lightbox { position: fixed; inset: 0; z-index: 130; background: #fff; display: none; }
+.pdp-lightbox[aria-hidden="false"] { display: block; }
+.pdp-lightbox img {
+  position: absolute; inset: 64px; margin: auto;
+  max-width: calc(100% - 168px); max-height: calc(100% - 128px);
+  object-fit: contain;
+}
+.lb-close {
+  position: absolute; top: 18px; right: 18px; z-index: 2;
+  background: none; border: 0; padding: 10px; color: #333; display: inline-flex; border-radius: 50%;
+}
+.lb-close:hover { color: #000; background: rgba(0, 0, 0, .05); }
+.pdp-lightbox .pdp-nav { position: absolute; top: 50%; transform: translateY(-50%); }
+.pdp-lightbox .lb-prev { left: 26px; }
+.pdp-lightbox .lb-next { right: 26px; }
+.lb-count {
+  position: absolute; bottom: 22px; left: 50%; transform: translateX(-50%);
+  font-size: 12px; font-weight: 300; letter-spacing: .14em; color: #555;
+}
+
+/* ============================================================
    RESPONSIVE
    ============================================================ */
 @media (max-width: 1180px) {
@@ -434,6 +502,8 @@ body.pdp .site-footer { margin-top: 0; }
   .fbanner--layers .fbanner-copy, .fbanner--img-left .fbanner-copy { padding: 30px; }
 
   .adv-grid { grid-template-columns: 1fr; gap: 40px; }
+  .usp-strip { gap: 26px 6px; }
+  .usp { width: 30%; min-width: 100px; }
   .ugc-row .track-arrow { display: none; }
   .ugc-track, .recipes-track { justify-content: flex-start; }
   .testimonial blockquote { font-size: 22px; }
@@ -442,6 +512,10 @@ body.pdp .site-footer { margin-top: 0; }
 }
 @media (max-width: 560px) {
   .pdp-modal-panel { max-width: calc(100vw - 24px); padding: 22px 20px 24px; }
+  .pdp-lightbox img { inset: 46px 12px 60px; max-width: calc(100% - 24px); max-height: calc(100% - 106px); }
+  .pdp-lightbox .lb-prev { left: 8px; }
+  .pdp-lightbox .lb-next { right: 8px; }
+  .pdp-nav { width: 40px; height: 40px; }
   .sg-row { grid-template-columns: 74px 104px minmax(0, 1fr); gap: 8px; font-size: 13px; }
   .bb-title { font-size: 23px; }
   .bb-price { font-size: 26px; }

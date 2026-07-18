@@ -249,7 +249,10 @@
 
   var BAG_S = '<svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="#1c1c1c" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 8h12l1 12.5H5L6 8Z"/><path d="M9 8a3 3 0 0 1 6 0"/></svg>';
   var HEART_S = '<svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="#1c1c1c" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20.8 5.6a5 5 0 0 0-7.1 0L12 7.3l-1.7-1.7a5 5 0 0 0-7.1 7.1L12 21.5l8.8-8.8a5 5 0 0 0 0-7.1Z"/></svg>';
-  var PROMO = '<article class="promo-tile"><img src="assets/promo-bg.png" alt=""><div class="promo-copy"><h3>Choose the right pan for the job</h3></div><a class="btn-outline" href="frying-pans.html#compare" style="border-color:#fff;color:#fff;background:transparent;margin-top:22px">Compare range</a></article>';
+  /* merchandising tile (Figma PLP): text low in the dark half, whole tile links to the comparison */
+  var PROMO = '<a class="promo-tile" href="frying-pans.html#compare" aria-label="Choose the right pan for the job — compare our range">' +
+    '<img src="assets/promo-bg.png" alt="">' +
+    '<h3>Choose the right pan for the job</h3></a>';
 
   /* corner badge = the shop's real product label for the selected variant */
   function badgeFor(v) {

@@ -98,6 +98,9 @@
     var mainImg = document.getElementById('pdpMain');
     var flag = document.getElementById('pdpVideoFlag');
     var thumbsEl = document.getElementById('pdpThumbs');
+    var prevBtn = document.getElementById('pdpPrev');
+    var nextBtn = document.getElementById('pdpNext');
+    var progress = document.getElementById('pdpProgress');
 
     function itemSrc(it) { return it.kind === 'packshot' ? img(p.variants[sel].sku) : it.src; }
     function renderStage() {
@@ -106,7 +109,72 @@
       mainImg.alt = it.kind === 'packshot' ? p.brand + ' ' + p.name : (it.alt || '');
       stage.classList.toggle('is-packshot', it.kind === 'packshot');
       flag.hidden = !it.video;
+      var many = items.length > 1;
+      prevBtn.hidden = nextBtn.hidden = !many;
+      progress.hidden = !many;
+      prevBtn.disabled = active === 0;
+      nextBtn.disabled = active === items.length - 1;
+      var seg = progress.querySelector('span');
+      seg.style.width = (100 / items.length) + '%';
+      seg.style.transform = 'translateX(' + (active * 100) + '%)';
     }
+    function stepGallery(d) {
+      active = Math.max(0, Math.min(items.length - 1, active + d));
+      renderStage(); renderThumbs(); renderLightbox();
+    }
+    prevBtn.addEventListener('click', function () { stepGallery(-1); });
+    nextBtn.addEventListener('click', function () { stepGallery(1); });
+
+    /* ---------- fullscreen lightbox (the live shop's gallery zoom) ---------- */
+    var lightbox = document.getElementById('pdpLightbox');
+    var zoomBtn = document.getElementById('pdpZoom');
+    var LB_X = '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M6 6l12 12M18 6 6 18"/></svg>';
+    var LB_L = '<svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m15 6-6 6 6 6"/></svg>';
+    var LB_R = '<svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m9 6 6 6-6 6"/></svg>';
+
+    function lightboxOpen() { return lightbox && lightbox.getAttribute('aria-hidden') === 'false'; }
+    function renderLightbox() {
+      if (!lightboxOpen()) return;
+      var it = items[active];
+      var im = lightbox.querySelector('img');
+      im.src = itemSrc(it);
+      im.alt = it.kind === 'packshot' ? p.brand + ' ' + p.name : (it.alt || '');
+      lightbox.querySelector('.lb-prev').disabled = active === 0;
+      lightbox.querySelector('.lb-next').disabled = active === items.length - 1;
+      lightbox.querySelector('.lb-count').textContent = (active + 1) + ' / ' + items.length;
+    }
+    function openLightbox() {
+      lightbox.innerHTML =
+        '<button class="lb-close" aria-label="Close">' + LB_X + '</button>' +
+        '<button class="pdp-nav lb-prev" aria-label="Previous image">' + LB_L + '</button>' +
+        '<img alt="">' +
+        '<button class="pdp-nav lb-next" aria-label="Next image">' + LB_R + '</button>' +
+        '<span class="lb-count"></span>';
+      lightbox.setAttribute('aria-hidden', 'false');
+      document.body.style.overflow = 'hidden';
+      renderLightbox();
+      var c = lightbox.querySelector('.lb-close');
+      if (c) c.focus();
+    }
+    function closeLightbox() {
+      if (!lightboxOpen()) return;
+      lightbox.setAttribute('aria-hidden', 'true');
+      lightbox.innerHTML = '';
+      document.body.style.overflow = '';
+    }
+    zoomBtn.addEventListener('click', openLightbox);
+    mainImg.addEventListener('click', openLightbox);
+    lightbox.addEventListener('click', function (e) {
+      if (e.target.closest('.lb-close')) { closeLightbox(); return; }
+      if (e.target.closest('.lb-prev')) { stepGallery(-1); return; }
+      if (e.target.closest('.lb-next')) { stepGallery(1); return; }
+      if (e.target === lightbox) closeLightbox();
+    });
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape') closeLightbox();
+      else if (lightboxOpen() && e.key === 'ArrowLeft') stepGallery(-1);
+      else if (lightboxOpen() && e.key === 'ArrowRight') stepGallery(1);
+    });
     function renderThumbs() {
       thumbsEl.innerHTML = items.map(function (it, i) {
         return '<button class="pdp-thumb' + (i === active ? ' sel' : '') + (it.kind === 'packshot' ? ' is-packshot' : '') + '" data-i="' + i + '" aria-label="Image ' + (i + 1) + '">' +

@@ -110,12 +110,18 @@ node `2:2`), as one template that renders **any catalog product** via `?id=`:
   set upsell (appears when the series has a Set — links to its PDP), size chips with serving
   hints + per-variant stock, stock-aware delivery block and CTA, Technical Data accordion
   (per-variant SKU), "Suitable alternatives" (same category, real shop order, live tiles).
-- **Figma example content** — the below-fold marketing (SearProtect®/3-ply banners, Product
+- **Figma example content** — the feature USP icon strip (7 line icons: 10-year warranty,
+  metal-utensil safe, oven-safe, dishwasher safe, mineral ceramic non-stick, all hobs,
+  3-ply — drawn as inline SVGs) and the below-fold marketing (SearProtect®/3-ply banners, Product
   Advantages, UGC row, VOGUE testimonial, recipes) describes the honeycomb Profi Resist build,
   so it renders **only for the Profi Resist series** (`p1`, `p11`, `p12`); other products get the
   standard PDP without it. The gallery works the same way: Profi Resist gets the mock's
   lifestyle shots (steak main + honeycomb/3-ply/cleaning/heating thumbs, "Watch video" flag),
-  everything else gets its packshot + the shared in-use shot.
+  everything else gets its packshot + the shared in-use shot. Gallery chrome follows the live
+  shop: prev/next circles on the stage (pale when at either end), a thin progress bar,
+  square bordered thumbnails (black border = active) that center when they fit and scroll
+  when they don't, and the zoom icon top-right (or a click on the image) opening a
+  fullscreen viewer with arrows, an image counter, Esc/arrow-key support.
 - **Example content, shared across products** (same precedent as the shared hover shot):
   the 3 reviews from the mock (capped at the product's *real* review count, so `p1` shows 2),
   the buy-box accessory (Profi Plus spatula) and the "Ideally complements" accessories with

@@ -30,7 +30,17 @@
               <svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="11" fill="rgba(255,255,255,.22)"/><path d="M10 8.2v7.6l6-3.8-6-3.8Z" fill="#fff"/></svg>
               Watch video
             </button>
+            <button class="pdp-nav pdp-nav--prev" id="pdpPrev" aria-label="Previous image">
+              <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m15 6-6 6 6 6"/></svg>
+            </button>
+            <button class="pdp-nav pdp-nav--next" id="pdpNext" aria-label="Next image">
+              <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m9 6 6 6-6 6"/></svg>
+            </button>
+            <button class="pdp-zoom" id="pdpZoom" aria-label="Zoom image">
+              <svg width="24" height="24" viewBox="0 0 22 22" fill="none" stroke="currentColor" stroke-linecap="round"><circle cx="9" cy="9" r="8.1" stroke-width="1.1"/><path d="M9 5.2v7.6M5.2 9h7.6" stroke-width="1.1"/><path d="m14.9 14.9 5.9 5.8" stroke-width="1.1"/></svg>
+            </button>
           </div>
+          <div class="pdp-progress" id="pdpProgress" aria-hidden="true"><span></span></div>
           <div class="pdp-thumbs" id="pdpThumbs"></div>
         </div>
 
@@ -43,6 +53,66 @@
     <div id="pdpMarketing" hidden>
 
       <div class="wrap">
+        <!-- feature USP icon strip -->
+        <section class="usp-strip" aria-label="Product feature icons">
+          <div class="usp">
+            <svg width="48" height="48" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M24 5.5 37.5 10v12c0 9.6-5.9 16.6-13.5 20.4C16.4 38.6 10.5 31.6 10.5 22V10Z"/>
+              <text x="24" y="27.5" text-anchor="middle" font-size="12.5" font-weight="600" fill="currentColor" stroke="none" font-family="inherit">10</text>
+            </svg>
+            <span>10 Year<br>Warranty</span>
+          </div>
+          <div class="usp">
+            <svg width="48" height="48" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <g transform="rotate(-32 24 24)"><rect x="20.2" y="5.5" width="7.6" height="12" rx="2.4"/><path d="M22.3 8v7M25.7 8v7M24 17.5V42"/></g>
+              <g transform="rotate(32 24 24)"><ellipse cx="24" cy="11.5" rx="4.4" ry="6.2"/><path d="M24 17.7V42"/></g>
+            </svg>
+            <span>Metal Utensil<br>Safe</span>
+          </div>
+          <div class="usp">
+            <svg width="48" height="48" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <rect x="8" y="9.5" width="32" height="30" rx="3"/>
+              <circle cx="16" cy="14.5" r="1.1" fill="currentColor" stroke="none"/><circle cx="24" cy="14.5" r="1.1" fill="currentColor" stroke="none"/><circle cx="32" cy="14.5" r="1.1" fill="currentColor" stroke="none"/>
+              <path d="M8 19.5h32"/>
+              <path d="M14.5 27.5c3-2.6 6.5-2.6 9.5 0s6.5 2.6 9.5 0M14.5 33c3-2.6 6.5-2.6 9.5 0s6.5 2.6 9.5 0"/>
+            </svg>
+            <span>Oven-Safe<br>Up To 400&deg;</span>
+          </div>
+          <div class="usp">
+            <svg width="48" height="48" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <rect x="9" y="8" width="30" height="32" rx="3"/>
+              <path d="M9 14h30"/><path d="M13 11h4"/><circle cx="34" cy="11" r="1" fill="currentColor" stroke="none"/>
+              <path d="M15.2 21.5h6.6c0 4-1.5 6.3-3.3 6.3s-3.3-2.3-3.3-6.3ZM18.5 27.8v5M16 32.8h5"/>
+              <ellipse cx="29" cy="27" rx="2.7" ry="5.6"/><ellipse cx="35" cy="27" rx="2.7" ry="5.6"/>
+            </svg>
+            <span>Dishwasher<br>Safe</span>
+          </div>
+          <div class="usp">
+            <svg width="48" height="48" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M11.5 22.5c-.8-5.5 3.4-9.6 8.4-9.3 5.2.3 9 4.2 8.4 9-.5 4.3-4.3 6.9-8.3 6.8-4.3-.1-7.9-2.6-8.5-6.5Z"/>
+              <circle cx="19.7" cy="21.6" r="3.1"/>
+              <path d="M8.5 33.5c1.5 3 5.5 4.5 9.5 4.5h6.5c4 0 7.5-1.5 9-4.5Z"/>
+              <path d="M33.5 34.8h8M33.5 36.9h6"/>
+            </svg>
+            <span>Mineral Ceramic<br>Non-Stick</span>
+          </div>
+          <div class="usp">
+            <svg width="48" height="48" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <circle cx="24" cy="24" r="15"/>
+              <path d="M30 24h5M28.2 28.2l3.6 3.6M24 30v5M19.8 28.2l-3.6 3.6M18 24h-5M19.8 19.8l-3.6-3.6M24 18v-5M28.2 19.8l3.6-3.6"/>
+            </svg>
+            <span>All Hobs<br>Compatible</span>
+          </div>
+          <div class="usp">
+            <svg width="48" height="48" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M7.5 14.5v15a8.5 8.5 0 0 0 8.5 8.5h16a8.5 8.5 0 0 0 8.5-8.5v-15"/>
+              <path d="M13 14.5v13.6a6 6 0 0 0 6 6h10a6 6 0 0 0 6-6V14.5"/>
+              <path d="M18.5 14.5v11.7a4 4 0 0 0 4 4h3a4 4 0 0 0 4-4V14.5"/>
+            </svg>
+            <span>3-Ply<br>Responsive</span>
+          </div>
+        </section>
+
         <section class="feature-banners" aria-label="Product features">
           <article class="fbanner fbanner--img-left">
             <div class="fbanner-media"><img src="assets/pdp/banner-searprotect.jpg" alt="Close-up of the raised honeycomb structure of the pan surface"></div>
@@ -275,6 +345,7 @@
   <div id="chrome-footer"></div>
   <div id="chrome-search"></div>
   <div class="pdp-modal" id="pdpModal" aria-hidden="true"></div>
+  <div class="pdp-lightbox" id="pdpLightbox" aria-hidden="true"></div>
 
 </body>
 </html>

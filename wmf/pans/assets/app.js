@@ -101,6 +101,7 @@
 
         '<div class="nav-drawer" id="navDrawer"><div class="nav-drawer-head">Menu' +
           '<button class="icon-btn" style="color:#333" data-act="nav-close">' + I.x + '</button></div>' +
+          '<button class="nav-drawer-search" data-act="search">' + I.searchDark + '<span>Search</span></button>' +
           '<div class="nav-drawer-body">' +
             MENU.nav.map(function (n, i) { return '<a href="#" data-mi="n:' + i + '">' + esc(n.label) + ' ' + I.chev + '</a>'; }).join('') +
             '<div style="height:8px"></div>' +
@@ -193,7 +194,11 @@
       var act = e.target.closest('[data-act]');
       if (act) {
         var a = act.getAttribute('data-act');
-        if (a === 'search') { openSearch(); return; }
+        if (a === 'search') {
+          // opening search from the mobile menu closes the drawer beneath it
+          document.body.classList.remove('nav-open'); closeMobilePanel();
+          openSearch(); return;
+        }
         if (a === 'search-close') {
           // one icon clears the query first, then closes (scrim closes outright)
           var inp = document.getElementById('searchInput');

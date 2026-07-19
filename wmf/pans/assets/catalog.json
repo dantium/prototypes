@@ -533,6 +533,20 @@
    "occasion": [
     "Everyday",
     "Gifting"
+   ],
+   "bundle": [
+    {
+     "qty": 1,
+     "name": "Profi Resist Fry Pan, 24 cm",
+     "sku": "3201000357",
+     "id": "p1"
+    },
+    {
+     "qty": 1,
+     "name": "Profi Resist Fry Pan, 28 cm",
+     "sku": "3201000358",
+     "id": "p1"
+    }
    ]
   },
   {
@@ -1248,6 +1262,19 @@
    "occasion": [
     "Everyday",
     "Gifting"
+   ],
+   "bundle": [
+    {
+     "qty": 1,
+     "name": "Durado Fry Pan, 24 cm",
+     "sku": "7115005328"
+    },
+    {
+     "qty": 1,
+     "name": "Durado Fry Pan, 28 cm",
+     "sku": "7115005330",
+     "id": "p36"
+    }
    ]
   },
   {

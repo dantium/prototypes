@@ -299,6 +299,18 @@
         '<button class="bb-cta" data-act="add"' + (v.stock ? '' : ' disabled') + '>' + (v.stock ? 'Add to cart' : 'Out of stock') + '</button>' +
         '<button class="bb-wish" data-act="wish" aria-label="Add to wishlist">' + ICONS.heart + '</button></div>';
 
+      /* bundle products list their components (live-shop "Dieses Set enthält") */
+      if (p.bundle && p.bundle.length) {
+        h += '<div class="bb-bundle"><span class="lbl">This set contains:</span>' +
+          p.bundle.map(function (b) {
+            var inner = '<span class="bb-bundle-thumb"><img src="' + img(b.sku) + '" alt=""></span>' +
+              '<span>' + (b.qty || 1) + ' × ' + esc(b.name) + '</span>';
+            return b.id
+              ? '<a class="bb-bundle-row" href="product.html?id=' + b.id + '">' + inner + '</a>'
+              : '<span class="bb-bundle-row">' + inner + '</span>';
+          }).join('') + '</div>';
+      }
+
       h += '<div class="bb-trust">' +
         '<div class="bb-trust-tile">' + ICONS.truck + '<span class="t1">Free Delivery</span><span class="t2">Orders over €49</span></div>' +
         '<div class="bb-trust-tile">' + ICONS.ret + '<span class="t1">Free Returns</span><span class="t2">DHL Go-Green</span></div>' +

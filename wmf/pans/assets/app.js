@@ -326,7 +326,6 @@
         '<div class="card-price"><span class="price' + (onSale ? ' sale' : '') + '">' + eur(v.price) + '</span>' +
         (onSale ? '<span class="discount">Save ' + save + '%</span>' : '') + '</div>' +
         (onSale ? '<p class="card-was">' + eur(v.msrp) + ' (last 30 days lowest price)</p>' : '') +
-        '<p class="card-vat">Including VAT</p>' +
         '<div class="stock' + (v.stock ? '' : ' out') + '"><span class="dot"></span>' + (v.stock ? 'In stock' : 'Out of stock') + '</div>' +
         '<div class="card-sizes"><span class="lbl">Size:</span>' + swatches + '</div>' +
       '</div></article>';

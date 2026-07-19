@@ -219,6 +219,20 @@ body.pdp .site-footer { margin-top: 0; }
 .bb-wish.on { color: #b91c1c; }
 .bb-wish.on svg path { fill: #b91c1c; }
 
+/* bundle contents (live-shop "This set contains") */
+.bb-bundle { margin-top: 18px; padding-top: 16px; border-top: 1px solid var(--line-soft); }
+.bb-bundle .lbl { display: block; margin-bottom: 12px; font-size: 15px; font-weight: 500; }
+.bb-bundle-row {
+  display: flex; align-items: center; gap: 14px;
+  padding: 4px 0; font-size: 14px; font-weight: 300; color: #1a1a1a; width: fit-content;
+}
+a.bb-bundle-row:hover { color: var(--gold-deep); }
+.bb-bundle-thumb {
+  flex: none; width: 40px; height: 40px;
+  background: #fff; border: 1px solid var(--line-soft); display: grid; place-items: center;
+}
+.bb-bundle-thumb img { width: 34px; height: 34px; object-fit: contain; }
+
 /* trust tiles */
 .bb-trust { display: grid; grid-template-columns: repeat(3, 1fr); gap: 13px; margin-top: 16px; }
 .bb-trust-tile {

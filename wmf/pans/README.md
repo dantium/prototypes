@@ -110,6 +110,9 @@ node `2:2`), as one template that renders **any catalog product** via `?id=`:
   set upsell (appears when the series has a Set — links to its PDP), size chips with serving
   hints + per-variant stock, stock-aware delivery block and CTA, Technical Data accordion
   (per-variant SKU), "Suitable alternatives" (same category, real shop order, live tiles).
+  Bundle products (the shop's BUNDLE label: `p12`, `p30`) list their components under the CTA
+  like the live bundle PDP ("This set contains:", thumbnails + 1 × item), driven by a `bundle`
+  array in the JSON; components that exist as catalog products link to their own PDP.
 - **Figma example content** — the feature USP icon strip (7 line icons: 10-year warranty,
   metal-utensil safe, oven-safe, dishwasher safe, mineral ceramic non-stick, all hobs,
   3-ply — drawn as inline SVGs) and the below-fold marketing (SearProtect®/3-ply banners, Product

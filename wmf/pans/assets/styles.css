@@ -388,8 +388,7 @@ body.nav-open::before { content: ""; position: fixed; inset: 0; background: rgba
 .card-price { display: flex; align-items: center; gap: 8px; padding: 8px 0 0; flex-wrap: wrap; }
 .price { font-size: 20px; font-weight: 700; }
 .price.sale { color: var(--sale); }
-.card-was { margin: 2px 0 0; font-size: 12px; font-weight: 300; font-style: italic; color: #1a1a1a; }
-.card-vat { margin: 1px 0 2px; font-size: 11px; font-weight: 300; color: #8a8a8a; }
+.card-was { margin: 2px 0 2px; font-size: 12px; font-weight: 300; font-style: italic; color: #1a1a1a; }
 .msrp { font-size: 14px; font-weight: 300; font-style: italic; color: #4a4a4a; }
 .discount {
   display: inline-flex; align-items: center; height: 22px; padding: 0 12px;

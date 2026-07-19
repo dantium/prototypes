@@ -37,13 +37,22 @@
   function panelHTML(item) {
     var cols = item.columns || [];
     if (!cols.length) return '';
-    var n = cols.length + (item.tile ? 1 : 0);
+    var n = cols.reduce(function (a, c) { return a + (c.span || 1); }, 0) + (item.tile ? 1 : 0);
     var html = cols.map(function (c) {
-      return '<div><div class="mm-colhead">' + esc(c.title) +
+      // a column can be a plain link list or a grid of series cards (image + strapline)
+      var body = c.series
+        ? '<div class="mm-series">' + c.series.map(function (s) {
+            return '<a class="mm-series-card" href="' + esc(s.href || '#') + '">' +
+              '<img src="' + esc(s.img || '') + '" alt="">' +
+              '<span><b>' + esc(s.label) + '</b><small>' + esc(s.desc || '') + '</small></span></a>';
+          }).join('') + '</div>'
+        : (c.links || []).map(function (l) {
+            return '<a class="mm-link" href="' + esc(l.href || '#') + '">' + esc(l.label) + '</a>';
+          }).join('');
+      return '<div' + (c.span ? ' style="grid-column:span ' + (+c.span) + '"' : '') + '>' +
+        '<div class="mm-colhead">' + esc(c.title) +
         (c.viewAll ? ' <a href="' + esc(c.viewAll) + '">View all</a>' : '') + '</div>' +
-        (c.links || []).map(function (l) {
-          return '<a class="mm-link" href="' + esc(l.href || '#') + '">' + esc(l.label) + '</a>';
-        }).join('') + '</div>';
+        body + '</div>';
     }).join('');
     if (item.tile) {
       html += '<div class="mm-col--tile"><div class="mm-tile"><img src="' + esc(item.tile.img) + '" alt="">' +
@@ -136,13 +145,22 @@
   /* ---- megamenu + drawers behaviour ---- */
   var mmCurrent = null;
   var mmCloseTimer = null;
+  /* the nav item whose panel is open keeps its hover look until the panel closes */
+  function markOpenNav(item) {
+    document.querySelectorAll('.nav-item.menu-open').forEach(function (b) { b.classList.remove('menu-open'); });
+    if (!item) return;
+    document.querySelectorAll('.nav-item[data-mi]').forEach(function (b) {
+      if (menuItemFor(b) === item) b.classList.add('menu-open');
+    });
+  }
   function setMenu(item) {
     clearTimeout(mmCloseTimer);
     var mmPanel = document.getElementById('mmPanel'); if (!mmPanel) return;
-    if (!item || !(item.columns || []).length) { mmPanel.classList.remove('open'); mmCurrent = null; return; }
+    if (!item || !(item.columns || []).length) { mmPanel.classList.remove('open'); mmCurrent = null; markOpenNav(null); return; }
     if (mmCurrent !== item) mmPanel.innerHTML = panelHTML(item);
     mmPanel.classList.add('open');
     mmCurrent = item;
+    markOpenNav(item);
   }
   function openMobilePanel(item) {
     var el = document.getElementById('mmMobilePanel'); if (!el) return;

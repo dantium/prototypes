@@ -275,29 +275,42 @@
     },
     {
      "title": "KNIFE SERIES",
-     "links": [
+     "span": 2,
+     "series": [
       {
        "label": "Grand Gourmet",
+       "desc": "Top performance in the most beautiful design.",
+       "img": "assets/knives/grand-gourmet.jpg",
        "href": "#"
       },
       {
        "label": "Classic Line",
+       "desc": "The right knives from the start.",
+       "img": "assets/knives/classic-line.jpg",
        "href": "#"
       },
       {
        "label": "Grand Wood",
+       "desc": "A unique masterpiece of nature.",
+       "img": "assets/knives/grand-wood.jpg",
        "href": "#"
       },
       {
        "label": "Yari",
+       "desc": "67-layer Japanese special blade steel.",
+       "img": "assets/knives/yari.jpg",
        "href": "#"
       },
       {
        "label": "Ultimate Black",
+       "desc": "Carbon coating in an iconic shape.",
+       "img": "assets/knives/ultimate-black.jpg",
        "href": "#"
       },
       {
        "label": "Grand Class",
+       "desc": "Classic style presented in a modern way.",
+       "img": "assets/knives/grand-class.jpg",
        "href": "#"
       }
      ]

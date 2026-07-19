@@ -5,7 +5,7 @@ design system (Rotis, tokens) and the existing comparison-table/header/search pr
 
 | Page | What it is |
 |---|---|
-| `index.html` | Home — search-prototype style: header + hero banner only |
+| `index.html` | Home — full-screen campaign banner (the megamenu prototype's World Cup hero, header overlaid), CTA into the journey |
 | `pans.html` | **Pans** category PLP — subcategory tiles, 34 real products |
 | `frying-pans.html` | **Frying Pans** subcategory PLP — 29 real products, comparison table, FAQ |
 | `product.html?id=…` | **PDP** — Figma "PDP - HoneyComb Pro+" design, rendered from the catalog for any product (defaults to `p1`, the Profi Resist Fry Pan the mock depicts) |

@@ -94,7 +94,7 @@ button { font-family: inherit; cursor: pointer; }
   color: #cfcfcf; padding: 14px 0 16px; border-bottom: 2px solid transparent; cursor: pointer;
   background: none; border-top: 0; border-left: 0; border-right: 0;
 }
-.nav-item:hover, .nav-item.active { color: #fff; border-bottom-color: var(--gold-deep); }
+.nav-item:hover, .nav-item.active, .nav-item.menu-open { color: #fff; border-bottom-color: var(--gold-deep); }
 .nav-item--muted { color: #9a9a96; }
 .header-hamburger { display: none; }
 
@@ -107,8 +107,16 @@ button { font-family: inherit; cursor: pointer; }
   display: none;
 }
 .mm-panel.open { display: block; }
-.mm-inner { max-width: 1300px; margin: 0 auto; padding: 38px 40px 52px; }
+/* panel content shares the header rows' width (.wrap: 1520px incl. 40px padding) */
+.mm-inner { max-width: 1520px; margin: 0 auto; padding: 38px 40px 52px; }
 .mm-grid { display: grid; grid-template-columns: repeat(var(--cols, 4), minmax(0, 1fr)); gap: 32px; align-items: start; }
+/* series cards (knives menu, from the Figma megamenu mock) */
+.mm-series { display: grid; grid-template-columns: 1fr 1fr; gap: 26px 30px; }
+.mm-series-card { display: flex; gap: 16px; align-items: flex-start; }
+.mm-series-card img { width: 92px; height: 62px; object-fit: cover; border-radius: 2px; background: #eee; flex: none; }
+.mm-series-card b { display: block; font-size: 14px; font-weight: 700; letter-spacing: .05em; text-transform: uppercase; color: #1c1c1c; }
+.mm-series-card small { display: block; margin-top: 4px; font-size: 13px; font-weight: 300; color: #5c5c58; line-height: 1.35; }
+.mm-series-card:hover b { color: var(--gold-deep); }
 .mm-colhead {
   font-weight: 500; font-size: 15px; letter-spacing: 0.22em; text-transform: uppercase;
   color: #1c1c1c; margin: 0 0 18px; display: flex; align-items: baseline; gap: 12px;
@@ -627,6 +635,7 @@ body.searching .page-head,
 body.searching .subcats,
 body.searching .catnav,
 body.searching .compare-section,
+body.searching .cat-only,
 body.searching .faq { display: none; }
 
 /* ---- no results ---- */
@@ -639,14 +648,38 @@ body.searching .faq { display: none; }
 .nr-cats { display: flex; justify-content: center; gap: 10px; flex-wrap: wrap; }
 
 /* ============================================================
-   HOME PAGE  (search prototype: header + hero banner, nothing else)
+   HOME PAGE — full-screen campaign banner (megamenu prototype hero):
+   the banner fills the viewport below the header; copy sits bottom-left.
    ============================================================ */
-.home-hero { max-width: 1520px; margin: 0 auto; padding: 0 40px; }
-.home-hero img { width: 100%; height: clamp(300px, 40vw, 540px); object-fit: cover; }
-body.home .site-footer { margin-top: 60px; }
-@media (max-width: 900px) {
-  .home-hero { padding: 0 22px; }
+/* like the megamenu prototype: the hero fills the whole viewport and the
+   (solid) header overlays its top edge; the footer sits below the fold */
+body.home #chrome-header { position: absolute; top: 0; left: 0; right: 0; z-index: 60; }
+body.home .site-footer { margin-top: 0; }
+.home-banner { position: relative; height: 100dvh; min-height: 560px; overflow: hidden; background: #161616; }
+.home-banner > img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.home-banner .hb-copy {
+  position: absolute; inset: 0; display: flex; flex-direction: column; justify-content: flex-end;
+  max-width: 1300px; margin: 0 auto;
+  padding: 0 clamp(20px, 5vw, 40px) clamp(48px, 6vw, 84px);
 }
+.home-banner h1 {
+  margin: 0; color: #fff;
+  font-size: clamp(28px, 4.6vw, 52px); line-height: 1.16; font-weight: 400;
+  letter-spacing: 0.16em; text-transform: uppercase;
+}
+.home-banner p {
+  margin: 18px 0 0; max-width: 560px;
+  color: rgba(255, 255, 255, 0.92);
+  font-size: clamp(16px, 1.7vw, 20px); font-weight: 400; line-height: 1.5;
+}
+.hb-cta {
+  display: inline-block; margin-top: 28px;
+  background: var(--button); color: #1a1a1a;
+  font-size: 13px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase;
+  padding: 15px 34px; border-radius: 9999px;
+  transition: background .15s;
+}
+.hb-cta:hover { background: var(--gold); }
 
 /* ============================================================
    RESPONSIVE

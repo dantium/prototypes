@@ -250,10 +250,6 @@
         '<span>3 payments of ' + klarna + ' € at 0% interest with Klarna <a href="#">Learn more</a></span>' +
         '<button class="bar-info" aria-label="More about Klarna">' + ICONS.info + '</button></div>';
 
-      h += '<div class="bb-bar bb-bar--club"><img src="assets/pdp/mywmf.png" alt="myWMF">' +
-        '<span>Earn <b>' + points + '</b> Club Points with this purchase</span>' +
-        '<button class="bar-info" data-act="club-info" aria-label="About Club Points">' + ICONS.info + '</button></div>';
-
       if (setProduct) {
         var sv = setProduct.variants[setProduct.default] || setProduct.variants[0];
         var sSave = isSale(sv) ? Math.round(sv.msrp - sv.price) : 0;
@@ -272,7 +268,7 @@
             esc(vv.size) + '</button>';
         }).join('') + '</div></div>';
 
-      h += '<div class="bb-acc-head"><span class="lbl">Add Accessories:</span>' +
+      h += '<div class="bb-acc-head"><span class="lbl">Also add:</span>' +
         '<span class="bb-acc-nav">' +
         '<button class="bb-acc-arrow" data-act="acc-prev" aria-label="Previous accessory"' + (accIdx === 0 ? ' disabled' : '') + '>' +
           '<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m15 6-6 6 6 6"/></svg></button>' +
@@ -283,7 +279,8 @@
         ACCESSORIES.map(function (acc) {
           return '<div class="bb-acc"><img src="' + acc.img + '" alt="">' +
             '<span><span class="bb-acc-name">' + esc(acc.name) + '</span><br><span class="bb-acc-price">€ ' + acc.price.toFixed(2) + '</span></span>' +
-            '<button class="bb-acc-add" data-act="acc-add">Add to Cart</button></div>';
+            '<button class="bb-acc-add" data-act="acc-add" aria-label="Add ' + esc(acc.name) + ' to cart">' +
+            '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#1c1c1c" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 8h12l1 12.5H5L6 8Z"/><path d="M9 8a3 3 0 0 1 6 0"/></svg></button></div>';
         }).join('') + '</div></div>';
 
       h += '<div class="bb-delivery">' +
@@ -298,6 +295,11 @@
       h += '<div class="bb-cta-row">' +
         '<button class="bb-cta" data-act="add"' + (v.stock ? '' : ' disabled') + '>' + (v.stock ? 'Add to cart' : 'Out of stock') + '</button>' +
         '<button class="bb-wish" data-act="wish" aria-label="Add to wishlist">' + ICONS.heart + '</button></div>';
+
+      h += '<div class="bb-bar bb-bar--club"><img src="assets/pdp/mywmf.png" alt="myWMF">' +
+        '<span>Earn <b>' + points + '</b> Club Points with this purchase</span>' +
+        '<button class="bar-info" data-act="club-info" aria-label="About Club Points">' + ICONS.info + '</button></div>';
+
 
       /* bundle products list their components (live-shop "Dieses Set enthält") */
       if (p.bundle && p.bundle.length) {

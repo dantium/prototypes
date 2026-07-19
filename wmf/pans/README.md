@@ -129,7 +129,8 @@ node `2:2`), as one template that renders **any catalog product** via `?id=`:
   the 3 reviews from the mock (capped at the product's *real* review count, so `p1` shows 2),
   the buy-box accessory (Profi Plus spatula) and the "Ideally complements" accessories with
   prices from the mock, Use & Care copy keyed off the product's surface attribute, and the
-  how-to video card. FAQ = the same 5 Q&As as the frying-pans PLP.
+  how-to video card. FAQ = the same 5 Q&As as the frying-pans PLP, and the "Compare our
+  Range" table from the PLP sits above it (white background variant) on every PDP.
 - Images live in `assets/pdp/` (downloaded from the Figma mock, resized ≤1100px, ~1.2 MB
   total). Two mock thumbs carry German captions baked into the artwork.
 - Cart clicks bump the header count; size switches swap price/UVP/Klarna/points/SKU/packshot.

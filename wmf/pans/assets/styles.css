@@ -28,7 +28,7 @@
   --line-soft: #e6e6e6;
   --grey-2: #cacaca;
   --wash: #f4f4f4;           /* neutral / lightest */
-  --page: #f4f4f4;           /* page background (design) */
+  --page: #ffffff;           /* page background (white, like the live shop) */
   --surface: #ffffff;        /* cards / raised surfaces */
   --gold: #d7c878;           /* wmf / yellow-light */
   --gold-deep: #b99c00;
@@ -430,7 +430,8 @@ body.nav-open::before { content: ""; position: fixed; inset: 0; background: rgba
   letter-spacing: 0.14em; text-transform: uppercase;
 }
 
-.show-more-row { display: flex; justify-content: center; padding: 46px 0 8px; }
+.show-more-row { display: flex; flex-direction: column; align-items: center; gap: 14px; padding: 42px 0 8px; }
+.show-more-count { margin: 0; font-size: 13px; font-weight: 300; letter-spacing: .04em; color: #666; }
 .btn-outline {
   display: inline-flex; align-items: center; gap: 10px; height: 44px; padding: 0 30px;
   border: 1px solid var(--black); border-radius: 999px; background: #fff; color: var(--black);

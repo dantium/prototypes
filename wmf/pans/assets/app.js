@@ -272,8 +272,10 @@
     '<img src="assets/promo-bg.png" alt="">' +
     '<h3>Choose the right pan for the job</h3></a>';
 
-  /* corner badge = the shop's real product label for the selected variant */
+  /* corner badge = the shop's real product label for the selected variant;
+     sale-flagged variants show the Sale badge ahead of any other label */
   function badgeFor(v) {
+    if (isSale(v)) return '<span class="badge badge--sale">Sale</span>';
     var label = (v.label || '').split(',')[0].trim();
     if (!label) return '';
     var cls = label === 'SALE' ? ' badge--sale' : label === 'NEW' ? ' badge--new' : '';
@@ -409,7 +411,12 @@
     // zero results: strip the page down to the message and its escape routes
     document.body.classList.toggle('searching-empty', !!searchQ && list.length === 0);
     updateSearchHead(list.length);
-    if (showMoreRow) showMoreRow.style.display = list.length > shown ? '' : 'none';
+    if (showMoreRow) {
+      showMoreRow.style.display = list.length ? '' : 'none';
+      var smCount = document.getElementById('showMoreCount');
+      if (smCount) smCount.textContent = Math.min(shown, list.length) + ' of ' + list.length + ' result' + (list.length === 1 ? '' : 's');
+      if (showMoreBtn) showMoreBtn.style.display = list.length > shown ? '' : 'none';
+    }
     if (productCountEl) {
       // while searching, the results head above carries the count
       productCountEl.textContent = searchQ ? '' : list.length + ' Product' + (list.length === 1 ? '' : 's');

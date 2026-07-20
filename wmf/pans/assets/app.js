@@ -9,8 +9,99 @@
 
   var PAGE = window.PAGE || { kind: 'plp', category: 'frying-pans' };
   var esc = function (s) { return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/"/g, '&quot;'); };
-  var eur = function (n) { return '€' + n.toFixed(2); };
+  var eur = function (n) {
+    return LANG === 'de' ? n.toFixed(2).replace('.', ',') + ' €' : '€' + n.toFixed(2);
+  };
   var img = function (sku) { return 'assets/products/' + sku + '.jpg'; };
+
+  /* ---- language: EN default, DE via the footer switcher (?lang= wins once,
+     then localStorage). The DE dictionary (assets/i18n-de.js) is keyed by the
+     English strings; missing entries fall back to English. ---- */
+  var LANG = (function () {
+    var q = null;
+    try { q = new URLSearchParams(location.search).get('lang'); } catch (e) {}
+    if (q === 'de' || q === 'en') { try { localStorage.setItem('wmf_lang', q); } catch (e) {} }
+    var l = 'en';
+    try { l = localStorage.getItem('wmf_lang') || 'en'; } catch (e) {}
+    return l === 'de' ? 'de' : 'en';
+  })();
+  var T = (LANG === 'de' && window.WMF_I18N_DE) || {};
+  var t = function (s) { return T[s] || s; };
+  document.documentElement.lang = LANG;
+
+  /* shipping locales (language labels stay in their native form, like the reference) */
+  var LOCALES = [
+    { code: 'DE', name: 'Germany',     langs: [['en', 'English'], ['de', 'Deutsch']] },
+    { code: 'NL', name: 'Netherlands', langs: [['en', 'English']] },
+    { code: 'ES', name: 'Spain',       langs: [['en', 'English']] },
+    { code: 'AT', name: 'Austria',     langs: [['de', 'Deutsch']] },
+    { code: 'CH', name: 'Switzerland', langs: [['de', 'Deutsch'], ['en', 'English']] }
+  ];
+  var COUNTRY = 'DE';
+  try { COUNTRY = localStorage.getItem('wmf_locale') || 'DE'; } catch (e) {}
+  var CUR_LOCALE = LOCALES.filter(function (l) { return l.code === COUNTRY; })[0] || LOCALES[0];
+
+  function flagSVG(code) {
+    var f = {
+      DE: '<rect width="3" height="2" fill="#000"/><rect y="0.667" width="3" height="1.333" fill="#D00"/><rect y="1.333" width="3" height="0.667" fill="#FFCE00"/>',
+      NL: '<rect width="3" height="2" fill="#21468B"/><rect width="3" height="1.333" fill="#fff"/><rect width="3" height="0.667" fill="#AE1C28"/>',
+      ES: '<rect width="3" height="2" fill="#AA151B"/><rect y="0.5" width="3" height="1" fill="#F1BF00"/>',
+      AT: '<rect width="3" height="2" fill="#ED2939"/><rect y="0.667" width="3" height="0.667" fill="#fff"/>',
+      CH: '<rect width="3" height="2" fill="#DA291C"/><rect x="1.3" y="0.4" width="0.4" height="1.2" fill="#fff"/><rect x="0.9" y="0.8" width="1.2" height="0.4" fill="#fff"/>'
+    };
+    return '<svg class="locale-flag" viewBox="0 0 3 2" aria-hidden="true">' + (f[code] || '') + '</svg>';
+  }
+  function curLangLabel() {
+    var hit = CUR_LOCALE.langs.filter(function (l) { return l[0] === LANG; })[0];
+    return (hit || CUR_LOCALE.langs[0])[1];
+  }
+  function localePanelHTML() {
+    return '<div class="locale-overlay" id="localeOverlay" aria-hidden="true">' +
+      '<div class="locale-scrim" data-locale-close></div>' +
+      '<aside class="locale-panel" role="dialog" aria-label="' + t('Select Country') + '">' +
+        '<div class="locale-head">' +
+          '<button class="locale-back" data-locale-close aria-label="' + t('BACK') + '">' +
+            '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m15 5-7 7 7 7"/></svg></button>' +
+          '<span>' + t('Select Country') + '</span></div>' +
+        '<div class="locale-body">' +
+          '<p class="locale-note">' + t('Your current selected location is %c and your order will be billed in EUR.').replace('%c', t(CUR_LOCALE.name)) + '</p>' +
+          '<div class="locale-current">' + flagSVG(CUR_LOCALE.code) + '<span>' + t(CUR_LOCALE.name) + '</span><em>' + curLangLabel() + '</em></div>' +
+          '<h3>' + t('Choose your location') + '</h3>' +
+          '<p class="locale-sub">' + t('WMF ships to the following areas:') + '</p>' +
+          '<div class="locale-list">' +
+            LOCALES.map(function (l) {
+              return '<div class="locale-row">' + flagSVG(l.code) + '<span>' + t(l.name) + '</span>' +
+                '<span class="locale-langs">' + l.langs.map(function (lg) {
+                  return '<button data-set-locale="' + l.code + ':' + lg[0] + '">' + lg[1] + '</button>';
+                }).join('') + '</span></div>';
+            }).join('') +
+          '</div></div></aside></div>';
+  }
+
+  /* catalog fields with a DE variant (from the de/de shop) */
+  function nameOf(p) { return (LANG === 'de' && p.name_de) || p.name; }
+  function descOf(p) { return (LANG === 'de' && p.description_de) || p.description; }
+
+  /* static page copy: swap the tagged nodes (text nodes only, so icons inside
+     buttons survive); data-i18n-html replaces markup via an explicit key */
+  function translatePage() {
+    if (LANG !== 'de') return;
+    document.querySelectorAll('[data-i18n]').forEach(function (el) {
+      var node = null;
+      for (var n = el.firstChild; n; n = n.nextSibling) {
+        if (n.nodeType === 3 && n.nodeValue.trim()) { node = n; break; }
+      }
+      var key = (el.getAttribute('data-i18n') || (node ? node.nodeValue : el.textContent)).trim();
+      if (!T[key]) return;
+      if (node) node.nodeValue = node.nodeValue.replace(key, T[key]);
+      else el.textContent = T[key];
+    });
+    document.querySelectorAll('[data-i18n-html]').forEach(function (el) {
+      var key = el.getAttribute('data-i18n-html');
+      if (T[key]) el.innerHTML = T[key];
+    });
+    document.title = t(document.title);
+  }
 
   /* ============================================================
      CHROME — header + megamenu + nav drawer + search overlay + footer
@@ -44,21 +135,21 @@
         ? '<div class="mm-series">' + c.series.map(function (s) {
             return '<a class="mm-series-card" href="' + esc(s.href || '#') + '">' +
               '<img src="' + esc(s.img || '') + '" alt="">' +
-              '<span><b>' + esc(s.label) + '</b><small>' + esc(s.desc || '') + '</small></span></a>';
+              '<span><b>' + esc(s.label) + '</b><small>' + esc(t(s.desc || '')) + '</small></span></a>';
           }).join('') + '</div>'
         : (c.links || []).map(function (l) {
-            return '<a class="mm-link" href="' + esc(l.href || '#') + '">' + esc(l.label) + '</a>';
+            return '<a class="mm-link" href="' + esc(l.href || '#') + '">' + esc(t(l.label)) + '</a>';
           }).join('');
       return '<div' + (c.span ? ' style="grid-column:span ' + (+c.span) + '"' : '') + '>' +
-        '<div class="mm-colhead">' + esc(c.title) +
-        (c.viewAll ? ' <a href="' + esc(c.viewAll) + '">View all</a>' : '') + '</div>' +
+        '<div class="mm-colhead">' + esc(t(c.title)) +
+        (c.viewAll ? ' <a href="' + esc(c.viewAll) + '">' + t('View all') + '</a>' : '') + '</div>' +
         body + '</div>';
     }).join('');
     if (item.tile) {
       html += '<div class="mm-col--tile"><div class="mm-tile"><img src="' + esc(item.tile.img) + '" alt="">' +
-        '<div class="mm-tile-copy"><div class="mm-tile-frame"><span class="l1">' + esc(item.tile.l1) + '</span>' +
-        '<span class="l2">' + esc(item.tile.l2) + '</span></div>' +
-        '<span class="mm-tile-sub">' + esc(item.tile.sub) + '</span></div></div></div>';
+        '<div class="mm-tile-copy"><div class="mm-tile-frame"><span class="l1">' + esc(t(item.tile.l1)) + '</span>' +
+        '<span class="l2">' + esc(t(item.tile.l2)) + '</span></div>' +
+        '<span class="mm-tile-sub">' + esc(t(item.tile.sub)) + '</span></div></div></div>';
     }
     return '<div class="mm-inner"><div class="mm-grid" style="--cols:' + n + '">' + html + '</div></div>';
   }
@@ -90,24 +181,25 @@
         '<div class="header-nav"><nav>' +
           MENU.nav.map(function (n, i) {
             var active = n.label === 'PANS' && PAGE.kind !== 'home';
-            return '<button class="nav-item' + (active ? ' active' : '') + '" data-mi="n:' + i + '">' + esc(n.label) + '</button>';
+            return '<button class="nav-item' + (active ? ' active' : '') + '" data-mi="n:' + i + '">' + esc(t(n.label)) + '</button>';
           }).join('') +
         '</nav><div style="display:flex;gap:26px">' +
           MENU.utility.map(function (n, i) {
-            return '<button class="nav-item nav-item--muted" data-mi="u:' + i + '">' + esc(n.label) + '</button>';
+            return '<button class="nav-item nav-item--muted" data-mi="u:' + i + '">' + esc(t(n.label)) + '</button>';
           }).join('') +
         '</div></div></div>' +
         '<div class="mm-panel" id="mmPanel"></div></header>' +
 
-        '<div class="nav-drawer" id="navDrawer"><div class="nav-drawer-head">Menu' +
+        '<div class="nav-drawer" id="navDrawer"><div class="nav-drawer-head">' + t('Menu') +
           '<button class="icon-btn" style="color:#333" data-act="nav-close">' + I.x + '</button></div>' +
-          '<button class="nav-drawer-search" data-act="search">' + I.searchDark + '<span>Search</span></button>' +
+          '<button class="nav-drawer-search" data-act="search">' + I.searchDark + '<span>' + t('Search') + '</span></button>' +
           '<div class="nav-drawer-body">' +
-            MENU.nav.map(function (n, i) { return '<a href="#" data-mi="n:' + i + '">' + esc(n.label) + ' ' + I.chev + '</a>'; }).join('') +
+            MENU.nav.map(function (n, i) { return '<a href="#" data-mi="n:' + i + '">' + esc(t(n.label)) + ' ' + I.chev + '</a>'; }).join('') +
             '<div style="height:8px"></div>' +
-            MENU.utility.map(function (n, i) { return '<a href="#" class="sub" data-mi="u:' + i + '">' + esc(n.label) + ' ' + I.chev + '</a>'; }).join('') +
+            MENU.utility.map(function (n, i) { return '<a href="#" class="sub" data-mi="u:' + i + '">' + esc(t(n.label)) + ' ' + I.chev + '</a>'; }).join('') +
           '</div></div>' +
-        '<div class="mm-mobile-panel" id="mmMobilePanel" hidden></div>';
+        '<div class="mm-mobile-panel" id="mmMobilePanel" hidden></div>' +
+        localePanelHTML();
     }
 
     var searchMount = document.getElementById('chrome-search');
@@ -116,7 +208,7 @@
         '<div class="search-overlay" id="searchOverlay" aria-hidden="true" role="dialog" aria-label="Search">' +
           '<div class="search-scrim" data-act="search-close"></div>' +
           '<div class="search-panel"><div class="search-bar">' + I.searchDark.replace(/18/g, '22') +
-            '<input id="searchInput" type="search" placeholder="Search products, collections and more" autocomplete="off" spellcheck="false">' +
+            '<input id="searchInput" type="search" placeholder="' + t('Search products, collections and more') + '" autocomplete="off" spellcheck="false">' +
             '<button class="search-close" aria-label="Close search" data-act="search-close">' + I.x + '</button>' +
           '</div><div class="search-body" id="searchBody"></div></div></div>';
     }
@@ -125,10 +217,10 @@
     if (footerMount) {
       footerMount.innerHTML =
         '<footer class="site-footer"><div class="wrap"><div class="footer-top">' +
-          '<div class="footer-col"><h4>Our Brands</h4><a href="#">Silit</a><a href="#">Kaiser</a></div>' +
-          '<div class="footer-col"><h4>Our Services</h4><a href="#">Payment methods</a><a href="#">Shipping and delivery</a><a href="#">Cancellation policy</a></div>' +
-          '<div class="footer-col"><h4>Help &amp; Contact</h4><a href="#">FAQ</a><a href="#">Contact</a><a href="#">Online live consultation</a></div>' +
-          '<div class="footer-col"><h4>About Us</h4><a href="#">WMF brand</a><a href="#">Story</a><a href="#">Career</a></div>' +
+          '<div class="footer-col"><h4>' + t('Our Brands') + '</h4><a href="#">Silit</a><a href="#">Kaiser</a></div>' +
+          '<div class="footer-col"><h4>' + t('Our Services') + '</h4><a href="#">' + t('Payment methods') + '</a><a href="#">' + t('Shipping and delivery') + '</a><a href="#">' + t('Cancellation policy') + '</a></div>' +
+          '<div class="footer-col"><h4>' + t('Help & Contact') + '</h4><a href="#">FAQ</a><a href="#">' + t('Contact') + '</a><a href="#">' + t('Online live consultation') + '</a></div>' +
+          '<div class="footer-col"><h4>' + t('About Us') + '</h4><a href="#">' + t('WMF brand') + '</a><a href="#">' + t('Story') + '</a><a href="#">' + t('Career') + '</a></div>' +
           '<div class="socials">' +
             '<a class="social" href="#" aria-label="YouTube"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M23 12s0-3.2-.4-4.7a2.5 2.5 0 0 0-1.8-1.8C19.3 5 12 5 12 5s-7.3 0-8.8.5A2.5 2.5 0 0 0 1.4 7.3C1 8.8 1 12 1 12s0 3.2.4 4.7a2.5 2.5 0 0 0 1.8 1.8C4.7 19 12 19 12 19s7.3 0 8.8-.5a2.5 2.5 0 0 0 1.8-1.8C23 15.2 23 12 23 12Zm-13 3V9l5.2 3-5.2 3Z"/></svg></a>' +
             '<a class="social" href="#" aria-label="Instagram"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="3.5" y="3.5" width="17" height="17" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.2" cy="6.8" r="1.1" fill="currentColor" stroke="none"/></svg></a>' +
@@ -137,8 +229,10 @@
             '<a class="social" href="#" aria-label="WhatsApp"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a9.9 9.9 0 0 0-8.5 15l-1.1 4 4.1-1.1A10 10 0 1 0 12 2Zm5.8 14.1c-.2.7-1.4 1.3-2 1.4-.5.1-1.2.1-1.9-.1-.4-.1-1-.3-1.8-.6-3-1.3-5-4.4-5.2-4.6-.1-.2-1.2-1.6-1.2-3s.7-2.1 1-2.4c.2-.3.5-.4.7-.4h.5c.2 0 .4 0 .6.5l.8 2c.1.2.1.4 0 .5l-.4.5-.3.3c-.1.1-.3.3-.1.6.2.3.8 1.3 1.7 2.1 1.2 1 2.1 1.4 2.4 1.5.3.1.4.1.6-.1l.8-1c.2-.3.4-.2.6-.1l2 .9c.2.1.4.2.4.3.1.1.1.6-.1 1.2Z"/></svg></a>' +
           '</div></div>' +
           '<div class="footer-bottom"><span class="fb-logo">' + WMF_LOGO + '</span>' +
-            '<nav><a href="#">Data protection</a><a href="#">Terms and Conditions</a><a href="#">Imprint</a></nav>' +
-            '<span class="footer-copy">© 2026 WMF – All rights reserved</span>' +
+            '<nav><a href="#">' + t('Data protection') + '</a><a href="#">' + t('Terms and Conditions') + '</a><a href="#">' + t('Imprint') + '</a></nav>' +
+            '<button class="locale-trigger" data-locale-open>' + flagSVG(CUR_LOCALE.code) +
+              '<span>' + t(CUR_LOCALE.name) + ' · ' + curLangLabel() + '</span></button>' +
+            '<span class="footer-copy">' + t('© 2026 WMF – All rights reserved') + '</span>' +
           '</div></div></footer>';
     }
   }
@@ -167,8 +261,8 @@
     var el = document.getElementById('mmMobilePanel'); if (!el) return;
     el.innerHTML = '<div class="mmp-head">' +
       '<button data-mmp="back">' +
-        '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="m15 6-6 6 6 6"/></svg> BACK</button>' +
-      '<button data-mmp="close">CLOSE ' + I.x + '</button></div>' +
+        '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="m15 6-6 6 6 6"/></svg> ' + t('BACK') + '</button>' +
+      '<button data-mmp="close">' + t('CLOSE') + ' ' + I.x + '</button></div>' +
       '<div class="mmp-body">' + panelHTML(item) + '</div>';
     el.hidden = false;
   }
@@ -190,6 +284,26 @@
         closeMobilePanel();
         if (mmp.getAttribute('data-mmp') === 'close') document.body.classList.remove('nav-open');
         return;
+      }
+      if (e.target.closest('[data-locale-open]')) {
+        var lo = document.getElementById('localeOverlay');
+        if (lo) { lo.classList.add('open'); lo.setAttribute('aria-hidden', 'false'); document.body.style.overflow = 'hidden'; }
+        return;
+      }
+      if (e.target.closest('[data-locale-close]')) {
+        var lc = document.getElementById('localeOverlay');
+        if (lc) { lc.classList.remove('open'); lc.setAttribute('aria-hidden', 'true'); document.body.style.overflow = ''; }
+        return;
+      }
+      var setl = e.target.closest('[data-set-locale]');
+      if (setl) {
+        var parts = setl.getAttribute('data-set-locale').split(':');
+        try {
+          localStorage.setItem('wmf_locale', parts[0]);
+          localStorage.setItem('wmf_lang', parts[1]);
+        } catch (err) {}
+        var u2 = new URL(location.href); u2.searchParams.delete('lang');
+        location.href = u2; return;
       }
       var act = e.target.closest('[data-act]');
       if (act) {
@@ -243,7 +357,12 @@
       if (mmCurrent) setMenu(null);
     });
     document.addEventListener('keydown', function (e) {
-      if (e.key === 'Escape') { setMenu(null); closeSearch(); closeMobilePanel(); document.body.classList.remove('nav-open', 'filters-open'); }
+      if (e.key === 'Escape') {
+        setMenu(null); closeSearch(); closeMobilePanel();
+        document.body.classList.remove('nav-open', 'filters-open');
+        var lo = document.getElementById('localeOverlay');
+        if (lo && lo.classList.contains('open')) { lo.classList.remove('open'); lo.setAttribute('aria-hidden', 'true'); document.body.style.overflow = ''; }
+      }
     });
   }
 
@@ -275,17 +394,17 @@
   /* merchandising tile (Figma PLP): text low in the dark half, whole tile links to the comparison */
   var PROMO = '<a class="promo-tile" href="frying-pans.html#compare" aria-label="Choose the right pan for the job — compare our range">' +
     '<img src="assets/promo-bg.png" alt="">' +
-    '<h3>Choose the right pan for the job</h3></a>';
+    '<h3>' + t('Choose the right pan for the job') + '</h3></a>';
 
   /* corner badge = the shop's real product label for the selected variant;
      sale-flagged variants show the Sale badge ahead of any other label */
   function badgeFor(v) {
-    if (isSale(v)) return '<span class="badge badge--sale">Sale</span>';
+    if (isSale(v)) return '<span class="badge badge--sale">' + t('Sale') + '</span>';
     var label = (v.label || '').split(',')[0].trim();
     if (!label) return '';
     var cls = label === 'SALE' ? ' badge--sale' : label === 'NEW' ? ' badge--new' : '';
     var text = label.charAt(0) + label.slice(1).toLowerCase();
-    return '<span class="badge' + cls + '">' + esc(text) + '</span>';
+    return '<span class="badge' + cls + '">' + esc(t(text)) + '</span>';
   }
 
   /* info labels: real/derived today (sets), PIM attributes when the data lands */
@@ -297,7 +416,7 @@
       if (!val) return;
       (Array.isArray(val) ? val : [val]).slice(0, 2 - out.length).forEach(function (x) { out.push(x); });
     });
-    return out.slice(0, 2).map(function (t) { return '<span class="label">' + esc(t) + '</span>'; }).join('');
+    return out.slice(0, 2).map(function (x) { return '<span class="label">' + esc(t(x)) + '</span>'; }).join('');
   }
 
   function cardHTML(p) {
@@ -307,7 +426,7 @@
     var swatches = p.variants.map(function (vv, i) {
       var sel = i === (p._sel == null ? p.default : p._sel);
       return '<span class="swatch' + (sel ? ' sel' : '') + (vv.stock ? '' : ' oos') + '" data-i="' + i + '"' +
-        (vv.stock ? '' : ' title="Out of stock"') + '>' + esc(vv.size) + '</span>';
+        (vv.stock ? '' : ' title="' + t('Out of stock') + '"') + '>' + esc(t(vv.size)) + '</span>';
     }).join('');
     var labels = infoLabels(p, v);
     var pdpHref = 'product.html?id=' + p.id;
@@ -315,15 +434,15 @@
       '<div class="card-media">' +
         '<img class="pan-inuse" src="assets/inuse.jpg" alt="" aria-hidden="true">' +
         badgeFor(v) +
-        '<a class="card-link" href="' + pdpHref + '" aria-label="' + esc(p.brand + ' ' + p.name) + '"></a>' +
+        '<a class="card-link" href="' + pdpHref + '" aria-label="' + esc(p.brand + ' ' + nameOf(p)) + '"></a>' +
         '<div class="card-actions"><button class="round" aria-label="Add to basket">' + BAG_S + '</button>' +
         '<button class="round" aria-label="Add to wishlist">' + HEART_S + '</button></div>' +
-        '<img class="pan" src="' + img(v.sku) + '" alt="' + esc(p.brand + ' ' + p.name) + '" loading="lazy">' +
+        '<img class="pan" src="' + img(v.sku) + '" alt="' + esc(p.brand + ' ' + nameOf(p)) + '" loading="lazy">' +
         (labels ? '<div class="card-labels">' + labels + '</div>' : '') +
       '</div>' +
       '<div class="card-body">' +
         '<span class="card-eyebrow">' + esc(p.series || p.brand) + '</span>' +
-        '<h3 class="card-name"><a href="' + pdpHref + '">' + esc(p.name) + '</a></h3>' +
+        '<h3 class="card-name"><a href="' + pdpHref + '">' + esc(nameOf(p)) + '</a></h3>' +
         /* real Bazaarvoice ratings from the PDPs; products without reviews show none */
         (p.rating != null
           ? '<div class="card-rating"><span class="stars" style="--pct:' + Math.round(p.rating / 5 * 100) + '%"></span>' +
@@ -331,10 +450,10 @@
           : '') +
         /* Price Display component (Figma 1621:6329) — Default / Discount variants */
         '<div class="card-price"><span class="price' + (onSale ? ' sale' : '') + '">' + eur(v.price) + '</span>' +
-        (onSale ? '<span class="discount">Save ' + save + '%</span>' : '') + '</div>' +
-        (onSale ? '<p class="card-was">' + eur(v.msrp) + ' (last 30 days lowest price)</p>' : '') +
-        '<div class="stock' + (v.stock ? '' : ' out') + '"><span class="dot"></span>' + (v.stock ? 'In stock' : 'Out of stock') + '</div>' +
-        '<div class="card-sizes"><span class="lbl">Size:</span>' + swatches + '</div>' +
+        (onSale ? '<span class="discount">' + t('Save %n%').replace('%n', save) + '</span>' : '') + '</div>' +
+        (onSale ? '<p class="card-was">' + eur(v.msrp) + ' ' + t('(last 30 days lowest price)') + '</p>' : '') +
+        '<div class="stock' + (v.stock ? '' : ' out') + '"><span class="dot"></span>' + (v.stock ? t('In stock') : t('Out of stock')) + '</div>' +
+        '<div class="card-sizes"><span class="lbl">' + t('Size:') + '</span>' + swatches + '</div>' +
       '</div></article>';
   }
 
@@ -344,8 +463,8 @@
     var toks = q.toLowerCase().split(/\s+/).filter(Boolean);
     var src = pool || DATA.products;
     if (!toks.length) return src.slice();
-    var inHay = function (p, t) { return p.search.indexOf(t) >= 0; };
-    var inDesc = function (p, t) { return inHay(p, t) || (p._desc && p._desc.indexOf(t) >= 0); };
+    var inHay = function (p, tok) { return (p._hay || p.search).indexOf(tok) >= 0; };
+    var inDesc = function (p, tok) { return inHay(p, tok) || (p._desc && p._desc.indexOf(tok) >= 0); };
     var byName = [], byDesc = [];
     src.forEach(function (p) {
       if (toks.every(function (t) { return inHay(p, t); })) byName.push(p);
@@ -356,18 +475,19 @@
 
   /* short snippet of the description around the first matched token */
   function descSnippet(p, q) {
-    if (!p.description || !p._desc) return null;
+    if (!descOf(p) || !p._desc) return null;
     var toks = q.toLowerCase().split(/\s+/).filter(Boolean);
-    var t = null, pos = -1;
+    var tok = null, pos = -1;
     for (var i = 0; i < toks.length; i++) {
       var at = p._desc.indexOf(toks[i]);
-      if (at >= 0 && (pos < 0 || at < pos)) { pos = at; t = toks[i]; }
+      if (at >= 0 && (pos < 0 || at < pos)) { pos = at; tok = toks[i]; }
     }
     if (pos < 0) return null;
+    var full = descOf(p);
     var start = Math.max(0, pos - 34);
-    var end = Math.min(p.description.length, pos + t.length + 44);
-    var frag = p.description.slice(start, end).replace(/^\S*\s/, '').replace(/\s\S*$/, '');
-    return (start > 0 ? '…' : '') + hi(frag, t) + (end < p.description.length ? '…' : '');
+    var end = Math.min(full.length, pos + tok.length + 44);
+    var frag = full.slice(start, end).replace(/^\S*\s/, '').replace(/\s\S*$/, '');
+    return (start > 0 ? '…' : '') + hi(frag, tok) + (end < full.length ? '…' : '');
   }
 
   function currentList() {
@@ -384,16 +504,16 @@
   ];
 
   function noResultsHTML() {
-    if (!searchQ) return '<div class="no-results">No pans match the selected filters. Try removing one.</div>';
+    if (!searchQ) return '<div class="no-results">' + t('No pans match the selected filters. Try removing one.') + '</div>';
     return '<div class="no-results">' +
       '<div class="nr-ico"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg></div>' +
-      '<p class="nr-title">No results for “' + esc(searchQ) + '”</p>' +
-      '<p class="nr-copy">Check your spelling or try a more general term. Here are some popular searches.</p>' +
+      '<p class="nr-title">' + t('No results for “%s”').replace('%s', esc(searchQ)) + '</p>' +
+      '<p class="nr-copy">' + t('Check your spelling or try a more general term. Here are some popular searches.') + '</p>' +
       '<div class="search-chips">' + TRENDING.slice(0, 4).map(chipHTML).join('') + '</div>' +
-      '<p class="search-section-title">Popular categories</p>' +
+      '<p class="search-section-title">' + t('Popular categories') + '</p>' +
       '<div class="nr-cats">' + NR_CATS.map(function (c) {
         return '<a class="subcat" href="' + c.href + '"><span class="subcat-thumb"><img src="' + img(c.sku) + '" alt=""></span>' +
-          '<span class="subcat-label">' + esc(c.label) + '</span></a>';
+          '<span class="subcat-label">' + esc(t(c.label)) + '</span></a>';
       }).join('') + '</div></div>';
   }
 
@@ -402,9 +522,10 @@
     var el = document.getElementById('searchHead'); if (!el) return;
     if (!searchQ) { el.innerHTML = ''; return; }
     el.innerHTML = '<div class="search-head">' +
-      '<p class="sh-eyebrow">Search results</p>' +
-      '<h1>' + count + ' result' + (count === 1 ? '' : 's') + ' for <b>“' + esc(searchQ) + '”</b></h1>' +
-      '<div class="sh-actions"><button class="sh-clear" data-sh-clear>Clear search</button></div></div>';
+      '<p class="sh-eyebrow">' + t('Search results') + '</p>' +
+      '<h1>' + (count === 1 ? t('%n result for %q') : t('%n results for %q'))
+        .replace('%n', count).replace('%q', '<b>“' + esc(searchQ) + '”</b>') + '</h1>' +
+      '<div class="sh-actions"><button class="sh-clear" data-sh-clear>' + t('Clear search') + '</button></div></div>';
   }
 
   function renderGrid() {
@@ -419,15 +540,15 @@
     if (showMoreRow) {
       showMoreRow.style.display = list.length ? '' : 'none';
       var smCount = document.getElementById('showMoreCount');
-      if (smCount) smCount.textContent = Math.min(shown, list.length) + ' of ' + list.length + ' result' + (list.length === 1 ? '' : 's');
+      if (smCount) smCount.textContent = t('%v of %t results').replace('%v', Math.min(shown, list.length)).replace('%t', list.length);
       if (showMoreBtn) showMoreBtn.style.display = list.length > shown ? '' : 'none';
     }
     if (productCountEl) {
       // while searching, the results head above carries the count
-      productCountEl.textContent = searchQ ? '' : list.length + ' Product' + (list.length === 1 ? '' : 's');
+      productCountEl.textContent = searchQ ? '' : (list.length === 1 ? t('%n Product') : t('%n Products')).replace('%n', list.length);
     }
     var applyBtn = document.getElementById('drawerApplyBtn');
-    if (applyBtn) applyBtn.textContent = 'Show ' + list.length + ' product' + (list.length === 1 ? '' : 's');
+    if (applyBtn) applyBtn.textContent = (list.length === 1 ? t('Show %n product') : t('Show %n products')).replace('%n', list.length);
   }
 
   if (grid) {
@@ -482,10 +603,11 @@
     var set = {};
     var add = function (s) { s = String(s || '').toLowerCase().trim(); if (s.length > 2) set[s] = 1; };
     DATA.products.forEach(function (p) {
-      p._desc = (p.description || '').toLowerCase();   // searchable copy of the real PDP description
+      p._desc = (descOf(p) || '').toLowerCase();   // searchable copy of the real PDP description
+      p._hay = (p.search + ' ' + (p.name_de || '')).toLowerCase();   // both languages searchable
       add(p.series);
       add(p.brand + ' ' + p.series);
-      var m = p.name.toLowerCase().match(/(deep fry pan|fry pan set|fry pan|frypan|grill pan|serving pan|roasting pan|wok)/);
+      var m = nameOf(p).toLowerCase().match(/(deep fry pan|fry pan set|fry pan|frypan|grill pan|serving pan|roasting pan|wok|bratpfannen-set|bratpfanne|stielpfanne|grillpfanne|servierpfanne)/);
       if (m) { add(m[1]); add(p.series + ' ' + m[1]); }
     });
     VOCAB = Object.keys(set).sort();
@@ -522,9 +644,10 @@
       '<span class="s-label">' + esc(r) + '</span>' +
       '<button class="s-remove" data-remove="' + esc(r) + '" aria-label="Remove ' + esc(r) + '">' + I.xs + '</button></div>';
   }
-  function trendRow(t) {
-    return '<div class="s-row" data-q="' + esc(t) + '"><span class="s-ico">' + ICO.trend + '</span>' +
-      '<span class="s-label">' + esc(t) + '</span></div>';
+  function trendRow(term) {
+    var q = t(term);
+    return '<div class="s-row" data-q="' + esc(q) + '"><span class="s-ico">' + ICO.trend + '</span>' +
+      '<span class="s-label">' + esc(q) + '</span></div>';
   }
   function completionRow(c, q) {
     return '<div class="s-row" data-q="' + esc(c) + '"><span class="s-ico">' + ICO.search + '</span>' +
@@ -532,26 +655,28 @@
   }
   function catRow(c, q) {
     return '<a class="s-row" href="' + c.href + '"><span class="s-ico">' + ICO.grid + '</span>' +
-      '<span class="s-label">' + hi(c.label, q) + '<span class="s-sub">Category · ' + c.count + ' products</span></span>' +
+      '<span class="s-label">' + hi(t(c.label), q) + '<span class="s-sub">' + t('Category · %n products').replace('%n', c.count) + '</span></span>' +
       '<span class="s-end">' + ICO.chev + '</span></a>';
   }
   function productRow(p, q) {
     var v = p.variants[p.default] || p.variants[0];
     var from = Math.min.apply(null, p.variants.map(function (x) { return x.price; }));
-    var meta = esc(p.variants.length > 1 ? p.variants.length + ' sizes · from ' + eur(from) : v.size);
+    var meta = esc(p.variants.length > 1
+      ? t('%n sizes · from %p').replace('%n', p.variants.length).replace('%p', eur(from))
+      : t(v.size));
     // when the hit came from the description, show the matched text instead
     if (q) {
       var toks = q.toLowerCase().split(/\s+/).filter(Boolean);
-      var nameHit = toks.every(function (t) { return p.search.indexOf(t) >= 0; });
+      var nameHit = toks.every(function (tok) { return (p._hay || p.search).indexOf(tok) >= 0; });
       if (!nameHit) { var snip = descSnippet(p, q); if (snip) meta = snip; }
     }
     // product suggestions link straight to the PDP
     return '<a class="s-row" href="product.html?id=' + p.id + '">' +
       '<img class="s-thumb" src="' + img(v.sku) + '" alt="">' +
-      '<span class="s-label">' + esc(p.brand + ' ' + p.name) + '<span class="s-sub">' + meta + '</span></span>' +
+      '<span class="s-label">' + esc(p.brand + ' ' + nameOf(p)) + '<span class="s-sub">' + meta + '</span></span>' +
       '<span class="s-price">' + eur(v.price) + '</span></a>';
   }
-  function chipHTML(t) { return '<button class="search-chip" data-q="' + esc(t) + '">' + esc(t) + '</button>'; }
+  function chipHTML(term) { var q = t(term); return '<button class="search-chip" data-q="' + esc(q) + '">' + esc(q) + '</button>'; }
 
   /* popular categories on the empty state — real destinations only */
   var POPULAR_CATS = [
@@ -568,15 +693,15 @@
     if (!q) {
       var html = '';
       if (recent.length) {
-        html += '<div class="search-section-head"><p class="search-section-title">Recent searches</p>' +
-          '<button class="search-clear-recents" data-clear-recents>Clear all</button></div>' +
+        html += '<div class="search-section-head"><p class="search-section-title">' + t('Recent searches') + '</p>' +
+          '<button class="search-clear-recents" data-clear-recents>' + t('Clear all') + '</button></div>' +
           recent.map(recentRow).join('');
       }
-      html += '<div class="search-section-head"><p class="search-section-title">Trending searches</p></div>' +
+      html += '<div class="search-section-head"><p class="search-section-title">' + t('Trending searches') + '</p></div>' +
         TRENDING.map(trendRow).join('') +
-        '<div class="search-section-head"><p class="search-section-title">Popular categories</p></div>' +
+        '<div class="search-section-head"><p class="search-section-title">' + t('Popular categories') + '</p></div>' +
         '<div class="search-chips">' + POPULAR_CATS.map(function (c) {
-          return '<a class="search-chip" href="' + c.href + '">' + esc(c.label) + '</a>';
+          return '<a class="search-chip" href="' + c.href + '">' + esc(t(c.label)) + '</a>';
         }).join('') + '</div>';
       body.innerHTML = html;
       return;
@@ -588,8 +713,8 @@
     var html = completions.map(function (c) { return completionRow(c, q); }).join('');
     if (cats.length)  html += (html ? '<div class="s-divider"></div>' : '') + cats.map(function (c) { return catRow(c, q); }).join('');
     if (hits.length)  html += (html ? '<div class="s-divider"></div>' : '') + hits.map(function (p) { return productRow(p, q); }).join('');
-    if (!html) html = '<div class="search-empty-note">No suggestions — press Enter to search.</div>';
-    html += '<button class="search-cta" data-q="' + esc(q) + '">See all results for “' + esc(q) + '” ' + ICO.arrow + '</button>';
+    if (!html) html = '<div class="search-empty-note">' + t('No suggestions — press Enter to search.') + '</div>';
+    html += '<button class="search-cta" data-q="' + esc(q) + '">' + t('See all results for “%s”').replace('%s', esc(q)) + ' ' + ICO.arrow + '</button>';
     body.innerHTML = html;
   }
 
@@ -600,7 +725,7 @@
       box.innerHTML = I.search + '<span class="hs-query">' + esc(searchQ) + '</span>' +
         '<span class="hs-clear" data-hs-clear role="button" aria-label="Clear search">' + I.xs + '</span>';
     } else {
-      box.innerHTML = I.search + '<span class="hs-placeholder">Search</span>';
+      box.innerHTML = I.search + '<span class="hs-placeholder">' + t('Search') + '</span>';
     }
   }
 
@@ -726,12 +851,12 @@
     if (!facetsEl) return;
     facetsEl.innerHTML = FACETS.map(function (g) {
       return '<div class="filter-group' + (g.open ? ' open' : '') + '">' +
-        '<button class="filter-head">' + esc(g.title) + ' <span class="filter-toggle"></span></button>' +
+        '<button class="filter-head">' + esc(t(g.title)) + ' <span class="filter-toggle"></span></button>' +
         '<div class="filter-body">' + g.options.map(function (o) {
           var on = selected[g.key].indexOf(o.label) >= 0;
           return '<label class="facet"><input type="checkbox" data-key="' + g.key + '" value="' + esc(o.label) + '"' +
-            (on ? ' checked' : '') + '><span class="box"></span><span class="facet-label">' + esc(o.label) +
-            (o.hint ? ' <span class="facet-hint">' + esc(o.hint) + '</span>' : '') + '</span></label>';
+            (on ? ' checked' : '') + '><span class="box"></span><span class="facet-label">' + esc(t(o.label)) +
+            (o.hint ? ' <span class="facet-hint">' + esc(t(o.hint)) + '</span>' : '') + '</span></label>';
         }).join('') + '</div></div>';
     }).join('');
   }
@@ -748,7 +873,7 @@
     var chips = [];
     FACETS.forEach(function (g) {
       selected[g.key].forEach(function (label) {
-        chips.push('<span class="chip">' + esc(label) +
+        chips.push('<span class="chip">' + esc(t(label)) +
           '<button aria-label="Remove ' + esc(label) + '" data-key="' + g.key + '" data-label="' + esc(label) + '">' + I.xs + '</button></span>');
       });
     });
@@ -762,7 +887,7 @@
       if (!chips.length) { el.hidden = true; el.innerHTML = ''; return; }
       el.hidden = false;
       var head = el === afEl
-        ? '<div class="af-head"><span class="af-title">Active filters</span><button class="af-clear" data-af-clear>Clear all</button></div>'
+        ? '<div class="af-head"><span class="af-title">' + t('Active filters') + '</span><button class="af-clear" data-af-clear>' + t('Clear all') + '</button></div>'
         : '';
       el.innerHTML = head + chips.join('');
     });
@@ -832,6 +957,7 @@
         updateHeaderSearch();
         bindSearch();
       });
+    translatePage();
     bindChrome();
     bindFacets();
 
@@ -860,7 +986,7 @@
         if (PAGE.kind === 'home') return;
         if (PAGE.kind === 'pdp') {
           // product.html renders itself from the catalog (assets/pdp.js)
-          if (window.renderPDP) window.renderPDP({ data: DATA, cardHTML: cardHTML, eur: eur, img: img, esc: esc, isSale: isSale });
+          if (window.renderPDP) window.renderPDP({ data: DATA, cardHTML: cardHTML, eur: eur, img: img, esc: esc, isSale: isSale, t: t, lang: LANG, nameOf: nameOf, descOf: descOf });
           return;
         }
         LIST = DATA.products.filter(function (p) { return p.cats && (PAGE.category in p.cats); });

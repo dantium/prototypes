@@ -14,6 +14,27 @@ The journey works both ways: megamenu/tiles drill down, breadcrumbs go back up.
 Every product tile (grid + search overlay) links to `product.html?id=…`.
 Search works on every page (submitting from Home or a PDP lands on `pans.html?q=…`).
 
+## Locale switcher & languages (EN / DE)
+
+The footer trigger (flag + "Germany · English") opens a right-hand **Select Country** panel
+(styled after the Our Place reference: current-location note, highlighted current row, then
+the shipping areas with flags and native-language buttons). Locales: Germany (English,
+Deutsch), Netherlands (English), Spain (English), Austria (Deutsch), Switzerland (Deutsch,
+English). Picking one stores `wmf_locale` + `wmf_lang` and reloads; `?lang=de` also works.
+Choosing a language flips the whole journey to German:
+
+- **UI strings** come from `assets/i18n-de.js` — a dictionary keyed by the English source
+  strings; anything missing falls back to English. JS-rendered surfaces translate via `t()`,
+  static markup via `data-i18n` / `data-i18n-html` attributes swapped on load.
+- **Product data**: `name_de` on all 42 products and `description_de` on 26 come from the
+  real `wmf.com/de/de` shop (same SKU join as the EN scrape — the DE shop also reveals the
+  real series naming, e.g. EN "Non-Stick Fry Pan" = DE "Devil Stielpfanne"). The remaining
+  names are pattern-translated from the EN names; products without `description_de` fall
+  back to the English description.
+- Prices format per language (`€79.99` ↔ `79,99 €`), search matches both languages'
+  names, and the deep megamenu links outside the Pans/Knives panels stay English
+  (dead links; translate in `i18n-de.js` when needed).
+
 ## Running it
 
 Must be served over **http** — the pages fetch their catalog, and browsers block `fetch()` of

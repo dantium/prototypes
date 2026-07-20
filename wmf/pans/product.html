@@ -7,6 +7,7 @@
   <link rel="stylesheet" href="assets/styles.css">
   <link rel="stylesheet" href="assets/pdp.css">
   <script>window.PAGE = { kind: 'pdp', category: 'frying-pans' };</script>
+  <script src="assets/i18n-de.js"></script>
   <script src="assets/app.js" defer></script>
   <script src="assets/pdp.js" defer></script>
 </head>
@@ -28,7 +29,7 @@
             <img id="pdpMain" alt="">
             <button class="pdp-videoflag" id="pdpVideoFlag" hidden>
               <svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="11" fill="rgba(255,255,255,.22)"/><path d="M10 8.2v7.6l6-3.8-6-3.8Z" fill="#fff"/></svg>
-              Watch video
+              <span data-i18n>Watch video</span>
             </button>
             <button class="pdp-nav pdp-nav--prev" id="pdpPrev" aria-label="Previous image">
               <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m15 6-6 6 6 6"/></svg>
@@ -60,14 +61,14 @@
               <path d="M24 5.5 37.5 10v12c0 9.6-5.9 16.6-13.5 20.4C16.4 38.6 10.5 31.6 10.5 22V10Z"/>
               <text x="24" y="27.5" text-anchor="middle" font-size="12.5" font-weight="600" fill="currentColor" stroke="none" font-family="inherit">10</text>
             </svg>
-            <span>10 Year<br>Warranty</span>
+            <span data-i18n-html="usp.warranty">10 Year<br>Warranty</span>
           </div>
           <div class="usp">
             <svg width="48" height="48" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
               <g transform="rotate(-32 24 24)"><rect x="20.2" y="5.5" width="7.6" height="12" rx="2.4"/><path d="M22.3 8v7M25.7 8v7M24 17.5V42"/></g>
               <g transform="rotate(32 24 24)"><ellipse cx="24" cy="11.5" rx="4.4" ry="6.2"/><path d="M24 17.7V42"/></g>
             </svg>
-            <span>Metal Utensil<br>Safe</span>
+            <span data-i18n-html="usp.metal">Metal Utensil<br>Safe</span>
           </div>
           <div class="usp">
             <svg width="48" height="48" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
@@ -76,7 +77,7 @@
               <path d="M8 19.5h32"/>
               <path d="M14.5 27.5c3-2.6 6.5-2.6 9.5 0s6.5 2.6 9.5 0M14.5 33c3-2.6 6.5-2.6 9.5 0s6.5 2.6 9.5 0"/>
             </svg>
-            <span>Oven-Safe<br>Up To 400&deg;</span>
+            <span data-i18n-html="usp.oven">Oven-Safe<br>Up To 400&deg;</span>
           </div>
           <div class="usp">
             <svg width="48" height="48" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
@@ -85,7 +86,7 @@
               <path d="M15.2 21.5h6.6c0 4-1.5 6.3-3.3 6.3s-3.3-2.3-3.3-6.3ZM18.5 27.8v5M16 32.8h5"/>
               <ellipse cx="29" cy="27" rx="2.7" ry="5.6"/><ellipse cx="35" cy="27" rx="2.7" ry="5.6"/>
             </svg>
-            <span>Dishwasher<br>Safe</span>
+            <span data-i18n-html="usp.dishwasher">Dishwasher<br>Safe</span>
           </div>
           <div class="usp">
             <svg width="48" height="48" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
@@ -94,14 +95,14 @@
               <path d="M8.5 33.5c1.5 3 5.5 4.5 9.5 4.5h6.5c4 0 7.5-1.5 9-4.5Z"/>
               <path d="M33.5 34.8h8M33.5 36.9h6"/>
             </svg>
-            <span>Mineral Ceramic<br>Non-Stick</span>
+            <span data-i18n-html="usp.ceramic">Mineral Ceramic<br>Non-Stick</span>
           </div>
           <div class="usp">
             <svg width="48" height="48" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
               <circle cx="24" cy="24" r="15"/>
               <path d="M30 24h5M28.2 28.2l3.6 3.6M24 30v5M19.8 28.2l-3.6 3.6M18 24h-5M19.8 19.8l-3.6-3.6M24 18v-5M28.2 19.8l3.6-3.6"/>
             </svg>
-            <span>All Hobs<br>Compatible</span>
+            <span data-i18n-html="usp.hobs">All Hobs<br>Compatible</span>
           </div>
           <div class="usp">
             <svg width="48" height="48" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
@@ -109,7 +110,7 @@
               <path d="M13 14.5v13.6a6 6 0 0 0 6 6h10a6 6 0 0 0 6-6V14.5"/>
               <path d="M18.5 14.5v11.7a4 4 0 0 0 4 4h3a4 4 0 0 0 4-4V14.5"/>
             </svg>
-            <span>3-Ply<br>Responsive</span>
+            <span data-i18n-html="usp.ply">3-Ply<br>Responsive</span>
           </div>
         </section>
 
@@ -117,8 +118,8 @@
           <article class="fbanner fbanner--img-left">
             <div class="fbanner-media"><img src="assets/pdp/banner-searprotect.jpg" alt="Close-up of the raised honeycomb structure of the pan surface"></div>
             <div class="fbanner-copy">
-              <h3>Unique SearProtect&reg; surface</h3>
-              <p>Particularly scratch-resistant and durable thanks to the raised honeycomb structure (Protection Grid) made of high-quality Cromargan&reg; for additional protection of the PermaDur non-stick coating.</p>
+              <h3 data-i18n="Unique SearProtect® surface">Unique SearProtect&reg; surface</h3>
+              <p data-i18n>Particularly scratch-resistant and durable thanks to the raised honeycomb structure (Protection Grid) made of high-quality Cromargan&reg; for additional protection of the PermaDur non-stick coating.</p>
             </div>
           </article>
 
@@ -127,50 +128,50 @@
               <img src="assets/pdp/banner-3ply.jpg" alt="Cutaway rendering of the pan's three body layers">
             </div>
             <div class="fbanner-labels">
-              <div class="flabel flabel--1"><span class="leader" aria-hidden="true"></span>SearProtect&reg; Grid<br>Mineral Ceramic<br>Stainless steel</div>
-              <div class="flabel flabel--2"><span class="leader" aria-hidden="true"></span>Aluminium</div>
-              <div class="flabel flabel--3"><span class="leader" aria-hidden="true"></span>Cromargan&reg; Stainless Steel</div>
+              <div class="flabel flabel--1"><span class="leader" aria-hidden="true"></span><span data-i18n="SearProtect® Grid">SearProtect&reg; Grid</span><br><span data-i18n>Mineral Ceramic</span><br><span data-i18n>Stainless steel</span></div>
+              <div class="flabel flabel--2"><span class="leader" aria-hidden="true"></span><span data-i18n>Aluminium</span></div>
+              <div class="flabel flabel--3"><span class="leader" aria-hidden="true"></span><span data-i18n="Cromargan® Stainless Steel">Cromargan&reg; Stainless Steel</span></div>
             </div>
             <div class="fbanner-copy">
-              <h3>Heat-responsive 3-ply body</h3>
-              <p>A premium layered build of stainless steel and aluminum responds rapidly to temperature changes throughout the entire pan, delivering precise, professional-level control from start to finish.</p>
+              <h3 data-i18n>Heat-responsive 3-ply body</h3>
+              <p data-i18n>A premium layered build of stainless steel and aluminum responds rapidly to temperature changes throughout the entire pan, delivering precise, professional-level control from start to finish.</p>
             </div>
           </article>
         </section>
 
         <!-- ============= PRODUCT ADVANTAGES ============= -->
         <section class="advantages" aria-label="Product advantages">
-          <h2>Product Advantages</h2>
+          <h2 data-i18n>Product Advantages</h2>
           <div class="adv-grid">
             <article class="adv-card">
               <img src="assets/pdp/adv-control.jpg" alt="Cutaway rendering of the pan's layered body">
-              <h4>Total Control, Every Time</h4>
-              <p>Fast, even heat edge-to-edge means predictable cooking with <b>no hot spots</b>, no constant turning, no second-guessing. Just consistent results, every meal.</p>
+              <h4 data-i18n>Total Control, Every Time</h4>
+              <p data-i18n-html="adv.control">Fast, even heat edge-to-edge means predictable cooking with <b>no hot spots</b>, no constant turning, no second-guessing. Just consistent results, every meal.</p>
             </article>
             <article class="adv-card">
               <img src="assets/pdp/adv-searing.jpg" alt="Steak searing in the pan over a gas flame">
-              <h4>Restaurant-Level Searing at Home</h4>
-              <p>It holds heat the moment food hits the pan, so you get that <b>deep golden crust</b> on steaks, chicken, and veg&mdash;without needing a commercial-grade setup.</p>
+              <h4 data-i18n>Restaurant-Level Searing at Home</h4>
+              <p data-i18n-html="adv.searing">It holds heat the moment food hits the pan, so you get that <b>deep golden crust</b> on steaks, chicken, and veg&mdash;without needing a commercial-grade setup.</p>
             </article>
             <article class="adv-card">
               <img src="assets/pdp/adv-healthy.jpg" alt="A drop of oil on the honeycomb surface">
-              <h4>Healthier Cooking, Effortless Release</h4>
-              <p>Cook with less oil and still get clean release. <b>Eggs glide</b>, fish stays intact, and delicate foods lift effortlessly&mdash;no tearing, no sticking.</p>
+              <h4 data-i18n>Healthier Cooking, Effortless Release</h4>
+              <p data-i18n-html="adv.healthy">Cook with less oil and still get clean release. <b>Eggs glide</b>, fish stays intact, and delicate foods lift effortlessly&mdash;no tearing, no sticking.</p>
             </article>
             <article class="adv-card">
               <img src="assets/pdp/adv-robust.jpg" alt="The pan in daily use">
-              <h4>Robust Build, Lasting Performance</h4>
-              <p>The raised honeycomb takes daily abrasion, helping protect the coating so performance lasts. Built for real world use, <b>metal utensil safe</b> and backed by a <b>10 year warranty</b>.</p>
+              <h4 data-i18n>Robust Build, Lasting Performance</h4>
+              <p data-i18n-html="adv.robust">The raised honeycomb takes daily abrasion, helping protect the coating so performance lasts. Built for real world use, <b>metal utensil safe</b> and backed by a <b>10 year warranty</b>.</p>
             </article>
             <article class="adv-card">
               <img src="assets/pdp/adv-versatility.jpg" alt="The pan moving from stovetop to oven">
-              <h4>Seamless Versatility &amp; Safety</h4>
-              <p>Induction-ready and compatible with gas and electric, plus <b>oven safe</b> when recipes go from stovetop to finish. The <b>cool-touch</b> handle keeps control comfortable and safe.</p>
+              <h4 data-i18n="Seamless Versatility & Safety">Seamless Versatility &amp; Safety</h4>
+              <p data-i18n-html="adv.versatile">Induction-ready and compatible with gas and electric, plus <b>oven safe</b> when recipes go from stovetop to finish. The <b>cool-touch</b> handle keeps control comfortable and safe.</p>
             </article>
             <article class="adv-card">
               <img src="assets/pdp/adv-cleanup.jpg" alt="The pan being rinsed clean">
-              <h4>Quick Cleanup, No Scrubbing</h4>
-              <p>Because food releases cleanly, cleanup stays simple. A quick rinse or wipe and you&rsquo;re done&mdash;less soaking, less scrubbing, more time back. <b>Dishwasher safe.</b></p>
+              <h4 data-i18n>Quick Cleanup, No Scrubbing</h4>
+              <p data-i18n-html="adv.cleanup">Because food releases cleanly, cleanup stays simple. A quick rinse or wipe and you&rsquo;re done&mdash;less soaking, less scrubbing, more time back. <b>Dishwasher safe.</b></p>
             </article>
           </div>
         </section>
@@ -179,7 +180,7 @@
       <!-- ============= UGC ============= -->
       <section class="ugc" aria-label="Customer videos">
         <div class="wrap">
-          <h2 class="pdp-h2">Chefs love Profi Resist at home</h2>
+          <h2 class="pdp-h2" data-i18n>Chefs love Profi Resist at home</h2>
           <div class="ugc-row">
             <button class="track-arrow" data-track="ugcTrack" data-dir="-1" aria-label="Previous videos">
               <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="m15 6-6 6 6 6"/></svg>
@@ -209,44 +210,44 @@
     <!-- ============= COMPARE OUR RANGE (reused prototype) ============= -->
     <section class="compare-section" id="compare">
       <div class="wrap">
-        <h2 class="comparison__title">Compare our Range</h2>
+        <h2 class="comparison__title" data-i18n>Compare our Range</h2>
         <div class="comparison-scroll">
           <div class="comparison">
             <div class="matrix">
-              <h3 class="segment-title segment-title--dark">Intense Searing</h3>
-              <h3 class="segment-title segment-title--light">Gentle Frying</h3>
-              <p class="segment-subtitle segment-subtitle--dark">Ideal for steaks and anything that needs golden crispy crusts</p>
-              <p class="segment-subtitle segment-subtitle--light">Ideal for anything delicate such as eggs, fish and vegetables.</p>
+              <h3 class="segment-title segment-title--dark" data-i18n>Intense Searing</h3>
+              <h3 class="segment-title segment-title--light" data-i18n>Gentle Frying</h3>
+              <p class="segment-subtitle segment-subtitle--dark" data-i18n>Ideal for steaks and anything that needs golden crispy crusts</p>
+              <p class="segment-subtitle segment-subtitle--light" data-i18n>Ideal for anything delicate such as eggs, fish and vegetables.</p>
 
               <article class="product product--dark">
                 <div class="pan-art pan-art--steel" aria-hidden="true"><span class="pan-art__shine"></span><span class="pan-art__rivet"></span></div>
                 <h4 class="product__name">Steel Pro Uncoated</h4>
-                <a class="product__button" href="#">Shop Now</a>
+                <a class="product__button" href="#" data-i18n>Shop Now</a>
               </article>
               <article class="product product--dark">
                 <div class="pan-art pan-art--honeycomb" aria-hidden="true"><span class="pan-art__rivet"></span></div>
                 <h4 class="product__name">Honeycomb Pro+<br>Ceramic</h4>
-                <a class="product__button" href="#">Shop Now</a>
+                <a class="product__button" href="#" data-i18n>Shop Now</a>
               </article>
               <article class="product">
                 <div class="pan-art pan-art--nonstick" aria-hidden="true"><span class="pan-art__rivet"></span></div>
                 <h4 class="product__name">Non-Stick Pro+<br>Ceramic</h4>
-                <a class="product__button" href="#">Shop Now</a>
+                <a class="product__button" href="#" data-i18n>Shop Now</a>
               </article>
               <article class="product">
                 <div class="pan-art pan-art--nonstick" aria-hidden="true"><span class="pan-art__rivet"></span></div>
                 <h4 class="product__name">Ceramic Pro+</h4>
-                <a class="product__button" href="#">Shop Now</a>
+                <a class="product__button" href="#" data-i18n>Shop Now</a>
               </article>
               <article class="product">
                 <div class="pan-art pan-art--nonstick" aria-hidden="true"><span class="pan-art__rivet"></span></div>
                 <h4 class="product__name">Non-Stick Pro</h4>
-                <a class="product__button" href="#">Shop Now</a>
+                <a class="product__button" href="#" data-i18n>Shop Now</a>
               </article>
               <article class="product">
                 <div class="pan-art pan-art--nonstick" aria-hidden="true"><span class="pan-art__rivet"></span></div>
                 <h4 class="product__name">Ceramic Pro</h4>
-                <a class="product__button" href="#">Shop Now</a>
+                <a class="product__button" href="#" data-i18n>Shop Now</a>
               </article>
 
               <div class="rules" aria-hidden="true">
@@ -255,61 +256,61 @@
               </div>
 
               <div class="spec-grid" role="table" aria-label="Pans range comparison">
-                <div class="spec-label col-label row-1" role="rowheader">Scratch<br>Resistant</div>
-                <div class="spec-cell spec-cell--dark col-1 row-1" role="cell">Metal utensil safe</div>
-                <div class="spec-cell spec-cell--dark col-2 row-1" role="cell">Metal utensil safe</div>
+                <div class="spec-label col-label row-1" role="rowheader" data-i18n-html="cmp.scratch">Scratch<br>Resistant</div>
+                <div class="spec-cell spec-cell--dark col-1 row-1" role="cell" data-i18n>Metal utensil safe</div>
+                <div class="spec-cell spec-cell--dark col-2 row-1" role="cell" data-i18n>Metal utensil safe</div>
                 <div class="spec-cell spec-cell--light col-3 row-1" role="cell">-</div>
-                <div class="spec-cell spec-cell--light col-4 row-1" role="cell">Scratch-resistant ceramic</div>
-                <div class="spec-cell spec-cell--light col-5 row-1" role="cell">Metal utensil safe</div>
-                <div class="spec-cell spec-cell--light col-6 row-1" role="cell">Metal utensil safe</div>
+                <div class="spec-cell spec-cell--light col-4 row-1" role="cell" data-i18n>Scratch-resistant ceramic</div>
+                <div class="spec-cell spec-cell--light col-5 row-1" role="cell" data-i18n>Metal utensil safe</div>
+                <div class="spec-cell spec-cell--light col-6 row-1" role="cell" data-i18n>Metal utensil safe</div>
 
-                <div class="spec-label col-label row-2" role="rowheader">Heat<br>Distribution</div>
-                <div class="spec-cell spec-cell--dark col-1 row-2" role="cell">3 Layers</div>
-                <div class="spec-cell spec-cell--dark col-2 row-2" role="cell">3 Layers</div>
-                <div class="spec-cell spec-cell--light col-3 row-2" role="cell">3 Layers</div>
-                <div class="spec-cell spec-cell--light col-4 row-2" role="cell">3 Layers</div>
-                <div class="spec-cell spec-cell--light col-5 row-2" role="cell">Single Layer</div>
-                <div class="spec-cell spec-cell--light col-6 row-2" role="cell">Single Layer</div>
+                <div class="spec-label col-label row-2" role="rowheader" data-i18n-html="cmp.heat">Heat<br>Distribution</div>
+                <div class="spec-cell spec-cell--dark col-1 row-2" role="cell" data-i18n>3 Layers</div>
+                <div class="spec-cell spec-cell--dark col-2 row-2" role="cell" data-i18n>3 Layers</div>
+                <div class="spec-cell spec-cell--light col-3 row-2" role="cell" data-i18n>3 Layers</div>
+                <div class="spec-cell spec-cell--light col-4 row-2" role="cell" data-i18n>3 Layers</div>
+                <div class="spec-cell spec-cell--light col-5 row-2" role="cell" data-i18n>Single Layer</div>
+                <div class="spec-cell spec-cell--light col-6 row-2" role="cell" data-i18n>Single Layer</div>
 
-                <div class="spec-label col-label row-3" role="rowheader">Non Stick Technology</div>
+                <div class="spec-label col-label row-3" role="rowheader" data-i18n>Non Stick Technology</div>
                 <div class="spec-cell spec-cell--dark col-1 row-3" role="cell">-</div>
-                <div class="spec-cell spec-cell--dark col-2 row-3" role="cell">Honeycomb non-stick hybrid</div>
-                <div class="spec-cell spec-cell--light col-3 row-3" role="cell">Non-stick</div>
-                <div class="spec-cell spec-cell--light col-4 row-3" role="cell">Ceramic non-stick</div>
-                <div class="spec-cell spec-cell--light col-5 row-3" role="cell">Lasting non-stick</div>
-                <div class="spec-cell spec-cell--light col-6 row-3" role="cell">Non-stick</div>
+                <div class="spec-cell spec-cell--dark col-2 row-3" role="cell" data-i18n>Honeycomb non-stick hybrid</div>
+                <div class="spec-cell spec-cell--light col-3 row-3" role="cell" data-i18n>Non-stick</div>
+                <div class="spec-cell spec-cell--light col-4 row-3" role="cell" data-i18n>Ceramic non-stick</div>
+                <div class="spec-cell spec-cell--light col-5 row-3" role="cell" data-i18n>Lasting non-stick</div>
+                <div class="spec-cell spec-cell--light col-6 row-3" role="cell" data-i18n>Non-stick</div>
 
-                <div class="spec-label col-label row-4" role="rowheader">Coating</div>
-                <div class="spec-cell spec-cell--dark col-1 row-4" role="cell">Uncoated</div>
-                <div class="spec-cell spec-cell--dark col-2 row-4" role="cell">Ceramic</div>
-                <div class="spec-cell spec-cell--light col-3 row-4" role="cell">Ceramic</div>
-                <div class="spec-cell spec-cell--light col-4 row-4" role="cell">Ceramic</div>
-                <div class="spec-cell spec-cell--light col-5 row-4" role="cell">PTFE</div>
-                <div class="spec-cell spec-cell--light col-6 row-4" role="cell">Ceramic</div>
+                <div class="spec-label col-label row-4" role="rowheader" data-i18n>Coating</div>
+                <div class="spec-cell spec-cell--dark col-1 row-4" role="cell" data-i18n>Uncoated</div>
+                <div class="spec-cell spec-cell--dark col-2 row-4" role="cell" data-i18n>Ceramic</div>
+                <div class="spec-cell spec-cell--light col-3 row-4" role="cell" data-i18n>Ceramic</div>
+                <div class="spec-cell spec-cell--light col-4 row-4" role="cell" data-i18n>Ceramic</div>
+                <div class="spec-cell spec-cell--light col-5 row-4" role="cell" data-i18n>PTFE</div>
+                <div class="spec-cell spec-cell--light col-6 row-4" role="cell" data-i18n>Ceramic</div>
 
-                <div class="spec-label col-label row-5" role="rowheader">Dishwasher &amp; Oven</div>
-                <div class="spec-cell spec-cell--dark col-1 row-5" role="cell">Oven-safe to 250°C<br>Dishwasher-safe</div>
-                <div class="spec-cell spec-cell--dark col-2 row-5" role="cell">Oven-safe to 250°C<br>Dishwasher-safe</div>
-                <div class="spec-cell spec-cell--light col-3 row-5" role="cell">Oven-safe to 250°C<br>Dishwasher-safe</div>
-                <div class="spec-cell spec-cell--light col-4 row-5" role="cell">Oven-safe to 250°C<br>Dishwasher-safe</div>
-                <div class="spec-cell spec-cell--light col-5 row-5" role="cell">Oven-safe to 250°C<br>Dishwasher-safe</div>
-                <div class="spec-cell spec-cell--light col-6 row-5" role="cell">Oven-safe to 250°C<br>Dishwasher-safe</div>
+                <div class="spec-label col-label row-5" role="rowheader" data-i18n="Dishwasher & Oven">Dishwasher &amp; Oven</div>
+                <div class="spec-cell spec-cell--dark col-1 row-5" role="cell" data-i18n-html="cmp.ovendw">Oven-safe to 250°C<br>Dishwasher-safe</div>
+                <div class="spec-cell spec-cell--dark col-2 row-5" role="cell" data-i18n-html="cmp.ovendw">Oven-safe to 250°C<br>Dishwasher-safe</div>
+                <div class="spec-cell spec-cell--light col-3 row-5" role="cell" data-i18n-html="cmp.ovendw">Oven-safe to 250°C<br>Dishwasher-safe</div>
+                <div class="spec-cell spec-cell--light col-4 row-5" role="cell" data-i18n-html="cmp.ovendw">Oven-safe to 250°C<br>Dishwasher-safe</div>
+                <div class="spec-cell spec-cell--light col-5 row-5" role="cell" data-i18n-html="cmp.ovendw">Oven-safe to 250°C<br>Dishwasher-safe</div>
+                <div class="spec-cell spec-cell--light col-6 row-5" role="cell" data-i18n-html="cmp.ovendw">Oven-safe to 250°C<br>Dishwasher-safe</div>
 
-                <div class="spec-label col-label row-6" role="rowheader">Design<br>Features</div>
-                <div class="spec-cell spec-cell--dark col-1 row-6" role="cell">Cool-touch handle<br>Drip-free pouring</div>
-                <div class="spec-cell spec-cell--dark col-2 row-6" role="cell">Professional handle<br>Drip-free pouring</div>
-                <div class="spec-cell spec-cell--light col-3 row-6" role="cell">Cool-touch handle<br>Drip-free pouring</div>
-                <div class="spec-cell spec-cell--light col-4 row-6" role="cell">Cool-touch handle<br>Drip-free pouring</div>
-                <div class="spec-cell spec-cell--light col-5 row-6" role="cell">Cool-touch handle<br>Drip-free pouring</div>
-                <div class="spec-cell spec-cell--light col-6 row-6" role="cell">Cool-touch handle<br>Drip-free pouring</div>
+                <div class="spec-label col-label row-6" role="rowheader" data-i18n-html="cmp.design">Design<br>Features</div>
+                <div class="spec-cell spec-cell--dark col-1 row-6" role="cell" data-i18n-html="cmp.cool">Cool-touch handle<br>Drip-free pouring</div>
+                <div class="spec-cell spec-cell--dark col-2 row-6" role="cell" data-i18n-html="cmp.pro">Professional handle<br>Drip-free pouring</div>
+                <div class="spec-cell spec-cell--light col-3 row-6" role="cell" data-i18n-html="cmp.cool">Cool-touch handle<br>Drip-free pouring</div>
+                <div class="spec-cell spec-cell--light col-4 row-6" role="cell" data-i18n-html="cmp.cool">Cool-touch handle<br>Drip-free pouring</div>
+                <div class="spec-cell spec-cell--light col-5 row-6" role="cell" data-i18n-html="cmp.cool">Cool-touch handle<br>Drip-free pouring</div>
+                <div class="spec-cell spec-cell--light col-6 row-6" role="cell" data-i18n-html="cmp.cool">Cool-touch handle<br>Drip-free pouring</div>
 
-                <div class="spec-label col-label row-7" role="rowheader">Warranty</div>
-                <div class="spec-cell spec-cell--dark col-1 row-7" role="cell">20-year warranty</div>
-                <div class="spec-cell spec-cell--dark col-2 row-7" role="cell">10-year warranty</div>
-                <div class="spec-cell spec-cell--light col-3 row-7" role="cell">5-year warranty</div>
-                <div class="spec-cell spec-cell--light col-4 row-7" role="cell">5-year warranty</div>
-                <div class="spec-cell spec-cell--light col-5 row-7" role="cell">5-year warranty</div>
-                <div class="spec-cell spec-cell--light col-6 row-7" role="cell">3-year warranty</div>
+                <div class="spec-label col-label row-7" role="rowheader" data-i18n>Warranty</div>
+                <div class="spec-cell spec-cell--dark col-1 row-7" role="cell" data-i18n>20-year warranty</div>
+                <div class="spec-cell spec-cell--dark col-2 row-7" role="cell" data-i18n>10-year warranty</div>
+                <div class="spec-cell spec-cell--light col-3 row-7" role="cell" data-i18n>5-year warranty</div>
+                <div class="spec-cell spec-cell--light col-4 row-7" role="cell" data-i18n>5-year warranty</div>
+                <div class="spec-cell spec-cell--light col-5 row-7" role="cell" data-i18n>5-year warranty</div>
+                <div class="spec-cell spec-cell--light col-6 row-7" role="cell" data-i18n>3-year warranty</div>
               </div>
             </div>
           </div>
@@ -320,27 +321,27 @@
     <!-- ============= FAQ (same questions & answers as the PLP) ============= -->
     <section class="faq pdp-faqs">
       <div class="wrap">
-        <h2>Frequently Asked Questions</h2>
+        <h2 data-i18n>Frequently Asked Questions</h2>
         <div class="faq-list">
           <div class="faq-item">
-            <button class="faq-q">Which pans for searing steaks? <span class="faq-sign"></span></button>
-            <div class="faq-a">For high-heat searing, choose an uncoated stainless steel or honeycomb hybrid pan. Their multi-layer bases hold and distribute intense heat evenly, producing the golden, crispy crust that defines a great steak — and both are metal-utensil safe.</div>
+            <button class="faq-q" data-i18n>Which pans for searing steaks? <span class="faq-sign"></span></button>
+            <div class="faq-a" data-i18n>For high-heat searing, choose an uncoated stainless steel or honeycomb hybrid pan. Their multi-layer bases hold and distribute intense heat evenly, producing the golden, crispy crust that defines a great steak — and both are metal-utensil safe.</div>
           </div>
           <div class="faq-item">
-            <button class="faq-q">Which pans for cooking eggs? <span class="faq-sign"></span></button>
-            <div class="faq-a">Delicate foods such as eggs, fish and vegetables release best from a ceramic or PTFE non-stick surface. Look for our Gentle Frying range for effortless flipping and easy cleaning.</div>
+            <button class="faq-q" data-i18n>Which pans for cooking eggs? <span class="faq-sign"></span></button>
+            <div class="faq-a" data-i18n>Delicate foods such as eggs, fish and vegetables release best from a ceramic or PTFE non-stick surface. Look for our Gentle Frying range for effortless flipping and easy cleaning.</div>
           </div>
           <div class="faq-item">
-            <button class="faq-q">What is the difference between Pro and Pro+ pans? <span class="faq-sign"></span></button>
-            <div class="faq-a">Pro+ pans add an extra performance layer — a more durable coating, a reinforced honeycomb structure or a heavier multi-ply base — along with an extended warranty compared with the standard Pro line.</div>
+            <button class="faq-q" data-i18n>What is the difference between Pro and Pro+ pans? <span class="faq-sign"></span></button>
+            <div class="faq-a" data-i18n>Pro+ pans add an extra performance layer — a more durable coating, a reinforced honeycomb structure or a heavier multi-ply base — along with an extended warranty compared with the standard Pro line.</div>
           </div>
           <div class="faq-item">
-            <button class="faq-q">How do you cook with stainless steel? <span class="faq-sign"></span></button>
-            <div class="faq-a">Pre-heat the empty pan over medium heat, add oil and let it shimmer before adding food. Ingredients naturally release once a crust forms, so resist the urge to move them too early.</div>
+            <button class="faq-q" data-i18n>How do you cook with stainless steel? <span class="faq-sign"></span></button>
+            <div class="faq-a" data-i18n>Pre-heat the empty pan over medium heat, add oil and let it shimmer before adding food. Ingredients naturally release once a crust forms, so resist the urge to move them too early.</div>
           </div>
           <div class="faq-item">
-            <button class="faq-q">What hobs do the pans work with? <span class="faq-sign"></span></button>
-            <div class="faq-a">Every WMF frying pan is suitable for all hob types, including induction, as well as gas, ceramic and electric. Most are also oven-safe up to 250°C.</div>
+            <button class="faq-q" data-i18n>What hobs do the pans work with? <span class="faq-sign"></span></button>
+            <div class="faq-a" data-i18n>Every WMF frying pan is suitable for all hob types, including induction, as well as gas, ceramic and electric. Most are also oven-safe up to 250°C.</div>
           </div>
         </div>
       </div>
@@ -349,13 +350,13 @@
     <!-- ============= RECIPES (Figma example content) ============= -->
     <section class="recipes" id="pdpRecipes" hidden>
       <div class="wrap">
-        <h2 class="pdp-h2">Recipes</h2>
-        <p class="recipes-sub">Cook delicious meals with the Profi Resist</p>
+        <h2 class="pdp-h2" data-i18n>Recipes</h2>
+        <p class="recipes-sub" data-i18n>Cook delicious meals with the Profi Resist</p>
         <div class="recipes-track">
-          <a class="recipe-card" href="#"><img src="assets/pdp/recipe-schnitzel.jpg" alt=""><span>Schnitzel with red cabbage salad</span></a>
-          <a class="recipe-card" href="#"><img src="assets/pdp/recipe-steak.jpg" alt=""><span>Pan-seared steak with vegetables</span></a>
-          <a class="recipe-card" href="#"><img src="assets/pdp/recipe-fish.jpg" alt=""><span>Pan-seared fish fillet with vegetables</span></a>
-          <a class="recipe-card" href="#"><img src="assets/pdp/recipe-pasta.jpg" alt=""><span>Pasta with asparagus and green vegetables</span></a>
+          <a class="recipe-card" href="#"><img src="assets/pdp/recipe-schnitzel.jpg" alt=""><span data-i18n>Schnitzel with red cabbage salad</span></a>
+          <a class="recipe-card" href="#"><img src="assets/pdp/recipe-steak.jpg" alt=""><span data-i18n>Pan-seared steak with vegetables</span></a>
+          <a class="recipe-card" href="#"><img src="assets/pdp/recipe-fish.jpg" alt=""><span data-i18n>Pan-seared fish fillet with vegetables</span></a>
+          <a class="recipe-card" href="#"><img src="assets/pdp/recipe-pasta.jpg" alt=""><span data-i18n>Pasta with asparagus and green vegetables</span></a>
         </div>
       </div>
     </section>
@@ -363,11 +364,11 @@
     <!-- ============= REVIEWS ============= -->
     <section class="reviews" id="reviews" aria-label="Customer reviews">
       <div class="wrap">
-        <h2 class="pdp-h2">Happy Customers</h2>
+        <h2 class="pdp-h2" data-i18n>Happy Customers</h2>
         <div class="reviews-list" id="reviewsList"></div>
         <div class="reviews-login">
-          <p>Please log in to your myWMF account to write a review for the product.</p>
-          <button class="gold-pill">Log in now</button>
+          <p data-i18n>Please log in to your myWMF account to write a review for the product.</p>
+          <button class="gold-pill" data-i18n>Log in now</button>
         </div>
       </div>
     </section>
@@ -377,18 +378,18 @@
       <div class="wrap">
         <div class="care-list">
           <div class="faq-item care-item">
-            <button class="faq-q">Use &amp; Care <span class="faq-sign"></span></button>
+            <button class="faq-q" data-i18n="Use & Care">Use &amp; Care <span class="faq-sign"></span></button>
             <div class="faq-a" id="careUse"></div>
           </div>
           <div class="faq-item care-item">
-            <button class="faq-q">Technical Data <span class="faq-sign"></span></button>
-            <div class="faq-a"><dl class="tech-table" id="techTable"></dl></div>
+            <button class="faq-q" data-i18n="Technical Data">Technical Data <span class="faq-sign"></span></button>
+            <div class="faq-a" data-i18n><dl class="tech-table" id="techTable"></dl></div>
           </div>
           <div class="faq-item care-item">
-            <button class="faq-q">Documents &amp; Downloads <span class="faq-sign"></span></button>
-            <div class="faq-a">
-              <a class="doc-link" href="#"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12"/><path d="m7 10 5 5 5-5"/><path d="M5 21h14"/></svg> Product data sheet (PDF)</a>
-              <a class="doc-link" href="#"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12"/><path d="m7 10 5 5 5-5"/><path d="M5 21h14"/></svg> Care instructions (PDF)</a>
+            <button class="faq-q" data-i18n="Documents & Downloads">Documents &amp; Downloads <span class="faq-sign"></span></button>
+            <div class="faq-a" data-i18n>
+              <a class="doc-link" href="#"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12"/><path d="m7 10 5 5 5-5"/><path d="M5 21h14"/></svg> <span data-i18n>Product data sheet (PDF)</span></a>
+              <a class="doc-link" href="#"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12"/><path d="m7 10 5 5 5-5"/><path d="M5 21h14"/></svg> <span data-i18n>Care instructions (PDF)</span></a>
             </div>
           </div>
         </div>
@@ -398,15 +399,15 @@
     <!-- ============= HOW TO ============= -->
     <section class="howto" aria-label="How-to video">
       <div class="wrap">
-        <h2 class="howto-title">How to get the best from your pan</h2>
-        <p class="howto-sub">Short technique videos from the WMF kitchen.</p>
+        <h2 class="howto-title" data-i18n>How to get the best from your pan</h2>
+        <p class="howto-sub" data-i18n>Short technique videos from the WMF kitchen.</p>
         <figure class="howto-video">
           <img src="assets/inuse.jpg" alt="Chef cooking with a WMF pan">
-          <span class="howto-overlay">How to sear the perfect steak</span>
+          <span class="howto-overlay" data-i18n>How to sear the perfect steak</span>
           <span class="play play--dark" aria-hidden="true"></span>
         </figure>
-        <h4 class="howto-caption">How to sear the perfect steak</h4>
-        <p class="howto-copy">Pre-heat the dry pan on medium-high until a drop of water dances across the surface. Add a little high-heat oil, lay the steak away from you and leave it untouched until a crust forms — it will release by itself when it is ready to turn.</p>
+        <h4 class="howto-caption" data-i18n>How to sear the perfect steak</h4>
+        <p class="howto-copy" data-i18n>Pre-heat the dry pan on medium-high until a drop of water dances across the surface. Add a little high-heat oil, lay the steak away from you and leave it untouched until a crust forms — it will release by itself when it is ready to turn.</p>
       </div>
     </section>
 
@@ -414,38 +415,38 @@
     <section class="xsell" aria-label="Related products">
       <div class="wrap">
         <div class="xs-block" id="xsAlternativesBlock">
-          <h3 class="xs-title">Suitable alternatives</h3>
-          <p class="xs-sub">Find the model that suits your needs.</p>
+          <h3 class="xs-title" data-i18n>Suitable alternatives</h3>
+          <p class="xs-sub" data-i18n>Find the model that suits your needs.</p>
           <div class="xs-track" id="xsAlternatives"></div>
         </div>
 
         <div class="xs-block">
-          <h3 class="xs-title">Ideally complements</h3>
-          <p class="xs-sub">Equipment for the perfect result.</p>
+          <h3 class="xs-title" data-i18n>Ideally complements</h3>
+          <p class="xs-sub" data-i18n>Equipment for the perfect result.</p>
           <div class="xs-track xs-track--acc">
             <article class="acc-card">
               <div class="acc-media"><div class="card-actions"><button class="round" aria-label="Add to basket"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="#1c1c1c" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 8h12l1 12.5H5L6 8Z"/><path d="M9 8a3 3 0 0 1 6 0"/></svg></button><button class="round" aria-label="Add to wishlist"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="#1c1c1c" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20.8 5.6a5 5 0 0 0-7.1 0L12 7.3l-1.7-1.7a5 5 0 0 0-7.1 7.1L12 21.5l8.8-8.8a5 5 0 0 0 0-7.1Z"/></svg></button></div><img src="assets/pdp/acc-silit-spatula.jpg" alt="Silit Classic Line spatula"></div>
-              <h4 class="acc-name">Silit Classic Line spatula, 34 cm</h4>
-              <div class="card-price"><span class="price sale">€12.99</span><span class="msrp">RRP €16.99</span></div>
-              <p class="acc-vat">Including 19% VAT | plus shipping costs</p>
+              <h4 class="acc-name" data-i18n>Silit Classic Line spatula, 34 cm</h4>
+              <div class="card-price"><span class="price sale" data-i18n>€12.99</span><span class="msrp" data-i18n>RRP €16.99</span></div>
+              <p class="acc-vat" data-i18n>Including 19% VAT | plus shipping costs</p>
             </article>
             <article class="acc-card">
               <div class="acc-media"><div class="card-actions"><button class="round" aria-label="Add to basket"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="#1c1c1c" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 8h12l1 12.5H5L6 8Z"/><path d="M9 8a3 3 0 0 1 6 0"/></svg></button><button class="round" aria-label="Add to wishlist"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="#1c1c1c" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20.8 5.6a5 5 0 0 0-7.1 0L12 7.3l-1.7-1.7a5 5 0 0 0-7.1 7.1L12 21.5l8.8-8.8a5 5 0 0 0 0-7.1Z"/></svg></button></div><img src="assets/pdp/acc-guard.jpg" alt="Splash guard"></div>
-              <h4 class="acc-name">Splash guard for pans, 20, 24 and 28 cm</h4>
-              <div class="card-price"><span class="price sale">€29.99</span><span class="msrp">RRP €37.99</span></div>
-              <p class="acc-vat">Including 19% VAT | plus shipping costs</p>
+              <h4 class="acc-name" data-i18n>Splash guard for pans, 20, 24 and 28 cm</h4>
+              <div class="card-price"><span class="price sale" data-i18n>€29.99</span><span class="msrp" data-i18n>RRP €37.99</span></div>
+              <p class="acc-vat" data-i18n>Including 19% VAT | plus shipping costs</p>
             </article>
             <article class="acc-card">
               <div class="acc-media"><div class="card-actions"><button class="round" aria-label="Add to basket"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="#1c1c1c" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 8h12l1 12.5H5L6 8Z"/><path d="M9 8a3 3 0 0 1 6 0"/></svg></button><button class="round" aria-label="Add to wishlist"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="#1c1c1c" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20.8 5.6a5 5 0 0 0-7.1 0L12 7.3l-1.7-1.7a5 5 0 0 0-7.1 7.1L12 21.5l8.8-8.8a5 5 0 0 0 0-7.1Z"/></svg></button></div><span class="badge badge--sale">Sale</span><img src="assets/pdp/acc-mat.jpg" alt="Pan protection mat set"></div>
-              <h4 class="acc-name">Pan protection mat set, 2-piece, 38 cm</h4>
-              <div class="card-price"><span class="price sale">€6.99</span><span class="msrp">RRP €7.99</span></div>
-              <p class="acc-vat">Including 19% VAT | plus shipping costs</p>
+              <h4 class="acc-name" data-i18n>Pan protection mat set, 2-piece, 38 cm</h4>
+              <div class="card-price"><span class="price sale" data-i18n>€6.99</span><span class="msrp" data-i18n>RRP €7.99</span></div>
+              <p class="acc-vat" data-i18n>Including 19% VAT | plus shipping costs</p>
             </article>
             <article class="acc-card">
               <div class="acc-media"><div class="card-actions"><button class="round" aria-label="Add to basket"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="#1c1c1c" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 8h12l1 12.5H5L6 8Z"/><path d="M9 8a3 3 0 0 1 6 0"/></svg></button><button class="round" aria-label="Add to wishlist"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="#1c1c1c" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20.8 5.6a5 5 0 0 0-7.1 0L12 7.3l-1.7-1.7a5 5 0 0 0-7.1 7.1L12 21.5l8.8-8.8a5 5 0 0 0 0-7.1Z"/></svg></button></div><img src="assets/pdp/acc-tongs.jpg" alt="BBQ serving tongs"></div>
-              <h4 class="acc-name">BBQ serving tongs</h4>
-              <div class="card-price"><span class="price sale">€24.99</span><span class="msrp">RRP €27.99</span></div>
-              <p class="acc-vat">Including 19% VAT | plus shipping costs</p>
+              <h4 class="acc-name" data-i18n>BBQ serving tongs</h4>
+              <div class="card-price"><span class="price sale" data-i18n>€24.99</span><span class="msrp" data-i18n>RRP €27.99</span></div>
+              <p class="acc-vat" data-i18n>Including 19% VAT | plus shipping costs</p>
             </article>
           </div>
         </div>

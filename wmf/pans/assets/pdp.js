@@ -62,6 +62,12 @@
 
   function renderPDP(api) {
     var DATA = api.data, esc = api.esc, eur = api.eur, img = api.img, isSale = api.isSale;
+    var t = api.t || function (x) { return x; };
+    var lang = api.lang || 'en';
+    var nameOf = api.nameOf || function (p) { return p.name; };
+    var descOf = api.descOf || function (p) { return p.description; };
+    /* keyed lookup with an explicit fallback (t() falls back to the key itself) */
+    function tt(key, fb) { var v = t(key); return v === key ? fb : v; }
     var products = DATA.products;
 
     var id = new URLSearchParams(location.search).get('id') || 'p1';
@@ -70,7 +76,7 @@
     var sel = p.default || 0;
     var isHero = p.series === HERO_SERIES;
 
-    document.title = 'WMF · ' + p.name;
+    document.title = 'WMF · ' + nameOf(p);
 
     /* ---------- breadcrumb (catalog category trails) ---------- */
     var catKey = p.cats && ('frying-pans' in p.cats) ? 'frying-pans' : 'pans';
@@ -78,10 +84,10 @@
     var trail = (DATA.categories && DATA.categories[catKey] && DATA.categories[catKey].breadcrumb) || ['Home', 'Products', 'Pans'];
     var crumbs = document.getElementById('pdpCrumbs');
     if (crumbs) {
-      crumbs.innerHTML = trail.map(function (t) {
-        var href = CAT_HREF[t];
-        return '<li>' + (href ? '<a href="' + href + '">' + esc(t) + '</a>' : esc(t)) + '</li>';
-      }).join('') + '<li>' + esc(p.name) + '</li>';
+      crumbs.innerHTML = trail.map(function (c) {
+        var href = CAT_HREF[c];
+        return '<li>' + (href ? '<a href="' + href + '">' + esc(t(c)) + '</a>' : esc(t(c))) + '</li>';
+      }).join('') + '<li>' + esc(nameOf(p)) + '</li>';
     }
 
     /* ---------- gallery ---------- */
@@ -106,7 +112,7 @@
     function renderStage() {
       var it = items[active];
       mainImg.src = itemSrc(it);
-      mainImg.alt = it.kind === 'packshot' ? p.brand + ' ' + p.name : (it.alt || '');
+      mainImg.alt = it.kind === 'packshot' ? p.brand + ' ' + nameOf(p) : (it.alt || '');
       stage.classList.toggle('is-packshot', it.kind === 'packshot');
       flag.hidden = !it.video;
       var many = items.length > 1;
@@ -203,7 +209,7 @@
     var setProduct = products.find(function (x) { return x.series === p.series && x.type === 'Set' && x.id !== p.id; });
 
     function titleFor(v) {
-      return /^\d+\s*cm$/i.test(v.size) ? p.name + ', ' + v.size : p.name;
+      return /^\d+\s*cm$/i.test(v.size) ? nameOf(p) + ', ' + v.size : nameOf(p);
     }
     function shortDesc(full) {
       if (!full) return '';
@@ -217,37 +223,39 @@
       var onSale = isSale(v);
       var save = onSale ? Math.round((1 - v.price / v.msrp) * 100) : 0;
       var klarna = (v.price / 3).toFixed(2);
+      if (lang === 'de') klarna = klarna.replace('.', ',');
       var points = Math.round(v.price);
       var h = '';
 
       h += '<span class="bb-eyebrow">' + esc(p.series || p.brand) + '</span>';
       h += '<h1 class="bb-title">' + esc(titleFor(v)) + '</h1>';
 
-      if (p.description) {
-        h += '<p class="bb-desc">' + esc(descOpen ? p.description : shortDesc(p.description)) + '</p>';
-        if (p.description.length > 150) {
-          h += '<button class="bb-readmore" data-act="readmore" aria-expanded="' + descOpen + '">' + (descOpen ? 'Read less' : 'Read more') + '</button>';
+      var desc = descOf(p);
+      if (desc) {
+        h += '<p class="bb-desc">' + esc(descOpen ? desc : shortDesc(desc)) + '</p>';
+        if (desc.length > 150) {
+          h += '<button class="bb-readmore" data-act="readmore" aria-expanded="' + descOpen + '">' + (descOpen ? t('Read less') : t('Read more')) + '</button>';
         }
       }
 
       if (p.rating != null) {
         h += '<a class="bb-rating" href="#reviews">' +
           '<span class="stars" style="--pct:' + Math.round(p.rating / 5 * 100) + '%"></span>' +
-          '<span class="rating-count">(' + p.rating.toFixed(1) + ') ' + p.reviews + ' Review' + (p.reviews === 1 ? '' : 's') + '</span></a>';
+          '<span class="rating-count">(' + p.rating.toFixed(1) + ') ' + p.reviews + ' ' + (p.reviews === 1 ? t('Review') : t('Reviews')) + '</span></a>';
       }
 
       /* Price Display component (Figma 1621:6329) — Default / Discount variants */
       h += '<div class="bb-price-row">' +
         '<span class="bb-price' + (onSale ? ' sale' : '') + '">' + eur(v.price) + '</span>' +
-        (onSale ? '<span class="discount">Save ' + save + '%</span>' : '') +
+        (onSale ? '<span class="discount">' + t('Save %n%').replace('%n', save) + '</span>' : '') +
         '</div>';
-      if (onSale) h += '<p class="bb-was">' + eur(v.msrp) + ' (last 30 days lowest price)</p>';
-      h += '<p class="bb-vat">Including VAT <span class="bb-shiphint">' +
-        (onSale ? 'shipping (free shipping on orders over €49)' : '(free shipping on orders over €49)') +
+      if (onSale) h += '<p class="bb-was">' + eur(v.msrp) + ' ' + t('(last 30 days lowest price)') + '</p>';
+      h += '<p class="bb-vat">' + t('Including VAT') + ' <span class="bb-shiphint">' +
+        (onSale ? t('shipping (free shipping on orders over €49)') : t('(free shipping on orders over €49)')) +
         '</span></p>';
 
       h += '<div class="bb-bar bb-bar--klarna"><img src="assets/pdp/klarna.png" alt="Klarna">' +
-        '<span>3 payments of ' + klarna + ' € at 0% interest with Klarna <a href="#">Learn more</a></span>' +
+        '<span>' + t('3 payments of %x € at 0% interest with Klarna').replace('%x', klarna) + ' <a href="#">' + t('Learn more') + '</a></span>' +
         '<button class="bar-info" aria-label="More about Klarna">' + ICONS.info + '</button></div>';
 
       if (setProduct) {
@@ -255,20 +263,20 @@
         var sSave = isSale(sv) ? Math.round(sv.msrp - sv.price) : 0;
         h += '<a class="bb-set" href="product.html?id=' + setProduct.id + '">' +
           '<img src="' + img(sv.sku) + '" alt="">' +
-          '<span><span class="bb-set-name">' + esc(setProduct.name) + ' <small>(' + esc(sv.size) + ')</small></span>' +
+          '<span><span class="bb-set-name">' + esc(nameOf(setProduct)) + ' <small>(' + esc(t(sv.size)) + ')</small></span>' +
           '<span class="bb-set-price">' + eur(sv.price) +
-          (sSave ? '<span class="discount">Save €' + sSave + '</span>' : '') + '</span></span></a>';
+          (sSave ? '<span class="discount">' + t('Save €%n').replace('%n', sSave) + '</span>' : '') + '</span></span></a>';
       }
 
-      h += '<div class="bb-sizes"><div class="bb-sizes-head"><span class="lbl">Size:</span><a href="#" data-act="size-guide">Size Guide</a></div>' +
+      h += '<div class="bb-sizes"><div class="bb-sizes-head"><span class="lbl">' + t('Size:') + '</span><a href="#" data-act="size-guide">' + t('Size Guide') + '</a></div>' +
         '<div class="bb-size-chips">' + p.variants.map(function (vv, i) {
           var hint = SIZE_HINTS[vv.size];
           return '<button class="bb-size' + (i === sel ? ' sel' : '') + (vv.stock ? '' : ' oos') + '" data-i="' + i + '"' +
-            ' title="' + esc((hint ? hint + (vv.stock ? '' : ' · out of stock') : (vv.stock ? '' : 'Out of stock'))) + '">' +
-            esc(vv.size) + '</button>';
+            ' title="' + esc((hint ? t(hint) + (vv.stock ? '' : ' · ' + t('Out of stock')) : (vv.stock ? '' : t('Out of stock')))) + '">' +
+            esc(t(vv.size)) + '</button>';
         }).join('') + '</div></div>';
 
-      h += '<div class="bb-acc-head"><span class="lbl">Also add:</span>' +
+      h += '<div class="bb-acc-head"><span class="lbl">' + t('Also add:') + '</span>' +
         '<span class="bb-acc-nav">' +
         '<button class="bb-acc-arrow" data-act="acc-prev" aria-label="Previous accessory"' + (accIdx === 0 ? ' disabled' : '') + '>' +
           '<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m15 6-6 6 6 6"/></svg></button>' +
@@ -278,35 +286,35 @@
         '<div class="bb-acc-viewport"><div class="bb-acc-track" style="transform:translateX(-' + (accIdx * 100) + '%)">' +
         ACCESSORIES.map(function (acc) {
           return '<div class="bb-acc"><img src="' + acc.img + '" alt="">' +
-            '<span><span class="bb-acc-name">' + esc(acc.name) + '</span><br><span class="bb-acc-price">€ ' + acc.price.toFixed(2) + '</span></span>' +
-            '<button class="bb-acc-add" data-act="acc-add" aria-label="Add ' + esc(acc.name) + ' to cart">' +
+            '<span><span class="bb-acc-name">' + esc(t(acc.name)) + '</span><br><span class="bb-acc-price">' + eur(acc.price) + '</span></span>' +
+            '<button class="bb-acc-add" data-act="acc-add" aria-label="' + esc(t(acc.name)) + '">' +
             '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#1c1c1c" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 8h12l1 12.5H5L6 8Z"/><path d="M9 8a3 3 0 0 1 6 0"/></svg></button></div>';
         }).join('') + '</div></div>';
 
       h += '<div class="bb-delivery">' +
-        '<div class="bb-del-row"><span class="bb-del-head">' + ICONS.truck + ' Online Delivery ' + ICONS.info + '</span>' +
+        '<div class="bb-del-row"><span class="bb-del-head">' + ICONS.truck + ' ' + t('Online Delivery') + ' ' + ICONS.info + '</span>' +
         (v.stock
-          ? '<span class="bb-del-line"><span class="dot"></span>Available Immediately - delivered in 1-3 days</span>'
-          : '<span class="bb-del-line warn"><span class="dot"></span>Out of stock online - back soon</span>') +
+          ? '<span class="bb-del-line"><span class="dot"></span>' + t('Available Immediately - delivered in 1-3 days') + '</span>'
+          : '<span class="bb-del-line warn"><span class="dot"></span>' + t('Out of stock online - back soon') + '</span>') +
         '</div>' +
         '<div class="bb-del-row"><span class="bb-del-head">' + ICONS.store + ' Click &amp; Collect</span>' +
-        '<span class="bb-del-line"><span class="dot"></span>Available in Würzburg <a href="#">Change Store</a></span></div></div>';
+        '<span class="bb-del-line"><span class="dot"></span>' + t('Available in Würzburg') + ' <a href="#">' + t('Change Store') + '</a></span></div></div>';
 
       h += '<div class="bb-cta-row">' +
-        '<button class="bb-cta" data-act="add"' + (v.stock ? '' : ' disabled') + '>' + (v.stock ? 'Add to cart' : 'Out of stock') + '</button>' +
+        '<button class="bb-cta" data-act="add"' + (v.stock ? '' : ' disabled') + '>' + (v.stock ? t('Add to cart') : t('Out of stock')) + '</button>' +
         '<button class="bb-wish" data-act="wish" aria-label="Add to wishlist">' + ICONS.heart + '</button></div>';
 
       h += '<div class="bb-bar bb-bar--club"><img src="assets/pdp/mywmf.png" alt="myWMF">' +
-        '<span>Earn <b>' + points + '</b> Club Points with this purchase</span>' +
+        '<span>' + t('Earn <b>%n</b> Club Points with this purchase').replace('%n', points) + '</span>' +
         '<button class="bar-info" data-act="club-info" aria-label="About Club Points">' + ICONS.info + '</button></div>';
 
 
       /* bundle products list their components (live-shop "Dieses Set enthält") */
       if (p.bundle && p.bundle.length) {
-        h += '<div class="bb-bundle"><span class="lbl">This set contains:</span>' +
+        h += '<div class="bb-bundle"><span class="lbl">' + t('This set contains:') + '</span>' +
           p.bundle.map(function (b) {
             var inner = '<span class="bb-bundle-thumb"><img src="' + img(b.sku) + '" alt=""></span>' +
-              '<span>' + (b.qty || 1) + ' × ' + esc(b.name) + '</span>';
+              '<span>' + (b.qty || 1) + ' × ' + esc(t(b.name)) + '</span>';
             return b.id
               ? '<a class="bb-bundle-row" href="product.html?id=' + b.id + '">' + inner + '</a>'
               : '<span class="bb-bundle-row">' + inner + '</span>';
@@ -314,9 +322,9 @@
       }
 
       h += '<div class="bb-trust">' +
-        '<div class="bb-trust-tile">' + ICONS.truck + '<span class="t1">Free Delivery</span><span class="t2">Orders over €49</span></div>' +
-        '<div class="bb-trust-tile">' + ICONS.ret + '<span class="t1">Free Returns</span><span class="t2">DHL Go-Green</span></div>' +
-        '<div class="bb-trust-tile">' + ICONS.crown + '<span class="t1">175+ Years</span><span class="t2">Fine Craftsmanship</span></div></div>';
+        '<div class="bb-trust-tile">' + ICONS.truck + '<span class="t1">' + t('Free Delivery') + '</span><span class="t2">' + t('Orders over €49') + '</span></div>' +
+        '<div class="bb-trust-tile">' + ICONS.ret + '<span class="t1">' + t('Free Returns') + '</span><span class="t2">DHL Go-Green</span></div>' +
+        '<div class="bb-trust-tile">' + ICONS.crown + '<span class="t1">' + t('175+ Years') + '</span><span class="t2">' + t('Fine Craftsmanship') + '</span></div></div>';
 
       return h;
     }
@@ -341,8 +349,8 @@
       if (a === 'readmore') { descOpen = !descOpen; renderBuyBox(); }
       else if (a === 'add') {
         bumpCart();
-        act.classList.add('added'); act.textContent = 'Added ✓';
-        setTimeout(function () { act.classList.remove('added'); act.textContent = 'Add to cart'; }, 1400);
+        act.classList.add('added'); act.textContent = t('Added ✓');
+        setTimeout(function () { act.classList.remove('added'); act.textContent = t('Add to cart'); }, 1400);
       }
       else if (a === 'acc-add') { bumpCart(); }
       else if (a === 'wish') { act.classList.toggle('on'); }
@@ -401,27 +409,27 @@
       var rows = SIZE_GUIDE.map(function (r) {
         var has = p.sizes.indexOf(r.size) >= 0;
         return '<div class="sg-row' + (has ? '' : ' dim') + '"><b>' + r.size +
-          (has ? '<span class="tick">✓</span>' : '') + '</b><span>' + r.serves + '</span><span>' + r.use + '</span></div>';
+          (has ? '<span class="tick">✓</span>' : '') + '</b><span>' + t(r.serves) + '</span><span>' + t(r.use) + '</span></div>';
       }).join('');
-      return '<h3>Size Guide</h3>' +
-        '<p class="pm-note">Frying pan sizes are measured across the top rim — the usable cooking surface is roughly 4&nbsp;cm smaller. When in doubt, size up: food browns better with room around it.</p>' +
-        '<div class="sg-table"><div class="sg-row head"><span>Size</span><span>Serves</span><span>Typical use</span></div>' + rows + '</div>' +
+      return '<h3>' + t('Size Guide') + '</h3>' +
+        '<p class="pm-note">' + t('Frying pan sizes are measured across the top rim — the usable cooking surface is roughly 4\u00a0cm smaller. When in doubt, size up: food browns better with room around it.') + '</p>' +
+        '<div class="sg-table"><div class="sg-row head"><span>' + t('Size') + '</span><span>' + t('Serves') + '</span><span>' + t('Typical use') + '</span></div>' + rows + '</div>' +
         '<p class="pm-note">' + esc(isSet
-          ? 'The ' + p.name + ' combines the most-used sizes in one set (' + p.sizes.join(', ') + ').'
-          : 'The ' + p.name + ' is available in ' + p.sizes.join(' and ') + ' — ticked above.') + '</p>';
+          ? t('The %name combines the most-used sizes in one set (%sizes).').replace('%name', nameOf(p)).replace('%sizes', p.sizes.map(function (x) { return t(x); }).join(', '))
+          : t('The %name is available in %sizes — ticked above.').replace('%name', nameOf(p)).replace('%sizes', p.sizes.join(lang === 'de' ? ' und ' : ' and '))) + '</p>';
     }
 
     function clubHTML() {
       var pts = Math.round(p.variants[sel].price);
-      return '<h3>myWMF Club Points</h3>' +
-        '<p class="pm-note">Collect Club Points with every order — 1 point for every €1 you spend.</p>' +
+      return '<h3>' + t('myWMF Club Points') + '</h3>' +
+        '<p class="pm-note">' + t('Collect Club Points with every order — 1 point for every €1 you spend.') + '</p>' +
         '<ul class="care-ul">' +
-        '<li>Points are added to your myWMF account as soon as your order ships.</li>' +
-        '<li>Redeem them at checkout: 100 points = a €5 reward.</li>' +
-        '<li>Members also get early access to seasonal offers and a birthday treat.</li>' +
+        '<li>' + t('Points are added to your myWMF account as soon as your order ships.') + '</li>' +
+        '<li>' + t('Redeem them at checkout: 100 points = a €5 reward.') + '</li>' +
+        '<li>' + t('Members also get early access to seasonal offers and a birthday treat.') + '</li>' +
         '</ul>' +
-        '<p class="pm-highlight">You would earn <b>' + pts + ' Club Points</b> with this purchase.</p>' +
-        '<button class="gold-pill" data-modal-close>Join myWMF — it’s free</button>';
+        '<p class="pm-highlight">' + t('You would earn <b>%n Club Points</b> with this purchase.').replace('%n', pts) + '</p>' +
+        '<button class="gold-pill" data-modal-close>' + t('Join myWMF — it’s free') + '</button>';
     }
 
     /* ---------- marketing example content (Profi Resist family only) ---------- */
@@ -438,32 +446,35 @@
         list.innerHTML = EXAMPLE_REVIEWS.slice(0, n).map(function (r) {
           return '<article class="review"><span class="stars" style="--pct:100%"></span>' +
             '<div class="review-meta"><span class="review-name">' + esc(r.name) + '</span><span class="review-date">' + r.date + '</span></div>' +
-            '<h4>' + esc(r.title) + '</h4><p>' + esc(r.text) + '</p></article>';
+            '<h4>' + esc(t(r.title)) + '</h4><p>' + esc(t(r.text)) + '</p></article>';
         }).join('') +
-        (p.reviews > n ? '<div class="reviews-more"><button class="btn-outline">Show more +</button></div>' : '');
+        (p.reviews > n ? '<div class="reviews-more"><button class="btn-outline">' + t('Show more +') + '</button></div>' : '');
       } else {
-        list.innerHTML = '<p class="reviews-none">No reviews yet — be the first to review this product.</p>';
+        list.innerHTML = '<p class="reviews-none">' + t('No reviews yet — be the first to review this product.') + '</p>';
       }
     }
 
     /* ---------- use & care + technical data ---------- */
     var careEl = document.getElementById('careUse');
-    if (careEl) careEl.innerHTML = CARE_BY_SURFACE[p.surface] || CARE_BY_SURFACE['Non-stick'];
+    if (careEl) {
+      var careKey = CARE_BY_SURFACE[p.surface] ? p.surface : 'Non-stick';
+      careEl.innerHTML = tt('care:' + careKey, CARE_BY_SURFACE[careKey]);
+    }
 
     function renderTech() {
       var tech = document.getElementById('techTable'); if (!tech) return;
       var rows = [
         ['Series', p.series],
-        ['Type', p.type],
-        ['Material', p.material],
-        ['Surface', p.surface],
-        ['Cooking technique', p.technique],
-        ['Sizes', p.sizes.map(function (s) { return s + (SIZE_HINTS[s] ? ' (' + SIZE_HINTS[s] + ')' : ''); }).join(', ')],
+        ['Type', t(p.type)],
+        ['Material', t(p.material)],
+        ['Surface', t(p.surface)],
+        ['Cooking technique', t(p.technique)],
+        ['Sizes', p.sizes.map(function (s) { return t(s) + (SIZE_HINTS[s] ? ' (' + t(SIZE_HINTS[s]) + ')' : ''); }).join(', ')],
         ['Article number', p.variants[sel].sku],
-        ['Hob compatibility', 'All hobs, including induction'],
-        ['Oven-safe', 'Up to 250°C']
+        ['Hob compatibility', t('All hobs, including induction')],
+        ['Oven-safe', t('Up to 250°C')]
       ].filter(function (r) { return r[1]; });
-      tech.innerHTML = rows.map(function (r) { return '<dt>' + esc(r[0]) + '</dt><dd>' + esc(r[1]) + '</dd>'; }).join('');
+      tech.innerHTML = rows.map(function (r) { return '<dt>' + esc(t(r[0])) + '</dt><dd>' + esc(r[1]) + '</dd>'; }).join('');
     }
 
     /* ---------- suitable alternatives (same category, real order) ---------- */

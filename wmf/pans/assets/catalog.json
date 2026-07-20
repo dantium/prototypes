@@ -64,7 +64,9 @@
    "technique": "Gentle Frying",
    "occasion": [
     "Everyday"
-   ]
+   ],
+   "name_de": "PermaDur Excellent Stielpfanne",
+   "description_de": "Durch die robuste, langlebige und aufwändig in drei Schichten aufgetragene PermaDur Antihaftversiegelung ist die PermaDur Excellent Stielpfanne mit 28 cm Durchmesser von WMF ideal zur fettarmen Zubereitung empfindlicher Speisen wie beispielsweise von Fisch geeignet und gleichzeitig nach dem Gebrauch kinderleicht zu reinigen. Die Pfanne aus formstabilen Aluminiumguss hält zuverlässig und auf Dauer auch hoher Beanspruchung stand."
   },
   {
    "id": "p1",
@@ -112,7 +114,9 @@
    "technique": "All Purpose",
    "occasion": [
     "Everyday"
-   ]
+   ],
+   "name_de": "Profi Resist Stielpfanne",
+   "description_de": "Die Profi Resist Stielpfanne mit 28 cm Durchmesser von WMF vereint das Beste aus zwei Welten. Dafür sorgt die einzigartige Kombination aus mehrschichtigem Aufbau mit Aluminiumkern, rostfreiem Edelstahl innen und extrem widerstandsfähigem Chromstahl außen sowie herausragender PermaDur Antihaftversiegelung, die durch eine spezielle, erhabene Wabenstruktur aus strapazierfähigem Cromargan® zusätzlich geschützt wird. Damit ist die Profi Resist Bratpfanne nicht nur kratzfest und besonders hitzebeständig, sondern bietet auch in allen Fällen - vom scharfen Anbraten von Fleisch bis hin zu fettarmen Braten empfindlicher Speisen - beste Brateigenschaften."
   },
   {
    "id": "p2",
@@ -150,7 +154,9 @@
    "occasion": [
     "Everyday",
     "Gifting"
-   ]
+   ],
+   "name_de": "PermaDur Excellent Stielpfannen-Set",
+   "description_de": "Durch die robuste, langlebige und aufwändig in drei Schichten aufgetragene PermaDur Antihaftversiegelung sind die PermaDur Excellent Stielpfannen von WMF ideal zur fettarmen Zubereitung empfindlicher Speisen wie beispielsweise von Fisch geeignet und gleichzeitig nach dem Gebrauch kinderleicht zu reinigen. Die Stielpfannen dieses 2-teiligen Sets mit 24 bzw. 28 cm Durchmesser, bestehen aus formstabilen Aluminiumguss und halten zuverlässig und auf Dauer auch hoher Beanspruchung stand."
   },
   {
    "id": "p3",
@@ -186,7 +192,8 @@
    "technique": "Gentle Frying",
    "occasion": [
     "Everyday"
-   ]
+   ],
+   "name_de": "PermaDur Premium Bratpfanne"
   },
   {
    "id": "p4",
@@ -219,7 +226,8 @@
    "description": "The WMF MisterX Stand is the perfect finishing touch for a sophisticated dining experience: practical, comfortable and convenient with eye-catching style. The smart design of this trivet combines premium materials and sophisticated contours with smart design features, in a foldable format for secure stand and effortless storage. Dishwasher-safe Cromargan® high-quality stainless steel ensures exceptional long-lasting performance with an elegant matte finish that never fails to impress. WMF: The art of the table, with strong tradition for over 160 years.",
    "occasion": [
     "Everyday"
-   ]
+   ],
+   "name_de": "Casserolen-Ständer MISTER X"
   },
   {
    "id": "p5",
@@ -266,7 +274,9 @@
    "occasion": [
     "Everyday",
     "Gifting"
-   ]
+   ],
+   "name_de": "Devil Bratpfannen-Set",
+   "description_de": "Vielseitige Pfannengerichte leicht gemacht: Das 2-teilige Devil Bratpfannen-Set von WMF mit je einer 24 cm und 28 cm Stielpfanne ist in der Küche einfach unverzichtbar. Die robuste keramische Antihaftversiegelung mit hartem mineralischem Aufbau sowie der TransTherm®-Allherdboden für eine optimale Wärmeverteilung und -speicherung ermöglichen hervorragende Bratergebnisse."
   },
   {
    "id": "p6",
@@ -302,7 +312,9 @@
    "technique": "Gentle Frying",
    "occasion": [
     "Everyday"
-   ]
+   ],
+   "name_de": "Durado Grillpfanne",
+   "description_de": "Strapazierfähig und vielseitig: Die Durado Grillpfanne von WMF mit ihrem 28 x 28 cm Format und dem geriffelten Boden ist ein absolutes Multitalent für köstliches Grillvergnügen in der Küche. Die robuste keramische Antihaftversiegelung bietet exzellente Grillergebnisse jeder Art und eine einfache Reinigung. Der TransTherm®-Allherdboden sorgt dank optimaler Wärmeverteilung und -speicherung für energiesparendes Braten."
   },
   {
    "id": "p7",
@@ -338,7 +350,9 @@
    "technique": "Intense Searing",
    "occasion": [
     "Everyday"
-   ]
+   ],
+   "name_de": "Wok mit Glasdeckel",
+   "description_de": "Der WMF Wok mit 36 cm Durchmesser und Glasdeckel ist der perfekte Schritt hinein in die vielseitige Geschmackswelt der asiatischen Küche. Gefertigt aus hochwertigem Cromargan®: Edelstahl Rostfrei 18/10 und ausgestattet mit dem energiesparenden TransTherm®-Allherdboden für beste Wärmeverteilung und –speicherung bietet der spülmaschinengeeignete Wok beste Voraussetzungen für gelungenen asiatischen Kochgenuss."
   },
   {
    "id": "p8",
@@ -375,7 +389,9 @@
    "occasion": [
     "Everyday",
     "Gifting"
-   ]
+   ],
+   "name_de": "Macao Wok-Set",
+   "description_de": "Das 4-teilige Macao Wok-Set von WMF ist ein großer Schritt hinein in die vielseitige Geschmackswelt der asiatischen Küche. Das Set besteht aus dem Wok mit 36 cm Durchmesser und energiesparendem TransTherm®-Allherdboden, einem passenden Glasdeckel, einem Ablagegitter und einem Dampfgareinsatz. Gefertigt aus strapazierfähigem Cromargan®: Edelstahl Rostfrei 18/10 und hochwertigem Glas bietet das spülmaschinengeeignete Set beste Voraussetzungen für gelungenen asiatischen Kochgenuss."
   },
   {
    "id": "p9",
@@ -411,7 +427,9 @@
    "technique": "Gentle Frying",
    "occasion": [
     "Everyday"
-   ]
+   ],
+   "name_de": "Hong Kong Wok",
+   "description_de": "Mit dem Silit Hong Kong Wok lassen sich köstliche Pfannengerichte und asiatische Nudeln sowie originelle, kreative Rezepte in einer Wok-Pfanne perfekt zubereiten. Das Geheimnis liegt in seiner ultra-harten, bis zu 400° C hitzebeständigen CeraProtect Antihaftversiegelung, die gleichzeitig eine einfache Reinigung des Woks ermöglicht."
   },
   {
    "id": "p10",
@@ -458,7 +476,8 @@
    "technique": "Gentle Frying",
    "occasion": [
     "Everyday"
-   ]
+   ],
+   "name_de": "Messino Bratpfanne"
   },
   {
    "id": "p11",
@@ -495,7 +514,9 @@
    "technique": "All Purpose",
    "occasion": [
     "Everyday"
-   ]
+   ],
+   "name_de": "Profi Resist Stielpfanne mit Pfannenwender",
+   "description_de": "Die Profi Resist Stielpfanne mit 28 cm Durchmesser von WMF vereint das Beste aus zwei Welten. Dafür sorgt die einzigartige Kombination aus mehrschichtigem Aufbau mit Aluminiumkern, rostfreiem Edelstahl innen und extrem widerstandsfähigem Chromstahl außen sowie herausragender PermaDur Antihaftversiegelung, die durch eine spezielle, erhabene Wabenstruktur aus strapazierfähigem Cromargan® zusätzlich geschützt wird. Damit ist die Profi Resist Bratpfanne nicht nur kratzfest und besonders hitzebeständig, sondern bietet auch in allen Fällen - vom scharfen Anbraten von Fleisch bis hin zu fettarmen Braten empfindlicher Speisen - beste Brateigenschaften. Der mitgelieferte Pfannenwender ist problemlos und sicher auch bei antihaftversiegelten Pfannen verwendbar."
   },
   {
    "id": "p12",
@@ -547,7 +568,8 @@
      "sku": "3201000358",
      "id": "p1"
     }
-   ]
+   ],
+   "name_de": "Profi Resist Bratpfannen-Set"
   },
   {
    "id": "p13",
@@ -584,7 +606,8 @@
    "technique": "Intense Searing",
    "occasion": [
     "Everyday"
-   ]
+   ],
+   "name_de": "Steak Profi Bratpfanne"
   },
   {
    "id": "p14",
@@ -621,7 +644,8 @@
    "occasion": [
     "Everyday",
     "Gifting"
-   ]
+   ],
+   "name_de": "Fusiontec Wok Platinum mit Deckel"
   },
   {
    "id": "p15",
@@ -667,7 +691,8 @@
    "technique": "All Purpose",
    "occasion": [
     "Everyday"
-   ]
+   ],
+   "name_de": "Fusiontec Mineral Bratpfanne Black"
   },
   {
    "id": "p16",
@@ -704,7 +729,8 @@
    "technique": "All Purpose",
    "occasion": [
     "Everyday"
-   ]
+   ],
+   "name_de": "Fusiontec Mineral Bratpfanne Platinum"
   },
   {
    "id": "p17",
@@ -750,7 +776,9 @@
    "technique": "All Purpose",
    "occasion": [
     "Everyday"
-   ]
+   ],
+   "name_de": "Fusiontec Mineral Stielpfanne, Rose Quartz",
+   "description_de": "Außergewöhnliche Kocheigenschaften, höchste Qualität und Langlebigkeit made in Germany – die Fusiontec Mineral Stielpfanne mit 28 cm Durchmesser von WMF ist eine Pfanne fürs Leben mit 30 Jahren Garantie*. Auch bei hoher Beanspruchung extrem kratzfest, langlebig und von zeitloser Schönheit, eignet sie sich ideal zum scharfen Anbraten auf Sterne-Niveau. Fusiontec reagiert dabei auf jedem Herd sehr schnell und präzise auf Hitze und speichert diese wie kaum ein anderes Material – perfekte Voraussetzungen für geschmacksintensiven Kochgenuss. Dazu verfügt die Stielpfanne über einen wärmereduzierenden Hohlgriff**."
   },
   {
    "id": "p18",
@@ -786,7 +814,8 @@
    "technique": "Intense Searing",
    "occasion": [
     "Everyday"
-   ]
+   ],
+   "name_de": "DuraCuisine, Wok"
   },
   {
    "id": "p19",
@@ -824,7 +853,9 @@
    "occasion": [
     "Everyday",
     "Gifting"
-   ]
+   ],
+   "name_de": "Nordic Profi Bratpfannen-Set",
+   "description_de": "Strapazierfähig und vielseitig: Das 2-teilige Pfannen-Set Nordic Profi von WMF mit je einer 24 cm und 28 cm Bratpfanne verspricht zartes Braten und Anbraten – Tag für Tag. Ob zarte Sautés oder scharf angebratene Pfannengerichte, dank der herausragenden Antihaftversiegelung sind exzellente Bratergebnisse und eine einfache Reinigung selbstverständlich. Der TransTherm®-Allherdboden sorgt dabei für eine optimale Wärmeverteilung und -speicherung sowie energiesparendes Braten."
   },
   {
    "id": "p20",
@@ -862,7 +893,9 @@
    "occasion": [
     "Everyday",
     "Gifting"
-   ]
+   ],
+   "name_de": "Devil Bratpfannen-Set",
+   "description_de": "Vielseitige Pfannengerichte leicht gemacht: Das 3-teilige Devil Bratpfannen-Set von WMF mit je einer 20 cm, 24 cm und 28 cm Stielpfanne ist in der Küche einfach unverzichtbar. Das Geheimnis: Eine leistungsstarke und schützende Antihaftversiegelung für hervorragende Bratergebnisse sowie der TransTherm®-Allherdboden, der für eine optimale Wärmeverteilung und -speicherung sorgt."
   },
   {
    "id": "p21",
@@ -898,7 +931,8 @@
    "technique": "All Purpose",
    "occasion": [
     "Everyday"
-   ]
+   ],
+   "name_de": "Ultimate Profi Resist Hohe Bratpfanne"
   },
   {
    "id": "p22",
@@ -944,7 +978,9 @@
    "technique": "All Purpose",
    "occasion": [
     "Everyday"
-   ]
+   ],
+   "name_de": "Ultimate Profi Resist Stielpfanne",
+   "description_de": "Ultimate Profi Resist vereint das Beste aus zwei Welten – die hohe Leistung und Langlebigkeit von Edelstahl mit dem alltagstauglichen Komfort einer Antihaftbeschichtung. Das Geheimnis liegt im innovativen Wabenschutzgitter, das für perfekte Bratergebnisse sorgt und die sichere Verwendung von Metallutensilien ermöglicht. Die langlebige Mehrschicht-Konstruktion gewährleistet eine schnelle und gleichmäßige Wärmeverteilung, während das backofengeeignete Design maximale Vielseitigkeit in der Küche bietet."
   },
   {
    "id": "p23",
@@ -980,7 +1016,9 @@
    "technique": "All Purpose",
    "occasion": [
     "Everyday"
-   ]
+   ],
+   "name_de": "Ultimate Profi Resist Servierpfanne",
+   "description_de": "Ultimate Profi Resist vereint das Beste aus zwei Welten – die hohe Leistung und Langlebigkeit von Edelstahl mit dem alltagstauglichen Komfort einer Antihaftbeschichtung. Das Geheimnis liegt im innovativen Wabenschutzgitter, das für perfekte Bratergebnisse sorgt und die sichere Verwendung von Metallutensilien ermöglicht. Die langlebige Mehrschicht-Konstruktion gewährleistet eine schnelle und gleichmäßige Wärmeverteilung, während das backofengeeignete Design maximale Vielseitigkeit in der Küche bietet."
   },
   {
    "id": "p24",
@@ -1027,7 +1065,9 @@
    "technique": "Gentle Frying",
    "occasion": [
     "Everyday"
-   ]
+   ],
+   "name_de": "Devil Stielpfanne mit Antihaftversiegelung",
+   "description_de": "Die Devil Stielpfanne von WMF mit 18 cm Durchmesser ist wie gemacht für das sanfte Anbraten von empfindlichen Speisen. Ihr Geheimnis: Eine leistungsstarke und schützende Antihaftversiegelung für hervorragende Bratergebnisse sowie der TransTherm®-Allherdboden, der für eine optimale Wärmeverteilung und -speicherung sorgt."
   },
   {
    "id": "p25",
@@ -1065,7 +1105,8 @@
    "occasion": [
     "Everyday",
     "Gifting"
-   ]
+   ],
+   "name_de": "Devil Bratpfannen-Set"
   },
   {
    "id": "p26",
@@ -1112,7 +1153,9 @@
    "technique": "Gentle Frying",
    "occasion": [
     "Everyday"
-   ]
+   ],
+   "name_de": "Devil Servier-Schmorpfanne mit Glasdeckel",
+   "description_de": "Braten, schmoren, servieren: Die elegante Devil Servier-Schmorpfanne mit Glasdeckel und 28 cm Durchmesser von WMF meistert nicht nur die leckersten Pfannen- und Schmorgerichte, sondern macht auch beim Servieren der Köstlichkeiten eine sehr gute Figur auf dem Tisch. Damit beim Anbraten nichts anbrennen kann, verfügt die große Pfanne aus strapazierfähigem Cromargan®: Edelstahl Rostfrei 18/10 über eine hochwertige Durit Select Pro Antihaftversiegelung, die zudem auch die Reinigung erleichtert."
   },
   {
    "id": "p27",
@@ -1149,7 +1192,9 @@
    "occasion": [
     "Everyday",
     "Gifting"
-   ]
+   ],
+   "name_de": "Fusiontec Mineral Pro, Wok mit Deckel, Tim Raue Edition",
+   "description_de": "Made in Germany: Der Fusiontec Mineral Pro Wok von WMF ist sprichwörtlich eine Pfanne fürs Leben. Extrem kratzfest, strapazierfähig, langlebig und von zeitloser Schönheit, eignet er sich perfekt für müheloses Wenden und Schwenken — ideal für asiatische Küche und alle Arten von Mahlzeiten. Fusiontec reagiert sehr schnell und präzise auf Hitze, speichert diese wie kaum ein anderes Material und erfüllt so auch höchste Ansprüche."
   },
   {
    "id": "p28",
@@ -1186,7 +1231,9 @@
    "occasion": [
     "Everyday",
     "Gifting"
-   ]
+   ],
+   "name_de": "Click&Serve Pfannen Vorteils-Set*",
+   "description_de": "Click&Serve, die neue Kochgeschirr-Serie von WMF, begeistert mit einem innovativen, cleveren und sehr platzsparenden Konzept und multifunktionalen Einsatzmöglichkeiten. Vom Herd direkt in den Backofen, vom Backofen direkt auf den Tisch und sollte etwas übrigbleiben, direkt vom Tisch in den Kühlschrank: Der abnehmbare und mit jedem Kochgeschirr der Serie kompatible Griff erlaubt in jedem Fall eine platzsparende Unterbringung. Dazu verfügt er über 10 Kilogramm Tragkraft und lässt sich genauso einfach, schnell und sicher an jeder beliebigen Stelle des Schüttrandes des jeweiligen Kochgeschirrs anbringen. Das 3-teilige Click&Serve Pfannen Vorteils-Set* von WMF besteht aus 2 antihaftversiegelten Bratpfannen mit 24 bzw. 28 cm Durchmesser sowie 1 abnehmbarem Griff. WMF gewährt zudem 10 Jahre Garantie."
   },
   {
    "id": "p29",
@@ -1224,7 +1271,9 @@
    "occasion": [
     "Everyday",
     "Gifting"
-   ]
+   ],
+   "name_de": "Durado Bratpfannen-Set",
+   "description_de": "Strapazierfähig und vielseitig: Das 3-teilige Durado Bratpfannen-Set von WMF mit je einer 20cm, 24 cm und 28 cm Stielpfanne bietet drei absolut langlebige Multitalente für jede Art der Zubereitung. Ob zarte Sautés oder scharf angebratene Pfannengerichte, dank der robusten keramischen Antihaftversiegelung sind exzellente Bratergebnisse und eine einfache Reinigung selbstverständlich. Der TransTherm®-Allherdboden sorgt dabei für eine optimale Wärmeverteilung und -speicherung sowie energiesparendes Braten."
   },
   {
    "id": "p30",
@@ -1275,7 +1324,9 @@
      "sku": "7115005330",
      "id": "p36"
     }
-   ]
+   ],
+   "name_de": "Set: Durado Bratpfannen",
+   "description_de": "Vorteile des Sets: Zwei Größen für jede Gelegenheit: Mit 24 cm und 28 cm sind Sie sowohl für Single- als auch Mehr-Personen-Mahlzeiten bestens ausgestattet. Robuste, keramische Antihaftversiegelung: Die Durado Pfannen haben eine widerstandsfähige Keramikbeschichtung, die bis 400 °C hitzebeständig ist — für hervorragende Bratergebnisse, fettarmes Braten und einfache Reinigung. Effiziente Wärmeverteilung &amp; Energiesparend: Der hochwertige TransTherm® Allherdboden sorgt für gleichmäßige Wärmeverteilung, gute Wärmespeicherung und spart Energie — unabhängig vom Herdtyp, auch Induktion. Vielseitigkeit &amp; Ofentauglichkeit: Cromargan® Edelstahl + Keramikbeschichtung, geeignet für alle Herdarten, und backofenfest (bis max. Temperatur laut Hersteller) — ideal für viele Koch- und Backideen."
   },
   {
    "id": "p31",
@@ -1330,7 +1381,9 @@
    "technique": "Intense Searing",
    "occasion": [
     "Everyday"
-   ]
+   ],
+   "name_de": "Profi Stielpfanne",
+   "description_de": "Die Profi Stielpfanne mit 28 cm Durchmesser von WMF verkörpert alles, was Küchenprofis benötigen. Dank Cromargan®: Edelstahl Rostfrei 18/10 ist sie extrem strapazierfähig und langlebig, dazu resistent gegen Speisesäuren, formstabil, backofengeeignet und sehr pflegeleicht. Ihr TransTherm®-Allherdboden sorgt für eine optimale Wärmeverteilung und –speicherung und ermöglicht den Einsatz auf jedem Herd – inklusive Induktion."
   },
   {
    "id": "p32",
@@ -1366,7 +1419,8 @@
    "technique": "Intense Searing",
    "occasion": [
     "Everyday"
-   ]
+   ],
+   "name_de": "Gourmet Plus Servierpfanne"
   },
   {
    "id": "p33",
@@ -1421,7 +1475,9 @@
    "technique": "Intense Searing",
    "occasion": [
     "Everyday"
-   ]
+   ],
+   "name_de": "Ultimate Stielpfanne",
+   "description_de": "Die WMF Ultimate Stielpfanne mit 28 cm Durchmesser von WMF sorgt in jeder Küche für Bratergebnisse aus der Spitzengastronomie. Dank ihres besonders ebenen Bodens aus dem neuen Cromargan® Ultimate, verteilt sich die Hitze auch besonders gleichmäßig über den kompletten Pfannenboden – ideal zum Braten von Fleisch. Das Ergebnis sind gleichmäßig gebräunte Steaks mit herrlicher Kruste und saftigem Inneren."
   },
   {
    "id": "p34",
@@ -1458,7 +1514,9 @@
    "technique": "Intense Searing",
    "occasion": [
     "Everyday"
-   ]
+   ],
+   "name_de": "Compact Cuisine Stielpfanne",
+   "description_de": "Die aus hochwertigem Cromargan®: Edelstahl Rostfrei 18/10 gefertigte Compact Cuisine Stielpfanne mit 28 cm Durchmesser von WMF überzeugt mit ihrem energiesparendem und induktionsgeeignetem TransTherm®-Allherdboden, verfügt über einen wärmereduzierenden Hohlgriff sowie einen breiten Schüttrand zum tropffreien Ausgießen von Flüssigkeiten und ist darüber hinaus zur komfortablen Reinigung in der Spülmaschine geeignet."
   },
   {
    "id": "p35",
@@ -1494,7 +1552,9 @@
    "technique": "Gentle Frying",
    "occasion": [
     "Everyday"
-   ]
+   ],
+   "name_de": "Devil Crêpes-Pfanne mit Teigverteiler und Wender",
+   "description_de": "Ihr spezielle, flache Form macht die Devil Crêpes-Pfanne von WMF zur perfekten Pfanne für die Zubereitung hauchdünner Crêpes oder leckerster Pfannkuchen. Dabei sorgt dicker Aluminiumguss für herausragend gleichmäßige Ergebnisse, während die robuste und langlebige 3-lagige PermaDur Antihaftversiegelung nicht nur wirkungsvoll Anhaftungen verhindert, sondern zudem für eine mühelose Reinigung sorgt."
   },
   {
    "id": "p36",
@@ -1540,7 +1600,8 @@
    "technique": "Gentle Frying",
    "occasion": [
     "Everyday"
-   ]
+   ],
+   "name_de": "Durado Stielpfanne"
   },
   {
    "id": "p37",
@@ -1577,7 +1638,8 @@
    "technique": "Intense Searing",
    "occasion": [
     "Everyday"
-   ]
+   ],
+   "name_de": "Click&Serve Bratpfanne mit Beschichtung"
   },
   {
    "id": "p38",
@@ -1613,7 +1675,8 @@
    "technique": "Gentle Frying",
    "occasion": [
     "Everyday"
-   ]
+   ],
+   "name_de": "Calabria Bratpfanne"
   },
   {
    "id": "p39",
@@ -1649,7 +1712,8 @@
    "technique": "Gentle Frying",
    "occasion": [
     "Everyday"
-   ]
+   ],
+   "name_de": "CeraDur Profi Bratpfanne"
   },
   {
    "id": "p40",
@@ -1685,7 +1749,8 @@
    "technique": "Intense Searing",
    "occasion": [
     "Everyday"
-   ]
+   ],
+   "name_de": "Gourmet Plus Bratpfanne"
   },
   {
    "id": "p41",
@@ -1720,7 +1785,8 @@
    "technique": "Gentle Frying",
    "occasion": [
     "Everyday"
-   ]
+   ],
+   "name_de": "Talis Bratpfanne"
   }
  ]
 }

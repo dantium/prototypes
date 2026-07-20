@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>WMF · Pots</title>
+  <link rel="stylesheet" href="assets/styles.css">
+  <script>window.PAGE = { kind: 'plp', category: 'pots', promo: false };</script>
+  <script src="assets/i18n-de.js"></script>
+  <script src="assets/app.js" defer></script>
+</head>
+<body>
+
+  <div id="chrome-header"></div>
+
+  <main>
+    <div class="wrap">
+      <!-- ============= BREADCRUMB ============= -->
+      <nav class="breadcrumb" aria-label="Breadcrumb">
+        <ol>
+          <li><a href="index.html" data-i18n>Home</a></li>
+          <li>Products</li>
+          <li data-i18n>Pots</li>
+        </ol>
+      </nav>
+
+      <div id="searchHead"></div>
+
+      <!-- ============= PAGE HEAD ============= -->
+      <div class="page-head">
+        <div>
+          <h1 class="page-title" data-i18n>Pots</h1>
+          <p class="page-sub" data-i18n>Cookware built to last — from the Fusiontec Mineral Pro sets to everyday saucepans, in a range of colours to match your kitchen.</p>
+        </div>
+        <div class="page-hero">
+          <img src="assets/hero.png" alt="WMF cookware">
+        </div>
+      </div>
+
+      <!-- ============= TOOLBAR ============= -->
+      <div class="toolbar">
+        <div class="toolbar-left">
+          <button class="pill pill--plain filter-open-btn" data-i18n="Filter" onclick="onFilterBtn()">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke-width="1.6" stroke-linecap="round"><path d="M4 7h13"/><path d="M4 12h16"/><path d="M4 17h9"/><circle cx="18" cy="7" r="2.3" fill="#fff"/><circle cx="15" cy="17" r="2.3" fill="#fff"/></svg>
+            Filter
+          </button>
+        </div>
+        <div class="toolbar-right">
+          <span class="product-count" id="productCount"></span>
+          <div class="sort">
+            <select aria-label="Sort by" id="sortSelect">
+              <option value="Recommended" data-i18n>Recommended</option>
+              <option value="Price: low to high" data-i18n>Price: low to high</option>
+              <option value="Price: high to low" data-i18n>Price: high to low</option>
+              <option value="Top rated" data-i18n>Top rated</option>
+              <option value="New in" data-i18n>New in</option>
+            </select>
+          </div>
+        </div>
+      </div>
+
+      <!-- ============= FILTERS + GRID ============= -->
+      <div class="plp">
+        <aside class="filters" aria-label="Product filters">
+          <div class="drawer-head" data-i18n="Filters">Filters
+            <button aria-label="Close filters" onclick="closeFilterDrawer()"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><path d="M6 6l12 12M18 6 6 18"/></svg></button>
+          </div>
+          <div class="drawer-body">
+            <div class="active-filters" id="activeFilters" hidden></div>
+            <div id="facets"></div>
+          </div>
+          <div class="drawer-apply">
+            <button id="drawerApplyBtn" onclick="closeFilterDrawer()">Show products</button>
+          </div>
+        </aside>
+
+        <section aria-label="Products">
+          <div class="active-filters active-filters--mobile" id="activeFiltersMobile" hidden></div>
+          <div class="grid" id="grid"></div>
+
+          <div class="show-more-row" id="showMoreRow">
+            <p class="show-more-count" id="showMoreCount"></p>
+            <button class="btn-outline" id="showMoreBtn" data-i18n>Show more</button>
+          </div>
+        </section>
+      </div>
+    </div>
+  </main>
+
+  <div id="chrome-footer"></div>
+  <div id="chrome-search"></div>
+
+</body>
+</html>

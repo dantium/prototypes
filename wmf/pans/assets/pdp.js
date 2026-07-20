@@ -29,6 +29,23 @@
 
   var SIZE_HINTS = { '20 cm': '1 – 2 people', '24 cm': '2 – 4 people', '28 cm': '4 – 6 people' };
 
+  /* Read-more description for the honeycomb hero (Profi Resist): teaser collapsed,
+     intro + benefit bullets expanded. Rich HTML — rendered, not escaped. */
+  var DESC_HERO = {
+    teaser: 'Get professional results in your kitchen with our most advanced frying pan yet.',
+    full:
+      '<p>Get professional results in your kitchen with our most advanced frying pan yet.</p>' +
+      '<p>Designed for confident searing this hybrid frying pan combines fast, even heat with protected nonstick performance built to last.</p>' +
+      '<ul class="bb-benefits">' +
+        '<li><b>Intense searing:</b> Delivers crisp results at high heat with easy release.</li>' +
+        '<li><b>Pro-grade multi-layer build:</b> Aluminium core with stainless-steel interior and durable chrome steel exterior for fast, even heat.</li>' +
+        '<li><b>10-year warranty:</b> Hard-wearing materials and construction, backed by a 10-year warranty for peace of mind.</li>' +
+        '<li><b>Protected nonstick durability:</b> PermaDur non-stick coating reinforced by a raised Sear Protect® honeycomb structure to resist scratching and sticking.</li>' +
+        '<li><b>Effortless serving:</b> Coated pouring rim helps food slide cleanly onto the plate, plus drip-free pouring of liquids.</li>' +
+        '<li><b>Stovetop-to-oven ready:</b> Suitable for all hob types and oven use, with a heat-reducing handle for comfortable control.</li>' +
+      '</ul>'
+  };
+
   /* buy-box accessory slider — example items from the Figma mock */
   var ACCESSORIES = [
     { img: 'assets/pdp/acc-spatula.jpg', name: 'Profi Plus spatula, 32 cm', price: 22.99 },
@@ -74,13 +91,19 @@
     var p = products.find(function (x) { return x.id === id; }) || products.find(function (x) { return x.id === 'p1'; }) || products[0];
     if (!p) return;
     var sel = p.default || 0;
+    var colorSel = p.colors ? (p.defaultColor || 0) : -1;   // colour-variant products
     var isHero = p.series === HERO_SERIES;
+    /* the sku that drives the packshot / price / article number */
+    function curSku() { return p.colors ? p.colors[colorSel].sku : p.variants[sel].sku; }
 
     document.title = 'WMF · ' + nameOf(p);
 
     /* ---------- breadcrumb (catalog category trails) ---------- */
-    var catKey = p.cats && ('frying-pans' in p.cats) ? 'frying-pans' : 'pans';
-    var CAT_HREF = { 'Home': 'index.html', 'Products': 'pans.html', 'Pans': 'pans.html', 'Frying Pans': 'frying-pans.html' };
+    var catKey = p.cats && ('frying-pans' in p.cats) ? 'frying-pans'
+               : p.cats && ('pots' in p.cats) ? 'pots'
+               : 'pans';
+    var CAT_PAGE = { 'frying-pans': 'frying-pans.html', 'pots': 'pots.html', 'pans': 'pans.html' };
+    var CAT_HREF = { 'Home': 'index.html', 'Products': 'pans.html', 'Pans': 'pans.html', 'Frying Pans': 'frying-pans.html', 'Pots': 'pots.html' };
     var trail = (DATA.categories && DATA.categories[catKey] && DATA.categories[catKey].breadcrumb) || ['Home', 'Products', 'Pans'];
     var crumbs = document.getElementById('pdpCrumbs');
     if (crumbs) {
@@ -95,6 +118,8 @@
     if (isHero) {
       items = HERO_GALLERY.slice();
       items.splice(1, 0, { kind: 'packshot' });   // real product photo as 2nd thumb
+    } else if (p.colors) {
+      items = [{ kind: 'packshot' }];              // just the colour packshot; the swatch swaps it
     } else {
       items = [{ kind: 'packshot' }, { src: 'assets/inuse.jpg', kind: 'life', alt: 'The pan in use' }];
     }
@@ -108,7 +133,7 @@
     var nextBtn = document.getElementById('pdpNext');
     var progress = document.getElementById('pdpProgress');
 
-    function itemSrc(it) { return it.kind === 'packshot' ? img(p.variants[sel].sku) : it.src; }
+    function itemSrc(it) { return it.kind === 'packshot' ? img(curSku()) : it.src; }
     function renderStage() {
       var it = items[active];
       mainImg.src = itemSrc(it);
@@ -182,6 +207,7 @@
       else if (lightboxOpen() && e.key === 'ArrowRight') stepGallery(1);
     });
     function renderThumbs() {
+      thumbsEl.style.display = items.length > 1 ? '' : 'none';   // no thumb strip for a single image
       thumbsEl.innerHTML = items.map(function (it, i) {
         return '<button class="pdp-thumb' + (i === active ? ' sel' : '') + (it.kind === 'packshot' ? ' is-packshot' : '') + '" data-i="' + i + '" aria-label="Image ' + (i + 1) + '">' +
           '<img src="' + esc(itemSrc(it)) + '" alt="">' + '</button>';
@@ -198,9 +224,10 @@
     var accIdx = 0;
 
     var ICONS = {
-      info: '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="9"/><path d="M12 10.8v5" stroke-linecap="round"/><circle cx="12" cy="7.6" r="1" fill="currentColor" stroke="none"/></svg>',
-      truck: '<svg width="22" height="15" viewBox="0 0 24 16" fill="none" stroke="#1a1a1a" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"><path d="M1 1.5h13v10H1z"/><path d="M14 5h4.5L22 8.6v2.9h-8"/><circle cx="5.4" cy="13" r="1.9" fill="#fff"/><circle cx="17.6" cy="13" r="1.9" fill="#fff"/></svg>',
-      store: '<svg width="18" height="16" viewBox="0 0 24 22" fill="none" stroke="#1a1a1a" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8 4.5 2h15L21 8"/><path d="M3 8c0 1.6 1.3 3 3 3s3-1.4 3-3c0 1.6 1.3 3 3 3s3-1.4 3-3c0 1.6 1.3 3 3 3s3-1.4 3-3"/><path d="M5 11v9h14v-9"/><path d="M10 20v-6h4v6"/></svg>',
+      /* WMF delivery / store / info glyphs from the Figma buy box (fill = currentColor) */
+      info: '<svg width="13" height="13" viewBox="0 0 10 10" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M5 0.78125C7.31682 0.78125 9.21875 2.65771 9.21875 5C9.21875 7.3299 7.33184 9.21875 5 9.21875C2.67102 9.21875 0.78125 7.33277 0.78125 5C0.78125 2.67182 2.66801 0.78125 5 0.78125ZM5 0.15625C2.32506 0.15625 0.15625 2.32584 0.15625 5C0.15625 7.67572 2.32506 9.84375 5 9.84375C7.67494 9.84375 9.84375 7.67572 9.84375 5C9.84375 2.32584 7.67494 0.15625 5 0.15625ZM4.77559 2.5H5.22439C5.35766 2.5 5.46412 2.61098 5.45857 2.74414L5.32186 6.02539C5.31662 6.15094 5.21334 6.25 5.08768 6.25H4.9123C4.78666 6.25 4.68336 6.15092 4.67812 6.02539L4.54141 2.74414C4.53588 2.61098 4.64232 2.5 4.77559 2.5ZM5 6.64062C4.69797 6.64062 4.45312 6.88547 4.45312 7.1875C4.45312 7.48953 4.69797 7.73438 5 7.73438C5.30203 7.73438 5.54688 7.48953 5.54688 7.1875C5.54688 6.88547 5.30203 6.64062 5 6.64062Z"/></svg>',
+      truck: '<svg width="20" height="15" viewBox="0 0 13 10" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M12.8375 7.5H12.35V5.38867C12.35 5.06055 12.2119 4.73828 11.9681 4.50586L10.2639 2.86719C10.0242 2.63281 9.68906 2.5 9.34578 2.5H8.45V1.53516C8.45 1.0332 7.99906 0.625 7.44656 0.625H1.00344C0.450938 0.625 0 1.0332 0 1.53516V7.21484C0 7.7168 0.450938 8.125 1.00344 8.125H1.3325C1.31016 8.22656 1.3 8.33008 1.3 8.4375C1.3 9.30078 2.02719 10 2.925 10C3.82281 10 4.55 9.30078 4.55 8.4375C4.55 8.33008 4.53781 8.22656 4.5175 8.125H8.4825C8.46016 8.22656 8.45 8.33008 8.45 8.4375C8.45 9.30078 9.17719 10 10.075 10C10.9728 10 11.7 9.30078 11.7 8.4375C11.7 8.33008 11.6878 8.22656 11.6675 8.125H12.8375C12.9269 8.125 13 8.05469 13 7.96875V7.65625C13 7.57031 12.9269 7.5 12.8375 7.5ZM9.34578 3.125C9.51641 3.125 9.685 3.19141 9.80484 3.30859L11.5091 4.94727C11.5253 4.96289 11.5314 4.98438 11.5456 5.00195H8.45V3.12695H9.34578V3.125ZM2.925 9.375C2.38672 9.375 1.95 8.95508 1.95 8.4375C1.95 7.91992 2.38672 7.5 2.925 7.5C3.46328 7.5 3.9 7.91992 3.9 8.4375C3.9 8.95508 3.46328 9.375 2.925 9.375ZM4.21688 7.5C3.92031 7.12305 3.45312 6.875 2.925 6.875C2.39687 6.875 1.92969 7.12305 1.63312 7.5H1.00344C0.808437 7.5 0.65 7.37305 0.65 7.21484V1.53516C0.65 1.37695 0.808437 1.25 1.00344 1.25H7.44656C7.64156 1.25 7.8 1.37695 7.8 1.53516V7.5H4.21688ZM10.075 9.375C9.53672 9.375 9.1 8.95508 9.1 8.4375C9.1 7.91992 9.53672 7.5 10.075 7.5C10.6133 7.5 11.05 7.91992 11.05 8.4375C11.05 8.95508 10.6133 9.375 10.075 9.375ZM10.075 6.875C9.54484 6.875 9.07969 7.12305 8.78312 7.5H8.45V5.625H11.7V7.5H11.3669C11.0703 7.12305 10.6052 6.875 10.075 6.875Z"/></svg>',
+      store: '<svg width="18" height="15" viewBox="0 0 12 10" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M11.9197 3.43945L10.2059 0.314453C10.0991 0.121094 9.9003 0 9.68468 0H2.31593C2.1003 0 1.90155 0.121094 1.79468 0.314453L0.0809292 3.43945C-0.147821 3.85742 0.139054 4.375 0.600304 4.375H1.2003V9.3457C1.2003 9.70703 1.46843 10 1.8003 10H6.6003C6.93218 10 7.2003 9.70703 7.2003 9.3457V4.375H10.2003V9.84375C10.2003 9.92969 10.2678 10 10.3503 10H10.6503C10.7328 10 10.8003 9.92969 10.8003 9.84375V4.375H11.4003C11.8616 4.375 12.1484 3.85742 11.9197 3.43945ZM6.6003 9.3457C6.6003 9.36328 6.59468 9.37305 6.59655 9.375L1.81155 9.37891C1.81155 9.37891 1.8003 9.36914 1.8003 9.3457V6.875H6.6003V9.3457ZM6.6003 6.25H1.8003V4.375H6.6003V6.25ZM0.602179 3.75L2.31593 0.625H9.68468L11.4003 3.75H0.602179Z"/></svg>',
       ret: '<svg width="20" height="15" viewBox="0 0 24 18" fill="none" stroke="#1a1a1a" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7h11a5 5 0 0 1 0 10H8"/><path d="m8 3-4 4 4 4"/></svg>',
       crown: '<svg width="18" height="15" viewBox="0 0 24 20" fill="none" stroke="#1a1a1a" stroke-width="1.5" stroke-linejoin="round"><path d="M3 6l4 4 5-6 5 6 4-4-1.5 11h-15L3 6Z"/></svg>',
       heart: '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20.8 5.6a5 5 0 0 0-7.1 0L12 7.3l-1.7-1.7a5 5 0 0 0-7.1 7.1L12 21.5l8.8-8.8a5 5 0 0 0 0-7.1Z"/></svg>'
@@ -220,6 +247,10 @@
 
     function buyBoxHTML() {
       var v = p.variants[sel];
+      if (p.colors) {   // the selected colour drives price / sku / stock
+        var col = p.colors[colorSel];
+        v = { sku: col.sku, size: v.size, price: col.price, msrp: col.msrp || null, stock: col.stock !== false, label: null };
+      }
       var onSale = isSale(v);
       var save = onSale ? Math.round((1 - v.price / v.msrp) * 100) : 0;
       var klarna = (v.price / 3).toFixed(2);
@@ -227,14 +258,27 @@
       var points = Math.round(v.price);
       var h = '';
 
-      h += '<span class="bb-eyebrow">' + esc(p.series || p.brand) + '</span>';
+      // series eyebrow links to its category PLP, pre-filtered to that series
+      if (p.series) {
+        var catPage = CAT_PAGE[catKey] || 'pans.html';
+        h += '<a class="bb-eyebrow" href="' + catPage + '?series=' + encodeURIComponent(p.series) + '">' + esc(p.series) + '</a>';
+      } else {
+        h += '<span class="bb-eyebrow">' + esc(p.brand) + '</span>';
+      }
       h += '<h1 class="bb-title">' + esc(titleFor(v)) + '</h1>';
 
-      var desc = descOf(p);
-      if (desc) {
-        h += '<p class="bb-desc">' + esc(descOpen ? desc : shortDesc(desc)) + '</p>';
-        if (desc.length > 150) {
-          h += '<button class="bb-readmore" data-act="readmore" aria-expanded="' + descOpen + '">' + (descOpen ? t('Read less') : t('Read more')) + '</button>';
+      if (isHero) {
+        // honeycomb hero: benefit-bulleted description (teaser collapsed, full expanded)
+        h += '<div class="bb-desc">' +
+          (descOpen ? tt('desc:hero', DESC_HERO.full) : '<p>' + esc(t(DESC_HERO.teaser)) + '</p>') + '</div>';
+        h += '<button class="bb-readmore" data-act="readmore" aria-expanded="' + descOpen + '">' + (descOpen ? t('Read less') : t('Read more')) + '</button>';
+      } else {
+        var desc = descOf(p);
+        if (desc) {
+          h += '<p class="bb-desc">' + esc(descOpen ? desc : shortDesc(desc)) + '</p>';
+          if (desc.length > 150) {
+            h += '<button class="bb-readmore" data-act="readmore" aria-expanded="' + descOpen + '">' + (descOpen ? t('Read less') : t('Read more')) + '</button>';
+          }
         }
       }
 
@@ -268,13 +312,28 @@
           (sSave ? '<span class="discount">' + t('Save €%n').replace('%n', sSave) + '</span>' : '') + '</span></span></a>';
       }
 
-      h += '<div class="bb-sizes"><div class="bb-sizes-head"><span class="lbl">' + t('Size:') + '</span><a href="#" data-act="size-guide">' + t('Size Guide') + '</a></div>' +
-        '<div class="bb-size-chips">' + p.variants.map(function (vv, i) {
-          var hint = SIZE_HINTS[vv.size];
-          return '<button class="bb-size' + (i === sel ? ' sel' : '') + (vv.stock ? '' : ' oos') + '" data-i="' + i + '"' +
-            ' title="' + esc((hint ? t(hint) + (vv.stock ? '' : ' · ' + t('Out of stock')) : (vv.stock ? '' : t('Out of stock')))) + '">' +
-            esc(t(vv.size)) + '</button>';
-        }).join('') + '</div></div>';
+      // colour swatches (image tiles, selected outlined) — the live-shop / reference pattern
+      if (p.colors) {
+        h += '<div class="bb-colors"><div class="bb-colors-head">' +
+          '<span class="bb-colors-lbl">' + t('Color') + '</span>' +
+          '<span class="bb-color-name">' + esc(p.colors[colorSel].name) + '</span></div>' +
+          '<div class="bb-swatches">' + p.colors.map(function (c, i) {
+            return '<button class="bb-swatch' + (i === colorSel ? ' sel' : '') + (c.stock === false ? ' oos' : '') +
+              '" data-color="' + i + '" title="' + esc(c.name + (c.stock === false ? ' · ' + t('Out of stock') : '')) + '" aria-label="' + esc(c.name) + '">' +
+              '<img src="' + img(c.sku) + '" alt=""></button>';
+          }).join('') + '</div></div>';
+      }
+
+      // size chips — only when there's a choice to make (more than one size)
+      if (p.variants.length > 1) {
+        h += '<div class="bb-sizes"><div class="bb-sizes-head"><span class="lbl">' + t('Size:') + '</span><a href="#" data-act="size-guide">' + t('Size Guide') + '</a></div>' +
+          '<div class="bb-size-chips">' + p.variants.map(function (vv, i) {
+            var hint = SIZE_HINTS[vv.size];
+            return '<button class="bb-size' + (i === sel ? ' sel' : '') + (vv.stock ? '' : ' oos') + '" data-i="' + i + '"' +
+              ' title="' + esc((hint ? t(hint) + (vv.stock ? '' : ' · ' + t('Out of stock')) : (vv.stock ? '' : t('Out of stock')))) + '">' +
+              esc(t(vv.size)) + '</button>';
+          }).join('') + '</div></div>';
+      }
 
       h += '<div class="bb-acc-head"><span class="lbl">' + t('Also add:') + '</span>' +
         '<span class="bb-acc-nav">' +
@@ -292,7 +351,7 @@
         }).join('') + '</div></div>';
 
       h += '<div class="bb-delivery">' +
-        '<div class="bb-del-row"><span class="bb-del-head">' + ICONS.truck + ' ' + t('Online Delivery') + ' ' + ICONS.info + '</span>' +
+        '<div class="bb-del-row"><span class="bb-del-head">' + ICONS.truck + ' ' + t('Online Delivery') + '</span>' +
         (v.stock
           ? '<span class="bb-del-line"><span class="dot"></span>' + t('Available Immediately - delivered in 1-3 days') + '</span>'
           : '<span class="bb-del-line warn"><span class="dot"></span>' + t('Out of stock online - back soon') + '</span>') +
@@ -337,6 +396,12 @@
     }
 
     box.addEventListener('click', function (e) {
+      var swatch = e.target.closest('.bb-swatch');
+      if (swatch) {
+        colorSel = +swatch.dataset.color;
+        renderBuyBox(); renderStage(); renderThumbs(); renderTech();
+        return;
+      }
       var size = e.target.closest('.bb-size');
       if (size) {
         sel = +size.dataset.i;
@@ -360,6 +425,29 @@
       }
       else if (a === 'size-guide') { e.preventDefault(); openModal(sizeGuideHTML()); }
       else if (a === 'club-info') { openModal(clubHTML()); }
+    });
+
+    /* colour name previews the hovered swatch (+ any price difference vs the
+       selected colour), reverting to the selected on leave */
+    box.addEventListener('mouseover', function (e) {
+      if (!p.colors) return;
+      var sw = e.target.closest('.bb-swatch'); if (!sw) return;
+      var nm = box.querySelector('.bb-color-name'); if (!nm) return;
+      var hovered = p.colors[+sw.dataset.color];
+      var diff = hovered.price - p.colors[colorSel].price;
+      var html = esc(hovered.name);
+      if (Math.abs(diff) >= 0.005) {
+        html += '<span class="bb-color-diff">' + (diff > 0 ? '+' : '−') + eur(Math.abs(diff)) + '</span>';
+      }
+      nm.innerHTML = html;
+    });
+    box.addEventListener('mouseout', function (e) {
+      if (!p.colors) return;
+      if (!e.target.closest('.bb-swatch')) return;
+      var to = e.relatedTarget;
+      if (to && to.closest && to.closest('.bb-swatch')) return;   // moving between swatches
+      var nm = box.querySelector('.bb-color-name');
+      if (nm) nm.textContent = p.colors[colorSel].name;
     });
 
     /* slide in place so the CSS transition runs (a re-render would jump) */
@@ -466,11 +554,12 @@
       var rows = [
         ['Series', p.series],
         ['Type', t(p.type)],
+        ['Color', p.colors ? p.colors[colorSel].name : null],
         ['Material', t(p.material)],
         ['Surface', t(p.surface)],
         ['Cooking technique', t(p.technique)],
         ['Sizes', p.sizes.map(function (s) { return t(s) + (SIZE_HINTS[s] ? ' (' + t(SIZE_HINTS[s]) + ')' : ''); }).join(', ')],
-        ['Article number', p.variants[sel].sku],
+        ['Article number', curSku()],
         ['Hob compatibility', t('All hobs, including induction')],
         ['Oven-safe', t('Up to 250°C')]
       ].filter(function (r) { return r[1]; });

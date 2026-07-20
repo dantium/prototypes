@@ -31,7 +31,7 @@ window.WMF_I18N_DE = {
 
   /* ---- locale switcher ---- */
   'Select Country': 'Land auswählen',
-  'Your current selected location is %c and your order will be billed in EUR.': 'Ihr aktuell gewählter Standort ist %c, Ihre Bestellung wird in EUR abgerechnet.',
+  'Your current selected location is %c and your order will be billed in %cur.': 'Ihr aktuell gewählter Standort ist %c, Ihre Bestellung wird in %cur abgerechnet.',
   'Choose your location': 'Standort wählen',
   'WMF ships to the following areas:': 'WMF liefert in folgende Regionen:',
   'Germany': 'Deutschland',
@@ -130,6 +130,8 @@ window.WMF_I18N_DE = {
   'Non-stick fry pan': 'Bratpfanne beschichtet',
   'Fry pan set': 'Bratpfannen-Set',
   'Pans': 'Pfannen',
+  'Pots': 'Töpfe',
+  'Cookware built to last — from the Fusiontec Mineral Pro sets to everyday saucepans, in a range of colours to match your kitchen.': 'Kochgeschirr für die Ewigkeit — von den Fusiontec Mineral Pro Sets bis zu Alltags-Stielkasserollen, in vielen Farben passend zu Ihrer Küche.',
   'Frying Pans': 'Bratpfannen',
   'Pan Sets': 'Pfannen-Sets',
 
@@ -184,11 +186,15 @@ window.WMF_I18N_DE = {
   '%n Products': '%n Produkte',
   '%v of %t results': '%v von %t Ergebnissen',
   'Show more': 'Mehr anzeigen',
+  'Show more (+%n)': 'Mehr anzeigen (+%n)',
+  'Show less': 'Weniger anzeigen',
 
   /* ---- cards ---- */
   'In stock': 'Auf Lager',
   'Out of stock': 'Nicht verfügbar',
   'Size:': 'Größe:',
+  'Color': 'Farbe',
+  'Color:': 'Farbe:',
   'Sale': 'Sale',
   'New': 'Neu',
   'Bestseller': 'Bestseller',
@@ -253,6 +259,8 @@ window.WMF_I18N_DE = {
   'Reviews': 'Bewertungen',
   'Read more': 'Mehr lesen',
   'Read less': 'Weniger anzeigen',
+  'Get professional results in your kitchen with our most advanced frying pan yet.': 'Erzielen Sie professionelle Ergebnisse in Ihrer Küche – mit unserer bisher fortschrittlichsten Bratpfanne.',
+  'desc:hero': '<p>Erzielen Sie professionelle Ergebnisse in Ihrer Küche – mit unserer bisher fortschrittlichsten Bratpfanne.</p><p>Für souveränes Anbraten entwickelt, verbindet diese Hybrid-Bratpfanne schnelle, gleichmäßige Hitze mit geschützter, langlebiger Antihaft-Leistung.</p><ul class="bb-benefits"><li><b>Scharfes Anbraten:</b> Knusprige Ergebnisse bei hoher Hitze und müheloses Lösen.</li><li><b>Mehrschichtiger Profi-Aufbau:</b> Aluminiumkern mit Edelstahl-Innenseite und robustem Chromstahl-Äußeren für schnelle, gleichmäßige Hitze.</li><li><b>10 Jahre Garantie:</b> Strapazierfähige Materialien und Verarbeitung, abgesichert durch 10 Jahre Garantie.</li><li><b>Geschützte Antihaft-Langlebigkeit:</b> PermaDur-Antihaftversiegelung, verstärkt durch die erhabene Sear Protect®-Wabenstruktur, widersteht Kratzern und Anhaften.</li><li><b>Müheloses Servieren:</b> Der beschichtete Schüttrand lässt Speisen sauber auf den Teller gleiten und ermöglicht tropffreies Ausgießen von Flüssigkeiten.</li><li><b>Vom Herd in den Ofen:</b> Für alle Herdarten und den Ofen geeignet, mit wärmereduziertem Griff für komfortable Kontrolle.</li></ul>',
   'Including VAT': 'Inkl. MwSt.',
   'shipping (free shipping on orders over €49)': 'Versand (versandkostenfrei ab 49 €)',
   '(free shipping on orders over €49)': '(versandkostenfrei ab 49 €)',

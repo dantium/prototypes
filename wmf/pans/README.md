@@ -8,6 +8,7 @@ design system (Rotis, tokens) and the existing comparison-table/header/search pr
 | `index.html` | Home — full-screen campaign banner (the megamenu prototype's World Cup hero, header overlaid), CTA into the journey |
 | `pans.html` | **Pans** category PLP — subcategory tiles, 34 real products |
 | `frying-pans.html` | **Frying Pans** subcategory PLP — 29 real products, comparison table, FAQ |
+| `pots.html` | **Pots** category PLP (reached from the POTS nav) — carries the Fusiontec Mineral Pro colour-variant set (`p42`) |
 | `product.html?id=…` | **PDP** — Figma "PDP - HoneyComb Pro+" design, rendered from the catalog for any product (defaults to `p1`, the Profi Resist Fry Pan the mock depicts) |
 
 The journey works both ways: megamenu/tiles drill down, breadcrumbs go back up.
@@ -18,10 +19,14 @@ Search works on every page (submitting from Home or a PDP lands on `pans.html?q=
 
 The footer trigger (flag + "Germany · English") opens a right-hand **Select Country** panel
 (styled after the Our Place reference: current-location note, highlighted current row, then
-the shipping areas with flags and native-language buttons). Locales: Germany (English,
-Deutsch), Netherlands (English), Spain (English), Austria (Deutsch), Switzerland (Deutsch,
-English). Picking one stores `wmf_locale` + `wmf_lang` and reloads; `?lang=de` also works.
-Choosing a language flips the whole journey to German:
+the shipping areas with flags and language buttons). Locales: Germany (English, Deutsch),
+Netherlands (English), Spain (English), Austria (Deutsch), Switzerland (Deutsch, English) —
+only the two content languages we actually have are offered (no French/Dutch/Spanish
+interface or products). Each market has a billing currency shown **only in the switcher
+note** — Switzerland reads "billed in CHF", the rest "billed in EUR"; the pages themselves
+stay in EUR (the prototype isn't a real FX/checkout). Picking a row stores `wmf_locale` +
+`wmf_lang` and reloads; `?lang=de` also works. Choosing German flips the whole journey to
+German:
 
 - **UI strings** come from `assets/i18n-de.js` — a dictionary keyed by the English source
   strings; anything missing falls back to English. JS-rendered surfaces translate via `t()`,
@@ -134,6 +139,11 @@ node `2:2`), as one template that renders **any catalog product** via `?id=`:
   Bundle products (the shop's BUNDLE label: `p12`, `p30`) list their components under the CTA
   like the live bundle PDP ("This set contains:", thumbnails + 1 × item), driven by a `bundle`
   array in the JSON; components that exist as catalog products link to their own PDP.
+  **Colour-variant products** (a `colors` array in the JSON — `p42`, the 8-colour Fusiontec
+  Mineral Pro pot set) render a "Color / <name>" image-swatch selector (selected one outlined,
+  like the reference); picking a colour swaps the gallery packshot, price, Klarna split, Club
+  points and article number. Its 8 real colour packshots come from the live shop by SKU. The
+  size chip is hidden for single-size colour products (colour is the axis).
 - **Figma example content** — the feature USP icon strip (7 line icons: 10-year warranty,
   metal-utensil safe, oven-safe, dishwasher safe, mineral ceramic non-stick, all hobs,
   3-ply — drawn as inline SVGs) and the below-fold marketing (SearProtect®/3-ply banners, Product

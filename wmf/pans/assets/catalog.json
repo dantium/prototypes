@@ -16,6 +16,14 @@
     "Pans",
     "Frying Pans"
    ]
+  },
+  "pots": {
+   "title": "Pots",
+   "breadcrumb": [
+    "Home",
+    "Products",
+    "Pots"
+   ]
   }
  },
  "skuCount": 59,
@@ -1787,6 +1795,96 @@
     "Everyday"
    ],
    "name_de": "Talis Bratpfanne"
+  },
+  {
+   "id": "p42",
+   "brand": "WMF",
+   "name": "Fusiontec Mineral Pro Pot Set, 4-piece",
+   "name_de": "Fusiontec Mineral Pro Topf-Set, 4-teilig",
+   "series": "Fusiontec Mineral Pro",
+   "type": "Set",
+   "minPrice": 329.0,
+   "sizes": [
+    "Set of 4"
+   ],
+   "rating": null,
+   "reviews": 0,
+   "ratingReal": false,
+   "default": 0,
+   "defaultColor": 0,
+   "cats": {
+    "pots": 1
+   },
+   "variants": [
+    {
+     "sku": "3201114127",
+     "size": "Set of 4",
+     "price": 349.0,
+     "msrp": null,
+     "stock": true,
+     "label": null
+    }
+   ],
+   "colors": [
+    {
+     "name": "Platinum",
+     "sku": "3201114127",
+     "price": 349.0,
+     "stock": true
+    },
+    {
+     "name": "Black",
+     "sku": "3201114028",
+     "price": 329.0,
+     "stock": true
+    },
+    {
+     "name": "Rose Quartz",
+     "sku": "3201114146",
+     "price": 329.0,
+     "stock": true
+    },
+    {
+     "name": "Eucalyptus Haze",
+     "sku": "3201114166",
+     "price": 349.99,
+     "stock": true
+    },
+    {
+     "name": "Passion Red",
+     "sku": "3201114095",
+     "price": 339.99,
+     "stock": true
+    },
+    {
+     "name": "Papaya Orange",
+     "sku": "3201114057",
+     "price": 349.0,
+     "stock": true
+    },
+    {
+     "name": "Mango Yellow",
+     "sku": "3201114070",
+     "price": 399.0,
+     "stock": true
+    },
+    {
+     "name": "Tim Raue Edition",
+     "sku": "3201114690",
+     "price": 399.99,
+     "stock": false
+    }
+   ],
+   "search": "wmf fusiontec mineral pro topf-set pot set 4-teilig platinum black rose quartz eucalyptus passion red papaya mango yellow",
+   "description": "Fusiontec Mineral Pro effortlessly combines striking aesthetics with extreme scratch resistance and durability. The exceptional Fusiontec material heats up very quickly and offers outstanding heat retention — for intensely flavourful cooking that impresses even professionals. Made in Germany, the 4-piece Fusiontec Mineral Pro pot set also features comfortable, heat-reducing hollow handles and comes with elegant glass lids. Available in eight colours.",
+   "description_de": "Fusiontec Mineral Pro von WMF vereint mühelos atemberaubende Ästhetik mit extremer Kratzfestigkeit und Robustheit. Das außergewöhnliche Fusiontec Material erhitzt sich außerdem sehr schnell und bietet eine herausragende Wärmespeicherung – für geschmacksintensiven Kochgenuss, der auch Profis beeindruckt. Hergestellt in Deutschland, verfügt das 4-teilige Fusiontec Mineral Pro Topf-Set zudem über komfortable und wärmereduzierende Hohlgriffe und wird mit eleganten Glasdeckeln ausgeliefert. In acht Farben erhältlich.",
+   "material": "Fusiontec",
+   "surface": "Ceramic",
+   "technique": "All Purpose",
+   "occasion": [
+    "Everyday",
+    "Gifting"
+   ]
   }
  ]
 }

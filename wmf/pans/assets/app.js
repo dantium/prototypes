@@ -14,9 +14,8 @@
   };
   var img = function (sku) { return 'assets/products/' + sku + '.jpg'; };
 
-  /* ---- language: EN default, DE via the footer switcher (?lang= wins once,
-     then localStorage). The DE dictionary (assets/i18n-de.js) is keyed by the
-     English strings; missing entries fall back to English. ---- */
+  /* ---- language: EN default, DE via the locale switcher (?lang= wins once,
+     then localStorage). Only EN and DE content exist. ---- */
   var LANG = (function () {
     var q = null;
     try { q = new URLSearchParams(location.search).get('lang'); } catch (e) {}
@@ -29,17 +28,18 @@
   var t = function (s) { return T[s] || s; };
   document.documentElement.lang = LANG;
 
-  /* shipping locales (language labels stay in their native form, like the reference) */
+  /* shipping locales — only the languages we actually have (EN/DE); currency per market */
   var LOCALES = [
-    { code: 'DE', name: 'Germany',     langs: [['en', 'English'], ['de', 'Deutsch']] },
-    { code: 'NL', name: 'Netherlands', langs: [['en', 'English']] },
-    { code: 'ES', name: 'Spain',       langs: [['en', 'English']] },
-    { code: 'AT', name: 'Austria',     langs: [['de', 'Deutsch']] },
-    { code: 'CH', name: 'Switzerland', langs: [['de', 'Deutsch'], ['en', 'English']] }
+    { code: 'DE', name: 'Germany',     currency: 'EUR', langs: [['en', 'English'], ['de', 'Deutsch']] },
+    { code: 'NL', name: 'Netherlands', currency: 'EUR', langs: [['en', 'English']] },
+    { code: 'ES', name: 'Spain',       currency: 'EUR', langs: [['en', 'English']] },
+    { code: 'AT', name: 'Austria',     currency: 'EUR', langs: [['de', 'Deutsch']] },
+    { code: 'CH', name: 'Switzerland', currency: 'CHF', langs: [['de', 'Deutsch'], ['en', 'English']] }
   ];
   var COUNTRY = 'DE';
   try { COUNTRY = localStorage.getItem('wmf_locale') || 'DE'; } catch (e) {}
   var CUR_LOCALE = LOCALES.filter(function (l) { return l.code === COUNTRY; })[0] || LOCALES[0];
+  var CURRENCY = CUR_LOCALE.currency;
 
   function flagSVG(code) {
     var f = {
@@ -64,7 +64,7 @@
             '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m15 5-7 7 7 7"/></svg></button>' +
           '<span>' + t('Select Country') + '</span></div>' +
         '<div class="locale-body">' +
-          '<p class="locale-note">' + t('Your current selected location is %c and your order will be billed in EUR.').replace('%c', t(CUR_LOCALE.name)) + '</p>' +
+          '<p class="locale-note">' + t('Your current selected location is %c and your order will be billed in %cur.').replace('%c', t(CUR_LOCALE.name)).replace('%cur', CURRENCY) + '</p>' +
           '<div class="locale-current">' + flagSVG(CUR_LOCALE.code) + '<span>' + t(CUR_LOCALE.name) + '</span><em>' + curLangLabel() + '</em></div>' +
           '<h3>' + t('Choose your location') + '</h3>' +
           '<p class="locale-sub">' + t('WMF ships to the following areas:') + '</p>' +
@@ -429,6 +429,17 @@
         (vv.stock ? '' : ' title="' + t('Out of stock') + '"') + '>' + esc(t(vv.size)) + '</span>';
     }).join('');
     var labels = infoLabels(p, v);
+    /* colour variants shown as small image swatches, capped with a +N marker */
+    var colorRow = '';
+    if (p.colors && p.colors.length) {
+      var CLIM = 4;
+      var shown = p.colors.slice(0, CLIM).map(function (c) {
+        return '<span class="card-swatch' + (c.stock === false ? ' oos' : '') + '" title="' + esc(c.name) + '"><img src="' + img(c.sku) + '" alt=""></span>';
+      }).join('');
+      var extra = p.colors.length - CLIM;
+      colorRow = '<div class="card-colors"><span class="lbl">' + t('Color:') + '</span>' + shown +
+        (extra > 0 ? '<span class="card-more">+' + extra + '</span>' : '') + '</div>';
+    }
     var pdpHref = 'product.html?id=' + p.id;
     return '<article class="card" data-id="' + p.id + '">' +
       '<div class="card-media">' +
@@ -453,7 +464,8 @@
         (onSale ? '<span class="discount">' + t('Save %n%').replace('%n', save) + '</span>' : '') + '</div>' +
         (onSale ? '<p class="card-was">' + eur(v.msrp) + ' ' + t('(last 30 days lowest price)') + '</p>' : '') +
         '<div class="stock' + (v.stock ? '' : ' out') + '"><span class="dot"></span>' + (v.stock ? t('In stock') : t('Out of stock')) + '</div>' +
-        '<div class="card-sizes"><span class="lbl">' + t('Size:') + '</span>' + swatches + '</div>' +
+        (p.variants.length > 1 ? '<div class="card-sizes"><span class="lbl">' + t('Size:') + '</span>' + swatches + '</div>' : '') +
+        colorRow +
       '</div></article>';
   }
 
@@ -778,8 +790,8 @@
   var selected = {};
 
   var PIM_FACETS = [
-    { key: 'material',  title: 'Material',          open: true  },
-    { key: 'technique', title: 'Cooking Technique', open: true  },
+    { key: 'material',  title: 'Material',          open: false },
+    { key: 'technique', title: 'Cooking Technique', open: false },
     { key: 'surface',   title: 'Surface',           open: false },
     { key: 'occasion',  title: 'Occasion',          open: false }
   ];
@@ -824,11 +836,10 @@
                   .sort(function (a, b) { return rank(a) - rank(b); });
     var series = uniq(LIST.map(function (p) { return p.series; })).sort();
 
-    /* group order and expanded states follow the Figma rail:
-       Material / Size / Cooking Technique open; the rest collapsed */
+    /* group order follows the Figma rail; all groups start collapsed */
     FACETS = [
       pim.material,
-      { key: 'size', title: 'Size', open: true, options: sizes.map(function (s) {
+      { key: 'size', title: 'Size', open: false, options: sizes.map(function (s) {
         return { label: s, hint: SIZE_HINTS[s], test: function (p) { return p.sizes.indexOf(s) >= 0; } }; }) },
       pim.technique,
       { key: 'price', title: 'Price', open: false, options: [
@@ -847,17 +858,32 @@
     FACETS.forEach(function (g) { selected[g.key] = selected[g.key] || []; });
   }
 
+  /* groups with many options collapse to the first few (selected ones stay visible) */
+  var FACET_LIMIT = 6;
+  var facetsExpanded = {};
   function renderFacets() {
     if (!facetsEl) return;
     facetsEl.innerHTML = FACETS.map(function (g) {
+      var over = g.options.length > FACET_LIMIT;
+      var showAll = !over || facetsExpanded[g.key];
+      var rows = g.options.map(function (o, i) {
+        var on = selected[g.key].indexOf(o.label) >= 0;
+        if (!showAll && i >= FACET_LIMIT && !on) return '';
+        return '<label class="facet"><input type="checkbox" data-key="' + g.key + '" value="' + esc(o.label) + '"' +
+          (on ? ' checked' : '') + '><span class="box"></span><span class="facet-label">' + esc(t(o.label)) +
+          (o.hint ? ' <span class="facet-hint">' + esc(t(o.hint)) + '</span>' : '') + '</span></label>';
+      }).join('');
+      var more = '';
+      if (over) {
+        var hidden = g.options.filter(function (o, i) {
+          return i >= FACET_LIMIT && selected[g.key].indexOf(o.label) < 0;
+        }).length;
+        more = '<button class="facet-more" data-more="' + g.key + '">' +
+          (showAll ? t('Show less') : t('Show more (+%n)').replace('%n', hidden)) + '</button>';
+      }
       return '<div class="filter-group' + (g.open ? ' open' : '') + '">' +
         '<button class="filter-head">' + esc(t(g.title)) + ' <span class="filter-toggle"></span></button>' +
-        '<div class="filter-body">' + g.options.map(function (o) {
-          var on = selected[g.key].indexOf(o.label) >= 0;
-          return '<label class="facet"><input type="checkbox" data-key="' + g.key + '" value="' + esc(o.label) + '"' +
-            (on ? ' checked' : '') + '><span class="box"></span><span class="facet-label">' + esc(t(o.label)) +
-            (o.hint ? ' <span class="facet-hint">' + esc(t(o.hint)) + '</span>' : '') + '</span></label>';
-        }).join('') + '</div></div>';
+        '<div class="filter-body">' + rows + more + '</div></div>';
     }).join('');
   }
 
@@ -897,6 +923,20 @@
 
   function bindFacets() {
     if (facetsEl) {
+      facetsEl.addEventListener('click', function (e) {
+        var more = e.target.closest('.facet-more'); if (!more) return;
+        var key = more.getAttribute('data-more');
+        facetsExpanded[key] = !facetsExpanded[key];
+        var wasOpen = more.closest('.filter-group').classList.contains('open');
+        renderFacets();
+        if (wasOpen) {
+          // keep the group open after the re-render
+          facetsEl.querySelectorAll('.filter-group').forEach(function (fg) {
+            var head = fg.querySelector('.facet-more');
+            if (head && head.getAttribute('data-more') === key) fg.classList.add('open');
+          });
+        }
+      });
       facetsEl.addEventListener('change', function (e) {
         var cb = e.target.closest('input[type="checkbox"]'); if (!cb) return;
         var arr = selected[cb.dataset.key]; if (!arr) return;
@@ -991,7 +1031,17 @@
         }
         LIST = DATA.products.filter(function (p) { return p.cats && (PAGE.category in p.cats); });
         buildFacets();
+        // deep link from a PDP series eyebrow: ?series= pre-selects the Series facet
+        var seriesParam = new URLSearchParams(location.search).get('series');
+        if (seriesParam && selected.series) {
+          var sg = FACETS.filter(function (g) { return g.key === 'series'; })[0];
+          if (sg && sg.options.some(function (o) { return o.label === seriesParam; })) {
+            selected.series = [seriesParam];
+            sg.open = true;
+          }
+        }
         renderFacets();
+        renderChips();
         var q = new URLSearchParams(location.search).get('q');
         if (q) {
           searchQ = q.trim();

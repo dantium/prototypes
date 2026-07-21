@@ -233,7 +233,17 @@
       heart: '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20.8 5.6a5 5 0 0 0-7.1 0L12 7.3l-1.7-1.7a5 5 0 0 0-7.1 7.1L12 21.5l8.8-8.8a5 5 0 0 0 0-7.1Z"/></svg>'
     };
 
-    var setProduct = products.find(function (x) { return x.series === p.series && x.type === 'Set' && x.id !== p.id; });
+    /* configurations of the same product family (single / with accessory / sets),
+       tagged by bundleGroup in the catalog; ordered single → accessory → sets */
+    function bundleRank(o) {
+      var m = /Set of (\d+)/i.exec(o.bundleLabel || '');
+      if (m) return 10 + (+m[1]);
+      return /^with/i.test(o.bundleLabel || '') ? 5 : 0;
+    }
+    var bundleOpts = p.bundleGroup
+      ? products.filter(function (x) { return x.bundleGroup === p.bundleGroup; })
+                .sort(function (a, b) { return bundleRank(a) - bundleRank(b); })
+      : [];
 
     function titleFor(v) {
       return /^\d+\s*cm$/i.test(v.size) ? nameOf(p) + ', ' + v.size : nameOf(p);
@@ -302,14 +312,24 @@
         '<span>' + t('3 payments of %x € at 0% interest with Klarna').replace('%x', klarna) + ' <a href="#">' + t('Learn more') + '</a></span>' +
         '<button class="bar-info" aria-label="More about Klarna">' + ICONS.info + '</button></div>';
 
-      if (setProduct) {
-        var sv = setProduct.variants[setProduct.default] || setProduct.variants[0];
-        var sSave = isSale(sv) ? Math.round(sv.msrp - sv.price) : 0;
-        h += '<a class="bb-set" href="product.html?id=' + setProduct.id + '">' +
-          '<img src="' + img(sv.sku) + '" alt="">' +
-          '<span><span class="bb-set-name">' + esc(nameOf(setProduct)) + ' <small>(' + esc(t(sv.size)) + ')</small></span>' +
-          '<span class="bb-set-price">' + eur(sv.price) +
-          (sSave ? '<span class="discount">' + t('Save €%n').replace('%n', sSave) + '</span>' : '') + '</span></span></a>';
+      /* Set / bundle configurations — the same selector pattern as colour and
+         size, just with roomier cards (image + label + price per option). */
+      if (bundleOpts.length > 1) {
+        h += '<div class="bb-bundles"><div class="bb-bundles-head">' +
+          '<span class="bb-bundles-lbl">' + t('Set offer') + '</span>' +
+          '<span class="bb-bundle-sel">' + esc(t(p.bundleLabel || '')) + '</span></div>' +
+          '<div class="bb-bundle-opts">' + bundleOpts.map(function (o) {
+            var ov = o.variants[o.default] || o.variants[0];
+            var oSave = isSale(ov) ? Math.round(ov.msrp - ov.price) : 0;
+            var isCur = o.id === p.id;
+            var inner = '<span class="bb-bundle-img"><img src="' + img(ov.sku) + '" alt=""></span>' +
+              '<span class="bb-bundle-t">' + esc(t(o.bundleLabel || '')) + '</span>' +
+              '<span class="bb-bundle-p">' + eur(ov.price) +
+              (oSave ? '<span class="discount">' + t('Save €%n').replace('%n', oSave) + '</span>' : '') + '</span>';
+            return isCur
+              ? '<span class="bb-bundle-opt sel" aria-current="true">' + inner + '</span>'
+              : '<a class="bb-bundle-opt" href="product.html?id=' + o.id + '">' + inner + '</a>';
+          }).join('') + '</div></div>';
       }
 
       // colour swatches (image tiles, selected outlined) — the live-shop / reference pattern

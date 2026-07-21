@@ -139,6 +139,15 @@ node `2:2`), as one template that renders **any catalog product** via `?id=`:
   Bundle products (the shop's BUNDLE label: `p12`, `p30`) list their components under the CTA
   like the live bundle PDP ("This set contains:", thumbnails + 1 × item), driven by a `bundle`
   array in the JSON; components that exist as catalog products link to their own PDP.
+  **Set / bundle configurations** are presented as a third selector alongside colour and size,
+  so all three read the same way (label + current choice + outlined options): a "Set offer"
+  group showing every configuration of the family as a card (image, label, price, Save chip).
+  Products are tied together by `bundleGroup` in the JSON with a `bundleLabel` each — today
+  `profi-resist-frypan` (Single pan / With spatula / Set of 2) and `durado-frypan` (Single pan
+  / Set of 2 / Set of 3), ordered single → accessory → sets. The current configuration is the
+  selected card; the others link to their own PDP. This replaces the old one-off set-upsell
+  row. The "This set contains:" list still appears on set PDPs — the selector picks the
+  configuration, the list says what's inside it.
   **Colour-variant products** (a `colors` array in the JSON — `p42`, the 8-colour Fusiontec
   Mineral Pro pot set) render a "Color / <name>" image-swatch selector (selected one outlined,
   like the reference); picking a colour swaps the gallery packshot, price, Klarna split, Club
@@ -170,6 +179,17 @@ node `2:2`), as one template that renders **any catalog product** via `?id=`:
   purchase earns). Scrim click, × and Esc close them.
 - **Accessory slider**: the buy-box "Add Accessories" row pages through 4 example accessories
   with the ‹ › arrows from the mock (clamped at the ends, position kept across size switches).
+
+## Search: natural language
+
+Trending searches mix natural-language needs ("Pan for cooking steak", "Pan for a large
+family", "Best pan for eggs", "Gift for a home cook") with product shorthand. For those to
+return something sensible the matcher drops filler words (a/for/the/best/cooking… plus the
+German equivalents) and maps intent words onto the catalog's real attributes — `steak`/`sear`
+→ Intense Searing, `eggs`/`fish`/`pancake` → Gentle Frying or a non-stick/ceramic surface,
+`family`/`large` → 28 cm+ and sets, `gift` → the Gifting occasion, `everyday` → Everyday.
+Both languages share the maps, so "Pfanne zum Steak braten" works too. Add new phrasings by
+extending `STOPWORDS` / `INTENT` in [assets/app.js](assets/app.js).
 
 ## Behaviour
 

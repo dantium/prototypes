@@ -124,7 +124,9 @@
     "Everyday"
    ],
    "name_de": "Profi Resist Stielpfanne",
-   "description_de": "Die Profi Resist Stielpfanne mit 28 cm Durchmesser von WMF vereint das Beste aus zwei Welten. Dafür sorgt die einzigartige Kombination aus mehrschichtigem Aufbau mit Aluminiumkern, rostfreiem Edelstahl innen und extrem widerstandsfähigem Chromstahl außen sowie herausragender PermaDur Antihaftversiegelung, die durch eine spezielle, erhabene Wabenstruktur aus strapazierfähigem Cromargan® zusätzlich geschützt wird. Damit ist die Profi Resist Bratpfanne nicht nur kratzfest und besonders hitzebeständig, sondern bietet auch in allen Fällen - vom scharfen Anbraten von Fleisch bis hin zu fettarmen Braten empfindlicher Speisen - beste Brateigenschaften."
+   "description_de": "Die Profi Resist Stielpfanne mit 28 cm Durchmesser von WMF vereint das Beste aus zwei Welten. Dafür sorgt die einzigartige Kombination aus mehrschichtigem Aufbau mit Aluminiumkern, rostfreiem Edelstahl innen und extrem widerstandsfähigem Chromstahl außen sowie herausragender PermaDur Antihaftversiegelung, die durch eine spezielle, erhabene Wabenstruktur aus strapazierfähigem Cromargan® zusätzlich geschützt wird. Damit ist die Profi Resist Bratpfanne nicht nur kratzfest und besonders hitzebeständig, sondern bietet auch in allen Fällen - vom scharfen Anbraten von Fleisch bis hin zu fettarmen Braten empfindlicher Speisen - beste Brateigenschaften.",
+   "bundleGroup": "profi-resist-frypan",
+   "bundleLabel": "Single pan"
   },
   {
    "id": "p2",
@@ -524,7 +526,9 @@
     "Everyday"
    ],
    "name_de": "Profi Resist Stielpfanne mit Pfannenwender",
-   "description_de": "Die Profi Resist Stielpfanne mit 28 cm Durchmesser von WMF vereint das Beste aus zwei Welten. Dafür sorgt die einzigartige Kombination aus mehrschichtigem Aufbau mit Aluminiumkern, rostfreiem Edelstahl innen und extrem widerstandsfähigem Chromstahl außen sowie herausragender PermaDur Antihaftversiegelung, die durch eine spezielle, erhabene Wabenstruktur aus strapazierfähigem Cromargan® zusätzlich geschützt wird. Damit ist die Profi Resist Bratpfanne nicht nur kratzfest und besonders hitzebeständig, sondern bietet auch in allen Fällen - vom scharfen Anbraten von Fleisch bis hin zu fettarmen Braten empfindlicher Speisen - beste Brateigenschaften. Der mitgelieferte Pfannenwender ist problemlos und sicher auch bei antihaftversiegelten Pfannen verwendbar."
+   "description_de": "Die Profi Resist Stielpfanne mit 28 cm Durchmesser von WMF vereint das Beste aus zwei Welten. Dafür sorgt die einzigartige Kombination aus mehrschichtigem Aufbau mit Aluminiumkern, rostfreiem Edelstahl innen und extrem widerstandsfähigem Chromstahl außen sowie herausragender PermaDur Antihaftversiegelung, die durch eine spezielle, erhabene Wabenstruktur aus strapazierfähigem Cromargan® zusätzlich geschützt wird. Damit ist die Profi Resist Bratpfanne nicht nur kratzfest und besonders hitzebeständig, sondern bietet auch in allen Fällen - vom scharfen Anbraten von Fleisch bis hin zu fettarmen Braten empfindlicher Speisen - beste Brateigenschaften. Der mitgelieferte Pfannenwender ist problemlos und sicher auch bei antihaftversiegelten Pfannen verwendbar.",
+   "bundleGroup": "profi-resist-frypan",
+   "bundleLabel": "With spatula"
   },
   {
    "id": "p12",
@@ -577,7 +581,9 @@
      "id": "p1"
     }
    ],
-   "name_de": "Profi Resist Bratpfannen-Set"
+   "name_de": "Profi Resist Bratpfannen-Set",
+   "bundleGroup": "profi-resist-frypan",
+   "bundleLabel": "Set of 2"
   },
   {
    "id": "p13",
@@ -1281,7 +1287,9 @@
     "Gifting"
    ],
    "name_de": "Durado Bratpfannen-Set",
-   "description_de": "Strapazierfähig und vielseitig: Das 3-teilige Durado Bratpfannen-Set von WMF mit je einer 20cm, 24 cm und 28 cm Stielpfanne bietet drei absolut langlebige Multitalente für jede Art der Zubereitung. Ob zarte Sautés oder scharf angebratene Pfannengerichte, dank der robusten keramischen Antihaftversiegelung sind exzellente Bratergebnisse und eine einfache Reinigung selbstverständlich. Der TransTherm®-Allherdboden sorgt dabei für eine optimale Wärmeverteilung und -speicherung sowie energiesparendes Braten."
+   "description_de": "Strapazierfähig und vielseitig: Das 3-teilige Durado Bratpfannen-Set von WMF mit je einer 20cm, 24 cm und 28 cm Stielpfanne bietet drei absolut langlebige Multitalente für jede Art der Zubereitung. Ob zarte Sautés oder scharf angebratene Pfannengerichte, dank der robusten keramischen Antihaftversiegelung sind exzellente Bratergebnisse und eine einfache Reinigung selbstverständlich. Der TransTherm®-Allherdboden sorgt dabei für eine optimale Wärmeverteilung und -speicherung sowie energiesparendes Braten.",
+   "bundleGroup": "durado-frypan",
+   "bundleLabel": "Set of 3"
   },
   {
    "id": "p30",
@@ -1334,7 +1342,9 @@
     }
    ],
    "name_de": "Set: Durado Bratpfannen",
-   "description_de": "Vorteile des Sets: Zwei Größen für jede Gelegenheit: Mit 24 cm und 28 cm sind Sie sowohl für Single- als auch Mehr-Personen-Mahlzeiten bestens ausgestattet. Robuste, keramische Antihaftversiegelung: Die Durado Pfannen haben eine widerstandsfähige Keramikbeschichtung, die bis 400 °C hitzebeständig ist — für hervorragende Bratergebnisse, fettarmes Braten und einfache Reinigung. Effiziente Wärmeverteilung &amp; Energiesparend: Der hochwertige TransTherm® Allherdboden sorgt für gleichmäßige Wärmeverteilung, gute Wärmespeicherung und spart Energie — unabhängig vom Herdtyp, auch Induktion. Vielseitigkeit &amp; Ofentauglichkeit: Cromargan® Edelstahl + Keramikbeschichtung, geeignet für alle Herdarten, und backofenfest (bis max. Temperatur laut Hersteller) — ideal für viele Koch- und Backideen."
+   "description_de": "Vorteile des Sets: Zwei Größen für jede Gelegenheit: Mit 24 cm und 28 cm sind Sie sowohl für Single- als auch Mehr-Personen-Mahlzeiten bestens ausgestattet. Robuste, keramische Antihaftversiegelung: Die Durado Pfannen haben eine widerstandsfähige Keramikbeschichtung, die bis 400 °C hitzebeständig ist — für hervorragende Bratergebnisse, fettarmes Braten und einfache Reinigung. Effiziente Wärmeverteilung &amp; Energiesparend: Der hochwertige TransTherm® Allherdboden sorgt für gleichmäßige Wärmeverteilung, gute Wärmespeicherung und spart Energie — unabhängig vom Herdtyp, auch Induktion. Vielseitigkeit &amp; Ofentauglichkeit: Cromargan® Edelstahl + Keramikbeschichtung, geeignet für alle Herdarten, und backofenfest (bis max. Temperatur laut Hersteller) — ideal für viele Koch- und Backideen.",
+   "bundleGroup": "durado-frypan",
+   "bundleLabel": "Set of 2"
   },
   {
    "id": "p31",
@@ -1609,7 +1619,9 @@
    "occasion": [
     "Everyday"
    ],
-   "name_de": "Durado Stielpfanne"
+   "name_de": "Durado Stielpfanne",
+   "bundleGroup": "durado-frypan",
+   "bundleLabel": "Single pan"
   },
   {
    "id": "p37",

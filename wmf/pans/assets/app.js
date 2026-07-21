@@ -469,14 +469,52 @@
       '</div></article>';
   }
 
+  /* ---- natural-language search aids ----
+     Shoppers type "pan for cooking steak", not "intense searing". Filler words
+     are dropped and intent words map onto the catalog's real attributes, so a
+     phrase still lands on a sensible set. Both languages share the maps. */
+  var STOPWORDS = {
+    a: 1, an: 1, the: 1, for: 1, to: 1, in: 1, of: 1, on: 1, at: 1, and: 1, with: 1,
+    my: 1, me: 1, i: 1, us: 1, our: 1, your: 1, is: 1, are: 1, best: 1, good: 1, great: 1,
+    want: 1, need: 1, looking: 1, cook: 1, cooking: 1, home: 1, use: 1, using: 1, what: 1, which: 1,
+    /* German fillers */
+    der: 1, die: 1, das: 1, ein: 1, eine: 1, einen: 1, für: 1, zum: 1, zur: 1, mit: 1, und: 1,
+    beste: 1, bester: 1, besten: 1, ich: 1, kochen: 1, grosse: 1, große: 1
+  };
+  var byTechnique = function (name) { return function (p) { return p.technique === name; }; };
+  var gentleFor = function (p) { return p.technique === 'Gentle Frying' || p.surface === 'Non-stick' || p.surface === 'Ceramic'; };
+  var bigFor = function (p) { return p.sizes.some(function (s) { return /^(28|32|36)/.test(s) || /Set/i.test(s); }); };
+  var smallFor = function (p) { return p.sizes.some(function (s) { return /^(18|20)/.test(s); }); };
+  var occasionIs = function (name) { return function (p) { return (p.occasion || []).indexOf(name) >= 0; }; };
+  var INTENT = {
+    steak: byTechnique('Intense Searing'), steaks: byTechnique('Intense Searing'),
+    sear: byTechnique('Intense Searing'), searing: byTechnique('Intense Searing'),
+    browning: byTechnique('Intense Searing'), crust: byTechnique('Intense Searing'),
+    braten: byTechnique('Intense Searing'), anbraten: byTechnique('Intense Searing'),
+    egg: gentleFor, eggs: gentleFor, omelette: gentleFor, omelet: gentleFor,
+    pancake: gentleFor, pancakes: gentleFor, crepe: gentleFor, crepes: gentleFor,
+    fish: gentleFor, delicate: gentleFor, ei: gentleFor, eier: gentleFor, fisch: gentleFor,
+    family: bigFor, large: bigFor, big: bigFor, party: bigFor, guests: bigFor,
+    familie: bigFor, gross: bigFor, groß: bigFor,
+    small: smallFor, single: smallFor, compact: smallFor, klein: smallFor,
+    gift: occasionIs('Gifting'), gifts: occasionIs('Gifting'), present: occasionIs('Gifting'),
+    geschenk: occasionIs('Gifting'),
+    everyday: occasionIs('Everyday'), daily: occasionIs('Everyday'), alltag: occasionIs('Everyday')
+  };
+
   /* Name/series matches rank above matches found only in the (real) product
-     description — both tiers keep their existing order. */
+     description or an intent attribute — both tiers keep their existing order. */
   function matchProducts(q, pool) {
-    var toks = q.toLowerCase().split(/\s+/).filter(Boolean);
+    var raw = q.toLowerCase().replace(/[?!.,]/g, ' ').split(/\s+/).filter(Boolean);
+    var toks = raw.filter(function (w) { return !STOPWORDS[w]; });
+    if (!toks.length) toks = raw;                     // query was all filler
     var src = pool || DATA.products;
     if (!toks.length) return src.slice();
     var inHay = function (p, tok) { return (p._hay || p.search).indexOf(tok) >= 0; };
-    var inDesc = function (p, tok) { return inHay(p, tok) || (p._desc && p._desc.indexOf(tok) >= 0); };
+    var inDesc = function (p, tok) {
+      return inHay(p, tok) || (p._desc && p._desc.indexOf(tok) >= 0) ||
+        (INTENT[tok] ? INTENT[tok](p) : false);
+    };
     var byName = [], byDesc = [];
     src.forEach(function (p) {
       if (toks.every(function (t) { return inHay(p, t); })) byName.push(p);
@@ -592,7 +630,17 @@
      SEARCH OVERLAY  (UX ported from the search prototype;
      completions, categories and products all come from the catalog)
      ============================================================ */
-  var TRENDING = ['Profi Resist fry pan', 'Fusiontec', 'Non-stick fry pan', 'Fry pan set', 'Devil', 'Wok'];
+  /* a mix of how people actually search: natural-language needs first, then
+     product/brand shorthand (the natural ones lean on STOPWORDS + INTENT) */
+  var TRENDING = [
+    'Pan for cooking steak',
+    'Pan for a large family',
+    'Best pan for eggs',
+    'Gift for a home cook',
+    'Profi Resist fry pan',
+    'Fry pan set',
+    'Wok'
+  ];
   var recent = [];
   try { recent = JSON.parse(sessionStorage.getItem('wmf_recent') || '[]'); } catch (e) {}
   function saveRecent() { try { sessionStorage.setItem('wmf_recent', JSON.stringify(recent)); } catch (e) {} }
@@ -970,16 +1018,24 @@
   window.closeFilterDrawer = function () { document.body.classList.remove('filters-open'); };
 
   /* ============================================================
-     SORT — "Recommended" is the shop's own category ordering
+     SORT — "Bestsellers" (default) puts the shop's BESTSELLER-labelled
+     products first, then falls back to its own category ordering
      ============================================================ */
   function priceOf(p) { return variantOf(p).price; }
   function posOf(p) { return (p.cats && p.cats[PAGE.category]) || 999; }
+  /* deepest discount across a product's flagged sale variants (0 = not on offer) */
+  function discountOf(p) {
+    return p.variants.reduce(function (best, v) {
+      return isSale(v) ? Math.max(best, Math.round((1 - v.price / v.msrp) * 100)) : best;
+    }, 0);
+  }
   function sortProducts(mode) {
     if (mode === 'Price: low to high') LIST.sort(function (x, y) { return priceOf(x) - priceOf(y); });
     else if (mode === 'Price: high to low') LIST.sort(function (x, y) { return priceOf(y) - priceOf(x); });
     else if (mode === 'Top rated') LIST.sort(function (x, y) { return ((y.rating || 0) - (x.rating || 0)) || ((y.reviews || 0) - (x.reviews || 0)) || (posOf(x) - posOf(y)); });
     else if (mode === 'New in') LIST.sort(function (x, y) { return (isNew(y) - isNew(x)) || (posOf(x) - posOf(y)); });
-    else LIST.sort(function (x, y) { return posOf(x) - posOf(y); });
+    else if (mode === 'Offers') LIST.sort(function (x, y) { return (discountOf(y) - discountOf(x)) || (posOf(x) - posOf(y)); });
+    else LIST.sort(function (x, y) { return (isBestseller(y) - isBestseller(x)) || (posOf(x) - posOf(y)); });
     shown = PAGE_SIZE; renderGrid();
   }
 
@@ -1051,7 +1107,7 @@
         updateHeaderSearch();
         var sortSelect = document.getElementById('sortSelect');
         if (sortSelect) sortSelect.addEventListener('change', function () { sortProducts(sortSelect.value); });
-        sortProducts('Recommended');
+        sortProducts('Bestsellers');
       })
       .catch(function (err) {
         console.error('Could not load assets/catalog.json:', err);

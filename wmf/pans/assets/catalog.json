@@ -184,7 +184,8 @@
      "title_de": "Sehr gute Bratpfanne",
      "text_de": "Gebratenes wir super"
     }
-   ]
+   ],
+   "bundleOrder": 10
   },
   {
    "id": "p2",
@@ -869,7 +870,8 @@
      "title_de": "Sehr gute Pfanne",
      "text_de": "Diese Pfanne ist ihr Geld wert. Sehr empfehlenswert!"
     }
-   ]
+   ],
+   "bundleOrder": 20
   },
   {
    "id": "p12",
@@ -922,7 +924,8 @@
    ],
    "name_de": "Profi Resist Bratpfannen-Set",
    "bundleGroup": "profi-resist-frypan",
-   "bundleLabel": "Set of 2"
+   "bundleLabel": "Set of 2",
+   "bundleOrder": 30
   },
   {
    "id": "p13",
@@ -1961,7 +1964,8 @@
      "title_de": "Super Antihaftbeschichtung",
      "text_de": "Die Antihaftbeschichtung ist perfekt."
     }
-   ]
+   ],
+   "bundleOrder": 30
   },
   {
    "id": "p30",
@@ -2014,7 +2018,8 @@
    "name_de": "Set: Durado Bratpfannen",
    "description_de": "Vorteile des Sets: Zwei Größen für jede Gelegenheit: Mit 24 cm und 28 cm sind Sie sowohl für Single- als auch Mehr-Personen-Mahlzeiten bestens ausgestattet. Robuste, keramische Antihaftversiegelung: Die Durado Pfannen haben eine widerstandsfähige Keramikbeschichtung, die bis 400 °C hitzebeständig ist — für hervorragende Bratergebnisse, fettarmes Braten und einfache Reinigung. Effiziente Wärmeverteilung &amp; Energiesparend: Der hochwertige TransTherm® Allherdboden sorgt für gleichmäßige Wärmeverteilung, gute Wärmespeicherung und spart Energie — unabhängig vom Herdtyp, auch Induktion. Vielseitigkeit &amp; Ofentauglichkeit: Cromargan® Edelstahl + Keramikbeschichtung, geeignet für alle Herdarten, und backofenfest (bis max. Temperatur laut Hersteller) — ideal für viele Koch- und Backideen.",
    "bundleGroup": "durado-frypan",
-   "bundleLabel": "Set of 2"
+   "bundleLabel": "Set of 2",
+   "bundleOrder": 20
   },
   {
    "id": "p31",
@@ -2436,7 +2441,8 @@
      "title_de": "Super Pfanne",
      "text_de": "Ich habe schon länger die Pfanne mit 28 cm als Ersatz für meinen alten Wok. Bratkartoffeln, Schupfnudeln, Reibekuchen, Eier usw. kleben nicht so fest wie bei anderen Pfannen. Für kleiner Mengen habe ich mir jetzt die Pfanne mit 20 cm zugelegt."
     }
-   ]
+   ],
+   "bundleOrder": 10
   },
   {
    "id": "p37",
@@ -2846,6 +2852,61 @@
      "text": "Great pots with five-star quality :)",
      "title_de": "Super Qualität",
      "text_de": "Tolle Töpfe mit 5 Sterne Qualität :)"
+    }
+   ]
+  },
+  {
+   "id": "p43",
+   "brand": "WMF",
+   "name": "Durado Fry Pan Set with Pan Protectors",
+   "series": "Durado",
+   "type": "Set",
+   "minPrice": 132.46,
+   "sizes": [],
+   "rating": null,
+   "reviews": 0,
+   "ratingReal": true,
+   "default": 0,
+   "cats": {
+    "pans": 48,
+    "frying-pans": 48
+   },
+   "variants": [
+    {
+     "sku": "bundle-7116002001-3201001202",
+     "size": "Set of 3 + protectors",
+     "price": 132.46,
+     "msrp": 137.98,
+     "stock": true,
+     "label": "BUNDLE",
+     "sale": true
+    }
+   ],
+   "search": "wmf durado fry pan set pan protectors bundle durado set of 3 protector mats",
+   "description": "The 3-piece Durado Fry Pan Set brings together versatility, durability and frying performance in one considered set. Three sizes (20, 24 and 28 cm) cover every kind of dish, from delicate sautés to high-heat searing. The robust ceramic non-stick sealing gives excellent results and makes cleaning easy. The 2-piece pan protector set keeps your pans free of scratches when they are stacked, so they last longer.",
+   "material": "Stainless Steel 1-ply",
+   "surface": "Ceramic",
+   "technique": "Gentle Frying",
+   "occasion": [
+    "Everyday",
+    "Gifting"
+   ],
+   "name_de": "Durado Bratpfannen-Set mit Pfannenschutzmatten",
+   "description_de": "Das 3-teilige Durado Bratpfannen-Set von WMF vereint Vielseitigkeit, Langlebigkeit und höchste Bratperformance in einem durchdachten Set. Mit drei unterschiedlichen Größen (20, 24 und 28 cm) bietet es für jede Zubereitungsart die passende Pfanne – von feinen Sautés bis hin zu scharf angebratenen Gerichten. Die robuste keramische Antihaftversiegelung sorgt für hervorragende Bratergebnisse, während sie gleichzeitig eine besonders einfache Reinigung ermöglicht. Dank des 2-teiligen Pfannenschutzmatten-Sets bleiben Ihre Pfannen vor Kratzern geschützt und Ihnen lange erhalten.",
+   "bundleGroup": "durado-frypan",
+   "bundleLabel": "Set of 3 + protectors",
+   "bundleOrder": 40,
+   "bundle": [
+    {
+     "qty": 1,
+     "name": "Durado Fry Pan Set, 3-piece",
+     "sku": "7116002001",
+     "id": "p29"
+    },
+    {
+     "qty": 1,
+     "name": "Pan Protector Set, 2-piece, 38 cm",
+     "sku": "3201001202"
     }
    ]
   }

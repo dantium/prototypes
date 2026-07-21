@@ -153,7 +153,11 @@ node `2:2`), as one template that renders **any catalog product** via `?id=`:
   group showing every configuration of the family as a card (image, label, price, Save chip).
   Products are tied together by `bundleGroup` in the JSON with a `bundleLabel` each — today
   `profi-resist-frypan` (Single pan / With spatula / Set of 2) and `durado-frypan` (Single pan
-  / Set of 2 / Set of 3), ordered single → accessory → sets. The current configuration is the
+  / Set of 2 / Set of 3 / Set of 3 + protectors), ordered by an explicit `bundleOrder` where
+  the catalog sets one, else single → accessory → sets. That last Durado option is a real
+  cross-product **bundle** (the shop's own `bundle-<sku>-<sku>` product: the 3-piece set plus a
+  2-piece pan-protector set, €132.46 against €137.98 bought separately) — the case where a
+  bundle builds on a set rather than a single pan, which is why the order is explicit. The current configuration is the
   selected card; the others link to their own PDP. This replaces the old one-off set-upsell
   row. The "This set contains:" list still appears on set PDPs — the selector picks the
   configuration, the list says what's inside it.

@@ -232,9 +232,16 @@
       if (m) return 10 + (+m[1]);
       return /^with/i.test(o.bundleLabel || '') ? 5 : 0;
     }
+    /* explicit order when the catalog sets one — a bundle that builds on a set
+       (set of 3 + protectors) can't be placed from its label alone */
+    function bundleSort(a, b) {
+      var ao = a.bundleOrder, bo = b.bundleOrder;
+      if (ao != null && bo != null) return ao - bo;
+      return bundleRank(a) - bundleRank(b);
+    }
     var bundleOpts = p.bundleGroup
       ? products.filter(function (x) { return x.bundleGroup === p.bundleGroup; })
-                .sort(function (a, b) { return bundleRank(a) - bundleRank(b); })
+                .sort(bundleSort)
       : [];
     /* a product whose own variants are set configurations rather than sizes */
     var setVariants = p.variants.length > 1 && !p.sizes.length &&

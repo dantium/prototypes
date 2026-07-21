@@ -193,9 +193,7 @@
    "series": "PermaDur Excellent",
    "type": "Set",
    "minPrice": 104.99,
-   "sizes": [
-    "Set of 2"
-   ],
+   "sizes": [],
    "rating": 4.45,
    "reviews": 27,
    "ratingReal": true,
@@ -391,10 +389,7 @@
    "series": "WMF",
    "type": "Set",
    "minPrice": 69.99,
-   "sizes": [
-    "Set of 2",
-    "Set of 3"
-   ],
+   "sizes": [],
    "rating": 4.8,
    "reviews": 146,
    "ratingReal": true,
@@ -603,9 +598,7 @@
    "series": "Macao",
    "type": "Set",
    "minPrice": 109.99,
-   "sizes": [
-    "Set of 4"
-   ],
+   "sizes": [],
    "rating": 4.05,
    "reviews": 27,
    "ratingReal": true,
@@ -885,9 +878,7 @@
    "series": "Profi Resist",
    "type": "Set",
    "minPrice": 79.99,
-   "sizes": [
-    "Set of 2"
-   ],
+   "sizes": [],
    "rating": null,
    "reviews": 0,
    "ratingReal": false,
@@ -1293,9 +1284,7 @@
    "series": "Nordic Profi",
    "type": "Set",
    "minPrice": 69.99,
-   "sizes": [
-    "Set of 2"
-   ],
+   "sizes": [],
    "rating": null,
    "reviews": 0,
    "ratingReal": true,
@@ -1333,9 +1322,7 @@
    "series": "Non-Stick",
    "type": "Set",
    "minPrice": 84.99,
-   "sizes": [
-    "Set of 3"
-   ],
+   "sizes": [],
    "rating": 4.65,
    "reviews": 55,
    "ratingReal": true,
@@ -1672,9 +1659,7 @@
    "series": "Devil",
    "type": "Set",
    "minPrice": 69.99,
-   "sizes": [
-    "Set of 2"
-   ],
+   "sizes": [],
    "rating": 5.0,
    "reviews": 1,
    "ratingReal": true,
@@ -1850,9 +1835,7 @@
    "series": "Click&Serve",
    "type": "Set",
    "minPrice": 179.99,
-   "sizes": [
-    "Set of 3"
-   ],
+   "sizes": [],
    "rating": 4.9,
    "reviews": 18,
    "ratingReal": true,
@@ -1918,9 +1901,7 @@
    "series": "Durado",
    "type": "Set",
    "minPrice": 129.99,
-   "sizes": [
-    "Set of 3"
-   ],
+   "sizes": [],
    "rating": 5.0,
    "reviews": 4,
    "ratingReal": true,
@@ -1989,9 +1970,7 @@
    "series": "Durado",
    "type": "Set",
    "minPrice": 94.48,
-   "sizes": [
-    "Set of 2"
-   ],
+   "sizes": [],
    "rating": null,
    "reviews": 0,
    "ratingReal": true,
@@ -2761,9 +2740,7 @@
    "series": "Fusiontec Mineral Pro",
    "type": "Set",
    "minPrice": 329.0,
-   "sizes": [
-    "Set of 4"
-   ],
+   "sizes": [],
    "rating": 4.0,
    "reviews": 6,
    "ratingReal": true,

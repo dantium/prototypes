@@ -150,9 +150,12 @@ a.bb-eyebrow:hover { color: var(--gold-deep); text-decoration: underline; }
   padding: 10px 8px 12px;
   border: 1px solid var(--grey-2); border-radius: 6px; background: #fff;
   color: inherit; text-decoration: none; transition: border-color .15s;
+  /* rendered as <a> across a bundleGroup, as <button> for in-product variants */
+  font: inherit; text-align: center; cursor: pointer;
 }
 .bb-bundle-opt:hover { border-color: #8a8a8a; }
 .bb-bundle-opt.sel { border-color: #000; }
+.bb-bundle-opt.oos { opacity: .5; }
 .bb-bundle-img { width: 100%; height: 62px; display: block; }
 .bb-bundle-img img { width: 100%; height: 100%; object-fit: contain; }
 .bb-bundle-t { margin-top: 6px; font-size: 13px; font-weight: 500; text-align: center; line-height: 1.25; }

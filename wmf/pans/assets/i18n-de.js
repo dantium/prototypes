@@ -119,6 +119,7 @@ window.WMF_I18N_DE = {
   'See all results for “%s”': 'Alle Ergebnisse für „%s“ anzeigen',
   'Category · %n products': 'Kategorie · %n Produkte',
   '%n sizes · from %p': '%n Größen · ab %p',
+  '%n options · from %p': '%n Varianten · ab %p',
   'Search results': 'Suchergebnisse',
   '%n result for %q': '%n Ergebnis für %q',
   '%n results for %q': '%n Ergebnisse für %q',

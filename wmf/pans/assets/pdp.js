@@ -236,6 +236,9 @@
       ? products.filter(function (x) { return x.bundleGroup === p.bundleGroup; })
                 .sort(function (a, b) { return bundleRank(a) - bundleRank(b); })
       : [];
+    /* a product whose own variants are set configurations rather than sizes */
+    var setVariants = p.variants.length > 1 && !p.sizes.length &&
+      p.variants.every(function (vv) { return /^Set of \d/i.test(vv.size || ''); });
 
     function titleFor(v) {
       return /^\d+\s*cm$/i.test(v.size) ? nameOf(p) + ', ' + v.size : nameOf(p);
@@ -305,8 +308,24 @@
         '<button class="bar-info" aria-label="More about Klarna">' + ICONS.info + '</button></div>';
 
       /* Set / bundle configurations — the same selector pattern as colour and
-         size, just with roomier cards (image + label + price per option). */
-      if (bundleOpts.length > 1) {
+         size, just with roomier cards (image + label + price per option).
+         Two shapes feed it: a family split across products (bundleGroup, linked)
+         and a single product whose variants are configurations (selected here). */
+      if (setVariants) {
+        h += '<div class="bb-bundles"><div class="bb-bundles-head">' +
+          '<span class="bb-bundles-lbl">' + t('Set offer') + '</span>' +
+          '<span class="bb-bundle-sel">' + esc(t(v.size)) + '</span></div>' +
+          '<div class="bb-bundle-opts">' + p.variants.map(function (vv, i) {
+            var vSave = isSale(vv) ? Math.round(vv.msrp - vv.price) : 0;
+            return '<button class="bb-bundle-opt' + (i === sel ? ' sel' : '') + (vv.stock ? '' : ' oos') +
+              '" data-i="' + i + '"' + (i === sel ? ' aria-current="true"' : '') + '>' +
+              '<span class="bb-bundle-img"><img src="' + img(vv.sku) + '" alt=""></span>' +
+              '<span class="bb-bundle-t">' + esc(t(vv.size)) + '</span>' +
+              '<span class="bb-bundle-p">' + eur(vv.price) +
+              (vSave ? '<span class="discount">' + t('Save €%n').replace('%n', vSave) + '</span>' : '') +
+              '</span></button>';
+          }).join('') + '</div></div>';
+      } else if (bundleOpts.length > 1) {
         h += '<div class="bb-bundles"><div class="bb-bundles-head">' +
           '<span class="bb-bundles-lbl">' + t('Set offer') + '</span>' +
           '<span class="bb-bundle-sel">' + esc(t(p.bundleLabel || '')) + '</span></div>' +
@@ -336,8 +355,9 @@
           }).join('') + '</div></div>';
       }
 
-      // size chips — only when there's a choice to make (more than one size)
-      if (p.variants.length > 1) {
+      // size chips — only when there's a real size choice to make. A set's
+      // variants are configurations, not sizes; they render as a Set offer above.
+      if (p.sizes.length > 1) {
         h += '<div class="bb-sizes"><div class="bb-sizes-head"><span class="lbl">' + t('Size:') + '</span><a href="#" data-act="size-guide">' + t('Size Guide') + '</a></div>' +
           '<div class="bb-size-chips">' + p.variants.map(function (vv, i) {
             var hint = SIZE_HINTS[vv.size];
@@ -414,7 +434,8 @@
         renderBuyBox(); renderStage(); renderThumbs(); renderTech();
         return;
       }
-      var size = e.target.closest('.bb-size');
+      /* size chips and set-configuration cards both pick a variant */
+      var size = e.target.closest('.bb-size, .bb-bundle-opt[data-i]');
       if (size) {
         sel = +size.dataset.i;
         renderBuyBox(); renderStage(); renderThumbs(); renderTech();
@@ -543,16 +564,16 @@
        own star count, author and date, with the body in both languages. */
     var list = document.getElementById('reviewsList');
     if (list) {
-      var items = p.reviewItems || [];
-      if (items.length) {
-        list.innerHTML = items.map(function (r) {
+      var revs = p.reviewItems || [];
+      if (revs.length) {
+        list.innerHTML = revs.map(function (r) {
           var title = (lang === 'de' ? r.title_de : r.title) || '';
           var text = (lang === 'de' ? r.text_de : r.text) || '';
           return '<article class="review"><span class="stars" style="--pct:' + Math.round((r.stars || 0) / 5 * 100) + '%"></span>' +
             '<div class="review-meta"><span class="review-name">' + esc(r.name) + '</span><span class="review-date">' + esc(r.date) + '</span></div>' +
             '<h4>' + esc(title) + '</h4><p>' + esc(text) + '</p></article>';
         }).join('') +
-        (p.reviews > items.length ? '<div class="reviews-more"><button class="btn-outline">' + t('Show more +') + '</button></div>' : '');
+        (p.reviews > revs.length ? '<div class="reviews-more"><button class="btn-outline">' + t('Show more +') + '</button></div>' : '');
       } else {
         list.innerHTML = '<p class="reviews-none">' + t('No reviews yet — be the first to review this product.') + '</p>';
       }

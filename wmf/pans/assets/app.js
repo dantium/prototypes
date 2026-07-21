@@ -464,7 +464,8 @@
         (onSale ? '<span class="discount">' + t('Save %n%').replace('%n', save) + '</span>' : '') + '</div>' +
         (onSale ? '<p class="card-was">' + eur(v.msrp) + ' ' + t('(last 30 days lowest price)') + '</p>' : '') +
         '<div class="stock' + (v.stock ? '' : ' out') + '"><span class="dot"></span>' + (v.stock ? t('In stock') : t('Out of stock')) + '</div>' +
-        (p.variants.length > 1 ? '<div class="card-sizes"><span class="lbl">' + t('Size:') + '</span>' + swatches + '</div>' : '') +
+        /* sizes only — a set's variants are configurations, offered on the PDP */
+        (p.variants.length > 1 && p.sizes.length > 1 ? '<div class="card-sizes"><span class="lbl">' + t('Size:') + '</span>' + swatches + '</div>' : '') +
         colorRow +
       '</div></article>';
   }
@@ -483,7 +484,8 @@
   };
   var byTechnique = function (name) { return function (p) { return p.technique === name; }; };
   var gentleFor = function (p) { return p.technique === 'Gentle Frying' || p.surface === 'Non-stick' || p.surface === 'Ceramic'; };
-  var bigFor = function (p) { return p.sizes.some(function (s) { return /^(28|32|36)/.test(s) || /Set/i.test(s); }); };
+  /* a set covers a big household too, and sets carry no size of their own */
+  var bigFor = function (p) { return p.type === 'Set' || p.sizes.some(function (s) { return /^(28|32|36)/.test(s); }); };
   var smallFor = function (p) { return p.sizes.some(function (s) { return /^(18|20)/.test(s); }); };
   var occasionIs = function (name) { return function (p) { return (p.occasion || []).indexOf(name) >= 0; }; };
   var INTENT = {
@@ -722,7 +724,9 @@
     var v = p.variants[p.default] || p.variants[0];
     var from = Math.min.apply(null, p.variants.map(function (x) { return x.price; }));
     var meta = esc(p.variants.length > 1
-      ? t('%n sizes · from %p').replace('%n', p.variants.length).replace('%p', eur(from))
+      ? (p.sizes.length > 1
+          ? t('%n sizes · from %p').replace('%n', p.sizes.length).replace('%p', eur(from))
+          : t('%n options · from %p').replace('%n', p.variants.length).replace('%p', eur(from)))
       : t(v.size));
     // when the hit came from the description, show the matched text instead
     if (q) {

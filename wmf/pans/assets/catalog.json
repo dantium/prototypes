@@ -879,7 +879,7 @@
    "name": "Profi Resist Fry Pan-Set",
    "series": "Profi Resist",
    "type": "Set",
-   "minPrice": 79.99,
+   "minPrice": 130.48,
    "sizes": [],
    "rating": null,
    "reviews": 0,
@@ -891,10 +891,10 @@
    },
    "variants": [
     {
-     "sku": "3201008479",
+     "sku": "bundle-3201002675-3201008479",
      "size": "Set of 2",
-     "price": 79.99,
-     "msrp": 129.99,
+     "price": 130.48,
+     "msrp": 149.98,
      "stock": true,
      "label": "BUNDLE"
     }
@@ -1985,7 +1985,7 @@
    },
    "variants": [
     {
-     "sku": "7115005328",
+     "sku": "bundle-7115005330-7115005328",
      "size": "Set of 2",
      "price": 94.48,
      "msrp": null,

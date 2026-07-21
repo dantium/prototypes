@@ -19,14 +19,6 @@
     { src: 'assets/pdp/gallery-heat.jpg',      kind: 'life', alt: 'Fast, even heating' }
   ];
 
-  /* Example reviews from the Figma mock (real-shop style). Shown only on
-     products that actually have reviews; capped at the real review count. */
-  var EXAMPLE_REVIEWS = [
-    { name: 'Tobias', date: '31.12.25', title: 'Great pan', text: 'The pan cooks evenly and nothing sticks. It’s also easy to wash by hand.' },
-    { name: 'Irene Sänger', date: '16.10.25', title: 'Top', text: 'Exactly as described. Excellent.' },
-    { name: 'Schiffmann', date: '15.10.25', title: 'Professional Resist frying pan', text: 'I saw it at a friend’s house and bought it myself. Nothing sticks, great browning. Versatile pan.' }
-  ];
-
   var SIZE_HINTS = { '20 cm': '1 – 2 people', '24 cm': '2 – 4 people', '28 cm': '4 – 6 people' };
 
   /* Read-more description for the honeycomb hero (Profi Resist): teaser collapsed,
@@ -546,17 +538,21 @@
       var rc = document.getElementById('pdpRecipes'); if (rc) rc.hidden = false;
     }
 
-    /* ---------- reviews ---------- */
+    /* ---------- reviews ----------
+       Real reviews scraped from the German shop (see README): each carries its
+       own star count, author and date, with the body in both languages. */
     var list = document.getElementById('reviewsList');
     if (list) {
-      if (p.rating != null && p.reviews > 0) {
-        var n = Math.min(p.reviews, EXAMPLE_REVIEWS.length);
-        list.innerHTML = EXAMPLE_REVIEWS.slice(0, n).map(function (r) {
-          return '<article class="review"><span class="stars" style="--pct:100%"></span>' +
-            '<div class="review-meta"><span class="review-name">' + esc(r.name) + '</span><span class="review-date">' + r.date + '</span></div>' +
-            '<h4>' + esc(t(r.title)) + '</h4><p>' + esc(t(r.text)) + '</p></article>';
+      var items = p.reviewItems || [];
+      if (items.length) {
+        list.innerHTML = items.map(function (r) {
+          var title = (lang === 'de' ? r.title_de : r.title) || '';
+          var text = (lang === 'de' ? r.text_de : r.text) || '';
+          return '<article class="review"><span class="stars" style="--pct:' + Math.round((r.stars || 0) / 5 * 100) + '%"></span>' +
+            '<div class="review-meta"><span class="review-name">' + esc(r.name) + '</span><span class="review-date">' + esc(r.date) + '</span></div>' +
+            '<h4>' + esc(title) + '</h4><p>' + esc(text) + '</p></article>';
         }).join('') +
-        (p.reviews > n ? '<div class="reviews-more"><button class="btn-outline">' + t('Show more +') + '</button></div>' : '');
+        (p.reviews > items.length ? '<div class="reviews-more"><button class="btn-outline">' + t('Show more +') + '</button></div>' : '');
       } else {
         list.innerHTML = '<p class="reviews-none">' + t('No reviews yet — be the first to review this product.') + '</p>';
       }

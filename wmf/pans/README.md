@@ -68,8 +68,13 @@ Real per-SKU data:
 - **labels** — `NEW` / `BESTSELLER` / `BUNDLE` / `SALE` from the shop's datalayer → corner badges
 - **stock** — datalayer `product_stock` + PDP `offers.availability` → per-variant In/Out of stock
 - **position** — the shop's own category ordering → the "Recommended" sort
-- **ratings** — Bazaarvoice values from PDP JSON-LD. Only 9 of 42 products have reviews on the
-  de/en store; the rest show **no stars rather than invented ones** (`rating: null`).
+- **ratings + reviews** — scraped from the German store (`wmf.com/de/de`), where an exact-SKU
+  search redirects straight to the PDP. The aggregate comes from the page's JSON-LD, the review
+  bodies from the inline Alpine component. 37 of 43 products carry a real rating covering **905
+  real reviews**; the rest show **no stars rather than invented ones** (`rating: null`). The live
+  shop lists each size as its own product, so counts are summed across a product's variant SKUs
+  and the rating is weighted by count. Each product also stores up to 3 real review bodies
+  (`reviewItems`) with the author, date and star count, English alongside the German original.
 - **descriptions** — the real PDP copy (JSON-LD `description`, footnotes stripped) on 41 of 42
   products. Search matches against it, so attribute queries like "induction" or
   "scratch-resistant" find products; name/series matches rank first, and the overlay shows the
@@ -88,7 +93,11 @@ facets, sort). Each page sets `window.PAGE = { kind, category }`.
   "type": "Single pan",              // "Single pan" | "Set"
   "minPrice": 69.99,
   "sizes": ["24 cm", "28 cm"],
-  "rating": 4.0, "reviews": 2,       // real Bazaarvoice, or null
+  "rating": 4.45, "reviews": 80,     // real, scraped from de/de — or null
+  "reviewItems": [                   // up to 3 real reviews, EN + DE
+    { "name": "Werner", "date": "25.04.26", "stars": 5,
+      "title": "…", "text": "…", "title_de": "…", "text_de": "…" }
+  ],
   "default": 1,                      // variant shown first
   "cats": { "pans": 7, "frying-pans": 2 },   // category -> real shop position
   "variants": [
@@ -166,7 +175,6 @@ node `2:2`), as one template that renders **any catalog product** via `?id=`:
   when they don't, and the zoom icon top-right (or a click on the image) opening a
   fullscreen viewer with arrows, an image counter, Esc/arrow-key support.
 - **Example content, shared across products** (same precedent as the shared hover shot):
-  the 3 reviews from the mock (capped at the product's *real* review count, so `p1` shows 2),
   the buy-box accessory (Profi Plus spatula) and the "Ideally complements" accessories with
   prices from the mock, Use & Care copy keyed off the product's surface attribute, and the
   how-to video card. FAQ = the same 5 Q&As as the frying-pans PLP, and the "Compare our

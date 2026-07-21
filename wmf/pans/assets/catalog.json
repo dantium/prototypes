@@ -39,9 +39,9 @@
     "24 cm",
     "28 cm"
    ],
-   "rating": 5,
-   "reviews": 1,
-   "ratingReal": false,
+   "rating": 4.21,
+   "reviews": 14,
+   "ratingReal": true,
    "default": 1,
    "cats": {
     "frying-pans": 27,
@@ -74,7 +74,36 @@
     "Everyday"
    ],
    "name_de": "PermaDur Excellent Stielpfanne",
-   "description_de": "Durch die robuste, langlebige und aufwändig in drei Schichten aufgetragene PermaDur Antihaftversiegelung ist die PermaDur Excellent Stielpfanne mit 28 cm Durchmesser von WMF ideal zur fettarmen Zubereitung empfindlicher Speisen wie beispielsweise von Fisch geeignet und gleichzeitig nach dem Gebrauch kinderleicht zu reinigen. Die Pfanne aus formstabilen Aluminiumguss hält zuverlässig und auf Dauer auch hoher Beanspruchung stand."
+   "description_de": "Durch die robuste, langlebige und aufwändig in drei Schichten aufgetragene PermaDur Antihaftversiegelung ist die PermaDur Excellent Stielpfanne mit 28 cm Durchmesser von WMF ideal zur fettarmen Zubereitung empfindlicher Speisen wie beispielsweise von Fisch geeignet und gleichzeitig nach dem Gebrauch kinderleicht zu reinigen. Die Pfanne aus formstabilen Aluminiumguss hält zuverlässig und auf Dauer auch hoher Beanspruchung stand.",
+   "reviewItems": [
+    {
+     "name": "Yuriy",
+     "date": "05.08.25",
+     "stars": 5,
+     "title": "Excellent",
+     "text": "The best pan.",
+     "title_de": "ausgezeichnet",
+     "text_de": "Die beste Pfanne"
+    },
+    {
+     "name": "Mine",
+     "date": "17.09.23",
+     "stars": 1,
+     "title": "Sadly a disaster",
+     "text": "Scratched after just 1 month, and after 6 months the pan is unusable.",
+     "title_de": "Leider eine Katastrophe",
+     "text_de": "Schon nach 1 Monat Kratzer und jzt nach 6 Monaten ist die Pfanne nicht gebräuchlichy"
+    },
+    {
+     "name": "Marcus",
+     "date": "28.05.23",
+     "stars": 2,
+     "title": "Bought it twice",
+     "text": "Both times the coating came away within 12 months, so I can only recommend it with reservations. When new the pan is superb. Nothing sticks at all. But it is very delicate. It really does not like being stacked with other pans. You should also avoid overly high temperatures and deglazing. The worst thing of all is a metal turner — it lifts the whole coating off like a peeler taking the skin off a potato.",
+     "title_de": "2 Mal gekauft",
+     "text_de": "Jedesmal hat sich die Beschichtung innerhalb von 12 Monaten gelöst.  Daher nur eingeschränkt zu empfehlen.  Neu ist die Pfanne super. Nichts klebt an. Selbst Klimaklebet dürfen Schwierigkeiten haben.  Allerdings ist die Pfanne sehr empfindlich.  Pfanne auf Pfanne stapeln mag diese Pfanne überhaupt nicht.  Zu heiße Temperaturen oder ablöschen sollte man auch vermeiden. Der Supergau ist  aber ein Metallwender. Damit schieben sie die ganze Beschichtung ab wie ein Schälmesser die Kartoffelschale von der Kartoffel."
+    }
+   ]
   },
   {
    "id": "p1",
@@ -87,9 +116,9 @@
     "24 cm",
     "28 cm"
    ],
-   "rating": 3,
-   "reviews": 2,
-   "ratingReal": false,
+   "rating": 4.45,
+   "reviews": 80,
+   "ratingReal": true,
    "default": 1,
    "cats": {
     "pans": 12,
@@ -126,7 +155,36 @@
    "name_de": "Profi Resist Stielpfanne",
    "description_de": "Die Profi Resist Stielpfanne mit 28 cm Durchmesser von WMF vereint das Beste aus zwei Welten. Dafür sorgt die einzigartige Kombination aus mehrschichtigem Aufbau mit Aluminiumkern, rostfreiem Edelstahl innen und extrem widerstandsfähigem Chromstahl außen sowie herausragender PermaDur Antihaftversiegelung, die durch eine spezielle, erhabene Wabenstruktur aus strapazierfähigem Cromargan® zusätzlich geschützt wird. Damit ist die Profi Resist Bratpfanne nicht nur kratzfest und besonders hitzebeständig, sondern bietet auch in allen Fällen - vom scharfen Anbraten von Fleisch bis hin zu fettarmen Braten empfindlicher Speisen - beste Brateigenschaften.",
    "bundleGroup": "profi-resist-frypan",
-   "bundleLabel": "Single pan"
+   "bundleLabel": "Single pan",
+   "reviewItems": [
+    {
+     "name": "Jens Hübner",
+     "date": "26.05.26",
+     "stars": 4,
+     "title": "All perfect — great product and superb build quality",
+     "text": "All perfect — great product and superb build quality.",
+     "title_de": "Alles Bestens ... Klasse Produkt und super Verarbeitung",
+     "text_de": "Alles Bestens ... Klasse Produkt und super Verarbeitung"
+    },
+    {
+     "name": "Werner",
+     "date": "25.04.26",
+     "stars": 5,
+     "title": "Among the best pans I have ever had",
+     "text": "After buying the large wok and the 28 cm pan and being very happy with the results, we added the 24 cm as well. You need nothing else. It heats up quickly, especially on induction. Thumbs up.",
+     "title_de": "Mit besten Pfannen, die ich je hatte",
+     "text_de": "Nachdem wir uns den großen Wok und die 28 Pfanne gekauft haben und mit dem Ergebnis sehr zufrieden sind, haben wir die 24 auch noch dazu gekauft. Es braucht nichts anderes bis das Ergebnis besonders ab Induktion wird schnell heiß Daumen hoch"
+    },
+    {
+     "name": "Gabriele Schneider",
+     "date": "11.04.26",
+     "stars": 5,
+     "title": "Very good frying pan",
+     "text": "Everything fries beautifully.",
+     "title_de": "Sehr gute Bratpfanne",
+     "text_de": "Gebratenes wir super"
+    }
+   ]
   },
   {
    "id": "p2",
@@ -138,9 +196,9 @@
    "sizes": [
     "Set of 2"
    ],
-   "rating": null,
-   "reviews": null,
-   "ratingReal": false,
+   "rating": 4.45,
+   "reviews": 27,
+   "ratingReal": true,
    "default": 0,
    "cats": {
     "pans": 21,
@@ -166,7 +224,36 @@
     "Gifting"
    ],
    "name_de": "PermaDur Excellent Stielpfannen-Set",
-   "description_de": "Durch die robuste, langlebige und aufwändig in drei Schichten aufgetragene PermaDur Antihaftversiegelung sind die PermaDur Excellent Stielpfannen von WMF ideal zur fettarmen Zubereitung empfindlicher Speisen wie beispielsweise von Fisch geeignet und gleichzeitig nach dem Gebrauch kinderleicht zu reinigen. Die Stielpfannen dieses 2-teiligen Sets mit 24 bzw. 28 cm Durchmesser, bestehen aus formstabilen Aluminiumguss und halten zuverlässig und auf Dauer auch hoher Beanspruchung stand."
+   "description_de": "Durch die robuste, langlebige und aufwändig in drei Schichten aufgetragene PermaDur Antihaftversiegelung sind die PermaDur Excellent Stielpfannen von WMF ideal zur fettarmen Zubereitung empfindlicher Speisen wie beispielsweise von Fisch geeignet und gleichzeitig nach dem Gebrauch kinderleicht zu reinigen. Die Stielpfannen dieses 2-teiligen Sets mit 24 bzw. 28 cm Durchmesser, bestehen aus formstabilen Aluminiumguss und halten zuverlässig und auf Dauer auch hoher Beanspruchung stand.",
+   "reviewItems": [
+    {
+     "name": "Emi",
+     "date": "15.11.25",
+     "stars": 5,
+     "title": "Very good",
+     "text": "High quality, lovely to handle.",
+     "title_de": "Sehr gut",
+     "text_de": "Hohe Qualität, schöne Handhabung"
+    },
+    {
+     "name": "Huehnerschultejohannes",
+     "date": "05.09.25",
+     "stars": 5,
+     "title": "All good",
+     "text": "Great. Fast delivery. The pans are not heavy. They sit well in the hand and are superb for whatever you are frying.",
+     "title_de": "Alles  gut",
+     "text_de": "Super. Schnelle Lieferung. Die Pfannen sind nicht schwer. Liegen gut in der Hand und super fürs Bratgut."
+    },
+    {
+     "name": "Regina Groß",
+     "date": "18.04.25",
+     "stars": 5,
+     "title": "The pans are great",
+     "text": "Really great set.",
+     "title_de": "Pfannen sind super",
+     "text_de": "Super tolles Set"
+    }
+   ]
   },
   {
    "id": "p3",
@@ -178,9 +265,9 @@
    "sizes": [
     "20 cm"
    ],
-   "rating": null,
-   "reviews": null,
-   "ratingReal": false,
+   "rating": 4.85,
+   "reviews": 7,
+   "ratingReal": true,
    "default": 0,
    "cats": {
     "frying-pans": 33
@@ -203,7 +290,36 @@
    "occasion": [
     "Everyday"
    ],
-   "name_de": "PermaDur Premium Bratpfanne"
+   "name_de": "PermaDur Premium Bratpfanne",
+   "reviewItems": [
+    {
+     "name": "sabine",
+     "date": "24.12.25",
+     "stars": 5,
+     "title": "Great",
+     "text": "Top quality as always.",
+     "title_de": "super",
+     "text_de": "top ware wie immer"
+    },
+    {
+     "name": "Thomas",
+     "date": "12.08.22",
+     "stars": 4,
+     "title": "Pan",
+     "text": "Great pan, even if it is not exactly cheap!",
+     "title_de": "Pfanne",
+     "text_de": "Tolle Pfanne, wenn auch nicht ganz preiswert!"
+    },
+    {
+     "name": "Anonym",
+     "date": "21.03.22",
+     "stars": 5,
+     "title": "Great pan",
+     "text": "Superb pan, great quality! It stores and spreads the heat perfectly. I have had one in 28 cm in use for a few years now and I am very happy with it.",
+     "title_de": "Tolle Pfanne",
+     "text_de": "Super Pfanne, tolle Qualität! \r\nDie Pfanne speichert und verteilt die Wärme optimal. Habe bereits eine in 28cm seit ein paar Jahren im Einsatz und bin sehr zufrieden"
+    }
+   ]
   },
   {
    "id": "p4",
@@ -215,9 +331,9 @@
    "sizes": [
     "One size"
    ],
-   "rating": null,
-   "reviews": null,
-   "ratingReal": false,
+   "rating": 4.9,
+   "reviews": 24,
+   "ratingReal": true,
    "default": 0,
    "cats": {
     "pans": 45
@@ -237,7 +353,36 @@
    "occasion": [
     "Everyday"
    ],
-   "name_de": "Casserolen-Ständer MISTER X"
+   "name_de": "Casserolen-Ständer MISTER X",
+   "reviewItems": [
+    {
+     "name": "Joeha-imkerei",
+     "date": "04.07.26",
+     "stars": 5,
+     "title": "Brilliant",
+     "text": "Very practical.",
+     "title_de": "Genial",
+     "text_de": "Sehr praktisch."
+    },
+    {
+     "name": "LB",
+     "date": "02.07.26",
+     "stars": 5,
+     "title": "Very practical and elegant",
+     "text": "This stand takes up very little space. It stores well in a drawer — stacked or side by side. Pots and pans do not slide off. Very good, I will buy more of them.",
+     "title_de": "Sehr praktisch und elegant",
+     "text_de": "Dieser Untersetzer nimmt sehr wenig Platz weg. In der Schublade kann man gut aufbewahren, stapeln oder nebeneinanderlegen. Töpfe Pfannen rutschen nicht weg. Sehr gut kaufe noch mehr davon"
+    },
+    {
+     "name": "Doris Wüst",
+     "date": "15.06.26",
+     "stars": 5,
+     "title": "Very good",
+     "text": "Very good, I would buy it again. Many thanks, and very friendly, helpful advice.",
+     "title_de": "sehr gut",
+     "text_de": "Sehr gut würde es wieder kaufen danke vielmals und sehr freundliche und gute Beratung"
+    }
+   ]
   },
   {
    "id": "p5",
@@ -250,9 +395,9 @@
     "Set of 2",
     "Set of 3"
    ],
-   "rating": 5,
-   "reviews": 1,
-   "ratingReal": false,
+   "rating": 4.8,
+   "reviews": 146,
+   "ratingReal": true,
    "default": 0,
    "cats": {
     "pans": 15,
@@ -286,7 +431,36 @@
     "Gifting"
    ],
    "name_de": "Devil Bratpfannen-Set",
-   "description_de": "Vielseitige Pfannengerichte leicht gemacht: Das 2-teilige Devil Bratpfannen-Set von WMF mit je einer 24 cm und 28 cm Stielpfanne ist in der Küche einfach unverzichtbar. Die robuste keramische Antihaftversiegelung mit hartem mineralischem Aufbau sowie der TransTherm®-Allherdboden für eine optimale Wärmeverteilung und -speicherung ermöglichen hervorragende Bratergebnisse."
+   "description_de": "Vielseitige Pfannengerichte leicht gemacht: Das 2-teilige Devil Bratpfannen-Set von WMF mit je einer 24 cm und 28 cm Stielpfanne ist in der Küche einfach unverzichtbar. Die robuste keramische Antihaftversiegelung mit hartem mineralischem Aufbau sowie der TransTherm®-Allherdboden für eine optimale Wärmeverteilung und -speicherung ermöglichen hervorragende Bratergebnisse.",
+   "reviewItems": [
+    {
+     "name": "Heike Fragemann",
+     "date": "08.07.26",
+     "stars": 4,
+     "title": "Good",
+     "text": "Good.",
+     "title_de": "Gut",
+     "text_de": "Gut"
+    },
+    {
+     "name": "Isolde",
+     "date": "01.07.26",
+     "stars": 5,
+     "title": "Absolutely great pans",
+     "text": "Good quality and good value for money.",
+     "title_de": "Absolut tollen Pfannen",
+     "text_de": "Gute Qualität sowie Preis/Leistungsverhältnis."
+    },
+    {
+     "name": "Cornelia",
+     "date": "14.06.26",
+     "stars": 5,
+     "title": "Very good value for money",
+     "text": "I would definitely buy it again.",
+     "title_de": "Sehr gutes Preis Leistungs Verhältnis",
+     "text_de": "Würde ich auf jeden Fall wieder kaufen"
+    }
+   ]
   },
   {
    "id": "p6",
@@ -298,9 +472,9 @@
    "sizes": [
     "28 cm"
    ],
-   "rating": 1,
-   "reviews": 1,
-   "ratingReal": false,
+   "rating": 4.4,
+   "reviews": 34,
+   "ratingReal": true,
    "default": 0,
    "cats": {
     "pans": 5
@@ -324,7 +498,36 @@
     "Everyday"
    ],
    "name_de": "Durado Grillpfanne",
-   "description_de": "Strapazierfähig und vielseitig: Die Durado Grillpfanne von WMF mit ihrem 28 x 28 cm Format und dem geriffelten Boden ist ein absolutes Multitalent für köstliches Grillvergnügen in der Küche. Die robuste keramische Antihaftversiegelung bietet exzellente Grillergebnisse jeder Art und eine einfache Reinigung. Der TransTherm®-Allherdboden sorgt dank optimaler Wärmeverteilung und -speicherung für energiesparendes Braten."
+   "description_de": "Strapazierfähig und vielseitig: Die Durado Grillpfanne von WMF mit ihrem 28 x 28 cm Format und dem geriffelten Boden ist ein absolutes Multitalent für köstliches Grillvergnügen in der Küche. Die robuste keramische Antihaftversiegelung bietet exzellente Grillergebnisse jeder Art und eine einfache Reinigung. Der TransTherm®-Allherdboden sorgt dank optimaler Wärmeverteilung und -speicherung für energiesparendes Braten.",
+   "reviewItems": [
+    {
+     "name": "Difra",
+     "date": "04.07.26",
+     "stars": 1,
+     "title": "No support",
+     "text": "The pan was scratched on both handles and damaged on the rim. I thought fine, I will make a claim, but to this day there has been no response. Next attempt is to take it into a store.",
+     "title_de": "Kein Support",
+     "text_de": "Pfanne an beiden Griffen verkratzt und am Pfannenrand beschädigt.\r\nIch dachte ok, ich reklamiere, aber bis heute keine Reaktion.\r\nNächster Versuch ist, in Filiale zu reklamieren"
+    },
+    {
+     "name": "Sigrid",
+     "date": "03.03.26",
+     "stars": 5,
+     "title": "Excellent",
+     "text": "Very good.",
+     "title_de": "Ausgezeichnet",
+     "text_de": "Sehr Gut"
+    },
+    {
+     "name": "Christian",
+     "date": "07.01.26",
+     "stars": 5,
+     "title": "The ideal pan with a handle",
+     "text": "For meat in particular this pan cooks things to the point. The base structure lets fat or oil run freely. The square shape makes ideal use of the space, even for large cuts. Nothing burns and the heat spreads well. Simply brilliant, this pan.",
+     "title_de": "Ideale Griffpfanne",
+     "text_de": "Besonders für Fleischspezialitäten bietet die Pfanne ein Braten auf den Punkt. Durch die Bodenstruktur ein Freilauf von Fett oder Öl. Durch die quadratische Form eine ideale Ausnutzung auch für große Stücke. Kein Anbrennen und gute Hitzverteilung. Einfach genial die Panne."
+    }
+   ]
   },
   {
    "id": "p7",
@@ -336,9 +539,9 @@
    "sizes": [
     "36 cm"
    ],
-   "rating": 4,
-   "reviews": 1,
-   "ratingReal": false,
+   "rating": 4.8,
+   "reviews": 5,
+   "ratingReal": true,
    "default": 0,
    "cats": {
     "pans": 20
@@ -362,7 +565,36 @@
     "Everyday"
    ],
    "name_de": "Wok mit Glasdeckel",
-   "description_de": "Der WMF Wok mit 36 cm Durchmesser und Glasdeckel ist der perfekte Schritt hinein in die vielseitige Geschmackswelt der asiatischen Küche. Gefertigt aus hochwertigem Cromargan®: Edelstahl Rostfrei 18/10 und ausgestattet mit dem energiesparenden TransTherm®-Allherdboden für beste Wärmeverteilung und –speicherung bietet der spülmaschinengeeignete Wok beste Voraussetzungen für gelungenen asiatischen Kochgenuss."
+   "description_de": "Der WMF Wok mit 36 cm Durchmesser und Glasdeckel ist der perfekte Schritt hinein in die vielseitige Geschmackswelt der asiatischen Küche. Gefertigt aus hochwertigem Cromargan®: Edelstahl Rostfrei 18/10 und ausgestattet mit dem energiesparenden TransTherm®-Allherdboden für beste Wärmeverteilung und –speicherung bietet der spülmaschinengeeignete Wok beste Voraussetzungen für gelungenen asiatischen Kochgenuss.",
+   "reviewItems": [
+    {
+     "name": "Bruzzel",
+     "date": "29.02.24",
+     "stars": 5,
+     "title": "Great bit of kit",
+     "text": "Stainless steel wok, top price.",
+     "title_de": "Tolles Teil",
+     "text_de": "Edelstahl-Wok, Spitzen-Preis"
+    },
+    {
+     "name": "Marco",
+     "date": "14.04.23",
+     "stars": 5,
+     "title": "Rather large",
+     "text": "This wok is big and it is magnificent. It is made entirely of stainless steel, so fortunately there is no coating that can come away. The handles stay cool in use. I am delighted with it, even if the original price is high. It is a high-quality piece. I use the WMF wok turner with it, which fits perfectly.",
+     "title_de": "Ganz schön groß",
+     "text_de": "Dieser Wok ist groß und großartig. Er besteht komplett aus Edelstahl, da kann sich glücklicherweise auch keine Beschichtung lösen. Bei der Benutzung bleiben die Griffe kühl. Ich bin begeistert, auch wenn der Originalpreis hoch ist. Es ist ein hochwertiges Gerät. Ich nutze dazu den Wok Pfannenwender von WMF. Er passt perfekt."
+    },
+    {
+     "name": "Stephan",
+     "date": "13.03.23",
+     "stars": 5,
+     "title": "Brilliant cooking",
+     "text": "The wok is huge. Vegetables are done incredibly quickly. Meat too, quick and well cooked. The wok does not get scalding at the sides.",
+     "title_de": "Geiles Kochen",
+     "text_de": "Der Wok ist riesig. Gemüse Mega schnell zubereitet. Auch Fleisch super schnell und gut gemacht. Der Wok wird an der Seite nicht kochend"
+    }
+   ]
   },
   {
    "id": "p8",
@@ -374,9 +606,9 @@
    "sizes": [
     "Set of 4"
    ],
-   "rating": null,
-   "reviews": null,
-   "ratingReal": false,
+   "rating": 4.05,
+   "reviews": 27,
+   "ratingReal": true,
    "default": 0,
    "cats": {
     "pans": 28
@@ -401,7 +633,36 @@
     "Gifting"
    ],
    "name_de": "Macao Wok-Set",
-   "description_de": "Das 4-teilige Macao Wok-Set von WMF ist ein großer Schritt hinein in die vielseitige Geschmackswelt der asiatischen Küche. Das Set besteht aus dem Wok mit 36 cm Durchmesser und energiesparendem TransTherm®-Allherdboden, einem passenden Glasdeckel, einem Ablagegitter und einem Dampfgareinsatz. Gefertigt aus strapazierfähigem Cromargan®: Edelstahl Rostfrei 18/10 und hochwertigem Glas bietet das spülmaschinengeeignete Set beste Voraussetzungen für gelungenen asiatischen Kochgenuss."
+   "description_de": "Das 4-teilige Macao Wok-Set von WMF ist ein großer Schritt hinein in die vielseitige Geschmackswelt der asiatischen Küche. Das Set besteht aus dem Wok mit 36 cm Durchmesser und energiesparendem TransTherm®-Allherdboden, einem passenden Glasdeckel, einem Ablagegitter und einem Dampfgareinsatz. Gefertigt aus strapazierfähigem Cromargan®: Edelstahl Rostfrei 18/10 und hochwertigem Glas bietet das spülmaschinengeeignete Set beste Voraussetzungen für gelungenen asiatischen Kochgenuss.",
+   "reviewItems": [
+    {
+     "name": "Hans",
+     "date": "02.07.26",
+     "stars": 1,
+     "title": "A shame, sadly",
+     "text": "I bought the Macao wok at WMF in Pasching today. I even asked whether it is now made in Germany. Sadly, once home, I found it was not the original. I do not travel to WMF to buy cheap goods. I will take it back tomorrow. I was making my original spring rolls (from a Chinese cookbook), which have nothing to do with the spring rolls you get from Chinese restaurants in Austria. What happened? I seared the meat and within seconds the base had discoloured and gone sticky. After it had cooled I put the wok in the sink with cold water in the hope of loosening it — hmm. A shame for the brand. Regards, Hans Wimmer.",
+     "title_de": "Schade, leider",
+     "text_de": "Habe mir heute in Pasching bei WMF den WOK Macao..... gekauft. Habe auch nachgefragt ob der jetzt Made in Germany ist oder das komische Zeug aus China. Leider musste ich daheim feststellen dass es nicht das Oroginal ist.\n\nIch fahre nicht zu WMF um mir billiges Zeug zu kaufen.\n\nWerde es morgen wieder retour bringen.\n\nMachte meine Original Frühlingsrollen(Kochbuch aus China) die nix mit den Frühlingsrollen in Österreich beim Chinesen zu tun haben.\n\nWas ist passiert? Fleisch angebraten und binnen Sekunden war der Boden angelaufen und verklebt, bitte. Stellte dann den Wok nachdem er abgekühlt war in die Spüle mit kaltem Wasser um es vielleicht aufzulösen, hmmmm. \n\nSchade um die Marke.\n\nGrüße\n\nHans Wimmer"
+    },
+    {
+     "name": "Larissa",
+     "date": "06.06.26",
+     "stars": 5,
+     "title": "For healthy eating",
+     "text": "You can cook very well and very cheaply at home!",
+     "title_de": "Für gesunde Ernährung",
+     "text_de": "Man kann sehr gut und günstig zu Hause kochen!"
+    },
+    {
+     "name": "GE",
+     "date": "24.04.26",
+     "stars": 2,
+     "title": "Thin",
+     "text": "Thin.",
+     "title_de": "Dünn",
+     "text_de": "Dünn"
+    }
+   ]
   },
   {
    "id": "p9",
@@ -413,9 +674,9 @@
    "sizes": [
     "36 cm"
    ],
-   "rating": null,
-   "reviews": null,
-   "ratingReal": false,
+   "rating": 4.85,
+   "reviews": 7,
+   "ratingReal": true,
    "default": 0,
    "cats": {
     "pans": 26
@@ -439,7 +700,36 @@
     "Everyday"
    ],
    "name_de": "Hong Kong Wok",
-   "description_de": "Mit dem Silit Hong Kong Wok lassen sich köstliche Pfannengerichte und asiatische Nudeln sowie originelle, kreative Rezepte in einer Wok-Pfanne perfekt zubereiten. Das Geheimnis liegt in seiner ultra-harten, bis zu 400° C hitzebeständigen CeraProtect Antihaftversiegelung, die gleichzeitig eine einfache Reinigung des Woks ermöglicht."
+   "description_de": "Mit dem Silit Hong Kong Wok lassen sich köstliche Pfannengerichte und asiatische Nudeln sowie originelle, kreative Rezepte in einer Wok-Pfanne perfekt zubereiten. Das Geheimnis liegt in seiner ultra-harten, bis zu 400° C hitzebeständigen CeraProtect Antihaftversiegelung, die gleichzeitig eine einfache Reinigung des Woks ermöglicht.",
+   "reviewItems": [
+    {
+     "name": "Top",
+     "date": "26.10.25",
+     "stars": 5,
+     "title": "George from Wilhelmshaven",
+     "text": "Top — superb inner coating, withstands very high temperatures (up to 400°C according to the manufacturer). Please only use wood or plastic turners and spoons. Child's play to clean.",
+     "title_de": "George aus Wilhelmshaven",
+     "text_de": "Top = super Innenbeschichtung, hält sehr hohe Temperaturen aus (laut Hersteller bis 400 ° Grad). Bitte nur Holz / Plastik Wender / Löffel benutzen. Kinderleichte Reinigung."
+    },
+    {
+     "name": "fam.goetz",
+     "date": "22.07.25",
+     "stars": 5,
+     "title": "Very fast delivery",
+     "text": "Everything fits.",
+     "title_de": "super schnelle Lieferung",
+     "text_de": "Passt alles."
+    },
+    {
+     "name": "Andreas B",
+     "date": "08.04.25",
+     "stars": 5,
+     "title": "All top",
+     "text": "The wok is very sturdy and feels high quality. The heat spreads very well and the wok is easy to clean too. A clear buy.",
+     "title_de": "Alles Top",
+     "text_de": "Der Wok ist sehr stabil und macht einen wertigen Eindruck. Die Hitzeverteilung  ist sehr gut und der Wok lässt sich auch leicht reinigen. Klarer Kauf"
+    }
+   ]
   },
   {
    "id": "p10",
@@ -452,9 +742,9 @@
     "24 cm",
     "28 cm"
    ],
-   "rating": null,
-   "reviews": null,
-   "ratingReal": false,
+   "rating": 4.51,
+   "reviews": 4,
+   "ratingReal": true,
    "default": 1,
    "cats": {
     "frying-pans": 42
@@ -487,7 +777,36 @@
    "occasion": [
     "Everyday"
    ],
-   "name_de": "Messino Bratpfanne"
+   "name_de": "Messino Bratpfanne",
+   "reviewItems": [
+    {
+     "name": "NM",
+     "date": "24.03.25",
+     "stars": 5,
+     "title": "Very good",
+     "text": "Very good.",
+     "title_de": "Sehr gut",
+     "text_de": "Sehr gut"
+    },
+    {
+     "name": "Jutta",
+     "date": "14.07.23",
+     "stars": 5,
+     "title": "Great pan",
+     "text": "It is a very good pan. I really enjoy using it.",
+     "title_de": "Tolle Pfanne",
+     "text_de": "Es ist eine sehr gute Pfanne. Ich benutze sie sehr gern."
+    },
+    {
+     "name": "HMS",
+     "date": "02.11.21",
+     "stars": 3,
+     "title": "Good pan",
+     "text": "The pan makes a very good impression. The frying results are good. Sadly WMF's service does not deserve to be called service. Intensive retraining of the staff dealing with customers would be advisable.",
+     "title_de": "gute Pfanne",
+     "text_de": "Die Pfanne macht einen sehr guten Eindruck. Das Bratergebnis ist gut.\r\nLeider verdient der Service der Fa. WMF die Bezeichnung Service nicht. Da empfiehlt sich eine intensive Nachschulung des zum Kundenkontakt eingesetzten Personals."
+    }
+   ]
   },
   {
    "id": "p11",
@@ -499,9 +818,9 @@
    "sizes": [
     "28 cm"
    ],
-   "rating": null,
-   "reviews": null,
-   "ratingReal": false,
+   "rating": 3.45,
+   "reviews": 18,
+   "ratingReal": true,
    "default": 0,
    "cats": {
     "pans": 2,
@@ -528,7 +847,36 @@
    "name_de": "Profi Resist Stielpfanne mit Pfannenwender",
    "description_de": "Die Profi Resist Stielpfanne mit 28 cm Durchmesser von WMF vereint das Beste aus zwei Welten. Dafür sorgt die einzigartige Kombination aus mehrschichtigem Aufbau mit Aluminiumkern, rostfreiem Edelstahl innen und extrem widerstandsfähigem Chromstahl außen sowie herausragender PermaDur Antihaftversiegelung, die durch eine spezielle, erhabene Wabenstruktur aus strapazierfähigem Cromargan® zusätzlich geschützt wird. Damit ist die Profi Resist Bratpfanne nicht nur kratzfest und besonders hitzebeständig, sondern bietet auch in allen Fällen - vom scharfen Anbraten von Fleisch bis hin zu fettarmen Braten empfindlicher Speisen - beste Brateigenschaften. Der mitgelieferte Pfannenwender ist problemlos und sicher auch bei antihaftversiegelten Pfannen verwendbar.",
    "bundleGroup": "profi-resist-frypan",
-   "bundleLabel": "With spatula"
+   "bundleLabel": "With spatula",
+   "reviewItems": [
+    {
+     "name": "Jens Hübner",
+     "date": "13.03.26",
+     "stars": 4,
+     "title": "All perfect",
+     "text": "It is a great, high-quality set.",
+     "title_de": "Alles Bestens",
+     "text_de": "ist ein tolles und hochwertiges Set"
+    },
+    {
+     "name": "Strife",
+     "date": "03.02.26",
+     "stars": 5,
+     "title": "Good pan",
+     "text": "Easy to use, good non-stick effect. Perfect for scrambled eggs or pancakes.",
+     "title_de": "Gute Pfanne",
+     "text_de": "Leicht zu bedienen gute antihaft Wirkung. Perfekt für Rührei oder Pfannkuchen."
+    },
+    {
+     "name": "GreMer",
+     "date": "07.11.25",
+     "stars": 5,
+     "title": "Very good pan",
+     "text": "This pan is worth the money. Highly recommended!",
+     "title_de": "Sehr gute Pfanne",
+     "text_de": "Diese Pfanne ist ihr Geld wert. Sehr empfehlenswert!"
+    }
+   ]
   },
   {
    "id": "p12",
@@ -541,7 +889,7 @@
     "Set of 2"
    ],
    "rating": null,
-   "reviews": null,
+   "reviews": 0,
    "ratingReal": false,
    "default": 0,
    "cats": {
@@ -595,9 +943,9 @@
    "sizes": [
     "24 cm"
    ],
-   "rating": null,
-   "reviews": null,
-   "ratingReal": false,
+   "rating": 4.8,
+   "reviews": 23,
+   "ratingReal": true,
    "default": 0,
    "cats": {
     "pans": 39,
@@ -621,7 +969,36 @@
    "occasion": [
     "Everyday"
    ],
-   "name_de": "Steak Profi Bratpfanne"
+   "name_de": "Steak Profi Bratpfanne",
+   "reviewItems": [
+    {
+     "name": "Elisabeth Maurer",
+     "date": "03.06.26",
+     "stars": 4,
+     "title": "Satisfied",
+     "text": "Happy with the frying results.",
+     "title_de": "Zufrieden",
+     "text_de": "Mit dem Bratergebnis zufrieden"
+    },
+    {
+     "name": "Matthias",
+     "date": "25.01.26",
+     "stars": 5,
+     "title": "Pan",
+     "text": "Great pan, heats up quickly. Ideal for small dishes, and the big 32 cm can stay in the cupboard more often now.",
+     "title_de": "Pfanne",
+     "text_de": "Super Pfanne wird schnell warm. Für kleine Gerichte Ideal und die große 32er kann jetzt öfter im Schrank bleiben."
+    },
+    {
+     "name": "Helmut",
+     "date": "03.01.26",
+     "stars": 5,
+     "title": "A good buy",
+     "text": "The pan has been in use for a few days now and everything is working perfectly so far.",
+     "title_de": "guter Kauf",
+     "text_de": "Die Pfanne wird seit einigen Tagen genutzt, bisher klappt alles perfekt."
+    }
+   ]
   },
   {
    "id": "p14",
@@ -633,9 +1010,9 @@
    "sizes": [
     "32 cm"
    ],
-   "rating": null,
-   "reviews": null,
-   "ratingReal": false,
+   "rating": 5.0,
+   "reviews": 2,
+   "ratingReal": true,
    "default": 0,
    "cats": {
     "pans": 41
@@ -659,7 +1036,27 @@
     "Everyday",
     "Gifting"
    ],
-   "name_de": "Fusiontec Wok Platinum mit Deckel"
+   "name_de": "Fusiontec Wok Platinum mit Deckel",
+   "reviewItems": [
+    {
+     "name": "ARH",
+     "date": "07.07.24",
+     "stars": 5,
+     "title": "Top",
+     "text": "Outstanding frying properties. Easy to clean. Good to handle. By no means overpriced — good value.",
+     "title_de": "Top",
+     "text_de": "Hervorragende Brateigendchaften\nLeicht zu reinigen \nGutes Handling\nKeinesfalls überbezahlt - preiswert"
+    },
+    {
+     "name": "Josefine",
+     "date": "02.06.23",
+     "stars": 5,
+     "title": "Expensive, but the quality has its price",
+     "text": "This wok is easy to handle and just as easy to clean. A very high-quality product overall, plus a 30-year manufacturer's guarantee. A clear recommendation.",
+     "title_de": "Teuer - aber die Qualität hat ihren Preis",
+     "text_de": "Dieser Wok ist einfach in der Handhabung, ebenso die Reinigung.\r\nSehr wertiges Produkt insgesamt, plus 30 Jahre Herstellergarantie! Klare Kaufempfehlung."
+    }
+   ]
   },
   {
    "id": "p15",
@@ -672,9 +1069,9 @@
     "24 cm",
     "28 cm"
    ],
-   "rating": null,
-   "reviews": null,
-   "ratingReal": false,
+   "rating": 2.58,
+   "reviews": 7,
+   "ratingReal": true,
    "default": 1,
    "cats": {
     "pans": 18,
@@ -706,7 +1103,36 @@
    "occasion": [
     "Everyday"
    ],
-   "name_de": "Fusiontec Mineral Bratpfanne Black"
+   "name_de": "Fusiontec Mineral Bratpfanne Black",
+   "reviewItems": [
+    {
+     "name": "Marion H.",
+     "date": "08.03.26",
+     "stars": 4,
+     "title": "Cast pan with a lovely high-gloss surface",
+     "text": "It does everything a cast pan should and the food tastes outstanding. The high-gloss surface does pick up unattractive frying marks — I am trying to ignore that and hoping a patina forms, as is usual with cast iron, so that oiling after use makes them less visible than they are when freshly cleaned. Five stars for cooking, two stars for how the inside surface looks. The handle stays relatively cool, which is a plus.",
+     "title_de": "Gusspfanne mit schöner Hochglanzoberfläche",
+     "text_de": "Erfüllt alle Eigenschaften einer Gusspfanne und der Geschmack der Speisen ist hervorragend. Die Hochglanzoberfläche erhält unschöne Bratflecken - ich versuche das zu ignorieren und hoffe, daß sich wie bei Gusseisen üblich, eine Patina bildet, die durch ölen nach Gebrauch nicht mehr so stark zu sehen ist, wie im frisch gereinigten Zustand. Kocheigenschaften 5 Sterne, Optik der Oberfläche innen 2 Sterne. Griff bleibt im Verhältnis kühl, das ist ein Pluspunkt."
+    },
+    {
+     "name": "Vanessa",
+     "date": "06.11.20",
+     "stars": 5,
+     "title": "Top quality",
+     "text": "Given the rather negative review already there I was genuinely sceptical at first, but I am now more than happy that I went for the pan after all. The quality is top as usual with Silargan/Fusiontec products. Anyone who has used Silargan before will find no nasty surprises here. The one drawback: the pan is very heavy, which unfortunately comes with the steel core. In future they might consider giving the 24 cm model a second handle as well, like the 28 cm.",
+     "title_de": "Top Qualität",
+     "text_de": "Aufgrund der bereits vorhandenen eher negativen Bewertung war ich anfänglich wirklich skeptisch, bin nun allerdings mehr als glücklich mich doch für die Pfanne entschieden zu haben. \r\nDie Qualität ist wie gewohnt top bei Silargan/Fusiontec Produkte. Wer bereits Erfahrungen mit Silargan sammeln konnte, wird auch hier keine bösen Überraschungen entdecken.\r\nEinziges Manko: die Pfanne ist sehr schwer, was leider normal ist bei dem Stahlkern. Man sollte vllt zukünftig bedenken auch bereits das 24cm Modell mit einem zweiten Griff auszustatten wie beim 28cm Modell."
+    },
+    {
+     "name": "Chez Achim",
+     "date": "08.10.20",
+     "stars": 1,
+     "title": "The frying results are okay, but the pan is absolutely not suited to everyday use",
+     "text": "The first pan had scratches on the base straight after the first use, even though I only used plastic spoons and turners (as I am used to with coated pans). That pan was exchanged without any fuss in the WMF store. I have now been using the pan for about 4 months, not very often, because it is not suited to everyday use (no non-stick properties, food catches, an unsightly film on the base after cleaning, boiling out with water and a little vinegar). And now the pan has scratches on the base again, from the wooden and plastic spoons and turners that are meant to be suitable for coated pans (I do not own any others). Verdict: the pan is not worth the money. (One star only because you cannot submit without it.)",
+     "title_de": "Bratergebnis ist okay, aber die Pfanne ist absolut nicht alltagstauglich",
+     "text_de": "Die erste Pfanne hatte gleich nach der ersten Benutzung Kratzer auf dem Boden, obwohl ich (wie von den beschichteten Pfannen gewohnt) nur Plastik-Kochlöffel/-Pfannenwender benutzt habe. Diese Pfanne wurde  im WMF-Geschäft problemlos getauscht.\r\nNun benutzte ich die Pfanne seit rd. 4 Monaten, nicht sehr oft, da si nicht alltagstauglich ist (keine Antihaft-Eigenschaft, Ansetzen des Bratguts, unansehnlicher Belag auf dem Pfannenboden nach der Reinigung, Auskochen mit Wasser und etwas Essig). Und nun hat die Pfanne auch wieder Kratzer auf dem Boden, und das von dem für beschichteten Pfannen geeigneten  Kochlöffeln und Pfannenwendern aus Holz und Plastik (andere besitze ich gar nicht).\r\nFazit: Die Pfanne ist ihr Geld nicht wert! \r\n(Ein Bewertungs-Stern nur, weil es ohne nicht angeschickt werden kann)"
+    }
+   ]
   },
   {
    "id": "p16",
@@ -719,8 +1145,8 @@
     "24 cm"
    ],
    "rating": null,
-   "reviews": null,
-   "ratingReal": false,
+   "reviews": 0,
+   "ratingReal": true,
    "default": 0,
    "cats": {
     "pans": 24,
@@ -757,9 +1183,9 @@
     "24 cm",
     "28 cm"
    ],
-   "rating": 3,
-   "reviews": 1,
-   "ratingReal": false,
+   "rating": 2.88,
+   "reviews": 8,
+   "ratingReal": true,
    "default": 1,
    "cats": {
     "pans": 19,
@@ -792,7 +1218,36 @@
     "Everyday"
    ],
    "name_de": "Fusiontec Mineral Stielpfanne, Rose Quartz",
-   "description_de": "Außergewöhnliche Kocheigenschaften, höchste Qualität und Langlebigkeit made in Germany – die Fusiontec Mineral Stielpfanne mit 28 cm Durchmesser von WMF ist eine Pfanne fürs Leben mit 30 Jahren Garantie*. Auch bei hoher Beanspruchung extrem kratzfest, langlebig und von zeitloser Schönheit, eignet sie sich ideal zum scharfen Anbraten auf Sterne-Niveau. Fusiontec reagiert dabei auf jedem Herd sehr schnell und präzise auf Hitze und speichert diese wie kaum ein anderes Material – perfekte Voraussetzungen für geschmacksintensiven Kochgenuss. Dazu verfügt die Stielpfanne über einen wärmereduzierenden Hohlgriff**."
+   "description_de": "Außergewöhnliche Kocheigenschaften, höchste Qualität und Langlebigkeit made in Germany – die Fusiontec Mineral Stielpfanne mit 28 cm Durchmesser von WMF ist eine Pfanne fürs Leben mit 30 Jahren Garantie*. Auch bei hoher Beanspruchung extrem kratzfest, langlebig und von zeitloser Schönheit, eignet sie sich ideal zum scharfen Anbraten auf Sterne-Niveau. Fusiontec reagiert dabei auf jedem Herd sehr schnell und präzise auf Hitze und speichert diese wie kaum ein anderes Material – perfekte Voraussetzungen für geschmacksintensiven Kochgenuss. Dazu verfügt die Stielpfanne über einen wärmereduzierenden Hohlgriff**.",
+   "reviewItems": [
+    {
+     "name": "Petro",
+     "date": "29.06.26",
+     "stars": 5,
+     "title": "Good",
+     "text": "10",
+     "title_de": "Goot.",
+     "text_de": "10"
+    },
+    {
+     "name": "Lydia",
+     "date": "19.02.24",
+     "stars": 1,
+     "title": "Review of the pans",
+     "text": "A disaster — I bought two pans. Everything sticks, no matter how much fat or which fat you use. No matter the temperature, medium or high, everything sticks. Total rubbish. I can only advise against buying these pans. Money thrown away!",
+     "title_de": "Bewertung Pfannen",
+     "text_de": "Katastrophe  - ich habe zwei Pfannen gekauft. Alles brennt an, egal wie viel Fett und welches Fett verwendet wird. Egal welche Temperatur (mittel oder stark) alles brennt an. Totaler Mist. Ich kann von dem Kauf dieser Pfannen nur abraten. Rausgeworfenes Geld!"
+    },
+    {
+     "name": "Benzer",
+     "date": "27.12.21",
+     "stars": 5,
+     "title": "Superb WMF Fusiontec Mineral frying pan",
+     "text": "I have had it for 3 days and I am very happy with it.",
+     "title_de": "Super tolle WMF Fusiontec Mineral Bratpfanne",
+     "text_de": "Ich habe es seit 3 Tagen und bin damit sehr zufrieden."
+    }
+   ]
   },
   {
    "id": "p18",
@@ -805,8 +1260,8 @@
     "28 cm"
    ],
    "rating": null,
-   "reviews": null,
-   "ratingReal": false,
+   "reviews": 0,
+   "ratingReal": true,
    "default": 0,
    "cats": {
     "pans": 10
@@ -842,8 +1297,8 @@
     "Set of 2"
    ],
    "rating": null,
-   "reviews": null,
-   "ratingReal": false,
+   "reviews": 0,
+   "ratingReal": true,
    "default": 0,
    "cats": {
     "pans": 47,
@@ -881,9 +1336,9 @@
    "sizes": [
     "Set of 3"
    ],
-   "rating": 5,
-   "reviews": 1,
-   "ratingReal": false,
+   "rating": 4.65,
+   "reviews": 55,
+   "ratingReal": true,
    "default": 0,
    "cats": {
     "pans": 33,
@@ -909,7 +1364,36 @@
     "Gifting"
    ],
    "name_de": "Devil Bratpfannen-Set",
-   "description_de": "Vielseitige Pfannengerichte leicht gemacht: Das 3-teilige Devil Bratpfannen-Set von WMF mit je einer 20 cm, 24 cm und 28 cm Stielpfanne ist in der Küche einfach unverzichtbar. Das Geheimnis: Eine leistungsstarke und schützende Antihaftversiegelung für hervorragende Bratergebnisse sowie der TransTherm®-Allherdboden, der für eine optimale Wärmeverteilung und -speicherung sorgt."
+   "description_de": "Vielseitige Pfannengerichte leicht gemacht: Das 3-teilige Devil Bratpfannen-Set von WMF mit je einer 20 cm, 24 cm und 28 cm Stielpfanne ist in der Küche einfach unverzichtbar. Das Geheimnis: Eine leistungsstarke und schützende Antihaftversiegelung für hervorragende Bratergebnisse sowie der TransTherm®-Allherdboden, der für eine optimale Wärmeverteilung und -speicherung sorgt.",
+   "reviewItems": [
+    {
+     "name": "Stefanie W",
+     "date": "15.06.26",
+     "stars": 5,
+     "title": "Great",
+     "text": "The best pans we have ever had!",
+     "title_de": "Super",
+     "text_de": "Beste Pfannen die wir je hatten!"
+    },
+    {
+     "name": "Kochall",
+     "date": "06.06.26",
+     "stars": 5,
+     "title": "Devil frying pan set — happy with it",
+     "text": "We are happy with the set so far and would buy it again!",
+     "title_de": "Devil Bratpfannenset - zufrieden",
+     "text_de": "Sind bisher zufrieden mit dem Set und würden es wieder kaufen!"
+    },
+    {
+     "name": "Christine Enghardt",
+     "date": "05.06.26",
+     "stars": 5,
+     "title": "Excellent product",
+     "text": "It was the coating above all that impressed me — cooking with little or no fat was no trouble at all, and neither was the cleaning up afterwards!",
+     "title_de": "Ausgezeichnetes Produkt",
+     "text_de": "Mich hat vor allem die Beschichtung begeistert - die Zubereitung mit wenig bzw. ohne Fett verlief problemlos, die anschließende Reinigung auch!"
+    }
+   ]
   },
   {
    "id": "p21",
@@ -921,9 +1405,9 @@
    "sizes": [
     "28 cm"
    ],
-   "rating": null,
-   "reviews": null,
-   "ratingReal": false,
+   "rating": 4.7,
+   "reviews": 7,
+   "ratingReal": true,
    "default": 0,
    "cats": {
     "frying-pans": 40
@@ -946,7 +1430,36 @@
    "occasion": [
     "Everyday"
    ],
-   "name_de": "Ultimate Profi Resist Hohe Bratpfanne"
+   "name_de": "Ultimate Profi Resist Hohe Bratpfanne",
+   "reviewItems": [
+    {
+     "name": "Wolfgang.marz",
+     "date": "17.06.26",
+     "stars": 5,
+     "title": "Great, just as I wanted",
+     "text": "Great, just as I wanted.",
+     "title_de": "Super wie gewünscht",
+     "text_de": "Super wie gewünscht"
+    },
+    {
+     "name": "Smayr2307",
+     "date": "11.06.26",
+     "stars": 5,
+     "title": "Ultimate pan",
+     "text": "The pan is very good.",
+     "title_de": "Ultimate Pfanne",
+     "text_de": "Die Pfanne ist sehr gut."
+    },
+    {
+     "name": "Nordwind",
+     "date": "05.06.26",
+     "stars": 5,
+     "title": "Great pan",
+     "text": "Nothing sticks, superb to clean.",
+     "title_de": "Tolle Pfanne",
+     "text_de": "Nichts brennt an ,Super zu reinigen"
+    }
+   ]
   },
   {
    "id": "p22",
@@ -959,9 +1472,9 @@
     "24 cm",
     "28 cm"
    ],
-   "rating": null,
-   "reviews": null,
-   "ratingReal": false,
+   "rating": 4.35,
+   "reviews": 6,
+   "ratingReal": true,
    "default": 1,
    "cats": {
     "pans": 8,
@@ -994,7 +1507,36 @@
     "Everyday"
    ],
    "name_de": "Ultimate Profi Resist Stielpfanne",
-   "description_de": "Ultimate Profi Resist vereint das Beste aus zwei Welten – die hohe Leistung und Langlebigkeit von Edelstahl mit dem alltagstauglichen Komfort einer Antihaftbeschichtung. Das Geheimnis liegt im innovativen Wabenschutzgitter, das für perfekte Bratergebnisse sorgt und die sichere Verwendung von Metallutensilien ermöglicht. Die langlebige Mehrschicht-Konstruktion gewährleistet eine schnelle und gleichmäßige Wärmeverteilung, während das backofengeeignete Design maximale Vielseitigkeit in der Küche bietet."
+   "description_de": "Ultimate Profi Resist vereint das Beste aus zwei Welten – die hohe Leistung und Langlebigkeit von Edelstahl mit dem alltagstauglichen Komfort einer Antihaftbeschichtung. Das Geheimnis liegt im innovativen Wabenschutzgitter, das für perfekte Bratergebnisse sorgt und die sichere Verwendung von Metallutensilien ermöglicht. Die langlebige Mehrschicht-Konstruktion gewährleistet eine schnelle und gleichmäßige Wärmeverteilung, während das backofengeeignete Design maximale Vielseitigkeit in der Küche bietet.",
+   "reviewItems": [
+    {
+     "name": "Ulli",
+     "date": "13.06.26",
+     "stars": 5,
+     "title": "Great",
+     "text": "Best frying results and easy to care for.",
+     "title_de": "Super",
+     "text_de": "Beste Bratergebnisse u Pflege"
+    },
+    {
+     "name": "Sehr gutes Produkt",
+     "date": "02.06.26",
+     "stars": 5,
+     "title": "Easy to handle, and superb for frying",
+     "text": "Highly recommended.",
+     "title_de": "Handlich, und super beim braten",
+     "text_de": "Sehr empfehlenswert"
+    },
+    {
+     "name": "Fabian",
+     "date": "15.04.26",
+     "stars": 1,
+     "title": "Very dissatisfied — the pan gets black patches on the coating extremely quickly",
+     "text": "Poor for €90. We had a €29 supermarket pan before that had better non-stick properties.",
+     "title_de": "sehr unzufrieden - Pfanne bekommt extrem schnell schwarze Stellen auf der Beschichtung",
+     "text_de": "für 90€ schlecht. hatten vorher eine 29 Euro Lidlpfanne. die hat bessere Antihaft-Eigenschaften"
+    }
+   ]
   },
   {
    "id": "p23",
@@ -1006,9 +1548,9 @@
    "sizes": [
     "24 cm"
    ],
-   "rating": null,
-   "reviews": null,
-   "ratingReal": false,
+   "rating": 2.0,
+   "reviews": 1,
+   "ratingReal": true,
    "default": 0,
    "cats": {
     "pans": 22
@@ -1032,7 +1574,18 @@
     "Everyday"
    ],
    "name_de": "Ultimate Profi Resist Servierpfanne",
-   "description_de": "Ultimate Profi Resist vereint das Beste aus zwei Welten – die hohe Leistung und Langlebigkeit von Edelstahl mit dem alltagstauglichen Komfort einer Antihaftbeschichtung. Das Geheimnis liegt im innovativen Wabenschutzgitter, das für perfekte Bratergebnisse sorgt und die sichere Verwendung von Metallutensilien ermöglicht. Die langlebige Mehrschicht-Konstruktion gewährleistet eine schnelle und gleichmäßige Wärmeverteilung, während das backofengeeignete Design maximale Vielseitigkeit in der Küche bietet."
+   "description_de": "Ultimate Profi Resist vereint das Beste aus zwei Welten – die hohe Leistung und Langlebigkeit von Edelstahl mit dem alltagstauglichen Komfort einer Antihaftbeschichtung. Das Geheimnis liegt im innovativen Wabenschutzgitter, das für perfekte Bratergebnisse sorgt und die sichere Verwendung von Metallutensilien ermöglicht. Die langlebige Mehrschicht-Konstruktion gewährleistet eine schnelle und gleichmäßige Wärmeverteilung, während das backofengeeignete Design maximale Vielseitigkeit in der Küche bietet.",
+   "reviewItems": [
+    {
+     "name": "Bernd Kaiser",
+     "date": "06.07.26",
+     "stars": 2,
+     "title": "Not so easy to handle",
+     "text": "Even at a low temperature the pan does not get hot enough to brown things, and at a higher temperature I cannot touch the handles any more — completely hot! I would return the pan despite having used it.",
+     "title_de": "Nicht so einfach zu handhaben",
+     "text_de": "Selbst bei niedriger Temperatur, kommt die Pfanne nicht zum anrösten, bei höherer Temperatur kann ich die Griffe nicht mehr anfassen, total heiß!!!! Würde die Pfanne trotz Gebrauch, zurückgeben."
+    }
+   ]
   },
   {
    "id": "p24",
@@ -1045,9 +1598,9 @@
     "18 cm",
     "20 cm"
    ],
-   "rating": null,
-   "reviews": null,
-   "ratingReal": false,
+   "rating": 4.66,
+   "reviews": 47,
+   "ratingReal": true,
    "default": 0,
    "cats": {
     "frying-pans": 35
@@ -1081,7 +1634,36 @@
     "Everyday"
    ],
    "name_de": "Devil Stielpfanne mit Antihaftversiegelung",
-   "description_de": "Die Devil Stielpfanne von WMF mit 18 cm Durchmesser ist wie gemacht für das sanfte Anbraten von empfindlichen Speisen. Ihr Geheimnis: Eine leistungsstarke und schützende Antihaftversiegelung für hervorragende Bratergebnisse sowie der TransTherm®-Allherdboden, der für eine optimale Wärmeverteilung und -speicherung sorgt."
+   "description_de": "Die Devil Stielpfanne von WMF mit 18 cm Durchmesser ist wie gemacht für das sanfte Anbraten von empfindlichen Speisen. Ihr Geheimnis: Eine leistungsstarke und schützende Antihaftversiegelung für hervorragende Bratergebnisse sowie der TransTherm®-Allherdboden, der für eine optimale Wärmeverteilung und -speicherung sorgt.",
+   "reviewItems": [
+    {
+     "name": "Peters, Sofia",
+     "date": "07.07.26",
+     "stars": 5,
+     "title": "Good buy, knowledgeable service",
+     "text": "Very happy! Exactly what I needed!",
+     "title_de": "guter Kauf, kompetente Bedienung",
+     "text_de": "sehr zufrieden! Genau das ,was ich brauchte!"
+    },
+    {
+     "name": "Axel B",
+     "date": "11.06.26",
+     "stars": 5,
+     "title": "Good little pan",
+     "text": "What can I say — a good pan, perfect for a single-person household.",
+     "title_de": "Gute kleine Pfanne",
+     "text_de": "Was soll ich sagen, eine gute Pfanne, perfekt für den Singlehaushalt"
+    },
+    {
+     "name": "Axel B",
+     "date": "11.06.26",
+     "stars": 2,
+     "title": "Damaged, sadly",
+     "text": "Unfortunately the pan was dented on the rim when I unpacked it. It looks like a pouring spout, but it is not one. So I have to go back to a store to exchange it.",
+     "title_de": "Leider Beschädigt",
+     "text_de": "Leider war die Pfanne nach dem Auspacken am Rand eingedrückt, \nsieht aus wie ein Ausguss, ist es aber nicht.\nSomit muss ich somit wieder in eine Filiale um sie umzutauschen,"
+    }
+   ]
   },
   {
    "id": "p25",
@@ -1093,9 +1675,9 @@
    "sizes": [
     "Set of 2"
    ],
-   "rating": null,
-   "reviews": null,
-   "ratingReal": false,
+   "rating": 5.0,
+   "reviews": 1,
+   "ratingReal": true,
    "default": 0,
    "cats": {
     "pans": 42,
@@ -1120,7 +1702,18 @@
     "Everyday",
     "Gifting"
    ],
-   "name_de": "Devil Bratpfannen-Set"
+   "name_de": "Devil Bratpfannen-Set",
+   "reviewItems": [
+    {
+     "name": "1A-Qualität",
+     "date": "11.07.20",
+     "stars": 5,
+     "title": "DEVIL ceramic pan duo",
+     "text": "I am very happy with both pans. First-class quality! And available at a very good price too.",
+     "title_de": "Keramikpfannen-Duo DEVIL",
+     "text_de": "Bin super zufrieden mit den beiden Pfannen. 1A-Qualität! Außerdem zu einem sehr günstigen Preis erhältlich."
+    }
+   ]
   },
   {
    "id": "p26",
@@ -1133,9 +1726,9 @@
     "24 cm",
     "28 cm"
    ],
-   "rating": null,
-   "reviews": null,
-   "ratingReal": false,
+   "rating": 4.7,
+   "reviews": 164,
+   "ratingReal": true,
    "default": 1,
    "cats": {
     "pans": 6
@@ -1169,7 +1762,36 @@
     "Everyday"
    ],
    "name_de": "Devil Servier-Schmorpfanne mit Glasdeckel",
-   "description_de": "Braten, schmoren, servieren: Die elegante Devil Servier-Schmorpfanne mit Glasdeckel und 28 cm Durchmesser von WMF meistert nicht nur die leckersten Pfannen- und Schmorgerichte, sondern macht auch beim Servieren der Köstlichkeiten eine sehr gute Figur auf dem Tisch. Damit beim Anbraten nichts anbrennen kann, verfügt die große Pfanne aus strapazierfähigem Cromargan®: Edelstahl Rostfrei 18/10 über eine hochwertige Durit Select Pro Antihaftversiegelung, die zudem auch die Reinigung erleichtert."
+   "description_de": "Braten, schmoren, servieren: Die elegante Devil Servier-Schmorpfanne mit Glasdeckel und 28 cm Durchmesser von WMF meistert nicht nur die leckersten Pfannen- und Schmorgerichte, sondern macht auch beim Servieren der Köstlichkeiten eine sehr gute Figur auf dem Tisch. Damit beim Anbraten nichts anbrennen kann, verfügt die große Pfanne aus strapazierfähigem Cromargan®: Edelstahl Rostfrei 18/10 über eine hochwertige Durit Select Pro Antihaftversiegelung, die zudem auch die Reinigung erleichtert.",
+   "reviewItems": [
+    {
+     "name": "sbr",
+     "date": "21.06.26",
+     "stars": 4,
+     "title": "New roasting pan",
+     "text": "This is already the second roasting pan of the same kind. The old one is many years old. It was always good. It is going out into the garden now. The new one is superb, as always.",
+     "title_de": "Neuer Bräter",
+     "text_de": "Das ist schon der zweite Bräter der selben Sorte. Der alte Bräter ist schon viele Jahre alt. War immer gut. Geht jetzt in den Garten. Der neue Bräter ist wie immer super."
+    },
+    {
+     "name": "Smayr2307",
+     "date": "11.06.26",
+     "stars": 5,
+     "title": "Six stars",
+     "text": "I am very happy with the pan.",
+     "title_de": "Sechs Sterne",
+     "text_de": "Ich bin sehr zufrieden mit der Pfanne"
+    },
+    {
+     "name": "A.Zimmermann",
+     "date": "05.06.26",
+     "stars": 5,
+     "title": "The fourth pan already",
+     "text": "A permanent fixture in everyday cooking.",
+     "title_de": "Schon die vierte Pfanne",
+     "text_de": "Ein Dauerbrenner im Kochalltag"
+    }
+   ]
   },
   {
    "id": "p27",
@@ -1181,9 +1803,9 @@
    "sizes": [
     "28 cm"
    ],
-   "rating": null,
-   "reviews": null,
-   "ratingReal": false,
+   "rating": 5.0,
+   "reviews": 1,
+   "ratingReal": true,
    "default": 0,
    "cats": {
     "pans": 7
@@ -1208,7 +1830,18 @@
     "Gifting"
    ],
    "name_de": "Fusiontec Mineral Pro, Wok mit Deckel, Tim Raue Edition",
-   "description_de": "Made in Germany: Der Fusiontec Mineral Pro Wok von WMF ist sprichwörtlich eine Pfanne fürs Leben. Extrem kratzfest, strapazierfähig, langlebig und von zeitloser Schönheit, eignet er sich perfekt für müheloses Wenden und Schwenken — ideal für asiatische Küche und alle Arten von Mahlzeiten. Fusiontec reagiert sehr schnell und präzise auf Hitze, speichert diese wie kaum ein anderes Material und erfüllt so auch höchste Ansprüche."
+   "description_de": "Made in Germany: Der Fusiontec Mineral Pro Wok von WMF ist sprichwörtlich eine Pfanne fürs Leben. Extrem kratzfest, strapazierfähig, langlebig und von zeitloser Schönheit, eignet er sich perfekt für müheloses Wenden und Schwenken — ideal für asiatische Küche und alle Arten von Mahlzeiten. Fusiontec reagiert sehr schnell und präzise auf Hitze, speichert diese wie kaum ein anderes Material und erfüllt so auch höchste Ansprüche.",
+   "reviewItems": [
+    {
+     "name": "Michael B.",
+     "date": "12.03.26",
+     "stars": 5,
+     "title": "Wok around the clock: cooking fun any time :-)",
+     "text": "The Tim Raue wok turned out to be our new favourite in the kitchen straight away. The wok gets very hot very quickly and sizzles everything through nicely and evenly. Vegetables, meat or tofu come out superbly crisp on the outside while staying juicy inside. The surface is as hard and scratch-resistant as promised. We use a metal turner when cooking with the wok without any scratches or other marks appearing. The wok is a visual highlight too. The bright blue looks far more brilliant in real life than in the photos. A real eye-catcher!",
+     "title_de": "Wok Around the Clock: Kochspaß rund um die Uhr :-)",
+     "text_de": "Der Tim Raue Wok hat sich direkt als unser neuer Liebling in der Küche entpuppt. \n\nDer Wok wird sehr schnell heiß wird und \"brutzelt\" alles schön gleichmäßig durch. Gemüse, Fleisch oder Tofu werden außen super knusprig und bleiben dabei aber trotzdem innen saftig.\n\nDie Oberfläche ist so hart und kratzfest, wie versprochen wird. Wir nutzen beim Kochen mit dem Wok einen Metallwender, ohne dass Kratzer oder andere Gebrauchspuren zu sehen sind.\n\nOptisch ist der Wok auch ein Highlight. Das strahlende Blau sieht in echt noch viel strahlender aus als auf den Bildern. Ein echter Hingucker!"
+    }
+   ]
   },
   {
    "id": "p28",
@@ -1220,9 +1853,9 @@
    "sizes": [
     "Set of 3"
    ],
-   "rating": null,
-   "reviews": null,
-   "ratingReal": false,
+   "rating": 4.9,
+   "reviews": 18,
+   "ratingReal": true,
    "default": 0,
    "cats": {
     "pans": 1
@@ -1247,7 +1880,36 @@
     "Gifting"
    ],
    "name_de": "Click&Serve Pfannen Vorteils-Set*",
-   "description_de": "Click&Serve, die neue Kochgeschirr-Serie von WMF, begeistert mit einem innovativen, cleveren und sehr platzsparenden Konzept und multifunktionalen Einsatzmöglichkeiten. Vom Herd direkt in den Backofen, vom Backofen direkt auf den Tisch und sollte etwas übrigbleiben, direkt vom Tisch in den Kühlschrank: Der abnehmbare und mit jedem Kochgeschirr der Serie kompatible Griff erlaubt in jedem Fall eine platzsparende Unterbringung. Dazu verfügt er über 10 Kilogramm Tragkraft und lässt sich genauso einfach, schnell und sicher an jeder beliebigen Stelle des Schüttrandes des jeweiligen Kochgeschirrs anbringen. Das 3-teilige Click&Serve Pfannen Vorteils-Set* von WMF besteht aus 2 antihaftversiegelten Bratpfannen mit 24 bzw. 28 cm Durchmesser sowie 1 abnehmbarem Griff. WMF gewährt zudem 10 Jahre Garantie."
+   "description_de": "Click&Serve, die neue Kochgeschirr-Serie von WMF, begeistert mit einem innovativen, cleveren und sehr platzsparenden Konzept und multifunktionalen Einsatzmöglichkeiten. Vom Herd direkt in den Backofen, vom Backofen direkt auf den Tisch und sollte etwas übrigbleiben, direkt vom Tisch in den Kühlschrank: Der abnehmbare und mit jedem Kochgeschirr der Serie kompatible Griff erlaubt in jedem Fall eine platzsparende Unterbringung. Dazu verfügt er über 10 Kilogramm Tragkraft und lässt sich genauso einfach, schnell und sicher an jeder beliebigen Stelle des Schüttrandes des jeweiligen Kochgeschirrs anbringen. Das 3-teilige Click&Serve Pfannen Vorteils-Set* von WMF besteht aus 2 antihaftversiegelten Bratpfannen mit 24 bzw. 28 cm Durchmesser sowie 1 abnehmbarem Griff. WMF gewährt zudem 10 Jahre Garantie.",
+   "reviewItems": [
+    {
+     "name": "Uwe",
+     "date": "08.06.26",
+     "stars": 5,
+     "title": "I should have bought these pans sooner, very good quality",
+     "text": "I should have bought these pans sooner, very good quality.",
+     "title_de": "Die Pfannen hätte ich schon früher kaufen sollen, sehr gute Qualität",
+     "text_de": "Die Pfannen hätte ich schon früher kaufen sollen, sehr gute Qualität"
+    },
+    {
+     "name": "Walter Klusch",
+     "date": "10.05.26",
+     "stars": 5,
+     "title": "Superb pans.",
+     "text": "Same as last year, when I bought my first 28 cm pan from WMF and was already delighted with it. Now the pair, 24 and 28, with the detachable handle. Happy to buy again.",
+     "title_de": "Super Pfannen.",
+     "text_de": "Wie schon voriges Jahr, da hatte ich meine erste Pfanne 28 cm Durchm. bei WMF gekauft und war da schon begeistert.\nJetzt das Doppel 24 u. 28 mit wechselgriff.\nGerne wieder."
+    },
+    {
+     "name": "Bettina Kaufungen",
+     "date": "19.02.26",
+     "stars": 5,
+     "title": "Solid quality",
+     "text": "This is how kitchen work becomes fun: with the right tools!",
+     "title_de": "Stabile Qualität",
+     "text_de": "So macht Küchenarbeit Spaß: mit dem richtigen Werkzeug!"
+    }
+   ]
   },
   {
    "id": "p29",
@@ -1259,9 +1921,9 @@
    "sizes": [
     "Set of 3"
    ],
-   "rating": null,
-   "reviews": null,
-   "ratingReal": false,
+   "rating": 5.0,
+   "reviews": 4,
+   "ratingReal": true,
    "default": 0,
    "cats": {
     "pans": 3,
@@ -1289,7 +1951,36 @@
    "name_de": "Durado Bratpfannen-Set",
    "description_de": "Strapazierfähig und vielseitig: Das 3-teilige Durado Bratpfannen-Set von WMF mit je einer 20cm, 24 cm und 28 cm Stielpfanne bietet drei absolut langlebige Multitalente für jede Art der Zubereitung. Ob zarte Sautés oder scharf angebratene Pfannengerichte, dank der robusten keramischen Antihaftversiegelung sind exzellente Bratergebnisse und eine einfache Reinigung selbstverständlich. Der TransTherm®-Allherdboden sorgt dabei für eine optimale Wärmeverteilung und -speicherung sowie energiesparendes Braten.",
    "bundleGroup": "durado-frypan",
-   "bundleLabel": "Set of 3"
+   "bundleLabel": "Set of 3",
+   "reviewItems": [
+    {
+     "name": "Osierenski",
+     "date": "09.06.26",
+     "stars": 5,
+     "title": "You have to buy these",
+     "text": "Very good pan, good heat distribution, good frying results, they look very good — all top.",
+     "title_de": "Die muss mann Kaufen",
+     "text_de": "Sehr gute Pfanne gute hitzeverteilung gutes bratergebnis ,sehen sehr gut aus alles Toop."
+    },
+    {
+     "name": "B.philipp",
+     "date": "21.05.26",
+     "stars": 5,
+     "title": "Pan set",
+     "text": "The coating does what it promises. No more scrubbing, kitchen roll is enough.",
+     "title_de": "Pfannenset",
+     "text_de": "Die Beschichtung hält was sie verspricht, kein schrubben mehr, only Küchenpapier recht aus."
+    },
+    {
+     "name": "Uwe Kleiner",
+     "date": "13.05.26",
+     "stars": 5,
+     "title": "Superb non-stick coating",
+     "text": "The non-stick coating is perfect.",
+     "title_de": "Super Antihaftbeschichtung",
+     "text_de": "Die Antihaftbeschichtung ist perfekt."
+    }
+   ]
   },
   {
    "id": "p30",
@@ -1302,8 +1993,8 @@
     "Set of 2"
    ],
    "rating": null,
-   "reviews": null,
-   "ratingReal": false,
+   "reviews": 0,
+   "ratingReal": true,
    "default": 0,
    "cats": {
     "pans": 9,
@@ -1358,9 +2049,9 @@
     "24 cm",
     "28 cm"
    ],
-   "rating": null,
-   "reviews": null,
-   "ratingReal": false,
+   "rating": 4.14,
+   "reviews": 56,
+   "ratingReal": true,
    "default": 2,
    "cats": {
     "frying-pans": 17,
@@ -1401,7 +2092,36 @@
     "Everyday"
    ],
    "name_de": "Profi Stielpfanne",
-   "description_de": "Die Profi Stielpfanne mit 28 cm Durchmesser von WMF verkörpert alles, was Küchenprofis benötigen. Dank Cromargan®: Edelstahl Rostfrei 18/10 ist sie extrem strapazierfähig und langlebig, dazu resistent gegen Speisesäuren, formstabil, backofengeeignet und sehr pflegeleicht. Ihr TransTherm®-Allherdboden sorgt für eine optimale Wärmeverteilung und –speicherung und ermöglicht den Einsatz auf jedem Herd – inklusive Induktion."
+   "description_de": "Die Profi Stielpfanne mit 28 cm Durchmesser von WMF verkörpert alles, was Küchenprofis benötigen. Dank Cromargan®: Edelstahl Rostfrei 18/10 ist sie extrem strapazierfähig und langlebig, dazu resistent gegen Speisesäuren, formstabil, backofengeeignet und sehr pflegeleicht. Ihr TransTherm®-Allherdboden sorgt für eine optimale Wärmeverteilung und –speicherung und ermöglicht den Einsatz auf jedem Herd – inklusive Induktion.",
+   "reviewItems": [
+    {
+     "name": "karlheinz.beyer",
+     "date": "01.07.26",
+     "stars": 5,
+     "title": "Superb quality",
+     "text": "Superb quality. An outstanding product that is a lot of fun to use.",
+     "title_de": "Super Qualität",
+     "text_de": "Super Qualität,. Ein hervorragendes Produkt was viel Spaß macht."
+    },
+    {
+     "name": "lukkoeh",
+     "date": "13.06.26",
+     "stars": 5,
+     "title": "Excellent",
+     "text": "10/10, I would buy it again, though hopefully I will never have to.",
+     "title_de": "Ausgezeichnet",
+     "text_de": "10/10 würd ich wieder kaufen, muss ich hoffentlich aber nie ????"
+    },
+    {
+     "name": "lukkoeh",
+     "date": "13.06.26",
+     "stars": 5,
+     "title": "Very good",
+     "text": "Works as expected, stands up to everything, hopefully. 10/10.",
+     "title_de": "Sehr gut",
+     "text_de": "Funktioniert wie erwartet, hält alles aus, hoffentlich. 10/10"
+    }
+   ]
   },
   {
    "id": "p32",
@@ -1413,9 +2133,9 @@
    "sizes": [
     "28 cm"
    ],
-   "rating": null,
-   "reviews": null,
-   "ratingReal": false,
+   "rating": 5.0,
+   "reviews": 4,
+   "ratingReal": true,
    "default": 0,
    "cats": {
     "pans": 29
@@ -1438,7 +2158,36 @@
    "occasion": [
     "Everyday"
    ],
-   "name_de": "Gourmet Plus Servierpfanne"
+   "name_de": "Gourmet Plus Servierpfanne",
+   "reviewItems": [
+    {
+     "name": "Doris.franz",
+     "date": "01.12.25",
+     "stars": 5,
+     "title": "Perfect pan",
+     "text": "The pan has met every expectation.",
+     "title_de": "perfekte Pfanne",
+     "text_de": "Die Pfanne hat alle Erwartungen erfüllt."
+    },
+    {
+     "name": "Chris",
+     "date": "20.07.24",
+     "stars": 5,
+     "title": "starting with quality, to make quality",
+     "text": "the size and handles are wonderful to take it strait the the table. serving my family quality food is the goal, starting with a quality tool only makes it easier",
+     "title_de": "starting with quality, to make quality",
+     "text_de": "the size and handles are wonderful to take it strait the the table. serving my family quality food is the goal, starting with a quality tool only makes it easier"
+    },
+    {
+     "name": "Diana",
+     "date": "06.01.24",
+     "stars": 5,
+     "title": "Very good",
+     "text": "Top quality and worth every cent. No coating that can be damaged, and dishwasher safe.",
+     "title_de": "Sehr gut",
+     "text_de": "Top Qualität und jeden Cent wert. Keine Beschichtung die kaputt gehen kann, Spülmaschinenfest"
+    }
+   ]
   },
   {
    "id": "p33",
@@ -1452,9 +2201,9 @@
     "24 cm",
     "28 cm"
    ],
-   "rating": 1,
-   "reviews": 1,
-   "ratingReal": false,
+   "rating": 5.0,
+   "reviews": 4,
+   "ratingReal": true,
    "default": 2,
    "cats": {
     "pans": 30,
@@ -1495,7 +2244,36 @@
     "Everyday"
    ],
    "name_de": "Ultimate Stielpfanne",
-   "description_de": "Die WMF Ultimate Stielpfanne mit 28 cm Durchmesser von WMF sorgt in jeder Küche für Bratergebnisse aus der Spitzengastronomie. Dank ihres besonders ebenen Bodens aus dem neuen Cromargan® Ultimate, verteilt sich die Hitze auch besonders gleichmäßig über den kompletten Pfannenboden – ideal zum Braten von Fleisch. Das Ergebnis sind gleichmäßig gebräunte Steaks mit herrlicher Kruste und saftigem Inneren."
+   "description_de": "Die WMF Ultimate Stielpfanne mit 28 cm Durchmesser von WMF sorgt in jeder Küche für Bratergebnisse aus der Spitzengastronomie. Dank ihres besonders ebenen Bodens aus dem neuen Cromargan® Ultimate, verteilt sich die Hitze auch besonders gleichmäßig über den kompletten Pfannenboden – ideal zum Braten von Fleisch. Das Ergebnis sind gleichmäßig gebräunte Steaks mit herrlicher Kruste und saftigem Inneren.",
+   "reviewItems": [
+    {
+     "name": "Sergej",
+     "date": "31.03.26",
+     "stars": 5,
+     "title": "Very good",
+     "text": "Quality is very good.",
+     "title_de": "Sehr gut",
+     "text_de": "Qualität sehr gut"
+    },
+    {
+     "name": "mairfuchs helmut",
+     "date": "13.02.26",
+     "stars": 5,
+     "title": "Very good",
+     "text": "Number one.",
+     "title_de": "sehr gut",
+     "text_de": "nummer 1"
+    },
+    {
+     "name": "Bernd Geilert",
+     "date": "27.09.25",
+     "stars": 5,
+     "title": "Very good product",
+     "text": "Sadly the 20 cm is not available at the moment.",
+     "title_de": "Sehr gutes Produkt",
+     "text_de": "Leider gobt es die 20cm aktuell nicht."
+    }
+   ]
   },
   {
    "id": "p34",
@@ -1508,8 +2286,8 @@
     "28 cm"
    ],
    "rating": null,
-   "reviews": null,
-   "ratingReal": false,
+   "reviews": 0,
+   "ratingReal": true,
    "default": 0,
    "cats": {
     "pans": 31,
@@ -1546,9 +2324,9 @@
    "sizes": [
     "27 cm"
    ],
-   "rating": null,
-   "reviews": null,
-   "ratingReal": false,
+   "rating": 4.65,
+   "reviews": 39,
+   "ratingReal": true,
    "default": 0,
    "cats": {
     "pans": 34
@@ -1572,7 +2350,36 @@
     "Everyday"
    ],
    "name_de": "Devil Crêpes-Pfanne mit Teigverteiler und Wender",
-   "description_de": "Ihr spezielle, flache Form macht die Devil Crêpes-Pfanne von WMF zur perfekten Pfanne für die Zubereitung hauchdünner Crêpes oder leckerster Pfannkuchen. Dabei sorgt dicker Aluminiumguss für herausragend gleichmäßige Ergebnisse, während die robuste und langlebige 3-lagige PermaDur Antihaftversiegelung nicht nur wirkungsvoll Anhaftungen verhindert, sondern zudem für eine mühelose Reinigung sorgt."
+   "description_de": "Ihr spezielle, flache Form macht die Devil Crêpes-Pfanne von WMF zur perfekten Pfanne für die Zubereitung hauchdünner Crêpes oder leckerster Pfannkuchen. Dabei sorgt dicker Aluminiumguss für herausragend gleichmäßige Ergebnisse, während die robuste und langlebige 3-lagige PermaDur Antihaftversiegelung nicht nur wirkungsvoll Anhaftungen verhindert, sondern zudem für eine mühelose Reinigung sorgt.",
+   "reviewItems": [
+    {
+     "name": "Selat",
+     "date": "28.06.26",
+     "stars": 4,
+     "title": "Pancake pan",
+     "text": "Sadly the one I received had a scratch.",
+     "title_de": "Pfannkuchenpfanne",
+     "text_de": "Ich habe leider eins mit Kratzer bekommen"
+    },
+    {
+     "name": "Anusha",
+     "date": "27.06.26",
+     "stars": 5,
+     "title": "Very good quality",
+     "text": "A must buy.",
+     "title_de": "Sehrgut Qualität",
+     "text_de": "Muss kaufen"
+    },
+    {
+     "name": "Alfred J. Schwarz",
+     "date": "20.06.26",
+     "stars": 5,
+     "title": "As always",
+     "text": "I cannot give a rating yet; I need to read up on the subject and then try it out.",
+     "title_de": "Wie immer",
+     "text_de": "kann noch keine Bewertung abgeben; ich muß mich in das Thema einlesen und dann ausprobieren"
+    }
+   ]
   },
   {
    "id": "p36",
@@ -1585,9 +2392,9 @@
     "20 cm",
     "28 cm"
    ],
-   "rating": 5,
-   "reviews": 1,
-   "ratingReal": false,
+   "rating": 4.7,
+   "reviews": 29,
+   "ratingReal": true,
    "default": 1,
    "cats": {
     "frying-pans": 22,
@@ -1621,7 +2428,36 @@
    ],
    "name_de": "Durado Stielpfanne",
    "bundleGroup": "durado-frypan",
-   "bundleLabel": "Single pan"
+   "bundleLabel": "Single pan",
+   "reviewItems": [
+    {
+     "name": "Manni49",
+     "date": "04.05.26",
+     "stars": 5,
+     "title": "Super fast delivery",
+     "text": "I have bought 3 pans in a short space of time. Cooking is a joy. Superb quality.",
+     "title_de": "Superschnelle Lieferung",
+     "text_de": "Habe innerhalb kurzer Zeit 3 Pfannen gekauft, Da macht das Kochen Freude. \nSuper Qualität"
+    },
+    {
+     "name": "Molly",
+     "date": "19.03.26",
+     "stars": 5,
+     "title": "Superb frying pan",
+     "text": "I was recently widowed, so the size is perfect for one person. My eggs do not stick at all and the pan is very easy to clean.",
+     "title_de": "Super-Bratpfanne",
+     "text_de": "Ich bin seit Kurzem Witwe, daher ist die Größe perfekt für eine Person. Meine Eier kleben überhaupt nicht an und die Pfanne lässt sich sehr leicht reinigen."
+    },
+    {
+     "name": "bfm",
+     "date": "24.02.26",
+     "stars": 5,
+     "title": "Superb pan",
+     "text": "I have had the 28 cm pan for a while as a replacement for my old wok. Fried potatoes, potato noodles, potato pancakes, eggs and so on do not stick as firmly as they do in other pans. I have now added the 20 cm pan for smaller quantities.",
+     "title_de": "Super Pfanne",
+     "text_de": "Ich habe schon länger die Pfanne mit 28 cm als Ersatz für meinen alten Wok. Bratkartoffeln, Schupfnudeln, Reibekuchen, Eier usw. kleben nicht so fest wie bei anderen Pfannen. Für kleiner Mengen habe ich mir jetzt die Pfanne mit 20 cm zugelegt."
+    }
+   ]
   },
   {
    "id": "p37",
@@ -1633,9 +2469,9 @@
    "sizes": [
     "24 cm"
    ],
-   "rating": null,
-   "reviews": null,
-   "ratingReal": false,
+   "rating": 5.0,
+   "reviews": 1,
+   "ratingReal": true,
    "default": 0,
    "cats": {
     "pans": 44,
@@ -1659,7 +2495,18 @@
    "occasion": [
     "Everyday"
    ],
-   "name_de": "Click&Serve Bratpfanne mit Beschichtung"
+   "name_de": "Click&Serve Bratpfanne mit Beschichtung",
+   "reviewItems": [
+    {
+     "name": "Erika",
+     "date": "24.06.24",
+     "stars": 5,
+     "title": "Great pan",
+     "text": "Fast delivery as always. I already have several pots and pans from this range and I am completely delighted!",
+     "title_de": "Tolle Pfanne",
+     "text_de": "Wie immer rasche Lieferung. Habe schon mehrere Töpfe und Pfannen aus dieser Serie und bin total begeistert!"
+    }
+   ]
   },
   {
    "id": "p38",
@@ -1671,9 +2518,9 @@
    "sizes": [
     "28 cm"
    ],
-   "rating": null,
-   "reviews": null,
-   "ratingReal": false,
+   "rating": 3.45,
+   "reviews": 7,
+   "ratingReal": true,
    "default": 0,
    "cats": {
     "frying-pans": 41
@@ -1696,7 +2543,36 @@
    "occasion": [
     "Everyday"
    ],
-   "name_de": "Calabria Bratpfanne"
+   "name_de": "Calabria Bratpfanne",
+   "reviewItems": [
+    {
+     "name": "MicHelk",
+     "date": "08.04.25",
+     "stars": 3,
+     "title": "Almost good",
+     "text": "The Calabria 28 cm is a handsome stainless steel pan that feels and looks good. Ergonomically it is fine, though also a little heavier than comparable WMF pans. What is unfortunate is the coating. Even with a plastic turner there are scratches visible in the material after the first use. You would need to work with a silicone turner at most.",
+     "title_de": "Fast schon gut",
+     "text_de": "Calabria 28cm ist eine schöne Edelstahlpfanne mit einer guten Haptik und Optik. Ergonomisch ist diese ok aber auch etwas schwerer als vergleichbare Pfannen von WMF. Was leider unschön ist ist die Beschichtung. Selbst mit Kunststoff Pfannenwender sind Kratzer im Material nach der ersten Anwendung zu sehen. Hierzu dürfte man maximal mit Silikon Pfannenwender arbeiten."
+    },
+    {
+     "name": "Viola.maertens",
+     "date": "20.05.24",
+     "stars": 5,
+     "title": "Not received yet",
+     "text": "The pan was ordered in store. It has not been delivered yet. But I assume there are no differences from the 24 cm.",
+     "title_de": "Noch nicht erhalten",
+     "text_de": "Pfanne wurde im Geschäft bestellt. Wurde noch nicht geliefert. Ich gehe aber davon aus, dass es keine Unterschiede zur 24er gibt."
+    },
+    {
+     "name": "Blumenfee2",
+     "date": "17.05.24",
+     "stars": 2,
+     "title": "Very good",
+     "text": "Great.",
+     "title_de": "Sehr gut",
+     "text_de": "Super"
+    }
+   ]
   },
   {
    "id": "p39",
@@ -1708,9 +2584,9 @@
    "sizes": [
     "20 cm"
    ],
-   "rating": null,
-   "reviews": null,
-   "ratingReal": false,
+   "rating": 3.65,
+   "reviews": 6,
+   "ratingReal": true,
    "default": 0,
    "cats": {
     "frying-pans": 43
@@ -1733,7 +2609,36 @@
    "occasion": [
     "Everyday"
    ],
-   "name_de": "CeraDur Profi Bratpfanne"
+   "name_de": "CeraDur Profi Bratpfanne",
+   "reviewItems": [
+    {
+     "name": "Daniela",
+     "date": "06.07.25",
+     "stars": 5,
+     "title": "Superb quality",
+     "text": "Superb quality as always. I cannot understand the moaning in the other reviews. Good quality simply weighs a bit more than cheap aluminium. I am happy all round.",
+     "title_de": "super Qualität",
+     "text_de": "Wie immer super Qualität, das Gejammer von anderen Bewertungen kann ich nicht nachvollziehen. Gute Qualität wiegt halt etwas mehr als billiges Alluminium. Ich bin rundum zufrieden."
+    },
+    {
+     "name": "Micky S",
+     "date": "15.02.22",
+     "stars": 1,
+     "title": "Disappointing, sadly",
+     "text": "I bought the pan at the end of 2019 and trusted the WMF name, even though there were plenty of warnings to be found on Amazon. After two years (once the guarantee had run out) everything stuck fast, despite being cared for exactly as instructed. There is no damage to be seen at all, the surface is as smooth as a baby's skin. Now it is sitting on the pavement waiting for the scrap dealer.",
+     "title_de": "Leider enttäuschend",
+     "text_de": "Ich habe die Pfanne Ende 2019 gekauft und dem Namen WMF vertraut, obwohl genügend Warnungen bei Amazon zu finden waren:\r\nNach zwei Jahren (Garantie lief ab...) klebte alles fest, obwohl brav nach Vorschrift gepflegt. Es sind keinerlei Beschädigungen zu sehen, die Oberfläche ist glatt wie ein Kinderpopo.\r\nNun liegt sieam Bürgersteig und wartet auf den Schrotthändler."
+    },
+    {
+     "name": "Kurt oder so",
+     "date": "13.01.22",
+     "stars": 1,
+     "title": "A great pan for hammering in nails",
+     "text": "I bought this pan believing in WMF products. Non-stick coated, nothing sticks! So says the advertising. In fact everything sticks fast. Fried eggs can only be scraped off. Despite every suggestion from customer service. Who still believes in that customer service? Take this pan straight to the recycling centre or give it to your enemies. Best wishes to all fellow victims.",
+     "title_de": "Super PFANNE ZUM NÄGEL EINSCHLAGEN",
+     "text_de": "Diese Pfanne gekauft im Glauben an WMF Produkte.\r\nAntihaftbeschichtet Kein Bratgut klebt an!\r\nSoweit die Werbung.\r\nTatsache alles klebt fest.\r\nSpiegeleier nur zum abkratzen.\r\nTrotz allen Vorschlägen vom Kundenservice.\r\nWer von diesem Kundenservice glaubt noch daran?\r\nDiese Pfanne sofort in den Wertstoffhof oder an Feinde verschenken.\r\nMit freundlichen Grüßen an alle Opfer"
+    }
+   ]
   },
   {
    "id": "p40",
@@ -1745,9 +2650,9 @@
    "sizes": [
     "24 cm"
    ],
-   "rating": null,
-   "reviews": null,
-   "ratingReal": false,
+   "rating": 1.0,
+   "reviews": 1,
+   "ratingReal": true,
    "default": 0,
    "cats": {
     "frying-pans": 45
@@ -1770,7 +2675,18 @@
    "occasion": [
     "Everyday"
    ],
-   "name_de": "Gourmet Plus Bratpfanne"
+   "name_de": "Gourmet Plus Bratpfanne",
+   "reviewItems": [
+    {
+     "name": "Tom_cv23",
+     "date": "11.11.25",
+     "stars": 1,
+     "title": "Good pan with one enormous flaw",
+     "text": "The pan itself is great and nice and heavy. Sadly, after the first run through the dishwasher water had got into the handle and could only be got out again with great difficulty!",
+     "title_de": "Gute Pfanne mit einem riesigen Fehler",
+     "text_de": "Die Pfanne ist ansich Toll und Schwer. Leider nach dem ersten Spülmaschinengang war Wasser in den Stiel gelangt und nur wieder mühsam herauszubekommen!"
+    }
+   ]
   },
   {
    "id": "p41",
@@ -1782,9 +2698,9 @@
    "sizes": [
     "28 cm"
    ],
-   "rating": null,
-   "reviews": null,
-   "ratingReal": false,
+   "rating": 4.55,
+   "reviews": 15,
+   "ratingReal": true,
    "default": 0,
    "cats": {
     "frying-pans": 47
@@ -1806,7 +2722,36 @@
    "occasion": [
     "Everyday"
    ],
-   "name_de": "Talis Bratpfanne"
+   "name_de": "Talis Bratpfanne",
+   "reviewItems": [
+    {
+     "name": "M.",
+     "date": "17.07.25",
+     "stars": 3,
+     "title": "The coating is sadly not satisfactory.",
+     "text": "We have had the pan for about 2 months and are now going to dispose of it, because the non-stick coating got steadily worse after only a few uses. Sending it in for repair is not an option for us. We are genuinely very disappointed. We have always been happy with Silit products up to now.",
+     "title_de": "Beschichtung leider nicht zufriedenstellend.",
+     "text_de": "Wir haben die Pfanne seit ca. 2 Monaten und werden diese nun entsorgen, da die Antihaftbeschichtung  bereits nach wenigen Benutzungen immer schlechter wurde. \nEine Einsendung zur Reperatur kommt für uns nicht in Frage.  \nWir sind wirklich sehr enttäuscht.  Von Silit Produkten sind wir bislang immer zufrieden gewesen."
+    },
+    {
+     "name": "vaskopanich",
+     "date": "04.12.24",
+     "stars": 5,
+     "title": "Great",
+     "text": "Simply cool.",
+     "title_de": "Super",
+     "text_de": "Einfach cool"
+    },
+    {
+     "name": "MiKa",
+     "date": "04.12.24",
+     "stars": 4,
+     "title": "Superb coating",
+     "text": "The Silit Talis pan has a very good coating and is well made, although it is a little heavier than the WMF pans of similar construction.",
+     "title_de": "super Beschichtung",
+     "text_de": "Die Silit Talis Pfanne hat eine sehr gute Beschichtung und ist gut verarbeitet, allerdings ist sie etwas schwerer als die WMF-Pfannen in ähnlicher Bauweise."
+    }
+   ]
   },
   {
    "id": "p42",
@@ -1819,9 +2764,9 @@
    "sizes": [
     "Set of 4"
    ],
-   "rating": null,
-   "reviews": 0,
-   "ratingReal": false,
+   "rating": 4.0,
+   "reviews": 6,
+   "ratingReal": true,
    "default": 0,
    "defaultColor": 0,
    "cats": {
@@ -1896,6 +2841,35 @@
    "occasion": [
     "Everyday",
     "Gifting"
+   ],
+   "reviewItems": [
+    {
+     "name": "Bolle",
+     "date": "19.05.26",
+     "stars": 5,
+     "title": "A dream of a pot set",
+     "text": "I thought long and hard about whether to buy this pot set. The high price is off-putting at first but, to say it up front, I do not regret a single cent I spent. The WMF Fusiontec Mineral Pro set impresses from the moment you unpack it. It looks very refined and has a decent weight to it. When cooking you notice straight away how quickly and evenly the heat spreads and how fast water boils. The heat is also held for an extremely long time after cooking, and the handles stay surprisingly cool. Cleaning works without any trouble, by hand or in the dishwasher, since hardly anything sticks in the pots. We will see whether it stays that way. So far it works superbly and I have not been able to find any wear or scratches. I would recommend this high-quality pot set to anyone. I will certainly be adding to it.",
+     "title_de": "Ein Traum an Töpfen",
+     "text_de": "Lange habe ich überlegt, ob ich mir dieses Topfset zulegen soll. Der hohe Preis schreckt erstmal ab, aber um es vorweg zu nehmen, ich bereue keinen Cent, den ich ausgegeben habe. Das WMF Fusiontec Mineral Pro Set überzeugt schon beim auspacken. Es sieht sehr edel aus und bringt ordenlich Gewicht mit. Beim kochen fällt sofort auf, wie schnell und gleichmäßig die Hitze verteilt wird und wie schnell zum Beispiel Wasser kocht. Die Hitze wird auch nach dem Kochvorgang ultra lange gehalten und die Henkel werden überaschenderweise, kaum warm. Das Reinigen egal ob per Hand oder in der Spülmaschine, klappt problemlos, da in den Töpfen kaum was anhaftet. Mal schaun ob es in Zukunft auch so bleibt. Bisher funktioniert es super und ich habe auch noch keine Abnutzung oder Kratzer feststellen können. Ich würde jedem empfehlen, sich dieses hochwertige Topf Set zuzulegen. Ich werde es garantiert noch erweitern."
+    },
+    {
+     "name": "Bettina",
+     "date": "21.03.26",
+     "stars": 3,
+     "title": "Good heat conduction and coating, poor handles",
+     "text": "The pots not only look good, they also conduct the heat outstandingly, so you get a good cooking result and in principle save electricity that way. Sadly the handles have now worked loose for the third time. We had the first pot exchanged at the specialist store after six months. With the current pots we were told the guarantee only covers the coating — bad luck. So now I can throw away two of the three pots after six years of use.",
+     "title_de": "Gute Wärmeleitung und Beschichtung , schlechte Griffe",
+     "text_de": "Die Töpfe sehen nicht nur gut aus, sondern leiten auch die Wärme hervorragend, so dass man ein gutes Koch Ergebnis erzielt und prinzipiell dadurch Strom spart.\nLeider sind jetzt schon zum dritten Mal die Griffe wackelig\nDen ersten Topf haben wir nach sechs Monaten im Fachgeschäft umgetauscht bekommen\nBei den jetzigen Töpfen wurde uns gesagt, dass die Garantie nur für die Beschichtung gilt\nPech gehabt. Nun kann ich zwei der drei Töpfe nach sechs Jahren Gebrauch wegwerfen."
+    },
+    {
+     "name": "lh03",
+     "date": "09.03.26",
+     "stars": 5,
+     "title": "Superb quality",
+     "text": "Great pots with five-star quality :)",
+     "title_de": "Super Qualität",
+     "text_de": "Tolle Töpfe mit 5 Sterne Qualität :)"
+    }
    ]
   }
  ]

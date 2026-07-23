@@ -871,7 +871,20 @@
      "text_de": "Diese Pfanne ist ihr Geld wert. Sehr empfehlenswert!"
     }
    ],
-   "bundleOrder": 20
+   "bundleOrder": 20,
+   "bundle": [
+    {
+     "qty": 1,
+     "name": "Profi Resist Fry Pan, 28 cm",
+     "sku": "3201000358",
+     "id": "p1"
+    },
+    {
+     "qty": 1,
+     "name": "Profi Plus Spatula, 32 cm",
+     "img": "assets/pdp/acc-spatula.jpg"
+    }
+   ]
   },
   {
    "id": "p12",

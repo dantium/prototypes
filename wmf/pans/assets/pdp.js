@@ -394,7 +394,10 @@
           '<span class="bb-bundle-sel">' + esc(t(p.bundleLabel || '')) + '</span></div>' +
           '<div class="bb-bundle-opts">' + bundleOpts.map(function (o) {
             var ov = o.variants[o.default] || o.variants[0];
-            var inner = bundleInner(nameOf(o), t(o.bundleLabel || ''), ov, o.bundle, o.type === 'Set', o.id === bestId);
+            /* value shows for sets and for a single bundled with an accessory
+               (has contents); Best value stays a set-only nudge */
+            var showVal = o.type === 'Set' || !!(o.bundle && o.bundle.length);
+            var inner = bundleInner(nameOf(o), t(o.bundleLabel || ''), ov, o.bundle, showVal, o.id === bestId);
             return o.id === p.id
               ? '<span class="bb-bundle-opt sel" aria-current="true">' + inner + '</span>'
               : '<a class="bb-bundle-opt" href="product.html?id=' + o.id + '">' + inner + '</a>';
@@ -462,7 +465,8 @@
       if (p.bundle && p.bundle.length) {
         h += '<div class="bb-bundle"><span class="lbl">' + t('This set contains:') + '</span>' +
           p.bundle.map(function (b) {
-            var inner = '<span class="bb-bundle-thumb"><img src="' + img(b.sku) + '" alt=""></span>' +
+            /* accessory components carry an explicit img (no product sku) */
+            var inner = '<span class="bb-bundle-thumb"><img src="' + (b.img || img(b.sku)) + '" alt=""></span>' +
               '<span>' + (b.qty || 1) + ' × ' + esc(t(b.name)) + '</span>';
             return b.id
               ? '<a class="bb-bundle-row" href="product.html?id=' + b.id + '">' + inner + '</a>'

@@ -154,9 +154,11 @@ node `2:2`), as one template that renders **any catalog product** via `?id=`:
   product name, and on a second line the configuration (Set of 2 / Set of 3 …). Sets/bundles
   add a dashed **"What's included"** toggle on that second line: hover previews the contents,
   and a tap pins the card open (works on touch, where hover doesn't) — one open at a time,
-  dismissed by an outside tap. The price column shows the set's RRP as its value
-  ("(€199 value)", muted grey, sets only — a plain single pan shows no value line) and a subtle
-  gold **"Best value"** tag above the price of the strongest-value set (largest RRP saving).
+  dismissed by an outside tap. The price column shows the RRP as its value ("(€199 value)",
+  muted grey) for any option that is a set or a single bundled with an accessory (a plain
+  single pan shows none), and a small red **"Best value"** badge above the price of the
+  strongest-value *set* (largest RRP saving — the badge stays a set-only nudge). A bundle item
+  may carry an `img` (e.g. the Profi Plus spatula) when it has no product sku of its own.
   The selected row takes the same plain 1px black stroke as the size chips. Rows stack rather
   than sit side-by-side so the full names fit on one line. Contents come from each product's
   `bundle` array.

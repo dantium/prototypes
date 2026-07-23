@@ -297,6 +297,7 @@ window.WMF_I18N_DE = {
   'Best value': 'Bestes Angebot',
   "What's included": 'Enthalten',
   'Durado Fry Pan, 20 cm': 'Durado Stielpfanne, 20 cm',
+  'Profi Plus Spatula, 32 cm': 'Profi Plus Pfannenwender, 32 cm',
   'Single pan': 'Einzelpfanne',
   'With spatula': 'Mit Pfannenwender',
   'This set contains:': 'Dieses Set enthält:',

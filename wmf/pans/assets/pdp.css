@@ -155,15 +155,17 @@ a.bb-eyebrow:hover { color: var(--gold-deep); text-decoration: underline; }
    longer configuration names have room to read on one line */
 .bb-bundle-opts { display: flex; flex-direction: column; gap: 8px; }
 .bb-bundle-opt {
+  position: relative;
   display: flex; align-items: center; gap: 12px;
   padding: 8px 12px;
   border: 1px solid var(--grey-2); border-radius: 6px; background: #fff;
-  color: inherit; text-decoration: none; transition: border-color .15s, box-shadow .15s;
+  color: inherit; text-decoration: none; transition: border-color .15s;
   /* rendered as <a> across a bundleGroup, as <button> for in-product variants */
   font: inherit; text-align: left; cursor: pointer;
 }
 .bb-bundle-opt:hover { border-color: #8a8a8a; }
-.bb-bundle-opt.sel { border-color: #000; box-shadow: inset 0 0 0 1px #000; }
+/* selected stroke matches the size chips — plain 1px black border, no inset */
+.bb-bundle-opt.sel { border-color: #000; }
 .bb-bundle-opt.oos { opacity: .5; }
 .bb-bundle-img { flex: 0 0 auto; width: 54px; height: 54px; display: block; }
 .bb-bundle-img img { width: 100%; height: 100%; object-fit: contain; }
@@ -171,8 +173,26 @@ a.bb-eyebrow:hover { color: var(--gold-deep); text-decoration: underline; }
 .bb-bundle-t { font-size: 14px; font-weight: 500; line-height: 1.25; }
 .bb-bundle-cfg { font-size: 12px; font-weight: 300; color: #6a6a6a; }
 .bb-bundle-p { flex: 0 0 auto; display: flex; flex-direction: column; align-items: flex-end; gap: 2px; font-size: 14px; font-weight: 300; white-space: nowrap; }
-/* value saving — muted, deliberately not the red promotional sale chip */
-.bb-bundle-save { font-size: 12px; font-weight: 400; color: var(--gold-deep); }
+/* the set's RRP shown as its value — muted, not a promotional sale chip */
+.bb-bundle-value { font-size: 12px; font-weight: 300; color: #6a6a6a; }
+
+/* hover preview of what a set includes */
+.bb-bundle-tip {
+  position: absolute; left: 12px; bottom: calc(100% + 8px); z-index: 20;
+  min-width: 220px; max-width: 300px;
+  display: none; padding: 10px 12px;
+  background: #fff; border: 1px solid var(--grey-2); border-radius: 6px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, .16);
+}
+.bb-bundle-opt:hover .bb-bundle-tip,
+.bb-bundle-opt:focus-visible .bb-bundle-tip { display: block; }
+.bb-bundle-tip::after {
+  content: ""; position: absolute; top: 100%; left: 26px;
+  border: 7px solid transparent; border-top-color: #fff;
+  filter: drop-shadow(0 1px 0 var(--grey-2));
+}
+.bb-bundle-tip-h { display: block; margin-bottom: 6px; font-size: 11px; font-weight: 500; text-transform: uppercase; letter-spacing: .06em; color: #6a6a6a; }
+.bb-bundle-tip-i { display: block; font-size: 13px; font-weight: 300; line-height: 1.5; color: #1a1a1a; }
 
 /* colour swatches (image tiles; selected one outlined — the reference pattern) */
 .bb-colors { margin-top: 16px; }

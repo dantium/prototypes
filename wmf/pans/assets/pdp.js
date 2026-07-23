@@ -339,38 +339,46 @@
       /* Set / bundle configurations — the same selector pattern as colour and
          size, as a stacked list of the real products: full product name, a small
          configuration qualifier (the set names differ only subtly, so it earns
-         its place), price and any value saving against RRP. The saving is muted,
-         not the promotional sale chip. Two shapes feed it: a family split across
-         products (bundleGroup, linked) and a single product whose variants are
-         configurations (selected here). */
-      function bundleSave(ov) {
-        return (ov.msrp && ov.msrp > ov.price) ? Math.round(ov.msrp - ov.price) : 0;
+         its place), price and the set's RRP shown as its value. Hovering an
+         option reveals what the set includes. Two shapes feed it: a family split
+         across products (bundleGroup, linked) and a single product whose variants
+         are configurations (selected here). */
+      function bundleValue(ov) {
+        return (ov.msrp && ov.msrp > ov.price)
+          ? '<span class="bb-bundle-value">' + t('(%v value)').replace('%v', eur(ov.msrp)) + '</span>'
+          : '';
       }
-      function bundleInner(name, cfg, ov) {
-        var save = bundleSave(ov);
+      function bundleTip(contents) {
+        if (!contents || !contents.length) return '';
+        return '<span class="bb-bundle-tip" role="tooltip"><span class="bb-bundle-tip-h">' +
+          t("What's included") + '</span>' +
+          contents.map(function (b) {
+            return '<span class="bb-bundle-tip-i">' + (b.qty || 1) + ' × ' + esc(t(b.name)) + '</span>';
+          }).join('') + '</span>';
+      }
+      function bundleInner(name, cfg, ov, contents) {
         return '<span class="bb-bundle-img"><img src="' + img(ov.sku) + '" alt=""></span>' +
           '<span class="bb-bundle-body"><span class="bb-bundle-t">' + esc(name) + '</span>' +
           (cfg ? '<span class="bb-bundle-cfg">' + esc(cfg) + '</span>' : '') + '</span>' +
-          '<span class="bb-bundle-p">' + eur(ov.price) +
-          (save ? '<span class="bb-bundle-save">' + t('Save €%n').replace('%n', save) + '</span>' : '') +
-          '</span>';
+          '<span class="bb-bundle-p">' + eur(ov.price) + bundleValue(ov) + '</span>' +
+          bundleTip(contents);
       }
       if (setVariants) {
         h += '<div class="bb-bundles"><div class="bb-bundles-head">' +
-          '<span class="bb-bundles-lbl">' + t('Set offer') + '</span>' +
+          '<span class="bb-bundles-lbl">' + t('Options:') + '</span>' +
           '<span class="bb-bundle-sel">' + esc(t(v.size)) + '</span></div>' +
           '<div class="bb-bundle-opts">' + p.variants.map(function (vv, i) {
             return '<button class="bb-bundle-opt' + (i === sel ? ' sel' : '') + (vv.stock ? '' : ' oos') +
               '" data-i="' + i + '"' + (i === sel ? ' aria-current="true"' : '') + '>' +
-              bundleInner(nameOf(p), t(vv.size), vv) + '</button>';
+              bundleInner(nameOf(p), t(vv.size), vv, p.bundle) + '</button>';
           }).join('') + '</div></div>';
       } else if (bundleOpts.length > 1) {
         h += '<div class="bb-bundles"><div class="bb-bundles-head">' +
-          '<span class="bb-bundles-lbl">' + t('Set offer') + '</span>' +
+          '<span class="bb-bundles-lbl">' + t('Options:') + '</span>' +
           '<span class="bb-bundle-sel">' + esc(t(p.bundleLabel || '')) + '</span></div>' +
           '<div class="bb-bundle-opts">' + bundleOpts.map(function (o) {
             var ov = o.variants[o.default] || o.variants[0];
-            var inner = bundleInner(nameOf(o), t(o.bundleLabel || ''), ov);
+            var inner = bundleInner(nameOf(o), t(o.bundleLabel || ''), ov, o.bundle);
             return o.id === p.id
               ? '<span class="bb-bundle-opt sel" aria-current="true">' + inner + '</span>'
               : '<a class="bb-bundle-opt" href="product.html?id=' + o.id + '">' + inner + '</a>';

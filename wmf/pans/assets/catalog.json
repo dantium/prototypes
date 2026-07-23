@@ -1965,7 +1965,26 @@
      "text_de": "Die Antihaftbeschichtung ist perfekt."
     }
    ],
-   "bundleOrder": 30
+   "bundleOrder": 30,
+   "bundle": [
+    {
+     "qty": 1,
+     "name": "Durado Fry Pan, 20 cm",
+     "sku": "7115005404",
+     "id": "p36"
+    },
+    {
+     "qty": 1,
+     "name": "Durado Fry Pan, 24 cm",
+     "sku": "7115005328"
+    },
+    {
+     "qty": 1,
+     "name": "Durado Fry Pan, 28 cm",
+     "sku": "7115005330",
+     "id": "p36"
+    }
+   ]
   },
   {
    "id": "p30",

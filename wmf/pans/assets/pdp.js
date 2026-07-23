@@ -118,7 +118,7 @@
     var active = 0;
 
     var stage = document.getElementById('pdpStage');
-    var mainImg = document.getElementById('pdpMain');
+    var track = document.getElementById('pdpTrack');
     var flag = document.getElementById('pdpVideoFlag');
     var thumbsEl = document.getElementById('pdpThumbs');
     var prevBtn = document.getElementById('pdpPrev');
@@ -126,11 +126,23 @@
     var progress = document.getElementById('pdpProgress');
 
     function itemSrc(it) { return it.kind === 'packshot' ? img(curSku()) : it.src; }
+
+    /* the stage is a horizontal track of slides that translateX between images,
+       like the live shop, rather than one <img> whose src swaps in place */
+    function buildTrack() {
+      track.innerHTML = items.map(function (it, i) {
+        var alt = it.kind === 'packshot' ? p.brand + ' ' + nameOf(p) : (it.alt || '');
+        return '<div class="pdp-slide ' + (it.kind === 'packshot' ? 'is-packshot' : 'is-life') + '" data-i="' + i + '">' +
+          '<img src="' + esc(itemSrc(it)) + '" alt="' + esc(alt) + '"></div>';
+      }).join('');
+    }
     function renderStage() {
+      /* keep every packshot slide on the current sku (colour/size may have changed) */
+      [].forEach.call(track.querySelectorAll('.pdp-slide.is-packshot img'), function (im) {
+        var s = img(curSku()); if (im.getAttribute('src') !== s) im.src = s;
+      });
+      track.style.transform = 'translateX(' + (-active * 100) + '%)';
       var it = items[active];
-      mainImg.src = itemSrc(it);
-      mainImg.alt = it.kind === 'packshot' ? p.brand + ' ' + nameOf(p) : (it.alt || '');
-      stage.classList.toggle('is-packshot', it.kind === 'packshot');
       flag.hidden = !it.video;
       var many = items.length > 1;
       prevBtn.hidden = nextBtn.hidden = !many;
@@ -145,8 +157,18 @@
       active = Math.max(0, Math.min(items.length - 1, active + d));
       renderStage(); renderThumbs(); renderLightbox();
     }
+    buildTrack();
     prevBtn.addEventListener('click', function () { stepGallery(-1); });
     nextBtn.addEventListener('click', function () { stepGallery(1); });
+
+    /* swipe the stage on touch, the way the live gallery does on mobile */
+    var swipeX = null;
+    stage.addEventListener('touchstart', function (e) { swipeX = e.changedTouches[0].clientX; }, { passive: true });
+    stage.addEventListener('touchend', function (e) {
+      if (swipeX == null) return;
+      var dx = e.changedTouches[0].clientX - swipeX; swipeX = null;
+      if (Math.abs(dx) > 40) stepGallery(dx < 0 ? 1 : -1);
+    }, { passive: true });
 
     /* ---------- fullscreen lightbox (the live shop's gallery zoom) ---------- */
     var lightbox = document.getElementById('pdpLightbox');
@@ -186,7 +208,7 @@
       document.body.style.overflow = '';
     }
     zoomBtn.addEventListener('click', openLightbox);
-    mainImg.addEventListener('click', openLightbox);
+    track.addEventListener('click', openLightbox);
     lightbox.addEventListener('click', function (e) {
       if (e.target.closest('.lb-close')) { closeLightbox(); return; }
       if (e.target.closest('.lb-prev')) { stepGallery(-1); return; }

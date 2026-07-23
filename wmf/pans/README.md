@@ -178,10 +178,12 @@ node `2:2`), as one template that renders **any catalog product** via `?id=`:
   standard PDP without it. The gallery works the same way: Profi Resist gets the mock's
   lifestyle shots (steak main + honeycomb/3-ply/cleaning/heating thumbs, "Watch video" flag),
   everything else gets its packshot + the shared in-use shot. Gallery chrome follows the live
-  shop: prev/next circles on the stage (pale when at either end), a thin progress bar,
-  square bordered thumbnails (black border = active) that center when they fit and scroll
-  when they don't, and the zoom icon top-right (or a click on the image) opening a
-  fullscreen viewer with arrows, an image counter, Esc/arrow-key support.
+  shop: the stage is a horizontal track that **slides** between images (prev/next, thumbs,
+  keyboard and touch-swipe all animate the same translate), prev/next circles on the stage
+  (pale when at either end), a thin progress bar, square bordered thumbnails (black border =
+  active) that center when they fit and scroll when they don't, and the zoom icon top-right
+  (or a click on the image) opening a fullscreen viewer with arrows, an image counter,
+  Esc/arrow-key support. Packshot slides re-point to the selected size/colour sku on the fly.
 - **Example content, shared across products** (same precedent as the shared hover shot):
   the buy-box accessory (Profi Plus spatula) and the "Ideally complements" accessories with
   prices from the mock, Use & Care copy keyed off the product's surface attribute, and the

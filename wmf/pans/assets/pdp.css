@@ -172,11 +172,20 @@ a.bb-eyebrow:hover { color: var(--gold-deep); text-decoration: underline; }
 .bb-bundle-body { flex: 1 1 auto; min-width: 0; display: flex; flex-direction: column; gap: 1px; }
 .bb-bundle-t { font-size: 14px; font-weight: 500; line-height: 1.25; }
 .bb-bundle-cfg { font-size: 12px; font-weight: 300; color: #6a6a6a; }
+/* dashed toggle for the contents card — tappable, so it works without hover */
+.bb-bundle-inc {
+  margin-left: 8px; color: #1a1a1a; cursor: pointer;
+  text-decoration: underline dashed; text-underline-offset: 3px;
+}
+.bb-bundle-inc:hover { color: #000; }
 .bb-bundle-p { flex: 0 0 auto; display: flex; flex-direction: column; align-items: flex-end; gap: 2px; font-size: 14px; font-weight: 300; white-space: nowrap; }
+.bb-bundle-price { font-size: 14px; }
+/* subtle Best value tag above the price of the strongest-value set */
+.bb-bundle-best { font-size: 10px; font-weight: 500; text-transform: uppercase; letter-spacing: .07em; color: var(--gold-deep); }
 /* the set's RRP shown as its value — muted, not a promotional sale chip */
 .bb-bundle-value { font-size: 12px; font-weight: 300; color: #6a6a6a; }
 
-/* hover preview of what a set includes */
+/* preview of what a set includes — on hover, or pinned open by tapping the link */
 .bb-bundle-tip {
   position: absolute; left: 12px; bottom: calc(100% + 8px); z-index: 20;
   min-width: 220px; max-width: 300px;
@@ -185,7 +194,8 @@ a.bb-eyebrow:hover { color: var(--gold-deep); text-decoration: underline; }
   box-shadow: 0 8px 24px rgba(0, 0, 0, .16);
 }
 .bb-bundle-opt:hover .bb-bundle-tip,
-.bb-bundle-opt:focus-visible .bb-bundle-tip { display: block; }
+.bb-bundle-opt:focus-visible .bb-bundle-tip,
+.bb-bundle-tip.open { display: block; }
 .bb-bundle-tip::after {
   content: ""; position: absolute; top: 100%; left: 26px;
   border: 7px solid transparent; border-top-color: #fff;

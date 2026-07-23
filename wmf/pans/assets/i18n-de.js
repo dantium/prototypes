@@ -294,6 +294,7 @@ window.WMF_I18N_DE = {
   'Set offer': 'Set-Angebot',
   'Options:': 'Optionen:',
   '(%v value)': '(Wert: %v)',
+  'Best value': 'Bestes Angebot',
   "What's included": 'Enthalten',
   'Durado Fry Pan, 20 cm': 'Durado Stielpfanne, 20 cm',
   'Single pan': 'Einzelpfanne',

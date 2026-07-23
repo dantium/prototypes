@@ -151,12 +151,15 @@ node `2:2`), as one template that renders **any catalog product** via `?id=`:
   **Set / bundle configurations** are presented as a third selector alongside colour and size,
   so all three read the same way (label + current choice + outlined options): an "Options:"
   group listing every configuration of the family as a stacked row — thumbnail, the real
-  product name with its configuration (Set of 2 / Set of 3 …) as a small qualifier beneath,
-  and the price with the set's RRP shown as its value ("(€199 value)") in muted grey. The
-  selected row takes the same plain 1px black stroke as the size chips. Rows stack rather than
-  sit side-by-side so the full names fit on one line. Hovering an option reveals a small
-  "What's included" card listing the set's contents (from the `bundle` array), so shoppers can
-  compare configurations without opening each PDP.
+  product name, and on a second line the configuration (Set of 2 / Set of 3 …). Sets/bundles
+  add a dashed **"What's included"** toggle on that second line: hover previews the contents,
+  and a tap pins the card open (works on touch, where hover doesn't) — one open at a time,
+  dismissed by an outside tap. The price column shows the set's RRP as its value
+  ("(€199 value)", muted grey, sets only — a plain single pan shows no value line) and a subtle
+  gold **"Best value"** tag above the price of the strongest-value set (largest RRP saving).
+  The selected row takes the same plain 1px black stroke as the size chips. Rows stack rather
+  than sit side-by-side so the full names fit on one line. Contents come from each product's
+  `bundle` array.
   Products are tied together by `bundleGroup` in the JSON with a `bundleLabel` each — today
   `profi-resist-frypan` (Single pan / With spatula / Set of 2) and `durado-frypan` (Single pan
   / Set of 2 / Set of 3 / Set of 3 + protectors), ordered by an explicit `bundleOrder` where

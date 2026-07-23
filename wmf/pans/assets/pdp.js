@@ -343,11 +343,7 @@
          option reveals what the set includes. Two shapes feed it: a family split
          across products (bundleGroup, linked) and a single product whose variants
          are configurations (selected here). */
-      function bundleValue(ov) {
-        return (ov.msrp && ov.msrp > ov.price)
-          ? '<span class="bb-bundle-value">' + t('(%v value)').replace('%v', eur(ov.msrp)) + '</span>'
-          : '';
-      }
+      function savingOf(ov) { return (ov.msrp && ov.msrp > ov.price) ? ov.msrp - ov.price : 0; }
       function bundleTip(contents) {
         if (!contents || !contents.length) return '';
         return '<span class="bb-bundle-tip" role="tooltip"><span class="bb-bundle-tip-h">' +
@@ -356,29 +352,49 @@
             return '<span class="bb-bundle-tip-i">' + (b.qty || 1) + ' × ' + esc(t(b.name)) + '</span>';
           }).join('') + '</span>';
       }
-      function bundleInner(name, cfg, ov, contents) {
+      /* one row: name; a second line with the config and, for a set/bundle, a
+         dashed "What's included" toggle (works on tap, not just hover); price
+         with the RRP as value (sets only) and a subtle Best value tag. */
+      function bundleInner(name, cfg, ov, contents, showVal, isBest) {
+        var hasContents = !!(contents && contents.length);
+        var incLink = hasContents
+          ? '<span class="bb-bundle-inc" data-inc role="button" tabindex="0" aria-expanded="false">' + t("What's included") + '</span>'
+          : '';
+        var value = (showVal && ov.msrp && ov.msrp > ov.price)
+          ? '<span class="bb-bundle-value">' + t('(%v value)').replace('%v', eur(ov.msrp)) + '</span>' : '';
         return '<span class="bb-bundle-img"><img src="' + img(ov.sku) + '" alt=""></span>' +
           '<span class="bb-bundle-body"><span class="bb-bundle-t">' + esc(name) + '</span>' +
-          (cfg ? '<span class="bb-bundle-cfg">' + esc(cfg) + '</span>' : '') + '</span>' +
-          '<span class="bb-bundle-p">' + eur(ov.price) + bundleValue(ov) + '</span>' +
-          bundleTip(contents);
+          '<span class="bb-bundle-cfg">' + esc(cfg) + incLink + '</span></span>' +
+          '<span class="bb-bundle-p">' +
+            (isBest ? '<span class="bb-bundle-best">' + t('Best value') + '</span>' : '') +
+            '<span class="bb-bundle-price">' + eur(ov.price) + '</span>' + value +
+          '</span>' + bundleTip(contents);
       }
       if (setVariants) {
+        /* a set product's variants are all sets → all show value; best = max saving */
+        var bestIdx = -1, bestSav = 0;
+        p.variants.forEach(function (vv, i) { var s = savingOf(vv); if (s > bestSav) { bestSav = s; bestIdx = i; } });
         h += '<div class="bb-bundles"><div class="bb-bundles-head">' +
           '<span class="bb-bundles-lbl">' + t('Options:') + '</span>' +
           '<span class="bb-bundle-sel">' + esc(t(v.size)) + '</span></div>' +
           '<div class="bb-bundle-opts">' + p.variants.map(function (vv, i) {
             return '<button class="bb-bundle-opt' + (i === sel ? ' sel' : '') + (vv.stock ? '' : ' oos') +
               '" data-i="' + i + '"' + (i === sel ? ' aria-current="true"' : '') + '>' +
-              bundleInner(nameOf(p), t(vv.size), vv, p.bundle) + '</button>';
+              bundleInner(nameOf(p), t(vv.size), vv, p.bundle, true, i === bestIdx) + '</button>';
           }).join('') + '</div></div>';
       } else if (bundleOpts.length > 1) {
+        /* value + Best value are set/bundle only (not single pans); best = max saving */
+        var bestId = null, best = 0;
+        bundleOpts.forEach(function (o) {
+          var ov = o.variants[o.default] || o.variants[0];
+          if (o.type === 'Set') { var s = savingOf(ov); if (s > best) { best = s; bestId = o.id; } }
+        });
         h += '<div class="bb-bundles"><div class="bb-bundles-head">' +
           '<span class="bb-bundles-lbl">' + t('Options:') + '</span>' +
           '<span class="bb-bundle-sel">' + esc(t(p.bundleLabel || '')) + '</span></div>' +
           '<div class="bb-bundle-opts">' + bundleOpts.map(function (o) {
             var ov = o.variants[o.default] || o.variants[0];
-            var inner = bundleInner(nameOf(o), t(o.bundleLabel || ''), ov, o.bundle);
+            var inner = bundleInner(nameOf(o), t(o.bundleLabel || ''), ov, o.bundle, o.type === 'Set', o.id === bestId);
             return o.id === p.id
               ? '<span class="bb-bundle-opt sel" aria-current="true">' + inner + '</span>'
               : '<a class="bb-bundle-opt" href="product.html?id=' + o.id + '">' + inner + '</a>';
@@ -469,7 +485,23 @@
       if (el) el.textContent = (parseInt(el.textContent, 10) || 0) + 1;
     }
 
+    function closeIncluded() {
+      [].forEach.call(box.querySelectorAll('.bb-bundle-tip.open'), function (x) { x.classList.remove('open'); });
+      [].forEach.call(box.querySelectorAll('.bb-bundle-inc[aria-expanded="true"]'), function (x) { x.setAttribute('aria-expanded', 'false'); });
+    }
     box.addEventListener('click', function (e) {
+      /* "What's included" toggle — pins the contents card open (mobile tap) and
+         must run before the row's select/navigate, whose default it cancels */
+      var inc = e.target.closest('[data-inc]');
+      if (inc) {
+        e.preventDefault();
+        var opt = inc.closest('.bb-bundle-opt');
+        var tip = opt && opt.querySelector('.bb-bundle-tip');
+        var wasOpen = tip && tip.classList.contains('open');
+        closeIncluded();
+        if (tip && !wasOpen) { tip.classList.add('open'); inc.setAttribute('aria-expanded', 'true'); }
+        return;
+      }
       var swatch = e.target.closest('.bb-swatch');
       if (swatch) {
         colorSel = +swatch.dataset.color;
@@ -500,6 +532,16 @@
       }
       else if (a === 'size-guide') { e.preventDefault(); openModal(sizeGuideHTML()); }
       else if (a === 'club-info') { openModal(clubHTML()); }
+    });
+    /* keyboard-toggle the "What's included" card, and dismiss it on outside click */
+    box.addEventListener('keydown', function (e) {
+      if ((e.key === 'Enter' || e.key === ' ') && e.target.closest && e.target.closest('[data-inc]')) {
+        e.preventDefault(); e.target.click();
+      }
+    });
+    document.addEventListener('click', function (e) {
+      if (e.target.closest && (e.target.closest('[data-inc]') || e.target.closest('.bb-bundle-tip'))) return;
+      closeIncluded();
     });
 
     /* colour name previews the hovered swatch (+ any price difference vs the

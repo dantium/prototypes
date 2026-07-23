@@ -315,22 +315,32 @@
         '<button class="bar-info" aria-label="More about Klarna">' + ICONS.info + '</button></div>';
 
       /* Set / bundle configurations — the same selector pattern as colour and
-         size, just with roomier cards (image + label + price per option).
-         Two shapes feed it: a family split across products (bundleGroup, linked)
-         and a single product whose variants are configurations (selected here). */
+         size, as a stacked list of the real products: full product name, a small
+         configuration qualifier (the set names differ only subtly, so it earns
+         its place), price and any value saving against RRP. The saving is muted,
+         not the promotional sale chip. Two shapes feed it: a family split across
+         products (bundleGroup, linked) and a single product whose variants are
+         configurations (selected here). */
+      function bundleSave(ov) {
+        return (ov.msrp && ov.msrp > ov.price) ? Math.round(ov.msrp - ov.price) : 0;
+      }
+      function bundleInner(name, cfg, ov) {
+        var save = bundleSave(ov);
+        return '<span class="bb-bundle-img"><img src="' + img(ov.sku) + '" alt=""></span>' +
+          '<span class="bb-bundle-body"><span class="bb-bundle-t">' + esc(name) + '</span>' +
+          (cfg ? '<span class="bb-bundle-cfg">' + esc(cfg) + '</span>' : '') + '</span>' +
+          '<span class="bb-bundle-p">' + eur(ov.price) +
+          (save ? '<span class="bb-bundle-save">' + t('Save €%n').replace('%n', save) + '</span>' : '') +
+          '</span>';
+      }
       if (setVariants) {
         h += '<div class="bb-bundles"><div class="bb-bundles-head">' +
           '<span class="bb-bundles-lbl">' + t('Set offer') + '</span>' +
           '<span class="bb-bundle-sel">' + esc(t(v.size)) + '</span></div>' +
           '<div class="bb-bundle-opts">' + p.variants.map(function (vv, i) {
-            var vSave = isSale(vv) ? Math.round(vv.msrp - vv.price) : 0;
             return '<button class="bb-bundle-opt' + (i === sel ? ' sel' : '') + (vv.stock ? '' : ' oos') +
               '" data-i="' + i + '"' + (i === sel ? ' aria-current="true"' : '') + '>' +
-              '<span class="bb-bundle-img"><img src="' + img(vv.sku) + '" alt=""></span>' +
-              '<span class="bb-bundle-t">' + esc(t(vv.size)) + '</span>' +
-              '<span class="bb-bundle-p">' + eur(vv.price) +
-              (vSave ? '<span class="discount">' + t('Save €%n').replace('%n', vSave) + '</span>' : '') +
-              '</span></button>';
+              bundleInner(nameOf(p), t(vv.size), vv) + '</button>';
           }).join('') + '</div></div>';
       } else if (bundleOpts.length > 1) {
         h += '<div class="bb-bundles"><div class="bb-bundles-head">' +
@@ -338,13 +348,8 @@
           '<span class="bb-bundle-sel">' + esc(t(p.bundleLabel || '')) + '</span></div>' +
           '<div class="bb-bundle-opts">' + bundleOpts.map(function (o) {
             var ov = o.variants[o.default] || o.variants[0];
-            var oSave = isSale(ov) ? Math.round(ov.msrp - ov.price) : 0;
-            var isCur = o.id === p.id;
-            var inner = '<span class="bb-bundle-img"><img src="' + img(ov.sku) + '" alt=""></span>' +
-              '<span class="bb-bundle-t">' + esc(t(o.bundleLabel || '')) + '</span>' +
-              '<span class="bb-bundle-p">' + eur(ov.price) +
-              (oSave ? '<span class="discount">' + t('Save €%n').replace('%n', oSave) + '</span>' : '') + '</span>';
-            return isCur
+            var inner = bundleInner(nameOf(o), t(o.bundleLabel || ''), ov);
+            return o.id === p.id
               ? '<span class="bb-bundle-opt sel" aria-current="true">' + inner + '</span>'
               : '<a class="bb-bundle-opt" href="product.html?id=' + o.id + '">' + inner + '</a>';
           }).join('') + '</div></div>';

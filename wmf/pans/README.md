@@ -150,7 +150,11 @@ node `2:2`), as one template that renders **any catalog product** via `?id=`:
   array in the JSON; components that exist as catalog products link to their own PDP.
   **Set / bundle configurations** are presented as a third selector alongside colour and size,
   so all three read the same way (label + current choice + outlined options): a "Set offer"
-  group showing every configuration of the family as a card (image, label, price, Save chip).
+  group listing every configuration of the family as a stacked row — thumbnail, the real
+  product name with its configuration (Set of 2 / Set of 3 …) as a small qualifier beneath,
+  and the price with any value saving against RRP. The saving is muted gold, deliberately not
+  the red promotional sale chip used on prices. Rows stack rather than sit side-by-side so the
+  full names fit on one line.
   Products are tied together by `bundleGroup` in the JSON with a `bundleLabel` each — today
   `profi-resist-frypan` (Single pan / With spatula / Set of 2) and `durado-frypan` (Single pan
   / Set of 2 / Set of 3 / Set of 3 + protectors), ordered by an explicit `bundleOrder` where

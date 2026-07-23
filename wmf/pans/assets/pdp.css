@@ -143,23 +143,24 @@ a.bb-eyebrow:hover { color: var(--gold-deep); text-decoration: underline; }
 .bb-bundles-head { display: flex; flex-direction: column; gap: 1px; margin-bottom: 12px; }
 .bb-bundles-lbl { font-size: 15px; font-weight: 500; color: #1a1a1a; }
 .bb-bundle-sel { font-size: 15px; font-weight: 300; color: #6a6a6a; }
-.bb-bundle-opts { display: flex; gap: 10px; flex-wrap: wrap; }
+/* stacked rows (thumb + title + price) rather than side-by-side cards, so
+   longer configuration names have room to read on one line */
+.bb-bundle-opts { display: flex; flex-direction: column; gap: 8px; }
 .bb-bundle-opt {
-  flex: 1 1 0; min-width: 118px; max-width: 190px;
-  display: flex; flex-direction: column; align-items: center; gap: 2px;
-  padding: 10px 8px 12px;
+  display: flex; align-items: center; gap: 12px;
+  padding: 8px 12px;
   border: 1px solid var(--grey-2); border-radius: 6px; background: #fff;
-  color: inherit; text-decoration: none; transition: border-color .15s;
+  color: inherit; text-decoration: none; transition: border-color .15s, box-shadow .15s;
   /* rendered as <a> across a bundleGroup, as <button> for in-product variants */
-  font: inherit; text-align: center; cursor: pointer;
+  font: inherit; text-align: left; cursor: pointer;
 }
 .bb-bundle-opt:hover { border-color: #8a8a8a; }
-.bb-bundle-opt.sel { border-color: #000; }
+.bb-bundle-opt.sel { border-color: #000; box-shadow: inset 0 0 0 1px #000; }
 .bb-bundle-opt.oos { opacity: .5; }
-.bb-bundle-img { width: 100%; height: 62px; display: block; }
+.bb-bundle-img { flex: 0 0 auto; width: 54px; height: 54px; display: block; }
 .bb-bundle-img img { width: 100%; height: 100%; object-fit: contain; }
-.bb-bundle-t { margin-top: 6px; font-size: 13px; font-weight: 500; text-align: center; line-height: 1.25; }
-.bb-bundle-p { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; justify-content: center; font-size: 13px; font-weight: 300; }
+.bb-bundle-t { flex: 1 1 auto; min-width: 0; font-size: 14px; font-weight: 500; line-height: 1.3; }
+.bb-bundle-p { flex: 0 0 auto; display: flex; flex-direction: column; align-items: flex-end; gap: 3px; font-size: 14px; font-weight: 300; white-space: nowrap; }
 .bb-bundle-p .discount { background: var(--sale); height: 20px; padding: 0 7px; font-size: 11px; }
 
 /* colour swatches (image tiles; selected one outlined — the reference pattern) */

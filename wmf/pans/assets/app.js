@@ -641,6 +641,57 @@
     var p = DATA.products.find(function (x) { return x.id === card.getAttribute('data-id'); });
     return p ? { card: card, p: p } : null;
   }
+
+  /* ---- back-in-stock email popover (UX-study #18) ----
+     The bell opens an email capture; submitting registers the reminder
+     (gold bell). Prototype only — the address is not stored or sent. */
+  function closeNotifyPop() {
+    var pop = document.querySelector('.notify-pop');
+    if (pop) {
+      var bell = pop.closest('.card') && pop.closest('.card').querySelector('.notify-bell');
+      if (bell) bell.classList.remove('is-on');   // re-render restores it when registered
+      pop.remove();
+    }
+    document.removeEventListener('click', onDocClickPop, true);
+    document.removeEventListener('keydown', onEscPop);
+  }
+  function onDocClickPop(e) {
+    if (!e.target.closest('.notify-pop') && !e.target.closest('.notify-bell')) closeNotifyPop();
+  }
+  function onEscPop(e) { if (e.key === 'Escape') closeNotifyPop(); }
+  function openNotifyPop(card, p, bell) {
+    closeNotifyPop();
+    bell.classList.add('is-on');   // bell lights up while the popover is open
+    var pop = document.createElement('div');
+    pop.className = 'notify-pop';
+    pop.innerHTML =
+      '<button class="np-close" aria-label="' + t('Close') + '">' + I.x + '</button>' +
+      '<div class="np-head">' +
+        '<p>' + t('Enter your email address and we will inform you when the product is available again.') + '</p></div>' +
+      '<div class="np-form">' +
+        '<input type="email" placeholder="' + t('E-mail address') + '" autocomplete="email">' +
+        '<button class="np-submit">' + t('Remind me') + '</button></div>';
+    card.appendChild(pop);
+    var input = pop.querySelector('input');
+    input.focus();
+    function submit() {
+      var val = input.value.trim();
+      if (!/^\S+@\S+\.\S+$/.test(val)) { input.classList.add('is-error'); input.focus(); return; }
+      NOTIFY.push(p.id);
+      saveStore(NOTIFY_STORE, NOTIFY);
+      pop.innerHTML = '<div class="np-head np-ok">' +
+        '<p>' + t("Thanks — we'll email you when it's back in stock.") + '</p></div>';
+      setTimeout(function () { closeNotifyPop(); card.outerHTML = cardHTML(p); }, 1600);
+    }
+    pop.querySelector('.np-submit').addEventListener('click', submit);
+    input.addEventListener('keydown', function (e) { if (e.key === 'Enter') submit(); });
+    input.addEventListener('input', function () { input.classList.remove('is-error'); });
+    pop.querySelector('.np-close').addEventListener('click', closeNotifyPop);
+    setTimeout(function () {
+      document.addEventListener('click', onDocClickPop, true);
+      document.addEventListener('keydown', onEscPop);
+    }, 0);
+  }
   if (grid) {
     grid.addEventListener('click', function (e) {
       var chip = e.target.closest('.search-chip[data-q]');
@@ -657,11 +708,17 @@
       if (bell) {
         var hitN = cardProduct(bell); if (!hitN) return;
         var ni = NOTIFY.indexOf(hitN.p.id);
-        if (ni >= 0) NOTIFY.splice(ni, 1); else NOTIFY.push(hitN.p.id);
-        saveStore(NOTIFY_STORE, NOTIFY);
-        hitN.card.outerHTML = cardHTML(hitN.p);
+        if (ni >= 0) {
+          // registered → tapping the gold bell unregisters
+          NOTIFY.splice(ni, 1);
+          saveStore(NOTIFY_STORE, NOTIFY);
+          hitN.card.outerHTML = cardHTML(hitN.p);
+        } else {
+          openNotifyPop(hitN.card, hitN.p, bell);
+        }
         return;
       }
+      if (e.target.closest('.notify-pop')) return;   // popover handles its own clicks
       var sw = e.target.closest('.swatch'); if (!sw) return;
       var hit = cardProduct(sw); if (!hit) return;
       hit.p._sel = parseInt(sw.dataset.i, 10);

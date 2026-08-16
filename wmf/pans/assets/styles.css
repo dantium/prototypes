@@ -446,7 +446,37 @@ body:not(.searching) .quick-filters-bar + .toolbar { border-top: 0; padding-top:
 
 /* ---- Product grid ---- */
 .grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 40px 34px; }
-.card { display: flex; flex-direction: column; }
+.card { position: relative; display: flex; flex-direction: column; }
+
+/* back-in-stock email popover (UX-study #18) — opens from the OOS bell */
+.notify-pop {
+  position: absolute; top: 64px; right: 6px; z-index: 7;
+  width: min(430px, calc(100vw - 36px));
+  background: #fff; border-radius: 4px; padding: 20px;
+  box-shadow: 0 12px 34px rgba(0,0,0,.2), 0 0 0 1px rgba(0,0,0,.05);
+}
+.np-close { position: absolute; top: 10px; right: 10px; background: none; border: 0; color: #9a9a96; cursor: pointer; padding: 4px; display: inline-flex; }
+.np-close:hover { color: #000; }
+.np-head { padding-right: 24px; }
+.np-head p { margin: 0; font-size: 15px; font-weight: 300; line-height: 1.5; color: #2a2a2a; }
+.np-ok { padding-right: 0; }
+.np-ok p { color: var(--stock); }
+.np-form { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 16px; }
+/* input follows the bordered-control recipe (.sort); button is the primary pill */
+.np-form input {
+  flex: 1 1 180px; min-width: 0; height: 48px;
+  border: 1px solid var(--line); border-radius: 6px; padding: 0 16px;
+  background: #fff; font-family: inherit; font-size: 14px; font-weight: 300; color: var(--black);
+}
+.np-form input:focus { outline: none; border-color: var(--black); }
+.np-form input.is-error { border-color: var(--sale); }
+.np-submit {
+  height: 48px; padding: 0 24px; border: 0; border-radius: 999px;
+  background: var(--black); color: #fff; cursor: pointer;
+  font-family: inherit; font-size: 13px; font-weight: 500; letter-spacing: .14em; text-transform: uppercase;
+  transition: background .15s;
+}
+.np-submit:hover { background: var(--ink-2); }
 .card-media {
   position: relative; aspect-ratio: 1 / 1; background: #fff; overflow: hidden;
 }

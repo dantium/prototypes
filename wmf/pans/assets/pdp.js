@@ -485,8 +485,17 @@
     function renderBuyBox() { box.innerHTML = buyBoxHTML(); }
 
     function bumpCart() {
-      var el = document.querySelector('.cart-count');
-      if (el) el.textContent = (parseInt(el.textContent, 10) || 0) + 1;
+      // shared session cart (assets/app.js renders tile + header badges from it)
+      var id = new URLSearchParams(location.search).get('id') || 'pdp';
+      var cart = {};
+      try { cart = JSON.parse(sessionStorage.getItem('wmf.plp.cart')) || {}; } catch (e) {}
+      cart[id] = (cart[id] || 0) + 1;
+      try { sessionStorage.setItem('wmf.plp.cart', JSON.stringify(cart)); } catch (e) {}
+      var el = document.getElementById('cartCount');
+      if (el) {
+        var total = Object.keys(cart).reduce(function (s, k) { return s + cart[k]; }, 0);
+        el.textContent = total; el.hidden = !total;
+      }
     }
 
     function closeIncluded() {

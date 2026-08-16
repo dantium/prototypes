@@ -103,6 +103,11 @@
      "title_de": "2 Mal gekauft",
      "text_de": "Jedesmal hat sich die Beschichtung innerhalb von 12 Monaten gelöst.  Daher nur eingeschränkt zu empfehlen.  Neu ist die Pfanne super. Nichts klebt an. Selbst Klimaklebet dürfen Schwierigkeiten haben.  Allerdings ist die Pfanne sehr empfindlich.  Pfanne auf Pfanne stapeln mag diese Pfanne überhaupt nicht.  Zu heiße Temperaturen oder ablöschen sollte man auch vermeiden. Der Supergau ist  aber ein Metallwender. Damit schieben sie die ganze Beschichtung ab wie ein Schälmesser die Kartoffelschale von der Kartoffel."
     }
+   ],
+   "cooktop": [
+    "Gas",
+    "Electric",
+    "Glass ceramic"
    ]
   },
   {
@@ -185,7 +190,13 @@
      "text_de": "Gebratenes wir super"
     }
    ],
-   "bundleOrder": 10
+   "bundleOrder": 10,
+   "cooktop": [
+    "Induction",
+    "Gas",
+    "Electric",
+    "Glass ceramic"
+   ]
   },
   {
    "id": "p2",
@@ -252,6 +263,11 @@
      "title_de": "Pfannen sind super",
      "text_de": "Super tolles Set"
     }
+   ],
+   "cooktop": [
+    "Gas",
+    "Electric",
+    "Glass ceramic"
    ]
   },
   {
@@ -318,6 +334,11 @@
      "title_de": "Tolle Pfanne",
      "text_de": "Super Pfanne, tolle Qualität! \r\nDie Pfanne speichert und verteilt die Wärme optimal. Habe bereits eine in 28cm seit ein paar Jahren im Einsatz und bin sehr zufrieden"
     }
+   ],
+   "cooktop": [
+    "Gas",
+    "Electric",
+    "Glass ceramic"
    ]
   },
   {
@@ -456,6 +477,12 @@
      "title_de": "Sehr gutes Preis Leistungs Verhältnis",
      "text_de": "Würde ich auf jeden Fall wieder kaufen"
     }
+   ],
+   "cooktop": [
+    "Induction",
+    "Gas",
+    "Electric",
+    "Glass ceramic"
    ]
   },
   {
@@ -523,6 +550,12 @@
      "title_de": "Ideale Griffpfanne",
      "text_de": "Besonders für Fleischspezialitäten bietet die Pfanne ein Braten auf den Punkt. Durch die Bodenstruktur ein Freilauf von Fett oder Öl. Durch die quadratische Form eine ideale Ausnutzung auch für große Stücke. Kein Anbrennen und gute Hitzverteilung. Einfach genial die Panne."
     }
+   ],
+   "cooktop": [
+    "Induction",
+    "Gas",
+    "Electric",
+    "Glass ceramic"
    ]
   },
   {
@@ -590,6 +623,12 @@
      "title_de": "Geiles Kochen",
      "text_de": "Der Wok ist riesig. Gemüse Mega schnell zubereitet. Auch Fleisch super schnell und gut gemacht. Der Wok wird an der Seite nicht kochend"
     }
+   ],
+   "cooktop": [
+    "Induction",
+    "Gas",
+    "Electric",
+    "Glass ceramic"
    ]
   },
   {
@@ -656,6 +695,12 @@
      "title_de": "Dünn",
      "text_de": "Dünn"
     }
+   ],
+   "cooktop": [
+    "Induction",
+    "Gas",
+    "Electric",
+    "Glass ceramic"
    ]
   },
   {
@@ -723,6 +768,12 @@
      "title_de": "Alles Top",
      "text_de": "Der Wok ist sehr stabil und macht einen wertigen Eindruck. Die Hitzeverteilung  ist sehr gut und der Wok lässt sich auch leicht reinigen. Klarer Kauf"
     }
+   ],
+   "cooktop": [
+    "Induction",
+    "Gas",
+    "Electric",
+    "Glass ceramic"
    ]
   },
   {
@@ -800,6 +851,11 @@
      "title_de": "gute Pfanne",
      "text_de": "Die Pfanne macht einen sehr guten Eindruck. Das Bratergebnis ist gut.\r\nLeider verdient der Service der Fa. WMF die Bezeichnung Service nicht. Da empfiehlt sich eine intensive Nachschulung des zum Kundenkontakt eingesetzten Personals."
     }
+   ],
+   "cooktop": [
+    "Gas",
+    "Electric",
+    "Glass ceramic"
    ]
   },
   {
@@ -884,6 +940,12 @@
      "name": "Profi Plus Spatula, 32 cm",
      "img": "assets/pdp/acc-spatula.jpg"
     }
+   ],
+   "cooktop": [
+    "Induction",
+    "Gas",
+    "Electric",
+    "Glass ceramic"
    ]
   },
   {
@@ -938,7 +1000,13 @@
    "name_de": "Profi Resist Bratpfannen-Set",
    "bundleGroup": "profi-resist-frypan",
    "bundleLabel": "Set of 2",
-   "bundleOrder": 30
+   "bundleOrder": 30,
+   "cooktop": [
+    "Induction",
+    "Gas",
+    "Electric",
+    "Glass ceramic"
+   ]
   },
   {
    "id": "p13",
@@ -1005,6 +1073,12 @@
      "title_de": "guter Kauf",
      "text_de": "Die Pfanne wird seit einigen Tagen genutzt, bisher klappt alles perfekt."
     }
+   ],
+   "cooktop": [
+    "Induction",
+    "Gas",
+    "Electric",
+    "Glass ceramic"
    ]
   },
   {
@@ -1063,6 +1137,12 @@
      "title_de": "Teuer - aber die Qualität hat ihren Preis",
      "text_de": "Dieser Wok ist einfach in der Handhabung, ebenso die Reinigung.\r\nSehr wertiges Produkt insgesamt, plus 30 Jahre Herstellergarantie! Klare Kaufempfehlung."
     }
+   ],
+   "cooktop": [
+    "Induction",
+    "Gas",
+    "Electric",
+    "Glass ceramic"
    ]
   },
   {
@@ -1139,6 +1219,12 @@
      "title_de": "Bratergebnis ist okay, aber die Pfanne ist absolut nicht alltagstauglich",
      "text_de": "Die erste Pfanne hatte gleich nach der ersten Benutzung Kratzer auf dem Boden, obwohl ich (wie von den beschichteten Pfannen gewohnt) nur Plastik-Kochlöffel/-Pfannenwender benutzt habe. Diese Pfanne wurde  im WMF-Geschäft problemlos getauscht.\r\nNun benutzte ich die Pfanne seit rd. 4 Monaten, nicht sehr oft, da si nicht alltagstauglich ist (keine Antihaft-Eigenschaft, Ansetzen des Bratguts, unansehnlicher Belag auf dem Pfannenboden nach der Reinigung, Auskochen mit Wasser und etwas Essig). Und nun hat die Pfanne auch wieder Kratzer auf dem Boden, und das von dem für beschichteten Pfannen geeigneten  Kochlöffeln und Pfannenwendern aus Holz und Plastik (andere besitze ich gar nicht).\r\nFazit: Die Pfanne ist ihr Geld nicht wert! \r\n(Ein Bewertungs-Stern nur, weil es ohne nicht angeschickt werden kann)"
     }
+   ],
+   "cooktop": [
+    "Induction",
+    "Gas",
+    "Electric",
+    "Glass ceramic"
    ]
   },
   {
@@ -1177,7 +1263,13 @@
    "occasion": [
     "Everyday"
    ],
-   "name_de": "Fusiontec Mineral Bratpfanne Platinum"
+   "name_de": "Fusiontec Mineral Bratpfanne Platinum",
+   "cooktop": [
+    "Induction",
+    "Gas",
+    "Electric",
+    "Glass ceramic"
+   ]
   },
   {
    "id": "p17",
@@ -1254,6 +1346,12 @@
      "title_de": "Super tolle WMF Fusiontec Mineral Bratpfanne",
      "text_de": "Ich habe es seit 3 Tagen und bin damit sehr zufrieden."
     }
+   ],
+   "cooktop": [
+    "Induction",
+    "Gas",
+    "Electric",
+    "Glass ceramic"
    ]
   },
   {
@@ -1291,7 +1389,13 @@
    "occasion": [
     "Everyday"
    ],
-   "name_de": "DuraCuisine, Wok"
+   "name_de": "DuraCuisine, Wok",
+   "cooktop": [
+    "Induction",
+    "Gas",
+    "Electric",
+    "Glass ceramic"
+   ]
   },
   {
    "id": "p19",
@@ -1329,7 +1433,13 @@
     "Gifting"
    ],
    "name_de": "Nordic Profi Bratpfannen-Set",
-   "description_de": "Strapazierfähig und vielseitig: Das 2-teilige Pfannen-Set Nordic Profi von WMF mit je einer 24 cm und 28 cm Bratpfanne verspricht zartes Braten und Anbraten – Tag für Tag. Ob zarte Sautés oder scharf angebratene Pfannengerichte, dank der herausragenden Antihaftversiegelung sind exzellente Bratergebnisse und eine einfache Reinigung selbstverständlich. Der TransTherm®-Allherdboden sorgt dabei für eine optimale Wärmeverteilung und -speicherung sowie energiesparendes Braten."
+   "description_de": "Strapazierfähig und vielseitig: Das 2-teilige Pfannen-Set Nordic Profi von WMF mit je einer 24 cm und 28 cm Bratpfanne verspricht zartes Braten und Anbraten – Tag für Tag. Ob zarte Sautés oder scharf angebratene Pfannengerichte, dank der herausragenden Antihaftversiegelung sind exzellente Bratergebnisse und eine einfache Reinigung selbstverständlich. Der TransTherm®-Allherdboden sorgt dabei für eine optimale Wärmeverteilung und -speicherung sowie energiesparendes Braten.",
+   "cooktop": [
+    "Induction",
+    "Gas",
+    "Electric",
+    "Glass ceramic"
+   ]
   },
   {
    "id": "p20",
@@ -1396,6 +1506,12 @@
      "title_de": "Ausgezeichnetes Produkt",
      "text_de": "Mich hat vor allem die Beschichtung begeistert - die Zubereitung mit wenig bzw. ohne Fett verlief problemlos, die anschließende Reinigung auch!"
     }
+   ],
+   "cooktop": [
+    "Induction",
+    "Gas",
+    "Electric",
+    "Glass ceramic"
    ]
   },
   {
@@ -1462,6 +1578,12 @@
      "title_de": "Tolle Pfanne",
      "text_de": "Nichts brennt an ,Super zu reinigen"
     }
+   ],
+   "cooktop": [
+    "Induction",
+    "Gas",
+    "Electric",
+    "Glass ceramic"
    ]
   },
   {
@@ -1539,6 +1661,12 @@
      "title_de": "sehr unzufrieden - Pfanne bekommt extrem schnell schwarze Stellen auf der Beschichtung",
      "text_de": "für 90€ schlecht. hatten vorher eine 29 Euro Lidlpfanne. die hat bessere Antihaft-Eigenschaften"
     }
+   ],
+   "cooktop": [
+    "Induction",
+    "Gas",
+    "Electric",
+    "Glass ceramic"
    ]
   },
   {
@@ -1588,6 +1716,12 @@
      "title_de": "Nicht so einfach zu handhaben",
      "text_de": "Selbst bei niedriger Temperatur, kommt die Pfanne nicht zum anrösten, bei höherer Temperatur kann ich die Griffe nicht mehr anfassen, total heiß!!!! Würde die Pfanne trotz Gebrauch, zurückgeben."
     }
+   ],
+   "cooktop": [
+    "Induction",
+    "Gas",
+    "Electric",
+    "Glass ceramic"
    ]
   },
   {
@@ -1666,6 +1800,12 @@
      "title_de": "Leider Beschädigt",
      "text_de": "Leider war die Pfanne nach dem Auspacken am Rand eingedrückt, \nsieht aus wie ein Ausguss, ist es aber nicht.\nSomit muss ich somit wieder in eine Filiale um sie umzutauschen,"
     }
+   ],
+   "cooktop": [
+    "Induction",
+    "Gas",
+    "Electric",
+    "Glass ceramic"
    ]
   },
   {
@@ -1714,6 +1854,12 @@
      "title_de": "Keramikpfannen-Duo DEVIL",
      "text_de": "Bin super zufrieden mit den beiden Pfannen. 1A-Qualität! Außerdem zu einem sehr günstigen Preis erhältlich."
     }
+   ],
+   "cooktop": [
+    "Induction",
+    "Gas",
+    "Electric",
+    "Glass ceramic"
    ]
   },
   {
@@ -1792,6 +1938,12 @@
      "title_de": "Schon die vierte Pfanne",
      "text_de": "Ein Dauerbrenner im Kochalltag"
     }
+   ],
+   "cooktop": [
+    "Induction",
+    "Gas",
+    "Electric",
+    "Glass ceramic"
    ]
   },
   {
@@ -1842,6 +1994,12 @@
      "title_de": "Wok Around the Clock: Kochspaß rund um die Uhr :-)",
      "text_de": "Der Tim Raue Wok hat sich direkt als unser neuer Liebling in der Küche entpuppt. \n\nDer Wok wird sehr schnell heiß wird und \"brutzelt\" alles schön gleichmäßig durch. Gemüse, Fleisch oder Tofu werden außen super knusprig und bleiben dabei aber trotzdem innen saftig.\n\nDie Oberfläche ist so hart und kratzfest, wie versprochen wird. Wir nutzen beim Kochen mit dem Wok einen Metallwender, ohne dass Kratzer oder andere Gebrauchspuren zu sehen sind.\n\nOptisch ist der Wok auch ein Highlight. Das strahlende Blau sieht in echt noch viel strahlender aus als auf den Bildern. Ein echter Hingucker!"
     }
+   ],
+   "cooktop": [
+    "Induction",
+    "Gas",
+    "Electric",
+    "Glass ceramic"
    ]
   },
   {
@@ -1908,6 +2066,12 @@
      "title_de": "Stabile Qualität",
      "text_de": "So macht Küchenarbeit Spaß: mit dem richtigen Werkzeug!"
     }
+   ],
+   "cooktop": [
+    "Induction",
+    "Gas",
+    "Electric",
+    "Glass ceramic"
    ]
   },
   {
@@ -1997,6 +2161,12 @@
      "sku": "7115005330",
      "id": "p36"
     }
+   ],
+   "cooktop": [
+    "Induction",
+    "Gas",
+    "Electric",
+    "Glass ceramic"
    ]
   },
   {
@@ -2051,7 +2221,13 @@
    "description_de": "Vorteile des Sets: Zwei Größen für jede Gelegenheit: Mit 24 cm und 28 cm sind Sie sowohl für Single- als auch Mehr-Personen-Mahlzeiten bestens ausgestattet. Robuste, keramische Antihaftversiegelung: Die Durado Pfannen haben eine widerstandsfähige Keramikbeschichtung, die bis 400 °C hitzebeständig ist — für hervorragende Bratergebnisse, fettarmes Braten und einfache Reinigung. Effiziente Wärmeverteilung &amp; Energiesparend: Der hochwertige TransTherm® Allherdboden sorgt für gleichmäßige Wärmeverteilung, gute Wärmespeicherung und spart Energie — unabhängig vom Herdtyp, auch Induktion. Vielseitigkeit &amp; Ofentauglichkeit: Cromargan® Edelstahl + Keramikbeschichtung, geeignet für alle Herdarten, und backofenfest (bis max. Temperatur laut Hersteller) — ideal für viele Koch- und Backideen.",
    "bundleGroup": "durado-frypan",
    "bundleLabel": "Set of 2",
-   "bundleOrder": 20
+   "bundleOrder": 20,
+   "cooktop": [
+    "Induction",
+    "Gas",
+    "Electric",
+    "Glass ceramic"
+   ]
   },
   {
    "id": "p31",
@@ -2137,6 +2313,12 @@
      "title_de": "Sehr gut",
      "text_de": "Funktioniert wie erwartet, hält alles aus, hoffentlich. 10/10"
     }
+   ],
+   "cooktop": [
+    "Induction",
+    "Gas",
+    "Electric",
+    "Glass ceramic"
    ]
   },
   {
@@ -2203,6 +2385,12 @@
      "title_de": "Sehr gut",
      "text_de": "Top Qualität und jeden Cent wert. Keine Beschichtung die kaputt gehen kann, Spülmaschinenfest"
     }
+   ],
+   "cooktop": [
+    "Induction",
+    "Gas",
+    "Electric",
+    "Glass ceramic"
    ]
   },
   {
@@ -2289,6 +2477,12 @@
      "title_de": "Sehr gutes Produkt",
      "text_de": "Leider gobt es die 20cm aktuell nicht."
     }
+   ],
+   "cooktop": [
+    "Induction",
+    "Gas",
+    "Electric",
+    "Glass ceramic"
    ]
   },
   {
@@ -2328,7 +2522,13 @@
     "Everyday"
    ],
    "name_de": "Compact Cuisine Stielpfanne",
-   "description_de": "Die aus hochwertigem Cromargan®: Edelstahl Rostfrei 18/10 gefertigte Compact Cuisine Stielpfanne mit 28 cm Durchmesser von WMF überzeugt mit ihrem energiesparendem und induktionsgeeignetem TransTherm®-Allherdboden, verfügt über einen wärmereduzierenden Hohlgriff sowie einen breiten Schüttrand zum tropffreien Ausgießen von Flüssigkeiten und ist darüber hinaus zur komfortablen Reinigung in der Spülmaschine geeignet."
+   "description_de": "Die aus hochwertigem Cromargan®: Edelstahl Rostfrei 18/10 gefertigte Compact Cuisine Stielpfanne mit 28 cm Durchmesser von WMF überzeugt mit ihrem energiesparendem und induktionsgeeignetem TransTherm®-Allherdboden, verfügt über einen wärmereduzierenden Hohlgriff sowie einen breiten Schüttrand zum tropffreien Ausgießen von Flüssigkeiten und ist darüber hinaus zur komfortablen Reinigung in der Spülmaschine geeignet.",
+   "cooktop": [
+    "Induction",
+    "Gas",
+    "Electric",
+    "Glass ceramic"
+   ]
   },
   {
    "id": "p35",
@@ -2395,6 +2595,11 @@
      "title_de": "Wie immer",
      "text_de": "kann noch keine Bewertung abgeben; ich muß mich in das Thema einlesen und dann ausprobieren"
     }
+   ],
+   "cooktop": [
+    "Gas",
+    "Electric",
+    "Glass ceramic"
    ]
   },
   {
@@ -2474,7 +2679,13 @@
      "text_de": "Ich habe schon länger die Pfanne mit 28 cm als Ersatz für meinen alten Wok. Bratkartoffeln, Schupfnudeln, Reibekuchen, Eier usw. kleben nicht so fest wie bei anderen Pfannen. Für kleiner Mengen habe ich mir jetzt die Pfanne mit 20 cm zugelegt."
     }
    ],
-   "bundleOrder": 10
+   "bundleOrder": 10,
+   "cooktop": [
+    "Induction",
+    "Gas",
+    "Electric",
+    "Glass ceramic"
+   ]
   },
   {
    "id": "p37",
@@ -2523,6 +2734,12 @@
      "title_de": "Tolle Pfanne",
      "text_de": "Wie immer rasche Lieferung. Habe schon mehrere Töpfe und Pfannen aus dieser Serie und bin total begeistert!"
     }
+   ],
+   "cooktop": [
+    "Induction",
+    "Gas",
+    "Electric",
+    "Glass ceramic"
    ]
   },
   {
@@ -2589,6 +2806,12 @@
      "title_de": "Sehr gut",
      "text_de": "Super"
     }
+   ],
+   "cooktop": [
+    "Induction",
+    "Gas",
+    "Electric",
+    "Glass ceramic"
    ]
   },
   {
@@ -2655,6 +2878,12 @@
      "title_de": "Super PFANNE ZUM NÄGEL EINSCHLAGEN",
      "text_de": "Diese Pfanne gekauft im Glauben an WMF Produkte.\r\nAntihaftbeschichtet Kein Bratgut klebt an!\r\nSoweit die Werbung.\r\nTatsache alles klebt fest.\r\nSpiegeleier nur zum abkratzen.\r\nTrotz allen Vorschlägen vom Kundenservice.\r\nWer von diesem Kundenservice glaubt noch daran?\r\nDiese Pfanne sofort in den Wertstoffhof oder an Feinde verschenken. Mit freundlichen Grüßen an alle Opfer."
     }
+   ],
+   "cooktop": [
+    "Induction",
+    "Gas",
+    "Electric",
+    "Glass ceramic"
    ]
   },
   {
@@ -2703,6 +2932,12 @@
      "title_de": "Gute Pfanne mit einem riesigen Fehler",
      "text_de": "Die Pfanne ist ansich Toll und Schwer. Leider nach dem ersten Spülmaschinengang war Wasser in den Stiel gelangt und nur wieder mühsam herauszubekommen!"
     }
+   ],
+   "cooktop": [
+    "Induction",
+    "Gas",
+    "Electric",
+    "Glass ceramic"
    ]
   },
   {
@@ -2768,6 +3003,12 @@
      "title_de": "super Beschichtung",
      "text_de": "Die Silit Talis Pfanne hat eine sehr gute Beschichtung und ist gut verarbeitet, allerdings ist sie etwas schwerer als die WMF-Pfannen in ähnlicher Bauweise."
     }
+   ],
+   "cooktop": [
+    "Induction",
+    "Gas",
+    "Electric",
+    "Glass ceramic"
    ]
   },
   {
@@ -2885,6 +3126,12 @@
      "title_de": "Super Qualität",
      "text_de": "Tolle Töpfe mit 5 Sterne Qualität :)"
     }
+   ],
+   "cooktop": [
+    "Induction",
+    "Gas",
+    "Electric",
+    "Glass ceramic"
    ]
   },
   {
@@ -2940,6 +3187,12 @@
      "name": "Pan Protector Set, 2-piece, 38 cm",
      "sku": "3201001202"
     }
+   ],
+   "cooktop": [
+    "Induction",
+    "Gas",
+    "Electric",
+    "Glass ceramic"
    ]
   }
  ]

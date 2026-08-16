@@ -201,14 +201,10 @@ body.nav-open .nav-drawer { transform: none; }
 /* ============================================================
    PAGE HEAD  (title + subtitle + hero)
    ============================================================ */
-.page-head {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(0, 540px);
-  gap: 40px;
-  align-items: center;
-  padding: 18px 0 34px;
-}
-.page-title { margin: 0 0 18px; font-size: 46px; line-height: 1.04; font-weight: 300; letter-spacing: 0.06em; text-transform: uppercase; }
+/* single column while the category hero image is out; restore the
+   two-column grid (minmax(0,1fr) minmax(0,540px), gap 40px) with it */
+.page-head { padding: 26px 0 30px; }
+.page-title { margin: 0 0 14px; font-size: 46px; line-height: 1.04; font-weight: 300; letter-spacing: 0.06em; text-transform: uppercase; }
 .page-sub { margin: 0; max-width: 640px; font-size: 16px; line-height: 1.55; font-weight: 300; color: #1c1c1c; }
 .page-hero { width: 100%; aspect-ratio: 634 / 214; overflow: hidden; }
 .page-hero img { width: 100%; height: 100%; object-fit: cover; }
@@ -217,8 +213,10 @@ body.nav-open .nav-drawer { transform: none; }
    CATEGORY NAVIGATION  (live-shop style: 120px photo tiles,
    label below, current category on the WMF gold background)
    ============================================================ */
-.catnav { padding: 4px 0 26px; }
-.catnav-track { display: flex; gap: 12px; overflow-x: auto; padding-bottom: 8px; scrollbar-width: thin; }
+.catnav { padding: 4px 0 12px; }
+/* no scrollbar — the mobile paging arrows are the scroll affordance */
+.catnav-track { display: flex; gap: 12px; overflow-x: auto; scrollbar-width: none; }
+.catnav-track::-webkit-scrollbar { display: none; }
 .cat-tile { flex: 0 0 auto; width: 120px; background: #fff; display: block; }
 .cat-tile img { width: 100%; height: 71px; object-fit: cover; display: block; }
 .cat-tile span {
@@ -246,6 +244,68 @@ body.nav-open .nav-drawer { transform: none; }
 .subcat.current .subcat-thumb { box-shadow: inset 0 0 0 2px var(--black); }
 
 /* ============================================================
+   HORIZONTAL SCROLL AFFORDANCE  (mobile: category tiles + quick
+   filters get paging arrows when content runs off screen;
+   buttons reuse the .round card-action style + menu chevron)
+   ============================================================ */
+.hscroll { position: relative; }
+.hscroll-arrow {
+  position: absolute; top: 50%; transform: translateY(-50%); z-index: 4;
+  width: 38px; height: 38px; border-radius: 50%; padding: 0;
+  background: #fff; border: 0; display: none; place-items: center;
+  color: #1c1c1c; box-shadow: 0 2px 6px rgba(0,0,0,.13); cursor: pointer;
+  transition: box-shadow .15s;
+}
+.hscroll-arrow:hover { box-shadow: 0 3px 11px rgba(0,0,0,.22); }
+.hscroll-arrow svg { display: block; }
+.hscroll-arrow--prev { left: -10px; }
+.hscroll-arrow--next { right: -10px; }
+.hscroll-arrow--prev svg { transform: rotate(180deg); }
+@media (max-width: 900px) {
+  .hscroll.has-prev .hscroll-arrow--prev,
+  .hscroll.has-next .hscroll-arrow--next { display: grid; }
+  /* chips bleed 22px past the wrap on mobile — pull the arrows out with them */
+  .hscroll--chips .hscroll-arrow--prev { left: -16px; }
+  .hscroll--chips .hscroll-arrow--next { right: -16px; }
+  /* centre the category arrows on the tile image, not image + label */
+  .hscroll--cats .hscroll-arrow { top: 44%; }
+}
+
+/* ============================================================
+   PAN FINDER MODAL  (UX-study #17) — on-site popup; the slot is
+   where the Neocom guided-selling widget mounts on live.
+   Panel styling mirrors the search overlay.
+   ============================================================ */
+.finder-overlay { position: fixed; inset: 0; z-index: 120; display: none; }
+.finder-overlay[aria-hidden="false"] { display: block; }
+.finder-scrim { position: absolute; inset: 0; background: rgba(0,0,0,.4); }
+.finder-panel {
+  position: absolute; top: 78px; left: 50%; transform: translateX(-50%);
+  width: 720px; max-width: calc(100vw - 48px);
+  max-height: calc(100vh - 120px); max-height: calc(100dvh - 120px);
+  background: #fff; color: #111; border-radius: 6px; overflow: hidden;
+  display: flex; flex-direction: column;
+  box-shadow: 0 30px 80px rgba(0,0,0,.4); animation: searchDrop .18s ease;
+}
+.finder-head {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 18px 22px; border-bottom: 1px solid var(--line-soft); flex: none;
+}
+.finder-head h2 { margin: 0; font-size: 15px; font-weight: 600; letter-spacing: .16em; text-transform: uppercase; }
+.finder-close { background: none; border: 0; padding: 4px; display: inline-flex; color: #333; cursor: pointer; }
+.finder-body { padding: 22px; overflow-y: auto; }
+.finder-slot {
+  display: grid; place-items: center; min-height: 380px;
+  border: 1.5px dashed var(--line); border-radius: 6px;
+  font-size: 15px; font-weight: 300; letter-spacing: .04em; color: #8a8a86;
+}
+body.finder-open { overflow: hidden; }
+@media (max-width: 700px) {
+  .finder-panel { top: 10px; max-width: calc(100vw - 20px); max-height: calc(100dvh - 20px); }
+  .finder-slot { min-height: 60vh; }
+}
+
+/* ============================================================
    TOOLBAR
    ============================================================ */
 .toolbar {
@@ -268,6 +328,32 @@ body.nav-open .nav-drawer { transform: none; }
 .pill:hover svg { stroke: #fff; }
 .pill svg { stroke: var(--black); }
 .pill--plain { text-transform: none; letter-spacing: 0.02em; font-weight: 500; }
+/* squared-off action buttons that sit in the filter + results toolbar */
+.pill--square { border-radius: 8px; }
+
+/* quick filters — curated shortcut chips, on their own row above the toolbar.
+   The bar carries the divider against the category tiles; the toolbar below
+   drops its own border so label + chips + actions read as one filter zone. */
+.quick-filters-bar { padding: 26px 0 28px; border-top: 1px solid var(--line-soft); }
+.qf-title { margin: 0 0 16px; font-size: 17px; font-weight: 400; letter-spacing: .01em; color: var(--black); }
+body:not(.searching) .quick-filters-bar + .toolbar { border-top: 0; padding-top: 0; }
+.quick-filters { display: flex; align-items: center; flex-wrap: wrap; gap: 10px; }
+.qf-chip {
+  display: inline-flex; align-items: center; gap: 7px;
+  height: 40px; padding: 0 16px;
+  border: 1px solid var(--line); border-radius: 999px;
+  background: #fff; color: var(--black);
+  font-family: var(--rotis); font-size: 14px; font-weight: 300; line-height: 1;
+  white-space: nowrap; cursor: pointer;
+  transition: border-color .15s, background .15s, color .15s;
+}
+.qf-chip:hover { border-color: var(--ink-2); background: var(--wash); }
+.qf-count { color: var(--muted); }
+.qf-chip.is-active { background: var(--black); border-color: var(--black); color: #fff; }
+.qf-chip.is-active:hover { background: var(--ink-2); }
+.qf-chip.is-active .qf-count { color: rgba(255,255,255,.68); }
+.qf-chip .qf-x { display: inline-flex; margin: 0 -3px 0 1px; }
+.qf-chip .qf-x svg { stroke: #fff; }
 .product-count { font-size: 12px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); }
 .sort {
   position: relative; display: inline-flex; align-items: center;
@@ -291,6 +377,17 @@ body.nav-open .nav-drawer { transform: none; }
 
 /* ---- Filters ---- */
 .filters { align-self: start; }
+/* desktop: the rail sticks and scrolls on its own, so filters and results
+   stay visible together (UX study #3); ≤900px uses the drawer instead */
+@media (min-width: 901px) {
+  .filters {
+    position: sticky; top: 0;
+    max-height: 100vh; max-height: 100dvh;
+    overflow-y: auto; overscroll-behavior: contain;
+    scrollbar-width: none;   /* scrolls, but without a visible bar */
+  }
+  .filters::-webkit-scrollbar { display: none; }
+}
 .drawer-head, .drawer-apply { display: none; }
 .filter-group { border-bottom: 1px solid var(--line-soft); }
 .filter-group:first-child { border-top: 1px solid var(--line-soft); }
@@ -320,6 +417,8 @@ body.nav-open .nav-drawer { transform: none; }
 .facet input:checked + .box::after { transform: scale(1); }
 .facet input:checked ~ .facet-label { color: #000; }
 .facet-hint { color: #8a8a8a; font-weight: 300; }
+.facet-count { color: #8a8a8a; font-weight: 300; }
+.facet--off { opacity: .45; }   /* option would return no results right now */
 .facet-more {
   display: block; margin-top: 6px; padding: 4px 0;
   background: none; border: 0; font-family: inherit;
@@ -371,11 +470,17 @@ body.nav-open .nav-drawer { transform: none; }
 .badge--sale { background: var(--sale); }
 .card-actions { position: absolute; top: 12px; right: 13px; display: flex; gap: 9px; z-index: 3; }
 .round {
+  position: relative;
   width: 44px; height: 44px; border-radius: 50%; background: #fff;
   border: 0; display: grid; place-items: center; color: #1c1c1c;
   box-shadow: 0 2px 6px rgba(0,0,0,.13);
   transition: box-shadow .15s, background .15s;
 }
+/* tile bag: quantity badge sits bottom-right of the circle (#8) */
+.round .cart-count { top: auto; bottom: -3px; right: -3px; }
+/* out-of-stock bell: gold when a back-in-stock alert is registered (#18) */
+.round.notify-bell.is-on,
+.round.notify-bell.is-on:hover { background: var(--gold); }
 .round:hover { background: #fff; box-shadow: 0 3px 11px rgba(0,0,0,.22); }
 .round svg { display: block; }
 /* whole media area links to the PDP (sits above the hover shot, below the buttons) */
@@ -420,6 +525,18 @@ body.nav-open .nav-drawer { transform: none; }
 .stock .dot { width: 7px; height: 7px; border-radius: 50%; background: var(--stock); flex: none; }
 .stock.out { color: var(--sale); }
 .stock.out .dot { background: var(--sale); }
+
+/* ============================================================
+   CONDENSED TILE v2  (UX-study #7) — attribute badges stay in
+   the image overlay; a technique-driven "Ideal for" line tells
+   shoppers what the pan is for. Sizes/colour rows move to PDP.
+   ============================================================ */
+.card--v2 .card-body { gap: 7px; }
+.card-ideal { margin: 0; font-size: 13px; font-weight: 300; line-height: 1.45; color: #55575c; }
+.card-ideal b { font-weight: 500; color: #2a2a2a; }
+/* price + stock share a row to save a line */
+.card--v2 .card-price { display: flex; align-items: baseline; justify-content: space-between; gap: 10px; }
+.card--v2 .card-price .stock { margin-left: auto; }
 
 .card-sizes { display: flex; align-items: center; gap: 7px; flex-wrap: wrap; padding-top: 4px; }
 .card-sizes .lbl { font-size: 12px; font-weight: 300; color: #333; }
@@ -689,6 +806,7 @@ body.nav-open .nav-drawer { transform: none; }
 .s-row .s-remove { flex: none; display: inline-flex; padding: 4px; border: 0; background: none; color: #b0b0aa; cursor: pointer; border-radius: 50%; }
 .s-row .s-remove:hover { color: #000; background: rgba(0,0,0,.06); }
 .s-divider { height: 1px; background: var(--line-soft); margin: 8px 14px; }
+.s-count { font-size: 11px; font-weight: 300; color: #9a9a96; }
 
 .search-chips { display: flex; flex-wrap: wrap; gap: 10px; padding: 4px 14px 16px; }
 .search-chip { border: 1px solid var(--line); border-radius: 999px; background: #fff; padding: 8px 16px; font-family: var(--rotis); font-size: 13.5px; font-weight: 300; color: #1a1a1a; cursor: pointer; text-decoration: none; display: inline-flex; transition: border-color .15s, background .15s; }
@@ -790,6 +908,17 @@ body.rail-collapsed .filters { display: none; }
   .header-search-icon { display: inline-flex; }
   .home-cats-grid { grid-template-columns: 1fr; }
 
+  /* quick filters scroll sideways rather than wrapping into a tall stack */
+  .quick-filters-bar { padding: 18px 0 22px; }
+  .qf-title { margin-bottom: 12px; font-size: 16px; }
+  .quick-filters {
+    flex-wrap: nowrap; overflow-x: auto; -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    margin: 0 -22px; padding: 0 22px 2px;   /* bleed to the screen edges */
+  }
+  .quick-filters::-webkit-scrollbar { display: none; }
+  .qf-chip { flex: none; }
+
   /* ---- filter drawer ---- */
   .filters {
     position: fixed; z-index: 95; inset: 0 auto 0 0; width: 340px; max-width: 92vw;
@@ -826,6 +955,16 @@ body.rail-collapsed .filters { display: none; }
   .search-panel { top: 10px; max-width: calc(100vw - 20px); max-height: calc(100vh - 20px); max-height: calc(100dvh - 20px); }
   .search-bar { padding: 14px 16px; }
   .search-bar input { font-size: 16px; }
+
+  /* top results as one sideways-scrolling row of compact cards, so
+     suggestions stay visible above the open keyboard (UX-study #13) */
+  .s-products { display: flex; gap: 10px; overflow-x: auto; -webkit-overflow-scrolling: touch; padding: 4px 14px 12px; scrollbar-width: none; }
+  .s-products::-webkit-scrollbar { display: none; }
+  .s-products .s-row { flex: 0 0 148px; flex-direction: column; align-items: flex-start; gap: 8px; padding: 10px; border: 1px solid var(--line-soft); border-radius: 8px; }
+  .s-products .s-row .s-thumb { width: 100%; height: 92px; border: 0; }
+  .s-products .s-row .s-label { flex: none; width: 100%; font-size: 13px; }
+  .s-products .s-row .s-sub { display: none; }
+  .s-products .s-row .s-price { font-size: 14px; }
 }
 @media (max-width: 560px) {
   .grid { grid-template-columns: 1fr; }

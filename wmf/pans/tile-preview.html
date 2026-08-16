@@ -1,0 +1,138 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>WMF · Tile v2 preview</title>
+  <link rel="stylesheet" href="assets/styles.css?v=20260813p">
+  <style>
+    /* review-page furniture only — tile styles come from styles.css */
+    body { background: #fff; }
+    .demo-wrap { max-width: 1200px; margin: 0 auto; padding: 40px 28px 80px; }
+    .demo-h1 { margin: 0 0 6px; font-size: 30px; font-weight: 300; letter-spacing: .05em; text-transform: uppercase; }
+    .demo-sub { margin: 0 0 40px; font-size: 14px; font-weight: 300; color: #55575c; max-width: 640px; }
+    .demo-section { margin: 0 0 14px; font-size: 12px; font-weight: 600; letter-spacing: .16em; text-transform: uppercase; color: #4a4a4a; }
+    .demo-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 34px 22px; margin-bottom: 48px; }
+    .demo-notes { border-top: 1px solid #e6e6e6; padding-top: 18px; font-size: 13.5px; font-weight: 300; color: #2a2a2a; max-width: 680px; }
+    .demo-notes li { margin: 0 0 7px; }
+    @media (max-width: 900px) { .demo-grid { grid-template-columns: repeat(2, minmax(0,1fr)); } }
+    @media (max-width: 560px) { .demo-grid { grid-template-columns: 1fr; } }
+  </style>
+</head>
+<body>
+  <div class="demo-wrap">
+    <h1 class="demo-h1">Product tile — condensed v2</h1>
+    <p class="demo-sub">UX-study item #7: condense the tile. Attribute badges stay in the image overlay;
+      a technique-driven "Ideal for" line says what each pan is for. Same three products in both versions.</p>
+
+    <p class="demo-section">Current tile (as live in the prototype)</p>
+    <div class="demo-grid" id="rowCurrent"></div>
+
+    <p class="demo-section">Condensed v2 — proposal</p>
+    <div class="demo-grid" id="rowV2"></div>
+
+    <ul class="demo-notes">
+      <li><b>Added:</b> technique-driven "Ideal for" line — Searing → protein &amp; vegetables · Gentle → eggs, fish &amp; vegetables · All-purpose → everyday cooking.</li>
+      <li><b>Kept:</b> attribute badges in the image overlay (set / technique / surface).</li>
+      <li><b>Removed from tile</b> (still on the PDP): size selector, colour swatches, "last 30 days" price line.</li>
+      <li><b>Condensed:</b> stock moved onto the price row; tighter vertical rhythm.</li>
+    </ul>
+  </div>
+
+  <script>
+  (function () {
+    var eur = function (n) { return '€' + n.toFixed(2); };
+    var img = function (sku) { return 'assets/products/' + sku + '.jpg'; };
+    var esc = function (s) { return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/"/g, '&quot;'); };
+    var variantOf = function (p) { return p.variants[p.default] || p.variants[0]; };
+    var isSale = function (v) { return !!(v.sale && v.msrp && v.msrp > v.price); };
+    var BAG_S = '<svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="#1c1c1c" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 8h12l1 12.5H5L6 8Z"/><path d="M9 8a3 3 0 0 1 6 0"/></svg>';
+    var HEART_S = '<svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="#1c1c1c" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20.8 5.6a5 5 0 0 0-7.1 0L12 7.3l-1.7-1.7a5 5 0 0 0-7.1 7.1L12 21.5l8.8-8.8a5 5 0 0 0 0-7.1Z"/></svg>';
+
+    function badgeFor(v) {
+      if (isSale(v)) return '<span class="badge badge--sale">Sale</span>';
+      var label = (v.label || '').split(',')[0].trim();
+      if (!label) return '';
+      var cls = label === 'SALE' ? ' badge--sale' : label === 'NEW' ? ' badge--new' : '';
+      return '<span class="badge' + cls + '">' + esc(label.charAt(0) + label.slice(1).toLowerCase()) + '</span>';
+    }
+
+    /* ---- v2 "Ideal for" line, driven by the cooking technique ---- */
+    var IDEAL_FOR = {
+      'Intense Searing': 'Searing protein and vegetables',
+      'Gentle Frying':   'Delicate food like eggs and fish',
+      'All Purpose':     'All-round everyday cooking'
+    };
+    function idealFor(p) {
+      var tech = Array.isArray(p.technique) ? p.technique[0] : p.technique;
+      var text = IDEAL_FOR[tech];
+      if (!text) return '';
+      return '<p class="card-ideal"><b>Ideal for:</b> ' + esc(text) + '</p>';
+    }
+
+    function mediaHTML(p, v, withLabels) {
+      var labels = [];
+      if (withLabels) {
+        if (/^Set of \d/.test(v.size)) labels.push(v.size);
+        ['technique', 'surface'].forEach(function (k) {
+          var val = p[k]; if (!val) return;
+          (Array.isArray(val) ? val : [val]).forEach(function (x) { if (labels.length < 2) labels.push(x); });
+        });
+      }
+      return '<div class="card-media">' + badgeFor(v) +
+        '<div class="card-actions"><button class="round" aria-label="Add to basket">' + BAG_S + '</button>' +
+        '<button class="round" aria-label="Add to wishlist">' + HEART_S + '</button></div>' +
+        '<img class="pan" src="' + img(v.sku) + '" alt="' + esc(p.brand + ' ' + p.name) + '">' +
+        (labels.length ? '<div class="card-labels">' + labels.map(function (x) { return '<span class="label">' + esc(x) + '</span>'; }).join('') + '</div>' : '') +
+      '</div>';
+    }
+
+    function bodyCommon(p) {
+      return '<span class="card-eyebrow">' + esc(p.series || p.brand) + '</span>' +
+        '<h3 class="card-name"><a href="#">' + esc(p.name) + '</a></h3>' +
+        (p.rating != null
+          ? '<div class="card-rating"><span class="stars" style="--pct:' + Math.round(p.rating / 5 * 100) + '%"></span>' +
+            '<span class="rating-count">' + p.rating.toFixed(1) + ' (' + p.reviews + ')</span></div>' : '');
+    }
+
+    function currentCard(p) {
+      var v = variantOf(p), onSale = isSale(v);
+      var save = onSale ? Math.round((1 - v.price / v.msrp) * 100) : 0;
+      var sizes = (p.variants.length > 1 && p.sizes.length > 1)
+        ? '<div class="card-sizes"><span class="lbl">Size:</span>' + p.variants.map(function (vv, i) {
+            return '<span class="swatch' + (i === p.default ? ' sel' : '') + '">' + esc(vv.size) + '</span>'; }).join('') + '</div>'
+        : '';
+      return '<article class="card">' + mediaHTML(p, v, true) +
+        '<div class="card-body">' + bodyCommon(p) +
+          '<div class="card-price"><span class="price' + (onSale ? ' sale' : '') + '">' + eur(v.price) + '</span>' +
+          (onSale ? '<span class="discount">Save ' + save + '%</span>' : '') + '</div>' +
+          (onSale ? '<p class="card-was">' + eur(v.msrp) + ' (last 30 days lowest price)</p>' : '') +
+          '<div class="stock' + (v.stock ? '' : ' out') + '"><span class="dot"></span>' + (v.stock ? 'In stock' : 'Out of stock') + '</div>' +
+          sizes +
+        '</div></article>';
+    }
+
+    function v2Card(p) {
+      var v = variantOf(p), onSale = isSale(v);
+      var save = onSale ? Math.round((1 - v.price / v.msrp) * 100) : 0;
+      return '<article class="card card--v2">' + mediaHTML(p, v, true) +
+        '<div class="card-body">' + bodyCommon(p) +
+          idealFor(p) +
+          '<div class="card-price"><span class="price' + (onSale ? ' sale' : '') + '">' + eur(v.price) + '</span>' +
+          (onSale ? '<span class="discount">Save ' + save + '%</span>' : '') +
+          '<div class="stock' + (v.stock ? '' : ' out') + '"><span class="dot"></span>' + (v.stock ? 'In stock' : 'Out of stock') + '</div></div>' +
+        '</div></article>';
+    }
+
+    var PICKS = ['Durado Fry Pan Set', 'Macao Wok Set', 'Profi Resist Fry Pan'];
+    fetch('assets/catalog.json?v=20260813p').then(function (r) { return r.json(); }).then(function (data) {
+      var byName = {};
+      data.products.forEach(function (p) { byName[p.name] = p; });
+      var picks = PICKS.map(function (n) { return byName[n]; }).filter(Boolean);
+      document.getElementById('rowCurrent').innerHTML = picks.map(currentCard).join('');
+      document.getElementById('rowV2').innerHTML = picks.map(v2Card).join('');
+    });
+  })();
+  </script>
+</body>
+</html>

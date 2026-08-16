@@ -175,7 +175,7 @@
             '<button class="icon-btn" aria-label="Wishlist">' + I.heart + '</button>' +
             '<button class="icon-btn" aria-label="Stores">' + I.pin + '</button>' +
             '<button class="icon-btn" aria-label="Account">' + I.user + '</button>' +
-            '<button class="icon-btn" aria-label="Basket">' + I.bag + '<span class="cart-count">1</span></button>' +
+            '<button class="icon-btn" aria-label="Basket">' + I.bag + '<span class="cart-count" id="cartCount" hidden></span></button>' +
           '</div>' +
         '</div>' +
         '<div class="header-nav"><nav>' +
@@ -208,7 +208,9 @@
         '<div class="search-overlay" id="searchOverlay" aria-hidden="true" role="dialog" aria-label="Search">' +
           '<div class="search-scrim" data-act="search-close"></div>' +
           '<div class="search-panel"><div class="search-bar">' + I.searchDark.replace(/18/g, '22') +
-            '<input id="searchInput" type="search" placeholder="' + t('Search products, collections and more') + '" autocomplete="off" spellcheck="false">' +
+            '<input id="searchInput" type="search" placeholder="' +
+              t(window.matchMedia('(max-width: 700px)').matches ? 'Search' : 'Search products, collections and more') +
+              '" autocomplete="off" spellcheck="false">' +
             '<button class="search-close" aria-label="Close search" data-act="search-close">' + I.x + '</button>' +
           '</div><div class="search-body" id="searchBody"></div></div></div>';
     }
@@ -390,6 +392,27 @@
   var PAGE_SIZE = 12, shown = PAGE_SIZE, searchQ = '';
 
   var BAG_S = '<svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="#1c1c1c" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 8h12l1 12.5H5L6 8Z"/><path d="M9 8a3 3 0 0 1 6 0"/></svg>';
+  var BELL_S = '<svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="#1c1c1c" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 9a6 6 0 1 0-12 0c0 6-2.5 7-2.5 7h17S18 15 18 9Z"/><path d="M10 19.5a2.2 2.2 0 0 0 4 0"/></svg>';
+
+  /* ---- session cart + back-in-stock notify (UX-study #8 / #18) ----
+     Quantities live in sessionStorage so tiles, the header badge and the
+     PDP stay in sync across category switches. */
+  var CART_STORE = 'wmf.plp.cart', NOTIFY_STORE = 'wmf.plp.notify';
+  function loadStore(key, fallback) {
+    try { return JSON.parse(sessionStorage.getItem(key)) || fallback; } catch (e) { return fallback; }
+  }
+  var CART = loadStore(CART_STORE, {});
+  var NOTIFY = loadStore(NOTIFY_STORE, []);
+  function saveStore(key, val) { try { sessionStorage.setItem(key, JSON.stringify(val)); } catch (e) {} }
+  function cartTotal() {
+    return Object.keys(CART).reduce(function (s, k) { return s + CART[k]; }, 0);
+  }
+  function updateCartBadge() {
+    var el = document.getElementById('cartCount'); if (!el) return;
+    var n = cartTotal();
+    el.textContent = n;
+    el.hidden = !n;
+  }
   var HEART_S = '<svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="#1c1c1c" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20.8 5.6a5 5 0 0 0-7.1 0L12 7.3l-1.7-1.7a5 5 0 0 0-7.1 7.1L12 21.5l8.8-8.8a5 5 0 0 0 0-7.1Z"/></svg>';
   /* merchandising tile (Figma PLP): text low in the dark half, whole tile links to the comparison */
   var PROMO = '<a class="promo-tile" href="frying-pans.html#compare" aria-label="Choose the right pan for the job — compare our range">' +
@@ -408,6 +431,19 @@
   }
 
   /* info labels: real/derived today (sets), PIM attributes when the data lands */
+  /* v2 tile (UX-study #7): technique-driven "Ideal for" line */
+  var IDEAL_FOR = {
+    'Intense Searing': 'Searing protein and vegetables',
+    'Gentle Frying':   'Delicate food like eggs and fish',
+    'All Purpose':     'All-round everyday cooking'
+  };
+  function idealFor(p) {
+    var tech = Array.isArray(p.technique) ? p.technique[0] : p.technique;
+    var text = IDEAL_FOR[tech];
+    if (!text) return '';
+    return '<p class="card-ideal"><b>' + t('Ideal for:') + '</b> ' + esc(t(text)) + '</p>';
+  }
+
   function infoLabels(p, v) {
     var out = [];
     if (/^Set of \d/.test(v.size)) out.push(v.size);
@@ -423,31 +459,30 @@
     var v = variantOf(p);
     var onSale = isSale(v);
     var save = onSale ? Math.round((1 - v.price / v.msrp) * 100) : 0;
-    var swatches = p.variants.map(function (vv, i) {
-      var sel = i === (p._sel == null ? p.default : p._sel);
-      return '<span class="swatch' + (sel ? ' sel' : '') + (vv.stock ? '' : ' oos') + '" data-i="' + i + '"' +
-        (vv.stock ? '' : ' title="' + t('Out of stock') + '"') + '>' + esc(t(vv.size)) + '</span>';
-    }).join('');
     var labels = infoLabels(p, v);
-    /* colour variants shown as small image swatches, capped with a +N marker */
-    var colorRow = '';
-    if (p.colors && p.colors.length) {
-      var CLIM = 4;
-      var shown = p.colors.slice(0, CLIM).map(function (c) {
-        return '<span class="card-swatch' + (c.stock === false ? ' oos' : '') + '" title="' + esc(c.name) + '"><img src="' + img(c.sku) + '" alt=""></span>';
-      }).join('');
-      var extra = p.colors.length - CLIM;
-      colorRow = '<div class="card-colors"><span class="lbl">' + t('Color:') + '</span>' + shown +
-        (extra > 0 ? '<span class="card-more">+' + extra + '</span>' : '') + '</div>';
-    }
     var pdpHref = 'product.html?id=' + p.id;
-    return '<article class="card" data-id="' + p.id + '">' +
+    /* Condensed v2 tile (UX-study #7): overlay badges carry the attributes,
+       an "Ideal for" line explains the technique, stock joins the price row.
+       Size/colour selection and the was-price line live on the PDP now.
+       NOTE for live: on discounted prices the EU Omnibus "(last 30 days
+       lowest price)" disclosure must be re-added wherever the strike price
+       is shown — dropped here for the prototype only. */
+    return '<article class="card card--v2" data-id="' + p.id + '">' +
       '<div class="card-media">' +
         '<img class="pan-inuse" src="assets/inuse.jpg" alt="" aria-hidden="true">' +
         badgeFor(v) +
         '<a class="card-link" href="' + pdpHref + '" aria-label="' + esc(p.brand + ' ' + nameOf(p)) + '"></a>' +
-        '<div class="card-actions"><button class="round" aria-label="Add to basket">' + BAG_S + '</button>' +
-        '<button class="round" aria-label="Add to wishlist">' + HEART_S + '</button></div>' +
+        '<div class="card-actions">' +
+        (v.stock
+          /* in stock: basket button carries this product's cart quantity (#8) */
+          ? '<button class="round add-bag" aria-label="' + t('Add to basket') + '">' + BAG_S +
+            ((CART[p.id] || 0) ? '<span class="cart-count">' + CART[p.id] + '</span>' : '') + '</button>'
+          /* out of stock: distinct bell — register for a back-in-stock alert (#18) */
+          : '<button class="round notify-bell' + (NOTIFY.indexOf(p.id) >= 0 ? ' is-on' : '') + '"' +
+            ' aria-pressed="' + (NOTIFY.indexOf(p.id) >= 0) + '"' +
+            ' aria-label="' + t('Notify me when available') + '"' +
+            ' title="' + t(NOTIFY.indexOf(p.id) >= 0 ? "We'll notify you" : 'Notify me when available') + '">' + BELL_S + '</button>') +
+        '<button class="round" aria-label="' + t('Add to wishlist') + '">' + HEART_S + '</button></div>' +
         '<img class="pan" src="' + img(v.sku) + '" alt="' + esc(p.brand + ' ' + nameOf(p)) + '" loading="lazy">' +
         (labels ? '<div class="card-labels">' + labels + '</div>' : '') +
       '</div>' +
@@ -459,14 +494,11 @@
           ? '<div class="card-rating"><span class="stars" style="--pct:' + Math.round(p.rating / 5 * 100) + '%"></span>' +
             '<span class="rating-count">' + p.rating.toFixed(1) + ' (' + p.reviews + ')</span></div>'
           : '') +
+        idealFor(p) +
         /* Price Display component (Figma 1621:6329) — Default / Discount variants */
         '<div class="card-price"><span class="price' + (onSale ? ' sale' : '') + '">' + eur(v.price) + '</span>' +
-        (onSale ? '<span class="discount">' + t('Save %n%').replace('%n', save) + '</span>' : '') + '</div>' +
-        (onSale ? '<p class="card-was">' + eur(v.msrp) + ' ' + t('(last 30 days lowest price)') + '</p>' : '') +
-        '<div class="stock' + (v.stock ? '' : ' out') + '"><span class="dot"></span>' + (v.stock ? t('In stock') : t('Out of stock')) + '</div>' +
-        /* sizes only — a set's variants are configurations, offered on the PDP */
-        (p.variants.length > 1 && p.sizes.length > 1 ? '<div class="card-sizes"><span class="lbl">' + t('Size:') + '</span>' + swatches + '</div>' : '') +
-        colorRow +
+        (onSale ? '<span class="discount">' + t('Save %n%').replace('%n', save) + '</span>' : '') +
+        '<div class="stock' + (v.stock ? '' : ' out') + '"><span class="dot"></span>' + (v.stock ? t('In stock') : t('Out of stock')) + '</div></div>' +
       '</div></article>';
   }
 
@@ -601,18 +633,39 @@
     }
     var applyBtn = document.getElementById('drawerApplyBtn');
     if (applyBtn) applyBtn.textContent = (list.length === 1 ? t('Show %n product') : t('Show %n products')).replace('%n', list.length);
+    renderFacets();   // option counts follow the current search + selections
   }
 
+  function cardProduct(el) {
+    var card = el.closest('.card'); if (!card) return null;
+    var p = DATA.products.find(function (x) { return x.id === card.getAttribute('data-id'); });
+    return p ? { card: card, p: p } : null;
+  }
   if (grid) {
     grid.addEventListener('click', function (e) {
       var chip = e.target.closest('.search-chip[data-q]');
       if (chip) { submitSearch(chip.getAttribute('data-q')); return; }
+      var bag = e.target.closest('.add-bag');
+      if (bag) {
+        var hitB = cardProduct(bag); if (!hitB) return;
+        CART[hitB.p.id] = (CART[hitB.p.id] || 0) + 1;
+        saveStore(CART_STORE, CART); updateCartBadge();
+        hitB.card.outerHTML = cardHTML(hitB.p);
+        return;
+      }
+      var bell = e.target.closest('.notify-bell');
+      if (bell) {
+        var hitN = cardProduct(bell); if (!hitN) return;
+        var ni = NOTIFY.indexOf(hitN.p.id);
+        if (ni >= 0) NOTIFY.splice(ni, 1); else NOTIFY.push(hitN.p.id);
+        saveStore(NOTIFY_STORE, NOTIFY);
+        hitN.card.outerHTML = cardHTML(hitN.p);
+        return;
+      }
       var sw = e.target.closest('.swatch'); if (!sw) return;
-      var card = sw.closest('.card');
-      var p = DATA.products.find(function (x) { return x.id === card.getAttribute('data-id'); });
-      if (!p) return;
-      p._sel = parseInt(sw.dataset.i, 10);
-      card.outerHTML = cardHTML(p);
+      var hit = cardProduct(sw); if (!hit) return;
+      hit.p._sel = parseInt(sw.dataset.i, 10);
+      hit.card.outerHTML = cardHTML(hit.p);
     });
   }
   if (showMoreBtn) showMoreBtn.addEventListener('click', function () { shown += PAGE_SIZE; renderGrid(); });
@@ -760,10 +813,12 @@
         html += '<div class="search-section-head"><p class="search-section-title">' + t('Recent searches') + '</p>' +
           '<button class="search-clear-recents" data-clear-recents>' + t('Clear all') + '</button></div>' +
           recent.map(recentRow).join('');
+      } else {
+        // trending only until the shopper has a history — recents beat trending (#13)
+        html += '<div class="search-section-head"><p class="search-section-title">' + t('Trending searches') + '</p></div>' +
+          TRENDING.map(trendRow).join('');
       }
-      html += '<div class="search-section-head"><p class="search-section-title">' + t('Trending searches') + '</p></div>' +
-        TRENDING.map(trendRow).join('') +
-        '<div class="search-section-head"><p class="search-section-title">' + t('Popular categories') + '</p></div>' +
+      html += '<div class="search-section-head"><p class="search-section-title">' + t('Popular categories') + '</p></div>' +
         '<div class="search-chips">' + POPULAR_CATS.map(function (c) {
           return '<a class="search-chip" href="' + c.href + '">' + esc(t(c.label)) + '</a>';
         }).join('') + '</div>';
@@ -773,10 +828,18 @@
     var ql = q.toLowerCase();
     var completions = VOCAB.filter(function (v) { return v.indexOf(ql) >= 0 && v !== ql; }).slice(0, 4);
     var cats = SEARCH_CATS.filter(function (c) { return (c.label + ' ' + c.keys).toLowerCase().indexOf(ql) >= 0; }).slice(0, 2);
-    var hits = matchProducts(q).slice(0, 4);
+    var all = matchProducts(q);
+    var hits = all.slice(0, 4);
     var html = completions.map(function (c) { return completionRow(c, q); }).join('');
     if (cats.length)  html += (html ? '<div class="s-divider"></div>' : '') + cats.map(function (c) { return catRow(c, q); }).join('');
-    if (hits.length)  html += (html ? '<div class="s-divider"></div>' : '') + hits.map(function (p) { return productRow(p, q); }).join('');
+    if (hits.length) {
+      // labelled + counted, and a sideways-scrolling row on mobile so results
+      // stay visible above the open keyboard (#13)
+      html += (html ? '<div class="s-divider"></div>' : '') +
+        '<div class="search-section-head"><p class="search-section-title">' + t('Top results') + '</p>' +
+        '<span class="s-count">' + t('%v of %t results').replace('%v', hits.length).replace('%t', all.length) + '</span></div>' +
+        '<div class="s-products">' + hits.map(function (p) { return productRow(p, q); }).join('') + '</div>';
+    }
     if (!html) html = '<div class="search-empty-note">' + t('No suggestions — press Enter to search.') + '</div>';
     html += '<button class="search-cta" data-q="' + esc(q) + '">' + t('See all results for “%s”').replace('%s', esc(q)) + ' ' + ICO.arrow + '</button>';
     body.innerHTML = html;
@@ -842,6 +905,7 @@
   var selected = {};
 
   var PIM_FACETS = [
+    { key: 'cooktop',   title: 'Cooktop type',      open: false },   /* UX-study #1 gap; live: from PIM */
     { key: 'material',  title: 'Material',          open: false },
     { key: 'technique', title: 'Cooking Technique', open: false },
     { key: 'surface',   title: 'Surface',           open: false },
@@ -850,6 +914,7 @@
 
   /* option ordering from the Figma rail (alphabetical otherwise) */
   var OPTION_ORDER = {
+    cooktop:   ['Induction', 'Gas', 'Electric', 'Glass ceramic'],
     material:  ['Stainless Steel 3-ply', 'Stainless Steel 1-ply', 'Fusiontec', 'Cast Aluminium', 'Cast Iron'],
     technique: ['Intense Searing', 'Gentle Frying', 'All Purpose'],
     surface:   ['Non-stick', 'Ceramic', 'Uncoated'],
@@ -888,8 +953,10 @@
                   .sort(function (a, b) { return rank(a) - rank(b); });
     var series = uniq(LIST.map(function (p) { return p.series; })).sort();
 
-    /* group order follows the Figma rail; all groups start collapsed */
+    /* group order follows the Figma rail; all groups start collapsed.
+       Cooktop type leads — the study's #1 missing filter. */
     FACETS = [
+      pim.cooktop,
       pim.material,
       { key: 'size', title: 'Size', open: false, options: sizes.map(function (s) {
         return { label: s, hint: SIZE_HINTS[s], test: function (p) { return p.sizes.indexOf(s) >= 0; } }; }) },
@@ -915,15 +982,23 @@
   var facetsExpanded = {};
   function renderFacets() {
     if (!facetsEl) return;
+    // counts re-render the rail on every filter change — keep open groups open
+    var openNow = {};
+    facetsEl.querySelectorAll('.filter-group.open').forEach(function (fg) {
+      openNow[fg.getAttribute('data-key')] = true;
+    });
     facetsEl.innerHTML = FACETS.map(function (g) {
+      var base = groupBase(g);
       var over = g.options.length > FACET_LIMIT;
       var showAll = !over || facetsExpanded[g.key];
       var rows = g.options.map(function (o, i) {
         var on = selected[g.key].indexOf(o.label) >= 0;
         if (!showAll && i >= FACET_LIMIT && !on) return '';
-        return '<label class="facet"><input type="checkbox" data-key="' + g.key + '" value="' + esc(o.label) + '"' +
+        var n = base.filter(o.test).length;
+        return '<label class="facet' + (!n && !on ? ' facet--off' : '') + '"><input type="checkbox" data-key="' + g.key + '" value="' + esc(o.label) + '"' +
           (on ? ' checked' : '') + '><span class="box"></span><span class="facet-label">' + esc(t(o.label)) +
-          (o.hint ? ' <span class="facet-hint">' + esc(t(o.hint)) + '</span>' : '') + '</span></label>';
+          (o.hint ? ' <span class="facet-hint">' + esc(t(o.hint)) + '</span>' : '') +
+          ' <span class="facet-count">(' + n + ')</span></span></label>';
       }).join('');
       var more = '';
       if (over) {
@@ -933,17 +1008,27 @@
         more = '<button class="facet-more" data-more="' + g.key + '">' +
           (showAll ? t('Show less') : t('Show more (+%n)').replace('%n', hidden)) + '</button>';
       }
-      return '<div class="filter-group' + (g.open ? ' open' : '') + '">' +
+      return '<div class="filter-group' + (g.open || openNow[g.key] ? ' open' : '') + '" data-key="' + g.key + '">' +
         '<button class="filter-head">' + esc(t(g.title)) + ' <span class="filter-toggle"></span></button>' +
         '<div class="filter-body">' + rows + more + '</div></div>';
     }).join('');
   }
 
+  function passGroup(g, p) {
+    var chosen = selected[g.key];
+    if (!chosen || !chosen.length) return true;
+    return g.options.some(function (o) { return chosen.indexOf(o.label) >= 0 && o.test(p); });
+  }
   function passFacets(p) {
-    return FACETS.every(function (g) {
-      var chosen = selected[g.key];
-      if (!chosen || !chosen.length) return true;
-      return g.options.some(function (o) { return chosen.indexOf(o.label) >= 0 && o.test(p); });
+    return FACETS.every(function (g) { return passGroup(g, p); });
+  }
+  /* expected result count for an option: what selecting it would return,
+     given the search and every OTHER group's selections (options within a
+     group are OR'ed, so the own group is left out of the base) */
+  function groupBase(g) {
+    var base = searchQ ? matchProducts(searchQ, LIST) : LIST;
+    return base.filter(function (p) {
+      return FACETS.every(function (g2) { return g2 === g || passGroup(g2, p); });
     });
   }
 
@@ -971,7 +1056,106 @@
     });
   }
 
-  function applyFilters() { shown = PAGE_SIZE; renderChips(); renderGrid(); }
+  /* ---- quick filters: curated shortcut chips for the most-used facets ----
+     Each entry points at an existing rail facet (key + option label) so a chip
+     and its rail checkbox stay in sync through the same `selected` state.
+     Suffix rule mirrors the Figma comp: size chips show the serving-size hint,
+     every other chip shows a live product count. */
+  var quickFiltersEl = document.getElementById('quickFilters');
+  var QUICK_FILTERS = [
+    { key: 'cooktop',   label: 'Induction' },
+    { key: 'size',      label: '28 cm' },
+    { key: 'size',      label: '24 cm' },
+    { key: 'surface',   label: 'Non-stick' },
+    { key: 'surface',   label: 'Ceramic' },
+    { key: 'material',  label: 'Stainless Steel 3-ply', text: 'Stainless steel' },
+    { key: 'technique', label: 'Gentle Frying',         text: 'Gentle frying' }
+  ];
+
+  function qfOption(qf) {
+    var g = FACETS.filter(function (x) { return x.key === qf.key; })[0];
+    if (!g) return null;
+    return g.options.filter(function (o) { return o.label === qf.label; })[0] || null;
+  }
+
+  function renderQuickFilters() {
+    if (!quickFiltersEl) return;
+    quickFiltersEl.innerHTML = QUICK_FILTERS.map(function (qf) {
+      var o = qfOption(qf);
+      if (!o) return '';                                   // option not in this catalog — skip
+      var on = (selected[qf.key] || []).indexOf(qf.label) >= 0;
+      var text = qf.text || t(qf.label);
+      var suffix = (qf.key === 'size' && SIZE_HINTS[qf.label])
+        ? t(SIZE_HINTS[qf.label])
+        : '(' + LIST.filter(o.test).length + ')';
+      return '<button class="qf-chip' + (on ? ' is-active' : '') + '" type="button"' +
+        ' data-key="' + qf.key + '" data-label="' + esc(qf.label) + '" aria-pressed="' + on + '">' +
+        '<span class="qf-text">' + esc(text) + '</span>' +
+        '<span class="qf-count">' + esc(suffix) + '</span>' +
+        (on ? '<span class="qf-x" aria-hidden="true">' + I.xs + '</span>' : '') +
+        '</button>';
+    }).join('');
+    updateHScrolls();   // chip widths changed — refresh arrow visibility
+  }
+
+  /* ---- horizontal scroll arrows (category tiles + quick filters) ----
+     Wraps a scroller and adds prev/next paging buttons, shown (mobile,
+     via CSS) only for the directions with off-screen content. */
+  var HS_UPDATERS = [];
+  function updateHScrolls() { HS_UPDATERS.forEach(function (f) { f(); }); }
+  function setupHScroll(scroller, mod) {
+    if (!scroller || scroller._hs) return;
+    var wrap = document.createElement('div');
+    wrap.className = 'hscroll' + (mod ? ' hscroll--' + mod : '');
+    scroller.parentNode.insertBefore(wrap, scroller);
+    wrap.appendChild(scroller);
+    [-1, 1].forEach(function (dir) {
+      var b = document.createElement('button');
+      b.type = 'button';
+      b.className = 'hscroll-arrow hscroll-arrow--' + (dir < 0 ? 'prev' : 'next');
+      b.setAttribute('aria-label', t(dir < 0 ? 'Scroll left' : 'Scroll right'));
+      b.innerHTML = I.chev;
+      b.addEventListener('click', function () {
+        scroller.scrollBy({ left: dir * Math.round(scroller.clientWidth * 0.7), behavior: 'smooth' });
+      });
+      wrap.appendChild(b);
+    });
+    var update = function () {
+      var max = scroller.scrollWidth - scroller.clientWidth;
+      wrap.classList.toggle('has-prev', scroller.scrollLeft > 2);
+      wrap.classList.toggle('has-next', max > 4 && scroller.scrollLeft < max - 2);
+    };
+    scroller.addEventListener('scroll', update, { passive: true });
+    window.addEventListener('resize', update);
+    scroller._hs = update;
+    HS_UPDATERS.push(update);
+    update();
+  }
+
+  /* ---- filter persistence across category switches (UX-study #5) ----
+     Selections are kept for the session and re-applied on the next PLP;
+     only options that exist in that category's facets are restored. */
+  var FILTER_STORE = 'wmf.plp.filters';
+  function saveFilters() {
+    try {
+      var out = {};
+      Object.keys(selected).forEach(function (k) { if (selected[k].length) out[k] = selected[k]; });
+      sessionStorage.setItem(FILTER_STORE, JSON.stringify(out));
+    } catch (e) { /* storage unavailable — filters simply don't persist */ }
+  }
+  function restoreFilters() {
+    var saved;
+    try { saved = JSON.parse(sessionStorage.getItem(FILTER_STORE) || '{}'); } catch (e) { return; }
+    FACETS.forEach(function (g) {
+      if (!saved[g.key] || !saved[g.key].length) return;
+      var ok = saved[g.key].filter(function (l) {
+        return g.options.some(function (o) { return o.label === l; });
+      });
+      if (ok.length) { selected[g.key] = ok; g.open = true; }
+    });
+  }
+
+  function applyFilters() { shown = PAGE_SIZE; saveFilters(); renderChips(); renderQuickFilters(); renderGrid(); }
 
   function bindFacets() {
     if (facetsEl) {
@@ -998,21 +1182,69 @@
         applyFilters();
       });
     }
+    if (quickFiltersEl) {
+      quickFiltersEl.addEventListener('click', function (e) {
+        var btn = e.target.closest('.qf-chip'); if (!btn) return;
+        var key = btn.getAttribute('data-key');
+        var arr = selected[key]; if (!arr) return;
+        var label = btn.getAttribute('data-label');
+        var i = arr.indexOf(label);
+        if (i >= 0) arr.splice(i, 1); else arr.push(label);
+        applyFilters();     // re-renders chips, rail (checkbox + counts) and grid
+      });
+    }
     [afEl, afMobileEl].forEach(function (el) {
       if (!el) return;
       el.addEventListener('click', function (e) {
         var btn = e.target.closest('button'); if (!btn) return;
         if (btn.hasAttribute('data-af-clear')) {
           Object.keys(selected).forEach(function (k) { selected[k] = []; });
-          renderFacets(); applyFilters(); return;
+          applyFilters(); return;
         }
         var arr = selected[btn.dataset.key]; if (!arr) return;
         var i = arr.indexOf(btn.dataset.label);
         if (i >= 0) arr.splice(i, 1);
-        renderFacets(); applyFilters();
+        applyFilters();
       });
     });
   }
+
+  /* ---- Pan Finder modal (UX-study #17) ----
+     Opens on-site, no page change. The slot holds the Neocom guided-selling
+     widget on live; the prototype shows a placeholder in its place. */
+  function mountFinder() {
+    if (document.getElementById('finderOverlay')) return;
+    var el = document.createElement('div');
+    el.id = 'finderOverlay';
+    el.className = 'finder-overlay';
+    el.setAttribute('aria-hidden', 'true');
+    el.setAttribute('role', 'dialog');
+    el.setAttribute('aria-label', t('Pan Finder'));
+    el.innerHTML =
+      '<div class="finder-scrim" data-finder-close></div>' +
+      '<div class="finder-panel">' +
+        '<div class="finder-head"><h2>' + t('Pan Finder') + '</h2>' +
+        '<button class="finder-close" aria-label="' + t('Close') + '" data-finder-close>' + I.x + '</button></div>' +
+        '<div class="finder-body"><div class="finder-slot">Neocom Finder Widget</div></div>' +
+      '</div>';
+    el.addEventListener('click', function (e) {
+      if (e.target.closest('[data-finder-close]')) window.closeFinder();
+    });
+    document.body.appendChild(el);
+  }
+  window.openFinder = function () {
+    mountFinder();
+    document.getElementById('finderOverlay').setAttribute('aria-hidden', 'false');
+    document.body.classList.add('finder-open');
+  };
+  window.closeFinder = function () {
+    var el = document.getElementById('finderOverlay');
+    if (el) el.setAttribute('aria-hidden', 'true');
+    document.body.classList.remove('finder-open');
+  };
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape' && document.body.classList.contains('finder-open')) window.closeFinder();
+  });
 
   /* ---- filter drawer (mobile) / rail collapse (desktop) ---- */
   window.onFilterBtn = function () {
@@ -1054,12 +1286,18 @@
       .then(function (m) {
         if (m && m.nav) MENU = m;
         renderChrome();
+        updateCartBadge();
         updateHeaderSearch();
         bindSearch();
       });
     translatePage();
     bindChrome();
     bindFacets();
+
+    // paging arrows for the horizontally scrolling rows (mobile)
+    setupHScroll(document.querySelector('.catnav-track'), 'cats');
+    setupHScroll(document.getElementById('quickFilters'), 'chips');
+    window.addEventListener('load', updateHScrolls);   // tile images change row width
 
     // FAQ accordions (frying-pans page only)
     document.querySelectorAll('.faq-q').forEach(function (b) {
@@ -1078,7 +1316,7 @@
       }
     });
 
-    fetch('assets/catalog.json')
+    fetch('assets/catalog.json?v=20260813f')
       .then(function (r) { if (!r.ok) throw new Error('HTTP ' + r.status); return r.json(); })
       .then(function (d) {
         DATA = d;
@@ -1091,6 +1329,7 @@
         }
         LIST = DATA.products.filter(function (p) { return p.cats && (PAGE.category in p.cats); });
         buildFacets();
+        restoreFilters();   // carry compatible selections over from the last PLP (UX-study #5)
         // deep link from a PDP series eyebrow: ?series= pre-selects the Series facet
         var seriesParam = new URLSearchParams(location.search).get('series');
         if (seriesParam && selected.series) {
@@ -1101,6 +1340,7 @@
           }
         }
         renderFacets();
+        renderQuickFilters();
         renderChips();
         var q = new URLSearchParams(location.search).get('q');
         if (q) {

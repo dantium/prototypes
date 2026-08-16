@@ -463,10 +463,8 @@
     var pdpHref = 'product.html?id=' + p.id;
     /* Condensed v2 tile (UX-study #7): overlay badges carry the attributes,
        an "Ideal for" line explains the technique, stock joins the price row.
-       Size/colour selection and the was-price line live on the PDP now.
-       NOTE for live: on discounted prices the EU Omnibus "(last 30 days
-       lowest price)" disclosure must be re-added wherever the strike price
-       is shown — dropped here for the prototype only. */
+       Size/colour selection lives on the PDP now. Sale tiles keep the
+       EU Omnibus "(last 30 days lowest price)" disclosure. */
     return '<article class="card card--v2" data-id="' + p.id + '">' +
       '<div class="card-media">' +
         '<img class="pan-inuse" src="assets/inuse.jpg" alt="" aria-hidden="true">' +
@@ -499,6 +497,8 @@
         '<div class="card-price"><span class="price' + (onSale ? ' sale' : '') + '">' + eur(v.price) + '</span>' +
         (onSale ? '<span class="discount">' + t('Save %n%').replace('%n', save) + '</span>' : '') +
         '<div class="stock' + (v.stock ? '' : ' out') + '"><span class="dot"></span>' + (v.stock ? t('In stock') : t('Out of stock')) + '</div></div>' +
+        /* EU Omnibus disclosure — must accompany every strike/discount price */
+        (onSale ? '<p class="card-was">' + eur(v.msrp) + ' ' + t('(last 30 days lowest price)') + '</p>' : '') +
       '</div></article>';
   }
 

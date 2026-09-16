@@ -480,15 +480,32 @@ body:not(.searching) .quick-filters-bar + .toolbar { border-top: 0; padding-top:
 .card-media {
   position: relative; aspect-ratio: 1 / 1; background: #fff; overflow: hidden;
 }
-.card-media > .pan {
-  position: absolute; inset: 7% 7%; width: 86%; height: 86%;
-  object-fit: contain; margin: auto; z-index: 0;
+.card-media .pan {
+  position: absolute; inset: 0; width: 100%; height: 100%;
+  object-fit: cover; z-index: 0;   /* spans the container, same as .pan-inuse */
 }
-.card-media > .pan-inuse {
+.card-media .pan-inuse {
   position: absolute; inset: 0; width: 100%; height: 100%;
   object-fit: cover; opacity: 0; transition: opacity .4s ease; z-index: 1;
 }
-.card-media:hover > .pan-inuse { opacity: 1; }
+.card-media:hover .pan-inuse { opacity: 1; }
+.media-scrub { display: none; }
+/* ≤900px: the track becomes the live-shop swipe gallery (product shot +
+   in-use photo) with a progress bar; overlays stay put while images swipe */
+@media (max-width: 900px) {
+  .media-track {
+    display: flex; height: 100%;
+    overflow-x: auto; scroll-snap-type: x mandatory;
+    scrollbar-width: none; -webkit-overflow-scrolling: touch;
+  }
+  .media-track::-webkit-scrollbar { display: none; }
+  .card-media .pan, .card-media .pan-inuse {
+    position: static; flex: 0 0 100%; width: 100%; height: 100%;
+    object-fit: cover; opacity: 1; transition: none; scroll-snap-align: start;
+  }
+  .media-scrub { display: block; height: 2px; margin-top: 10px; background: var(--line-soft); overflow: hidden; }
+  .media-scrub span { display: block; width: 50%; height: 100%; background: var(--black); }
+}
 .badge {
   position: absolute; top: 19px; left: 0;
   display: inline-flex; align-items: center; height: 24px; padding: 0 16px 0 26px;
@@ -564,9 +581,10 @@ body:not(.searching) .quick-filters-bar + .toolbar { border-top: 0; padding-top:
 .card--v2 .card-body { gap: 7px; }
 .card-ideal { margin: 0; font-size: 13px; font-weight: 300; line-height: 1.45; color: #55575c; }
 .card-ideal b { font-weight: 500; color: #2a2a2a; }
-/* price + stock share a row to save a line */
-.card--v2 .card-price { display: flex; align-items: baseline; justify-content: space-between; gap: 10px; }
-.card--v2 .card-price .stock { margin-left: auto; }
+/* series/collection row carries the stock indicator on the right */
+.card-top { display: flex; align-items: center; justify-content: space-between; gap: 10px; }
+/* price sits directly under the title — body gap only, no extra padding */
+.card--v2 .card-price { padding-top: 0; }
 
 .card-sizes { display: flex; align-items: center; gap: 7px; flex-wrap: wrap; padding-top: 4px; }
 .card-sizes .lbl { font-size: 12px; font-weight: 300; color: #333; }
@@ -587,6 +605,8 @@ body:not(.searching) .quick-filters-bar + .toolbar { border-top: 0; padding-top:
   border: 1px solid var(--line); border-radius: 4px; background: #fff; flex: none;
 }
 .card-swatch img { width: 100%; height: 100%; object-fit: contain; }
+.card-swatch[data-sku] { cursor: pointer; }
+.card-swatch.sel { border-color: var(--black); box-shadow: inset 0 0 0 1px var(--black); }
 .card-swatch.oos { border-style: dashed; }
 .card-swatch.oos img { opacity: .4; }
 .card-more { font-size: 12px; font-weight: 300; color: #6a6a6a; }

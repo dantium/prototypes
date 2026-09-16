@@ -1,124 +1,74 @@
-# WMF Pans PLP — UX-study handover (Aug 2026)
+# WMF Pans PLP — changes vs. current site (Aug 2026 UX study)
 
-Changes from the Aug-2026 PLP UX study (Applause). The prototype is the working reference —
-every behaviour is implemented and inspectable there.
-
-- **Live reference:** https://dantium.github.io/prototypes/wmf/pans/pans.html (sub-PLP: `frying-pans.html`)
-- **Code:** `wmf/pans/assets/app.js` (logic) · `styles.css` · `i18n-de.js` · `catalog.json`
-- **Commits:** `e2f1c82` (main work) · `228bc93` (notify popover) · `af5d555` (Omnibus line)
-- Tile design-review page (not linked from the shop): `tile-preview.html`
-
----
+Each item: what the site does **today** → the **new** behaviour. The prototype is the working
+reference for every change: https://dantium.github.io/prototypes/wmf/pans/pans.html
+(logic in `wmf/pans/assets/app.js`; commits `e2f1c82` · `228bc93` · `af5d555`).
 
 ## Mega menu / Header
 
-- **Cart badge is dynamic**: shows the cart's total quantity, **hidden at 0** (was hard-coded "1").
-  Updates from tile add-to-cart and PDP add-to-cart. Prototype: `updateCartBadge()` / `#cartCount`.
-- Nothing else in the mega menu changed this round.
+| Change | Current site | New |
+|---|---|---|
+| Cart badge | Static count | Live cart total; hidden when the cart is empty |
 
-## PLP
+Nothing else in the mega menu changes.
 
-### Filters
+## PLP — Filters
 
-- **Quick-filter chips** — row labelled **"Frequently selected criteria"** above the toolbar.
-  Curated per category (merchandiser-editable list, prototype: `QUICK_FILTERS`). Size chips show the
-  serving hint `(4 – 6 people)`; all others show a live result count `(9)`. Chips and the filter rail
-  are **one state** — toggling either updates both, plus the active-filter chips and counts.
-  Active chip = solid black with ×.
-- **Cooktop type facet** — new multi-value product attribute `cooktop`, values exactly
-  `Induction | Gas | Electric | Glass ceramic` ("Glass ceramic", not "Ceramic" — that word is taken
-  by the surface facet). **Source: PIM.** Accessories (lids/protectors/stands) have no value and drop
-  out of any cooktop filtering. Group sits **first** in the rail; an **Induction** chip leads the quick filters.
-- **Sticky rail (desktop >900px)** — `position: sticky; top: 0; max-height: 100dvh; overflow-y: auto`,
-  no visible scrollbar, `overscroll-behavior: contain`. Mobile keeps the existing drawer.
-- **Option counts** — every rail option shows its *expected result count*: query = search term
-  + all **other** groups' selections (OR inside a group, AND across groups), own group excluded.
-  Compute in the search engine (aggregations). Count-0 options dim to 45%, stay clickable.
-- **Persistence across categories** — selections survive navigation; on load restore only options
-  that exist in the target category's facets, expand their groups, drop the rest. "Clear all" clears
-  the store too. Prototype: `sessionStorage["wmf.plp.filters"]` as `{group: [values]}`.
-  **Live: prefer URL params** (shareable) with session fallback.
+| Change | Current site | New |
+|---|---|---|
+| Quick filters | None on the PLP | "Frequently selected criteria" chip row above the toolbar; curated per category; live counts; fully synced with the sidebar (toggle either) |
+| Cooktop filter | No facet — only an "Induction pans" category tile | New "Cooktop type" facet, first in the sidebar: `Induction / Gas / Electric / Glass ceramic`, from **PIM**; accessories have no value and drop out when filtering; Induction is also the lead quick chip |
+| Filter sidebar | Scrolls away with the page | Sticky (>900px): pins to viewport, scrolls internally when tall, no scrollbar; mobile drawer unchanged |
+| Option counts | No numbers on options | Every option shows its expected result count — computed from search + all *other* selected groups (OR within a group, AND across); zero-count options dim but stay clickable |
+| Category switch | Resets all selections | Compatible selections carry over (options that exist in the new category); their groups open; "Clear all" clears everything. Prototype: sessionStorage — live: prefer URL params |
 
-### Product tile (condensed v2)
+## PLP — Product tile
 
-Top to bottom: image (status badge top-left, action circles top-right, attribute badges
-bottom-left: "Set of N" + technique/surface, max 2) → series eyebrow → name → rating
-(omit when no reviews) → **"Ideal for:" line** (from cooking technique, one line, see Copy) →
-**price row** (price + "Save N%" left, stock right, same row) → **Omnibus line on discounted
-items only**.
+| Change | Current site | New |
+|---|---|---|
+| Tile content | Size + colour swatches on the tile; no usage guidance | Condensed tile: attribute badges stay on the photo; stock indicator sits on the collection/series row (right-aligned); price directly under the name; new one-line **"Ideal for:"** (from cooking technique); size swatches stay (switch variant + price); colour swatches stay (image thumbs, own colour outlined, tap swaps to that colour's product). ⚠️ Keep `(last 30 days lowest price)` with every discounted price — EU Omnibus |
+| Tile image | Product shot inset; hover shows in-use photo (desktop) | Product shot fills the tile edge-to-edge. **Mobile:** swipeable 2-slide gallery (product shot → in-use photo) with a progress bar under the image, as on the live PLP; badges/buttons stay fixed while images swipe. Desktop hover unchanged |
+| Cart quantity | Shown in the header only | Also on the tile's bag button (badge on the circle, none at 0) |
+| Out of stock | No action on the tile | Bag becomes a **bell** → email popover ("Remind me") → registered = gold bell; tap again to unregister. ⚠️ Prototype doesn't store/send the email — needs the back-in-stock service + double opt-in |
 
-- **Removed from tile** (PDP handles them): size selector, colour swatches.
-- ⚠️ **Required:** `€129.99 (last 30 days lowest price)` must accompany **every**
-  strike/discount price (EU Omnibus). Never drop it.
-- **Cart qty on tile** — bag button shows the product's quantity as a badge (bottom-right of the
-  circle), none at 0. Prototype cart: `sessionStorage["wmf.plp.cart"]` — **live: real cart.**
-- **Back-in-stock notify** — out-of-stock tiles swap bag → **bell**. Tap opens a popover on the tile:
-  copy line, email input, primary "Remind me" button, ×. Invalid email → red border. Valid submit →
-  green confirmation → auto-close (~1.6 s) → bell gold = registered; tapping a gold bell unregisters.
-  Close via ×/Esc/outside click = no registration.
-  ⚠️ Prototype does **not** store or send the address — wire to the back-in-stock service with
-  double opt-in (GDPR); registered state per customer, not per session.
+## PLP — Toolbar & layout
 
-### Layout & toolbar
-
-- Category hero image removed for now (markup commented out); page head is single-column.
-- **Category tiles + chip rows on mobile (≤900px)**: edge-bleed horizontal scroll, no scrollbar,
-  **paging arrows** (white circle + chevron) shown only for directions with off-screen content;
-  tap scrolls ~70% of the visible width.
-- **Pan Finder** button opens an **on-site modal** (no page change): title bar + ×, scrim, Esc close,
-  scroll lock. The modal body's `.finder-slot` is the **mount point for the Neocom widget**
-  (prototype shows a placeholder).
+| Change | Current site | New |
+|---|---|---|
+| Pan Finder | Dead button | Opens an on-site modal; `.finder-slot` inside is the **Neocom widget** mount point |
+| Mobile scroll rows | Scrollbar / no affordance | Category tiles + chips scroll edge-to-edge with paging arrows (shown only where content is off-screen); no scrollbars |
+| Category hero image | Image beside the H1 | Removed for now; single-column page head |
 
 ## PDP
 
-- Add-to-cart feeds the same cart/badge as the PLP tiles (prototype: `bumpCart()` writes the shared store).
-- Size and colour selection now happen **only** on the PDP — the tile no longer offers them.
-- Omnibus disclosure applies here too wherever a strike price shows.
+| Change | Current site | New |
+|---|---|---|
+| Add to cart | Updates header only | Also drives the shared cart state behind the tile + header badges |
+| Colour | Colour picker in the buy box | Unchanged — PDP picker drives packshot / price / SKU; PLP tile swatches link into the sibling colour product |
 
 ## Search
 
-- **Empty state:** user has recent searches → show **Recents** (+ Popular categories), **no Trending**.
-  No recents → Trending + Popular categories. All viewports.
-- **Typing state:** completions → categories → **"Top results"** with a live count
-  (`4 of 38 results`) right-aligned in the section header.
-- **Mobile ≤700px:** Top results render as **one horizontally scrolling row of compact product
-  cards** (image, name, price) so they stay visible above the open keyboard.
-  Desktop keeps the stacked list rows. Input placeholder shortens to "Search" on mobile.
-- Full results page (after Enter / "See all results") is the normal PLP grid — nothing special.
-
----
-
-## Integration cheat-sheet
-
-| Prototype (sessionStorage)     | Shape                | Live equivalent                    |
-|--------------------------------|----------------------|------------------------------------|
-| `wmf.plp.filters`              | `{group: [values]}`  | URL params / session               |
-| `wmf.plp.cart`                 | `{productId: qty}`   | Real cart                          |
-| `wmf.plp.notify`               | `[productId]`        | Back-in-stock service (+ opt-in)   |
-| `wmf_recent`                   | `[query]` (max 6)    | Existing search history            |
-
-**Breakpoints:** >900 sticky rail · ≤900 drawer + scroll arrows · ≤700 search mobile layout · ≤560 one-column grid.
-**Cache busting:** all asset links + the catalog fetch carry `?v=YYYYMMDDx` — bump on any asset change.
-**i18n:** `i18n-de.js`, keyed by the EN source string, falls back to EN.
+| Change | Current site | New |
+|---|---|---|
+| Suggestions (empty) | Trending always shown | If the user has recent searches: show Recents, hide Trending; otherwise Trending as today |
+| Product suggestions | Plain list | Labelled "Top results" with a live "x of y results" count. **Mobile ≤700px:** one horizontally-scrolling row of compact cards (visible above the open keyboard). Desktop list unchanged |
+| Input placeholder | Long guidance text | Just "Search" on mobile |
+| Results page | — | Unchanged (standard grid, now with the new tile) |
 
 ## Copy (EN / DE)
 
 | Context | EN | DE |
 |---|---|---|
 | Chips row label | Frequently selected criteria | Häufig gewählte Kriterien |
-| Facet group | Cooktop type | Herdart |
-| Ideal for — label | Ideal for: | Ideal für: |
-| Ideal for — Intense Searing | Searing protein and vegetables | Scharfes Anbraten von Fleisch und Gemüse |
-| Ideal for — Gentle Frying | Delicate food like eggs and fish | Empfindliches wie Eier und Fisch |
-| Ideal for — All Purpose ⚠️ placeholder | All-round everyday cooking | Vielseitiges Kochen im Alltag |
-| Notify — copy | Enter your email address and we will inform you when the product is available again. | Geben Sie Ihre E-Mail-Adresse ein und wir informieren Sie, sobald das Produkt wieder verfügbar ist. |
-| Notify — field / button | E-mail address / Remind me | E-Mail-Adresse / Benachrichtigen |
-| Notify — success | Thanks — we'll email you when it's back in stock. | Danke — wir informieren Sie per E-Mail, sobald es wieder verfügbar ist. |
-| Search | Top results / x of y results | Top-Ergebnisse / x von y Ergebnissen |
+| Cooktop facet | Cooktop type | Herdart |
+| Ideal for — Searing | Ideal for: Searing protein and vegetables | Ideal für: Scharfes Anbraten von Fleisch und Gemüse |
+| Ideal for — Gentle | Ideal for: Delicate food like eggs and fish | Ideal für: Empfindliches wie Eier und Fisch |
+| Ideal for — All Purpose ⚠️ placeholder | Ideal for: All-round everyday cooking | Ideal für: Vielseitiges Kochen im Alltag |
+| Notify popover | Enter your email address and we will inform you when the product is available again. → Remind me | Geben Sie Ihre E-Mail-Adresse ein … → Benachrichtigen |
 
-## Open / on hold
+Full dictionary: `assets/i18n-de.js` (EN-keyed, falls back to EN).
 
-- **#16 Category-tile rework** (remove levels / icons / A/B) — awaiting design decision.
-- **#10–12 Interactive comparison** — on hold ("Discuss").
-- #6 tooltips · #9 tile hierarchy · #14 suggestion order · #15 NL-hint — discuss / later iteration.
-- Photo / voice search — parked (trbo, ≥2027).
+## Not in this scope
+
+#16 category-tile rework (design decision pending) · #10–12 interactive comparison (on hold) ·
+#6/#9/#14/#15 (discuss/later) · photo & voice search (parked, trbo ≥2027).

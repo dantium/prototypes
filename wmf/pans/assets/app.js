@@ -460,14 +460,38 @@
     var onSale = isSale(v);
     var save = onSale ? Math.round((1 - v.price / v.msrp) * 100) : 0;
     var labels = infoLabels(p, v);
+    var swatches = p.variants.map(function (vv, i) {
+      var sel = i === (p._sel == null ? p.default : p._sel);
+      return '<span class="swatch' + (sel ? ' sel' : '') + (vv.stock ? '' : ' oos') + '" data-i="' + i + '"' +
+        (vv.stock ? '' : ' title="' + t('Out of stock') + '"') + '>' + esc(t(vv.size)) + '</span>';
+    }).join('');
+    /* colour variants as small image swatches (capped, +N marker); the
+       product's own colour is outlined, tapping another swaps the tile */
+    var colorRow = '';
+    if (p.colors && p.colors.length) {
+      var CLIM = 4;
+      var shown = p.colors.slice(0, CLIM).map(function (c, i) {
+        var sel = i === (p.defaultColor || 0);
+        return '<span class="card-swatch' + (sel ? ' sel' : '') + (c.stock === false ? ' oos' : '') +
+          '" data-sku="' + esc(c.sku) + '" title="' + esc(c.name) + '"><img src="' + img(c.sku) + '" alt="' + esc(c.name) + '"></span>';
+      }).join('');
+      var extra = p.colors.length - CLIM;
+      colorRow = '<div class="card-colors"><span class="lbl">' + t('Color:') + '</span>' + shown +
+        (extra > 0 ? '<span class="card-more">+' + extra + '</span>' : '') + '</div>';
+    }
     var pdpHref = 'product.html?id=' + p.id;
     /* Condensed v2 tile (UX-study #7): overlay badges carry the attributes,
-       an "Ideal for" line explains the technique, stock joins the price row.
-       Size/colour selection lives on the PDP now. Sale tiles keep the
-       EU Omnibus "(last 30 days lowest price)" disclosure. */
+       an "Ideal for" line explains the technique, stock sits on the series
+       row, size swatches stay on the tile. Colour selection lives on the
+       PDP. Sale tiles keep the EU Omnibus disclosure. */
     return '<article class="card card--v2" data-id="' + p.id + '">' +
       '<div class="card-media">' +
-        '<img class="pan-inuse" src="assets/inuse.jpg" alt="" aria-hidden="true">' +
+        /* the track is the mobile swipe gallery; on desktop the images
+           overlay as before (product shot + in-use photo on hover) */
+        '<div class="media-track">' +
+          '<img class="pan" src="' + img(v.sku) + '" alt="' + esc(p.brand + ' ' + nameOf(p)) + '" loading="lazy">' +
+          '<img class="pan-inuse" src="assets/inuse.jpg" alt="" aria-hidden="true">' +
+        '</div>' +
         badgeFor(v) +
         '<a class="card-link" href="' + pdpHref + '" aria-label="' + esc(p.brand + ' ' + nameOf(p)) + '"></a>' +
         '<div class="card-actions">' +
@@ -481,24 +505,29 @@
             ' aria-label="' + t('Notify me when available') + '"' +
             ' title="' + t(NOTIFY.indexOf(p.id) >= 0 ? "We'll notify you" : 'Notify me when available') + '">' + BELL_S + '</button>') +
         '<button class="round" aria-label="' + t('Add to wishlist') + '">' + HEART_S + '</button></div>' +
-        '<img class="pan" src="' + img(v.sku) + '" alt="' + esc(p.brand + ' ' + nameOf(p)) + '" loading="lazy">' +
         (labels ? '<div class="card-labels">' + labels + '</div>' : '') +
       '</div>' +
+      /* mobile gallery progress bar (live-shop pattern); hidden on desktop */
+      '<div class="media-scrub" aria-hidden="true"><span></span></div>' +
       '<div class="card-body">' +
-        '<span class="card-eyebrow">' + esc(p.series || p.brand) + '</span>' +
+        /* series/collection row carries the stock indicator on the right */
+        '<div class="card-top"><span class="card-eyebrow">' + esc(p.series || p.brand) + '</span>' +
+        '<div class="stock' + (v.stock ? '' : ' out') + '"><span class="dot"></span>' + (v.stock ? t('In stock') : t('Out of stock')) + '</div></div>' +
         '<h3 class="card-name"><a href="' + pdpHref + '">' + esc(nameOf(p)) + '</a></h3>' +
+        /* Price Display component (Figma 1621:6329) — Default / Discount variants */
+        '<div class="card-price"><span class="price' + (onSale ? ' sale' : '') + '">' + eur(v.price) + '</span>' +
+        (onSale ? '<span class="discount">' + t('Save %n%').replace('%n', save) + '</span>' : '') + '</div>' +
+        /* EU Omnibus disclosure — must accompany every strike/discount price */
+        (onSale ? '<p class="card-was">' + eur(v.msrp) + ' ' + t('(last 30 days lowest price)') + '</p>' : '') +
         /* real Bazaarvoice ratings from the PDPs; products without reviews show none */
         (p.rating != null
           ? '<div class="card-rating"><span class="stars" style="--pct:' + Math.round(p.rating / 5 * 100) + '%"></span>' +
             '<span class="rating-count">' + p.rating.toFixed(1) + ' (' + p.reviews + ')</span></div>'
           : '') +
         idealFor(p) +
-        /* Price Display component (Figma 1621:6329) — Default / Discount variants */
-        '<div class="card-price"><span class="price' + (onSale ? ' sale' : '') + '">' + eur(v.price) + '</span>' +
-        (onSale ? '<span class="discount">' + t('Save %n%').replace('%n', save) + '</span>' : '') +
-        '<div class="stock' + (v.stock ? '' : ' out') + '"><span class="dot"></span>' + (v.stock ? t('In stock') : t('Out of stock')) + '</div></div>' +
-        /* EU Omnibus disclosure — must accompany every strike/discount price */
-        (onSale ? '<p class="card-was">' + eur(v.msrp) + ' ' + t('(last 30 days lowest price)') + '</p>' : '') +
+        /* sizes only — a set's variants are configurations, offered on the PDP */
+        (p.variants.length > 1 && p.sizes.length > 1 ? '<div class="card-sizes"><span class="lbl">' + t('Size:') + '</span>' + swatches + '</div>' : '') +
+        colorRow +
       '</div></article>';
   }
 
@@ -693,6 +722,15 @@
     }, 0);
   }
   if (grid) {
+    // mobile tile gallery: keep each card's progress bar in sync with its
+    // swipe position (scroll doesn't bubble — capture catches it once for all)
+    grid.addEventListener('scroll', function (e) {
+      var tk = e.target;
+      if (!tk.classList || !tk.classList.contains('media-track')) return;
+      var card = tk.closest('.card'); if (!card) return;
+      var thumb = card.querySelector('.media-scrub span'); if (!thumb) return;
+      thumb.style.transform = 'translateX(' + (tk.scrollLeft / tk.clientWidth * 100) + '%)';
+    }, true);
     grid.addEventListener('click', function (e) {
       var chip = e.target.closest('.search-chip[data-q]');
       if (chip) { submitSearch(chip.getAttribute('data-q')); return; }
@@ -719,6 +757,14 @@
         return;
       }
       if (e.target.closest('.notify-pop')) return;   // popover handles its own clicks
+      // colour swatch: colours are sibling products on the live shop — swap the tile
+      var cw = e.target.closest('.card-swatch[data-sku]');
+      if (cw) {
+        var hitC = cardProduct(cw); if (!hitC) return;
+        var sib = DATA.products.find(function (x) { return x.variants.some(function (vv) { return vv.sku === cw.dataset.sku; }); });
+        if (sib && sib !== hitC.p) hitC.card.outerHTML = cardHTML(sib);
+        return;
+      }
       var sw = e.target.closest('.swatch'); if (!sw) return;
       var hit = cardProduct(sw); if (!hit) return;
       hit.p._sel = parseInt(sw.dataset.i, 10);
@@ -1373,7 +1419,7 @@
       }
     });
 
-    fetch('assets/catalog.json?v=20260813f')
+    fetch('assets/catalog.json?v=20260813y')
       .then(function (r) { if (!r.ok) throw new Error('HTTP ' + r.status); return r.json(); })
       .then(function (d) {
         DATA = d;

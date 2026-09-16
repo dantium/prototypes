@@ -1225,7 +1225,28 @@
     "Gas",
     "Electric",
     "Glass ceramic"
-   ]
+   ],
+   "colors": [
+    {
+     "name": "Black",
+     "sku": "3201113556",
+     "price": 99.99,
+     "stock": true
+    },
+    {
+     "name": "Platinum",
+     "sku": "3201113558",
+     "price": 89.99,
+     "stock": true
+    },
+    {
+     "name": "Rose Quartz",
+     "sku": "3201113560",
+     "price": 99.99,
+     "stock": true
+    }
+   ],
+   "defaultColor": 0
   },
   {
    "id": "p16",
@@ -1269,7 +1290,28 @@
     "Gas",
     "Electric",
     "Glass ceramic"
-   ]
+   ],
+   "colors": [
+    {
+     "name": "Black",
+     "sku": "3201113556",
+     "price": 99.99,
+     "stock": true
+    },
+    {
+     "name": "Platinum",
+     "sku": "3201113558",
+     "price": 89.99,
+     "stock": true
+    },
+    {
+     "name": "Rose Quartz",
+     "sku": "3201113560",
+     "price": 99.99,
+     "stock": true
+    }
+   ],
+   "defaultColor": 1
   },
   {
    "id": "p17",
@@ -1352,7 +1394,28 @@
     "Gas",
     "Electric",
     "Glass ceramic"
-   ]
+   ],
+   "colors": [
+    {
+     "name": "Black",
+     "sku": "3201113556",
+     "price": 99.99,
+     "stock": true
+    },
+    {
+     "name": "Platinum",
+     "sku": "3201113558",
+     "price": 89.99,
+     "stock": true
+    },
+    {
+     "name": "Rose Quartz",
+     "sku": "3201113560",
+     "price": 99.99,
+     "stock": true
+    }
+   ],
+   "defaultColor": 2
   },
   {
    "id": "p18",

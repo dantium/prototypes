@@ -1,0 +1,16 @@
+<svg preserveAspectRatio="none" overflow="visible" style="display: block;" width="56" height="56" viewBox="0 0 56 56" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g id="cart-button (DS Icon Button &#194;&#183; Ghost outlined)">
+<circle id="Ellipse 1" cx="28" cy="28" r="27.5" fill="white" stroke="black"/>
+<g id="shopping-cart" clip-path="url(#clip0_0_125)">
+<g id="Group 2480">
+<path id="Path 1864" d="M39.3997 39.4709H16.6003L18.477 22.989H37.523L39.3997 39.4709Z" stroke="black" stroke-linecap="round" stroke-linejoin="round"/>
+<path id="Path 1865" d="M24.084 26.1836L24.1537 19.9412C24.1537 19.493 24.2541 19.0492 24.4491 18.635C24.6441 18.2209 24.9299 17.8447 25.2903 17.5277C25.6506 17.2108 26.0784 16.9594 26.5492 16.7878C27.02 16.6163 27.5246 16.528 28.0342 16.528C28.5438 16.528 29.0484 16.6163 29.5192 16.7878C29.99 16.9594 30.4178 17.2108 30.7782 17.5277C31.1385 17.8447 31.4243 18.2209 31.6194 18.635C31.8144 19.0492 31.9148 19.493 31.9148 19.9412V26.1836" stroke="black" stroke-linecap="round" stroke-linejoin="round"/>
+</g>
+</g>
+</g>
+<defs>
+<clipPath id="clip0_0_125">
+<rect width="24" height="24" fill="white" transform="translate(16 16)"/>
+</clipPath>
+</defs>
+</svg>

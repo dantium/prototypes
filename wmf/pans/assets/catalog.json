@@ -26,7 +26,7 @@
    ]
   }
  },
- "skuCount": 59,
+ "skuCount": 60,
  "products": [
   {
    "id": "p0",
@@ -3257,6 +3257,267 @@
     "Electric",
     "Glass ceramic"
    ]
+  },
+  {
+   "id": "p44",
+   "brand": "WMF",
+   "name": "Cooking Set: Aparto Pot Set 5-pc, Devil Frying Pan Set 2-pc & Profi Plus Spatula 32 cm",
+   "name_de": "Koch-Set: WMF Aparto Topf-Set, 5-teilig, Devil Bratpfannen-Set, 2-teilig und Profi Plus Pfannenwender, 32cm",
+   "series": null,
+   "type": "Set",
+   "minPrice": 196.17,
+   "sizes": [],
+   "rating": null,
+   "reviews": 0,
+   "ratingReal": false,
+   "default": 0,
+   "cats": {
+    "pots": 2
+   },
+   "variants": [
+    {
+     "sku": "bundle-7116001673-3201113924-3201000146",
+     "size": "Set",
+     "price": 196.17,
+     "msrp": 217.97,
+     "stock": true,
+     "label": "BUNDLE"
+    }
+   ],
+   "description": "This set brings together everything you need for versatile everyday cooking. The WMF Aparto cookware, the 2-piece frying pan set and the Profi Plus spatula combine well-thought-out features, harmoniously matched materials and reliable performance – for comfortable cooking, braising, frying and serving. Heat-resistant glass lids make it easy to keep an eye on cooking, while TransTherm® all-stove bases provide efficient heat distribution and retention on all hob types, including induction. The ceramic-coated pans are designed for frequent frying and easy cleaning, and the spatula is ideal for cookware with delicate surfaces. From soups and sauces to braised vegetables and crisp pan-fried dishes, this set covers a wide range of culinary tasks in one carefully matched WMF solution.",
+   "description_de": "Dieses Set vereint alles, was für vielseitiges Kochen im Alltag benötigt wird. Das WMF Aparto Kochgeschirr, das 2-teilige Pfannenset und der Profi Plus Wender verbinden durchdachte Funktionen, harmonisch aufeinander abgestimmte Materialien und verlässliche Performance – für komfortables Kochen, Schmoren, Braten und Servieren. Hitzebeständige Glasdeckel ermöglichen eine einfache Kontrolle des Kochvorgangs, während TransTherm®-Allherdböden auf allen Herdarten, inklusive Induktion, für effiziente Wärmeverteilung und -speicherung sorgen. Die keramikbeschichteten Pfannen sind auf häufiges Braten und eine mühelose Reinigung ausgelegt, der Wender eignet sich ideal für Kochgeschirr mit empfindlichen Oberflächen. Von Suppen und Saucen über geschmortes Gemüse bis hin zu kross gebratenen Pfannengerichten deckt dieses Set ein breites Spektrum kulinarischer Aufgaben ab – in einer sorgfältig abgestimmten WMF Gesamtlösung.",
+   "material": "Stainless Steel",
+   "surface": "Ceramic",
+   "technique": "All Purpose",
+   "occasion": [
+    "Everyday",
+    "Gifting"
+   ],
+   "bundle": [
+    {
+     "qty": 1,
+     "name": "Aparto Pot Set, 5-piece",
+     "name_de": "Aparto Topf-Vorteils-Set*, 5-teilig",
+     "sku": "7116001673",
+     "price": 125.99,
+     "rating": 4.2,
+     "reviews": 68,
+     "tech": [
+      [
+       "EAN",
+       "4000530693020"
+      ],
+      [
+       "Material",
+       "Stainless steel 18/10"
+      ],
+      [
+       "Exterior finish",
+       "High-gloss polished stainless steel"
+      ],
+      [
+       "Interior",
+       "Brushed stainless steel"
+      ],
+      [
+       "Lid material",
+       "Glass"
+      ],
+      [
+       "Pouring rim",
+       "Yes"
+      ],
+      [
+       "Hob compatibility",
+       "Induction · Gas · Glass ceramic · Halogen"
+      ],
+      [
+       "Oven-safe",
+       "Body up to 250 °C, lid up to 180 °C"
+      ],
+      [
+       "Dishwasher-safe",
+       "Yes, hand washing recommended"
+      ],
+      [
+       "Weight",
+       "7.35 kg"
+      ]
+     ]
+    },
+    {
+     "qty": 1,
+     "name": "Devil Frying Pan Set, 2-piece, 24 & 28 cm",
+     "name_de": "Devil Bratpfannen-Set, 2-teilig, 24 und 28 cm",
+     "sku": "3201113924",
+     "price": 53.99,
+     "rating": 4.8,
+     "reviews": 150,
+     "tech": [
+      [
+       "EAN",
+       "4000530659743"
+      ],
+      [
+       "Exterior finish",
+       "High-gloss polished stainless steel"
+      ],
+      [
+       "Interior coating",
+       "Ceramic"
+      ],
+      [
+       "Oven-safe",
+       "Up to 250 °C"
+      ],
+      [
+       "Dishwasher-safe",
+       "Yes, hand washing recommended"
+      ],
+      [
+       "Weight",
+       "3.275 kg"
+      ]
+     ],
+     "id": "p5"
+    },
+    {
+     "qty": 1,
+     "name": "Profi Plus Spatula, 32 cm",
+     "name_de": "Profi Plus Pfannenwender, 32 cm",
+     "sku": "3201000146",
+     "price": 16.19,
+     "rating": 4.7,
+     "reviews": 213,
+     "tech": [
+      [
+       "EAN",
+       "4000530548900"
+      ],
+      [
+       "Handle material",
+       "Cromargan®"
+      ],
+      [
+       "Dishwasher-safe",
+       "Yes"
+      ],
+      [
+       "Weight",
+       "161 g"
+      ]
+     ]
+    }
+   ],
+   "bundleInfo": {
+    "eyebrow": "Cooking Sets",
+    "eyebrow_de": "Kochsets",
+    "gallery": [
+     "assets/pdp/bundle-aparto/gallery-lid.jpg",
+     "assets/pdp/bundle-aparto/gallery-sizes.jpg",
+     "assets/pdp/bundle-aparto/gallery-coating.jpg",
+     "assets/pdp/bundle-aparto/gallery-spatula.jpg"
+    ],
+    "advantages": [
+     [
+      "Fully equipped cooking set:",
+      "pots, pans and spatula for boiling, braising, frying and serving"
+     ],
+     [
+      "Confident control:",
+      "glass lids let you see inside without letting heat escape"
+     ],
+     [
+      "Efficient heat distribution:",
+      "TransTherm® all-stove bases for even heat and good heat retention"
+     ],
+     [
+      "Long-lasting frying:",
+      "ceramic-coated pans with high heat resistance and easy cleaning"
+     ],
+     [
+      "Gentle on coatings:",
+      "the spatula is kind to non-stick surfaces, ideal for delicate food"
+     ],
+     [
+      "Premium WMF quality:",
+      "Cromargan® stainless steel and well-thought-out details for everyday cooking"
+     ]
+    ],
+    "advantages_de": [
+     [
+      "Voll ausgestattetes Kochset:",
+      "Töpfe, Pfannen und Wender für Kochen, Schmoren, Braten und Servieren"
+     ],
+     [
+      "Souveräne Kochkontrolle:",
+      "Glasdeckel ermöglichen den Blick ins Kochgeschirr, ohne Wärme entweichen zu lassen"
+     ],
+     [
+      "Effiziente Hitzeverteilung:",
+      "TransTherm®-Allherdböden sorgen für gleichmäßige Wärme und gute Hitzespeicherung"
+     ],
+     [
+      "Langlebige Bratleistung:",
+      "Keramikbeschichtete Pfannen mit hoher Hitzebeständigkeit und komfortabler Reinigung"
+     ],
+     [
+      "Sanfter Umgang mit Beschichtungen:",
+      "Wender schonend zu Antihaftoberflächen, ideal für empfindliche Speisen"
+     ],
+     [
+      "Premium-WMF-Qualität:",
+      "Cromargan® Edelstahl und durchdachte Details für verlässlichen Genuss im Küchenalltag"
+     ]
+    ],
+    "descTitle": "Cook, fry and serve – with one versatile WMF cookware set",
+    "descTitle_de": "Kochen, braten und servieren – mit einem vielseitigen WMF Kochgeschirr-Set mühelos kombiniert",
+    "details": [
+     {
+      "img": "assets/products/7116001673.jpg",
+      "title": "Versatile Cookware, Perfectly Matched",
+      "title_de": "Vielseitiges Kochgeschirr, perfekt aufeinander abgestimmt",
+      "text": "Aparto pots, the matching frying pan set and the Profi Plus spatula – one harmonised set for cooking, braising, frying and serving.",
+      "text_de": "WMF Aparto Kochgeschirr, das passende Pfannenset und der Profi Plus Wender vereinen komfortables Kochvergnügen für Kochen, Schmoren, Braten und Servieren."
+     },
+     {
+      "img": "assets/pdp/bundle-aparto/detail-editorial.jpg",
+      "title": "Complete Cooking Versatility",
+      "title_de": "Vollendete Kochvielfalt",
+      "text": "Coordinated sizes and materials cover everything from soups and sauces to braised vegetables and crisp pan-fried dishes.",
+      "text_de": "Aufeinander abgestimmte Größen und harmonierende Materialien unterstützen ein breites Spektrum an Aufgaben im täglichen Küchenalltag."
+     },
+     {
+      "img": "assets/pdp/bundle-aparto/gallery-lid.jpg",
+      "title": "Glass Lids & Heat Efficiency",
+      "title_de": "Glasdeckel und Hitzeeffizienz im Einklang",
+      "text": "Glass lids let you check at a glance, while TransTherm® all-stove bases spread heat evenly and retain it efficiently.",
+      "text_de": "Glasdeckel ermöglichen einen mühelosen Blick ins Kochgeschirr, während der TransTherm®-Allherdboden für gleichmäßige Wärmeverteilung sorgt."
+     },
+     {
+      "img": "assets/pdp/bundle-aparto/gallery-coating.jpg",
+      "title": "Long-Lasting Frying",
+      "title_de": "Langlebig braten",
+      "text": "The ceramic-coated pans are made for frequent frying and easy cleaning, with high heat resistance.",
+      "text_de": "Die keramikbeschichteten Pfannen sind auf vielseitiges Braten und eine mühelose Reinigung ausgelegt."
+     },
+     {
+      "img": "assets/pdp/bundle-aparto/gallery-spatula.jpg",
+      "title": "Gentle Turning",
+      "title_de": "Sanft wenden",
+      "text": "The Profi Plus spatula is kind to non-stick coatings and ideal for turning delicate food without damaging the surface.",
+      "text_de": "Der passende Wender ist schonend zu Antihaftbeschichtungen und ideal für empfindliche Speisen."
+     },
+     {
+      "img": "assets/pdp/bundle-aparto/gallery-sizes.jpg",
+      "title": "Cromargan® Quality for Serving",
+      "title_de": "Cromargan® Qualität für stilvolles Servieren",
+      "text": "Generous pouring rims for near drip-free pouring, and robust Cromargan® stainless steel for durability and hygiene.",
+      "text_de": "Großzügige Schüttränder ermöglichen ein nahezu tropffreies Ausgießen, robustes Cromargan® Edelstahl unterstützt Langlebigkeit und Hygiene."
+     }
+    ]
+   },
+   "search": "aparto devil profi plus koch-set cooking set bundle pots pans spatula topf-set kochset"
   }
  ]
 }

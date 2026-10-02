@@ -4,16 +4,17 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>WMF · Product</title>
-  <link rel="stylesheet" href="assets/styles.css?v=20260813y">
-  <link rel="stylesheet" href="assets/pdp.css?v=20260813y">
+  <link rel="stylesheet" href="assets/styles.css?v=20261002e">
+  <link rel="stylesheet" href="assets/pdp.css?v=20261002e">
   <script>window.PAGE = { kind: 'pdp', category: 'frying-pans' };</script>
-  <script src="assets/i18n-de.js?v=20260813y"></script>
-  <script src="assets/app.js?v=20260813y" defer></script>
-  <script src="assets/pdp.js?v=20260813y" defer></script>
+  <script src="assets/i18n-de.js?v=20261002e"></script>
+  <script src="assets/app.js?v=20261002e" defer></script>
+  <script src="assets/pdp.js?v=20261002e" defer></script>
 </head>
 <body class="pdp">
 
   <div id="chrome-header"></div>
+
 
   <main>
     <div class="wrap">
@@ -22,11 +23,13 @@
         <ol id="pdpCrumbs"><li>Loading…</li></ol>
       </nav>
 
-      <!-- ============= GALLERY + BUY BOX ============= -->
+      <!-- ============= GALLERY + BUY BOX  (Figma "PDP v2", node 2399:276) ============= -->
       <section class="pdp-top">
         <div class="pdp-gallery">
           <div class="pdp-stage" id="pdpStage">
             <div class="pdp-track" id="pdpTrack"></div>
+            <!-- DS PromoLabel (discount variant) — bundles only: "Bundle savings" -->
+            <span class="pdp-badge promo-label promo-label--discount" id="pdpBadge" hidden></span>
             <button class="pdp-videoflag" id="pdpVideoFlag" hidden>
               <svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="11" fill="rgba(255,255,255,.22)"/><path d="M10 8.2v7.6l6-3.8-6-3.8Z" fill="#fff"/></svg>
               <span data-i18n>Watch video</span>
@@ -49,166 +52,19 @@
       </section>
     </div>
 
-    <!-- ============= FEATURE BANNERS + MARKETING (Figma example content —
-         true for the Profi Resist family, hidden elsewhere) ============= -->
-    <div id="pdpMarketing" hidden>
-
-      <div class="wrap">
-        <!-- feature USP icon strip -->
-        <section class="usp-strip" aria-label="Product feature icons">
-          <div class="usp">
-            <svg width="48" height="48" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-              <path d="M24 5.5 37.5 10v12c0 9.6-5.9 16.6-13.5 20.4C16.4 38.6 10.5 31.6 10.5 22V10Z"/>
-              <text x="24" y="27.5" text-anchor="middle" font-size="12.5" font-weight="600" fill="currentColor" stroke="none" font-family="inherit">10</text>
-            </svg>
-            <span data-i18n-html="usp.warranty">10 Year<br>Warranty</span>
-          </div>
-          <div class="usp">
-            <svg width="48" height="48" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-              <g transform="rotate(-32 24 24)"><rect x="20.2" y="5.5" width="7.6" height="12" rx="2.4"/><path d="M22.3 8v7M25.7 8v7M24 17.5V42"/></g>
-              <g transform="rotate(32 24 24)"><ellipse cx="24" cy="11.5" rx="4.4" ry="6.2"/><path d="M24 17.7V42"/></g>
-            </svg>
-            <span data-i18n-html="usp.metal">Metal Utensil<br>Safe</span>
-          </div>
-          <div class="usp">
-            <svg width="48" height="48" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-              <rect x="8" y="9.5" width="32" height="30" rx="3"/>
-              <circle cx="16" cy="14.5" r="1.1" fill="currentColor" stroke="none"/><circle cx="24" cy="14.5" r="1.1" fill="currentColor" stroke="none"/><circle cx="32" cy="14.5" r="1.1" fill="currentColor" stroke="none"/>
-              <path d="M8 19.5h32"/>
-              <path d="M14.5 27.5c3-2.6 6.5-2.6 9.5 0s6.5 2.6 9.5 0M14.5 33c3-2.6 6.5-2.6 9.5 0s6.5 2.6 9.5 0"/>
-            </svg>
-            <span data-i18n-html="usp.oven">Oven-Safe<br>Up To 400&deg;</span>
-          </div>
-          <div class="usp">
-            <svg width="48" height="48" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-              <rect x="9" y="8" width="30" height="32" rx="3"/>
-              <path d="M9 14h30"/><path d="M13 11h4"/><circle cx="34" cy="11" r="1" fill="currentColor" stroke="none"/>
-              <path d="M15.2 21.5h6.6c0 4-1.5 6.3-3.3 6.3s-3.3-2.3-3.3-6.3ZM18.5 27.8v5M16 32.8h5"/>
-              <ellipse cx="29" cy="27" rx="2.7" ry="5.6"/><ellipse cx="35" cy="27" rx="2.7" ry="5.6"/>
-            </svg>
-            <span data-i18n-html="usp.dishwasher">Dishwasher<br>Safe</span>
-          </div>
-          <div class="usp">
-            <svg width="48" height="48" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-              <path d="M11.5 22.5c-.8-5.5 3.4-9.6 8.4-9.3 5.2.3 9 4.2 8.4 9-.5 4.3-4.3 6.9-8.3 6.8-4.3-.1-7.9-2.6-8.5-6.5Z"/>
-              <circle cx="19.7" cy="21.6" r="3.1"/>
-              <path d="M8.5 33.5c1.5 3 5.5 4.5 9.5 4.5h6.5c4 0 7.5-1.5 9-4.5Z"/>
-              <path d="M33.5 34.8h8M33.5 36.9h6"/>
-            </svg>
-            <span data-i18n-html="usp.ceramic">Mineral Ceramic<br>Non-Stick</span>
-          </div>
-          <div class="usp">
-            <svg width="48" height="48" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-              <circle cx="24" cy="24" r="15"/>
-              <path d="M30 24h5M28.2 28.2l3.6 3.6M24 30v5M19.8 28.2l-3.6 3.6M18 24h-5M19.8 19.8l-3.6-3.6M24 18v-5M28.2 19.8l3.6-3.6"/>
-            </svg>
-            <span data-i18n-html="usp.hobs">All Hobs<br>Compatible</span>
-          </div>
-          <div class="usp">
-            <svg width="48" height="48" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-              <path d="M7.5 14.5v15a8.5 8.5 0 0 0 8.5 8.5h16a8.5 8.5 0 0 0 8.5-8.5v-15"/>
-              <path d="M13 14.5v13.6a6 6 0 0 0 6 6h10a6 6 0 0 0 6-6V14.5"/>
-              <path d="M18.5 14.5v11.7a4 4 0 0 0 4 4h3a4 4 0 0 0 4-4V14.5"/>
-            </svg>
-            <span data-i18n-html="usp.ply">3-Ply<br>Responsive</span>
-          </div>
-        </section>
-
-        <section class="feature-banners" aria-label="Product features">
-          <article class="fbanner fbanner--img-left">
-            <div class="fbanner-media"><img src="assets/pdp/banner-searprotect.jpg" alt="Close-up of the raised honeycomb structure of the pan surface"></div>
-            <div class="fbanner-copy">
-              <h3 data-i18n="Unique SearProtect® surface">Unique SearProtect&reg; surface</h3>
-              <p data-i18n>Particularly scratch-resistant and durable thanks to the raised honeycomb structure (Protection Grid) made of high-quality Cromargan&reg; for additional protection of the PermaDur non-stick coating.</p>
+    <!-- ============= PRODUCT DETAILS — accordion, open by default ============= -->
+    <section class="pdp-sec pdp-details" aria-label="Product details">
+      <div class="pdp-sec-in">
+        <div class="pdp-acc open" id="accDetails">
+          <button class="pdp-acc-head" aria-expanded="true"><span data-i18n>Product Details</span><img class="pdp-acc-chev" src="assets/pdp/v2/arrow-down.svg" width="24" height="24" alt=""></button>
+          <div class="pdp-acc-body">
+            <div class="pdp-features" id="pdpFeatures"></div>
+            <div class="pdp-longdesc" id="pdpLongDesc">
+              <h2 id="pdpDescTitle"></h2>
+              <p id="pdpDescText"></p>
             </div>
-          </article>
-
-          <article class="fbanner fbanner--layers">
-            <div class="fbanner-cutaway">
-              <img src="assets/pdp/banner-3ply.jpg" alt="Cutaway rendering of the pan's three body layers">
-            </div>
-            <div class="fbanner-labels">
-              <div class="flabel flabel--1"><span class="leader" aria-hidden="true"></span><span data-i18n="SearProtect® Grid">SearProtect&reg; Grid</span><br><span data-i18n>Mineral Ceramic</span><br><span data-i18n>Stainless steel</span></div>
-              <div class="flabel flabel--2"><span class="leader" aria-hidden="true"></span><span data-i18n>Aluminium</span></div>
-              <div class="flabel flabel--3"><span class="leader" aria-hidden="true"></span><span data-i18n="Cromargan® Stainless Steel">Cromargan&reg; Stainless Steel</span></div>
-            </div>
-            <div class="fbanner-copy">
-              <h3 data-i18n>Heat-responsive 3-ply body</h3>
-              <p data-i18n>A premium layered build of stainless steel and aluminum responds rapidly to temperature changes throughout the entire pan, delivering precise, professional-level control from start to finish.</p>
-            </div>
-          </article>
-        </section>
-
-        <!-- ============= PRODUCT ADVANTAGES ============= -->
-        <section class="advantages" aria-label="Product advantages">
-          <h2 data-i18n>Product Advantages</h2>
-          <div class="adv-grid">
-            <article class="adv-card">
-              <img src="assets/pdp/adv-control.jpg" alt="Cutaway rendering of the pan's layered body">
-              <h4 data-i18n>Total Control, Every Time</h4>
-              <p data-i18n-html="adv.control">Fast, even heat edge-to-edge means predictable cooking with <b>no hot spots</b>, no constant turning, no second-guessing. Just consistent results, every meal.</p>
-            </article>
-            <article class="adv-card">
-              <img src="assets/pdp/adv-searing.jpg" alt="Steak searing in the pan over a gas flame">
-              <h4 data-i18n>Restaurant-Level Searing at Home</h4>
-              <p data-i18n-html="adv.searing">It holds heat the moment food hits the pan, so you get that <b>deep golden crust</b> on steaks, chicken, and veg&mdash;without needing a commercial-grade setup.</p>
-            </article>
-            <article class="adv-card">
-              <img src="assets/pdp/adv-healthy.jpg" alt="A drop of oil on the honeycomb surface">
-              <h4 data-i18n>Healthier Cooking, Effortless Release</h4>
-              <p data-i18n-html="adv.healthy">Cook with less oil and still get clean release. <b>Eggs glide</b>, fish stays intact, and delicate foods lift effortlessly&mdash;no tearing, no sticking.</p>
-            </article>
-            <article class="adv-card">
-              <img src="assets/pdp/adv-robust.jpg" alt="The pan in daily use">
-              <h4 data-i18n>Robust Build, Lasting Performance</h4>
-              <p data-i18n-html="adv.robust">The raised honeycomb takes daily abrasion, helping protect the coating so performance lasts. Built for real world use, <b>metal utensil safe</b> and backed by a <b>10 year warranty</b>.</p>
-            </article>
-            <article class="adv-card">
-              <img src="assets/pdp/adv-versatility.jpg" alt="The pan moving from stovetop to oven">
-              <h4 data-i18n="Seamless Versatility & Safety">Seamless Versatility &amp; Safety</h4>
-              <p data-i18n-html="adv.versatile">Induction-ready and compatible with gas and electric, plus <b>oven safe</b> when recipes go from stovetop to finish. The <b>cool-touch</b> handle keeps control comfortable and safe.</p>
-            </article>
-            <article class="adv-card">
-              <img src="assets/pdp/adv-cleanup.jpg" alt="The pan being rinsed clean">
-              <h4 data-i18n>Quick Cleanup, No Scrubbing</h4>
-              <p data-i18n-html="adv.cleanup">Because food releases cleanly, cleanup stays simple. A quick rinse or wipe and you&rsquo;re done&mdash;less soaking, less scrubbing, more time back. <b>Dishwasher safe.</b></p>
-            </article>
-          </div>
-        </section>
-      </div>
-
-      <!-- ============= UGC ============= -->
-      <section class="ugc" aria-label="Customer videos">
-        <div class="wrap">
-          <h2 class="pdp-h2" data-i18n>Chefs love Profi Resist at home</h2>
-          <div class="ugc-row">
-            <button class="track-arrow" data-track="ugcTrack" data-dir="-1" aria-label="Previous videos">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="m15 6-6 6 6 6"/></svg>
-            </button>
-            <div class="ugc-track" id="ugcTrack">
-              <figure class="ugc-card"><img src="assets/pdp/ugc-1.jpg" alt="Home chef cooking with the pan"><span class="play" aria-hidden="true"></span></figure>
-              <figure class="ugc-card"><img src="assets/pdp/ugc-2.jpg" alt="Plated fish dish cooked in the pan"><span class="play" aria-hidden="true"></span></figure>
-              <figure class="ugc-card"><img src="assets/pdp/ugc-3.jpg" alt="Creator talking through a recipe"><span class="play" aria-hidden="true"></span></figure>
-              <figure class="ugc-card"><img src="assets/pdp/ugc-4.jpg" alt="Egg frying in the pan"><span class="play" aria-hidden="true"></span></figure>
-            </div>
-            <button class="track-arrow" data-track="ugcTrack" data-dir="1" aria-label="Next videos">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="m9 6 6 6-6 6"/></svg>
-            </button>
-          </div>
-        </div>
-      </section>
-
-      <!-- ============= TESTIMONIAL ============= -->
-      <section class="testimonial" aria-label="Press testimonial">
-        <div class="wrap">
-          <blockquote>&ldquo;This is the ultimate pan you need in your kitchen, a combination of style and professional culinary performance&rdquo;</blockquote>
-          <img class="press-logo" src="assets/pdp/vogue.png" alt="Vogue">
-        </div>
-      </section>
-    </div>
-
-    <!-- ============= COMPARE OUR RANGE (reused prototype) ============= -->
-    <section class="compare-section" id="compare">
+            <!-- COMPARE OUR RANGE (reused prototype) — frying-pan PDPs only -->
+            <section class="compare-section" id="compare" hidden>
       <div class="wrap">
         <h2 class="comparison__title" data-i18n>Compare our Range</h2>
         <div class="comparison-scroll">
@@ -316,6 +172,89 @@
           </div>
         </div>
       </div>
+            </section>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============= PRODUCT INFORMATION — collapsed accordions ============= -->
+    <section class="pdp-sec pdp-info" aria-label="Product information">
+      <div class="pdp-sec-in">
+        <div class="pdp-acc" id="accScope">
+          <button class="pdp-acc-head" aria-expanded="false"><span data-i18n="Scope of delivery">Scope of delivery</span><img class="pdp-acc-chev" src="assets/pdp/v2/arrow-down.svg" width="24" height="24" alt=""></button>
+          <div class="pdp-acc-body">
+            <ul class="scope-list" id="scopeList"></ul>
+          </div>
+        </div>
+        <div class="pdp-acc" id="accTech">
+          <button class="pdp-acc-head" aria-expanded="false"><span data-i18n="Technical data">Technical data</span><img class="pdp-acc-chev" src="assets/pdp/v2/arrow-down.svg" width="24" height="24" alt=""></button>
+          <div class="pdp-acc-body">
+            <div id="techData"></div>
+          </div>
+        </div>
+        <div class="pdp-acc" id="accReviews">
+          <button class="pdp-acc-head" aria-expanded="false"><span data-i18n="Reviews">Reviews</span><img class="pdp-acc-chev" src="assets/pdp/v2/arrow-down.svg" width="24" height="24" alt=""></button>
+          <div class="pdp-acc-body">
+            <div class="reviews-list" id="reviewsList"></div>
+            <div class="reviews-login">
+              <p data-i18n>Please log in to your myWMF account to write a review for the product.</p>
+              <button class="gold-pill" data-i18n>Log in now</button>
+            </div>
+          </div>
+        </div>
+        <div class="pdp-acc" id="accDocs">
+          <button class="pdp-acc-head" aria-expanded="false"><span data-i18n="Documents & downloads">Documents &amp; downloads</span><img class="pdp-acc-chev" src="assets/pdp/v2/arrow-down.svg" width="24" height="24" alt=""></button>
+          <div class="pdp-acc-body">
+            <div id="docLinks">
+              <a class="doc-link" href="#"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12"/><path d="m7 10 5 5 5-5"/><path d="M5 21h14"/></svg> <span data-i18n>Product data sheet (PDF)</span></a>
+              <a class="doc-link" href="#"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12"/><path d="m7 10 5 5 5-5"/><path d="M5 21h14"/></svg> <span data-i18n>Care instructions (PDF)</span></a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============= CROSS-SELL ============= -->
+    <section class="xsell" aria-label="Related products">
+      <div class="wrap">
+        <div class="xs-block" id="xsAlternativesBlock">
+          <h3 class="xs-title" data-i18n>Suitable alternatives</h3>
+          <p class="xs-sub" data-i18n>Find the model that suits your needs.</p>
+          <div class="xs-track" id="xsAlternatives"></div>
+        </div>
+
+        <div class="xs-block">
+          <h3 class="xs-title" data-i18n>Ideally complements</h3>
+          <p class="xs-sub" data-i18n>Equipment for the perfect result.</p>
+          <div class="xs-track xs-track--acc">
+            <article class="acc-card">
+              <div class="acc-media"><div class="card-actions"><button class="round" aria-label="Add to basket"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="#1c1c1c" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 8h12l1 12.5H5L6 8Z"/><path d="M9 8a3 3 0 0 1 6 0"/></svg></button><button class="round" aria-label="Add to wishlist"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="#1c1c1c" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20.8 5.6a5 5 0 0 0-7.1 0L12 7.3l-1.7-1.7a5 5 0 0 0-7.1 7.1L12 21.5l8.8-8.8a5 5 0 0 0 0-7.1Z"/></svg></button></div><img src="assets/pdp/acc-silit-spatula.jpg" alt="Silit Classic Line spatula"></div>
+              <h4 class="acc-name" data-i18n>Silit Classic Line spatula, 34 cm</h4>
+              <div class="card-price"><span class="price sale" data-i18n>€12.99</span><span class="msrp" data-i18n>RRP €16.99</span></div>
+              <p class="acc-vat" data-i18n>Including 19% VAT | plus shipping costs</p>
+            </article>
+            <article class="acc-card">
+              <div class="acc-media"><div class="card-actions"><button class="round" aria-label="Add to basket"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="#1c1c1c" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 8h12l1 12.5H5L6 8Z"/><path d="M9 8a3 3 0 0 1 6 0"/></svg></button><button class="round" aria-label="Add to wishlist"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="#1c1c1c" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20.8 5.6a5 5 0 0 0-7.1 0L12 7.3l-1.7-1.7a5 5 0 0 0-7.1 7.1L12 21.5l8.8-8.8a5 5 0 0 0 0-7.1Z"/></svg></button></div><img src="assets/pdp/acc-guard.jpg" alt="Splash guard"></div>
+              <h4 class="acc-name" data-i18n>Splash guard for pans, 20, 24 and 28 cm</h4>
+              <div class="card-price"><span class="price sale" data-i18n>€29.99</span><span class="msrp" data-i18n>RRP €37.99</span></div>
+              <p class="acc-vat" data-i18n>Including 19% VAT | plus shipping costs</p>
+            </article>
+            <article class="acc-card">
+              <div class="acc-media"><div class="card-actions"><button class="round" aria-label="Add to basket"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="#1c1c1c" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 8h12l1 12.5H5L6 8Z"/><path d="M9 8a3 3 0 0 1 6 0"/></svg></button><button class="round" aria-label="Add to wishlist"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="#1c1c1c" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20.8 5.6a5 5 0 0 0-7.1 0L12 7.3l-1.7-1.7a5 5 0 0 0-7.1 7.1L12 21.5l8.8-8.8a5 5 0 0 0 0-7.1Z"/></svg></button></div><span class="promo-label promo-label--sale" data-i18n>Sale</span><img src="assets/pdp/acc-mat.jpg" alt="Pan protection mat set"></div>
+              <h4 class="acc-name" data-i18n>Pan protection mat set, 2-piece, 38 cm</h4>
+              <div class="card-price"><span class="price sale" data-i18n>€6.99</span><span class="msrp" data-i18n>RRP €7.99</span></div>
+              <p class="acc-vat" data-i18n>Including 19% VAT | plus shipping costs</p>
+            </article>
+            <article class="acc-card">
+              <div class="acc-media"><div class="card-actions"><button class="round" aria-label="Add to basket"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="#1c1c1c" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 8h12l1 12.5H5L6 8Z"/><path d="M9 8a3 3 0 0 1 6 0"/></svg></button><button class="round" aria-label="Add to wishlist"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="#1c1c1c" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20.8 5.6a5 5 0 0 0-7.1 0L12 7.3l-1.7-1.7a5 5 0 0 0-7.1 7.1L12 21.5l8.8-8.8a5 5 0 0 0 0-7.1Z"/></svg></button></div><img src="assets/pdp/acc-tongs.jpg" alt="BBQ serving tongs"></div>
+              <h4 class="acc-name" data-i18n>BBQ serving tongs</h4>
+              <div class="card-price"><span class="price sale" data-i18n>€24.99</span><span class="msrp" data-i18n>RRP €27.99</span></div>
+              <p class="acc-vat" data-i18n>Including 19% VAT | plus shipping costs</p>
+            </article>
+          </div>
+        </div>
+      </div>
     </section>
 
     <!-- ============= FAQ (same questions & answers as the PLP) ============= -->
@@ -346,113 +285,8 @@
         </div>
       </div>
     </section>
-
-    <!-- ============= RECIPES (Figma example content) ============= -->
-    <section class="recipes" id="pdpRecipes" hidden>
-      <div class="wrap">
-        <h2 class="pdp-h2" data-i18n>Recipes</h2>
-        <p class="recipes-sub" data-i18n>Cook delicious meals with the Profi Resist</p>
-        <div class="recipes-track">
-          <a class="recipe-card" href="#"><img src="assets/pdp/recipe-schnitzel.jpg" alt=""><span data-i18n>Schnitzel with red cabbage salad</span></a>
-          <a class="recipe-card" href="#"><img src="assets/pdp/recipe-steak.jpg" alt=""><span data-i18n>Pan-seared steak with vegetables</span></a>
-          <a class="recipe-card" href="#"><img src="assets/pdp/recipe-fish.jpg" alt=""><span data-i18n>Pan-seared fish fillet with vegetables</span></a>
-          <a class="recipe-card" href="#"><img src="assets/pdp/recipe-pasta.jpg" alt=""><span data-i18n>Pasta with asparagus and green vegetables</span></a>
-        </div>
-      </div>
-    </section>
-
-    <!-- ============= REVIEWS ============= -->
-    <section class="reviews" id="reviews" aria-label="Customer reviews">
-      <div class="wrap">
-        <h2 class="pdp-h2" data-i18n>Happy Customers</h2>
-        <div class="reviews-list" id="reviewsList"></div>
-        <div class="reviews-login">
-          <p data-i18n>Please log in to your myWMF account to write a review for the product.</p>
-          <button class="gold-pill" data-i18n>Log in now</button>
-        </div>
-      </div>
-    </section>
-
-    <!-- ============= USE & CARE / TECHNICAL DATA / DOCUMENTS ============= -->
-    <section class="care" aria-label="Product information">
-      <div class="wrap">
-        <div class="care-list">
-          <div class="faq-item care-item">
-            <button class="faq-q" data-i18n="Use & Care">Use &amp; Care <span class="faq-sign"></span></button>
-            <div class="faq-a" id="careUse"></div>
-          </div>
-          <div class="faq-item care-item">
-            <button class="faq-q" data-i18n="Technical Data">Technical Data <span class="faq-sign"></span></button>
-            <div class="faq-a" data-i18n><dl class="tech-table" id="techTable"></dl></div>
-          </div>
-          <div class="faq-item care-item">
-            <button class="faq-q" data-i18n="Documents & Downloads">Documents &amp; Downloads <span class="faq-sign"></span></button>
-            <div class="faq-a" data-i18n>
-              <a class="doc-link" href="#"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12"/><path d="m7 10 5 5 5-5"/><path d="M5 21h14"/></svg> <span data-i18n>Product data sheet (PDF)</span></a>
-              <a class="doc-link" href="#"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12"/><path d="m7 10 5 5 5-5"/><path d="M5 21h14"/></svg> <span data-i18n>Care instructions (PDF)</span></a>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ============= HOW TO ============= -->
-    <section class="howto" aria-label="How-to video">
-      <div class="wrap">
-        <h2 class="howto-title" data-i18n>How to get the best from your pan</h2>
-        <p class="howto-sub" data-i18n>Short technique videos from the WMF kitchen.</p>
-        <figure class="howto-video">
-          <img src="assets/inuse.jpg" alt="Chef cooking with a WMF pan">
-          <span class="howto-overlay" data-i18n>How to sear the perfect steak</span>
-          <span class="play play--dark" aria-hidden="true"></span>
-        </figure>
-        <h4 class="howto-caption" data-i18n>How to sear the perfect steak</h4>
-        <p class="howto-copy" data-i18n>Pre-heat the dry pan on medium-high until a drop of water dances across the surface. Add a little high-heat oil, lay the steak away from you and leave it untouched until a crust forms — it will release by itself when it is ready to turn.</p>
-      </div>
-    </section>
-
-    <!-- ============= CROSS-SELL ============= -->
-    <section class="xsell" aria-label="Related products">
-      <div class="wrap">
-        <div class="xs-block" id="xsAlternativesBlock">
-          <h3 class="xs-title" data-i18n>Suitable alternatives</h3>
-          <p class="xs-sub" data-i18n>Find the model that suits your needs.</p>
-          <div class="xs-track" id="xsAlternatives"></div>
-        </div>
-
-        <div class="xs-block">
-          <h3 class="xs-title" data-i18n>Ideally complements</h3>
-          <p class="xs-sub" data-i18n>Equipment for the perfect result.</p>
-          <div class="xs-track xs-track--acc">
-            <article class="acc-card">
-              <div class="acc-media"><div class="card-actions"><button class="round" aria-label="Add to basket"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="#1c1c1c" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 8h12l1 12.5H5L6 8Z"/><path d="M9 8a3 3 0 0 1 6 0"/></svg></button><button class="round" aria-label="Add to wishlist"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="#1c1c1c" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20.8 5.6a5 5 0 0 0-7.1 0L12 7.3l-1.7-1.7a5 5 0 0 0-7.1 7.1L12 21.5l8.8-8.8a5 5 0 0 0 0-7.1Z"/></svg></button></div><img src="assets/pdp/acc-silit-spatula.jpg" alt="Silit Classic Line spatula"></div>
-              <h4 class="acc-name" data-i18n>Silit Classic Line spatula, 34 cm</h4>
-              <div class="card-price"><span class="price sale" data-i18n>€12.99</span><span class="msrp" data-i18n>RRP €16.99</span></div>
-              <p class="acc-vat" data-i18n>Including 19% VAT | plus shipping costs</p>
-            </article>
-            <article class="acc-card">
-              <div class="acc-media"><div class="card-actions"><button class="round" aria-label="Add to basket"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="#1c1c1c" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 8h12l1 12.5H5L6 8Z"/><path d="M9 8a3 3 0 0 1 6 0"/></svg></button><button class="round" aria-label="Add to wishlist"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="#1c1c1c" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20.8 5.6a5 5 0 0 0-7.1 0L12 7.3l-1.7-1.7a5 5 0 0 0-7.1 7.1L12 21.5l8.8-8.8a5 5 0 0 0 0-7.1Z"/></svg></button></div><img src="assets/pdp/acc-guard.jpg" alt="Splash guard"></div>
-              <h4 class="acc-name" data-i18n>Splash guard for pans, 20, 24 and 28 cm</h4>
-              <div class="card-price"><span class="price sale" data-i18n>€29.99</span><span class="msrp" data-i18n>RRP €37.99</span></div>
-              <p class="acc-vat" data-i18n>Including 19% VAT | plus shipping costs</p>
-            </article>
-            <article class="acc-card">
-              <div class="acc-media"><div class="card-actions"><button class="round" aria-label="Add to basket"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="#1c1c1c" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 8h12l1 12.5H5L6 8Z"/><path d="M9 8a3 3 0 0 1 6 0"/></svg></button><button class="round" aria-label="Add to wishlist"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="#1c1c1c" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20.8 5.6a5 5 0 0 0-7.1 0L12 7.3l-1.7-1.7a5 5 0 0 0-7.1 7.1L12 21.5l8.8-8.8a5 5 0 0 0 0-7.1Z"/></svg></button></div><span class="badge badge--sale">Sale</span><img src="assets/pdp/acc-mat.jpg" alt="Pan protection mat set"></div>
-              <h4 class="acc-name" data-i18n>Pan protection mat set, 2-piece, 38 cm</h4>
-              <div class="card-price"><span class="price sale" data-i18n>€6.99</span><span class="msrp" data-i18n>RRP €7.99</span></div>
-              <p class="acc-vat" data-i18n>Including 19% VAT | plus shipping costs</p>
-            </article>
-            <article class="acc-card">
-              <div class="acc-media"><div class="card-actions"><button class="round" aria-label="Add to basket"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="#1c1c1c" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 8h12l1 12.5H5L6 8Z"/><path d="M9 8a3 3 0 0 1 6 0"/></svg></button><button class="round" aria-label="Add to wishlist"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="#1c1c1c" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20.8 5.6a5 5 0 0 0-7.1 0L12 7.3l-1.7-1.7a5 5 0 0 0-7.1 7.1L12 21.5l8.8-8.8a5 5 0 0 0 0-7.1Z"/></svg></button></div><img src="assets/pdp/acc-tongs.jpg" alt="BBQ serving tongs"></div>
-              <h4 class="acc-name" data-i18n>BBQ serving tongs</h4>
-              <div class="card-price"><span class="price sale" data-i18n>€24.99</span><span class="msrp" data-i18n>RRP €27.99</span></div>
-              <p class="acc-vat" data-i18n>Including 19% VAT | plus shipping costs</p>
-            </article>
-          </div>
-        </div>
-      </div>
-    </section>
   </main>
+
 
   <div id="chrome-footer"></div>
   <div id="chrome-search"></div>

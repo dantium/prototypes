@@ -9,7 +9,7 @@ design system (Rotis, tokens) and the existing comparison-table/header/search pr
 | `pans.html` | **Pans** category PLP — subcategory tiles, 34 real products |
 | `frying-pans.html` | **Frying Pans** subcategory PLP — 29 real products, comparison table, FAQ |
 | `pots.html` | **Pots** category PLP (reached from the POTS nav) — carries the Fusiontec Mineral Pro colour-variant set (`p42`) |
-| `product.html?id=…` | **PDP** — Figma "PDP - HoneyComb Pro+" design, rendered from the catalog for any product (defaults to `p1`, the Profi Resist Fry Pan the mock depicts) |
+| `product.html?id=…` | **PDP** — Figma "PDP v2" + bundle PDP designs, rendered from the catalog for any product (defaults to `p1`, the Profi Resist Fry Pan; bundle example `p44`) |
 
 The journey works both ways: megamenu/tiles drill down, breadcrumbs go back up.
 Every product tile (grid + search overlay) links to `product.html?id=…`.
@@ -133,77 +133,57 @@ options show the Figma serving hints ("28 cm (4 – 6 people)") as display-only 
 
 ## PDP (`product.html`)
 
-Built from the Figma **"PDP - HoneyComb Pro+ (Version 1)"** mock (file `8oCPrBtDcVBGzxhSrNYlTT`,
-node `2:2`), as one template that renders **any catalog product** via `?id=`:
+Built from the Figma **"PDP v2"** handover (file `8oCPrBtDcVBGzxhSrNYlTT`, page "PDP - Dev
+handover": desktop `2399:276`, mobile `2666:1164`) plus the **bundle PDP** (`3234:2347`), as one
+template that renders **any catalog product** via `?id=` (logic in `assets/pdp.js`, styles in
+`assets/pdp.css`, v2 icons in `assets/pdp/v2/`). Boxes are square like the live shop; only pills
+and round icon buttons are rounded.
 
-- **Data-driven** (from `catalog.json`): breadcrumb trail, series eyebrow, title (+ selected
-  size), real PDP description behind Read more, real rating/review count (none shown when the
-  shop has none), the Price Display component (Figma `1621:6329`, Default and Discount
-  variants) — red price + "Save N%" chip + italic "€… (last 30 days lowest price)" when
-  discounted, otherwise black price with the underlined free-shipping hint —
-  Klarna 3-way split and Club Points (computed from price),
-  set upsell (appears when the series has a Set — links to its PDP), size chips with serving
-  hints + per-variant stock, stock-aware delivery block and CTA, Technical Data accordion
-  (per-variant SKU), "Suitable alternatives" (same category, real shop order, live tiles).
-  Bundle products (the shop's BUNDLE label: `p12`, `p30`) list their components under the CTA
-  like the live bundle PDP ("This set contains:", thumbnails + 1 × item), driven by a `bundle`
-  array in the JSON; components that exist as catalog products link to their own PDP.
-  **Set / bundle configurations** are presented as a third selector alongside colour and size,
-  so all three read the same way (label + current choice + outlined options): an "Options:"
-  group listing every configuration of the family as a stacked row — thumbnail, the real
-  product name, and on a second line the configuration (Set of 2 / Set of 3 …). Sets/bundles
-  add a dashed **"What's included"** toggle on that second line: hover previews the contents,
-  and a tap pins the card open (works on touch, where hover doesn't) — one open at a time,
-  dismissed by an outside tap. The price column shows the RRP as its value ("(€199 value)",
-  muted grey) for any option that is a set or a single bundled with an accessory (a plain
-  single pan shows none), and a small red **"Best value"** badge above the price of the
-  strongest-value *set* (largest RRP saving — the badge stays a set-only nudge). A bundle item
-  may carry an `img` (e.g. the Profi Plus spatula) when it has no product sku of its own.
-  The selected row takes the same plain 1px black stroke as the size chips. Rows stack rather
-  than sit side-by-side so the full names fit on one line. Contents come from each product's
-  `bundle` array.
-  Products are tied together by `bundleGroup` in the JSON with a `bundleLabel` each — today
-  `profi-resist-frypan` (Single pan / With spatula / Set of 2) and `durado-frypan` (Single pan
-  / Set of 2 / Set of 3 / Set of 3 + protectors), ordered by an explicit `bundleOrder` where
-  the catalog sets one, else single → accessory → sets. That last Durado option is a real
-  cross-product **bundle** (the shop's own `bundle-<sku>-<sku>` product: the 3-piece set plus a
-  2-piece pan-protector set, €132.46 against €137.98 bought separately) — the case where a
-  bundle builds on a set rather than a single pan, which is why the order is explicit. The current configuration is the
-  selected card; the others link to their own PDP. This replaces the old one-off set-upsell
-  row. The "This set contains:" list still appears on set PDPs — the selector picks the
-  configuration, the list says what's inside it.
-  **Colour-variant products** (a `colors` array in the JSON — `p42`, the 8-colour Fusiontec
-  Mineral Pro pot set) render a "Color / <name>" image-swatch selector (selected one outlined,
-  like the reference); picking a colour swaps the gallery packshot, price, Klarna split, Club
-  points and article number. Its 8 real colour packshots come from the live shop by SKU. The
-  size chip is hidden for single-size colour products (colour is the axis).
-- **Figma example content** — the feature USP icon strip (7 line icons: 10-year warranty,
-  metal-utensil safe, oven-safe, dishwasher safe, mineral ceramic non-stick, all hobs,
-  3-ply — drawn as inline SVGs) and the below-fold marketing (SearProtect®/3-ply banners, Product
-  Advantages, UGC row, VOGUE testimonial, recipes) describes the honeycomb Profi Resist build,
-  so it renders **only for the Profi Resist series** (`p1`, `p11`, `p12`); other products get the
-  standard PDP without it. The gallery works the same way: Profi Resist gets the mock's
-  lifestyle shots (steak main + honeycomb/3-ply/cleaning/heating thumbs, "Watch video" flag),
-  everything else gets its packshot + the shared in-use shot. Gallery chrome follows the live
-  shop: the stage is a horizontal track that **slides** between images (prev/next, thumbs,
-  keyboard and touch-swipe all animate the same translate), prev/next circles on the stage
-  (pale when at either end), a thin progress bar, square bordered thumbnails (black border =
-  active) that center when they fit and scroll when they don't, and the zoom icon top-right
-  (or a click on the image) opening a fullscreen viewer with arrows, an image counter,
-  Esc/arrow-key support. Packshot slides re-point to the selected size/colour sku on the fly.
-- **Example content, shared across products** (same precedent as the shared hover shot):
-  the buy-box accessory (Profi Plus spatula) and the "Ideally complements" accessories with
-  prices from the mock, Use & Care copy keyed off the product's surface attribute, and the
-  how-to video card. FAQ = the same 5 Q&As as the frying-pans PLP, and the "Compare our
-  Range" table from the PLP sits above it (white background variant) on every PDP.
-- Images live in `assets/pdp/` (downloaded from the Figma mock, resized ≤1100px, ~1.2 MB
-  total). Two mock thumbs carry German captions baked into the artwork.
-- Cart clicks bump the header count; size switches swap price/UVP/Klarna/points/SKU/packshot.
-- **Popups**: Size Guide (rim-diameter note + serves/use table, the product's own sizes ticked,
-  others dimmed) and Club Points ((i) on the myWMF bar — how points work + the points this
-  purchase earns). Scrim click, × and Esc close them.
-- **Accessory slider**: the buy-box "Add Accessories" row pages through 4 example accessories
-  with the ‹ › arrows from the mock (clamped at the ends, position kept across size switches).
+- **Buy box (v2 section stack)** — series eyebrow (links to the series PLP), title, DS
+  RatingStars + "(4.5) 80 Reviews" + (i) review notice; **Price Summary**: price + "VAT included,
+  plus shipping (free shipping on orders over €49)" (opens the shipping-cost note), and on sale
+  items "Last lowest price: ~~€…~~ −38 % (i)" — the (i) opens the **price-history dialog** (today's
+  price / lowest price of the last 30 days). Then product selection: **Color** (66 px packshot
+  tiles, hover previews the name + price difference), **Size** (124×56 chips with serving
+  guidance "For 2–3 people", Size Guide modal), **Options** (DS Product Option Card: name,
+  dotted "What's included" that previews on hover / pins on tap, price, and on sets a green
+  "You save €…" computed from the set's items; the largest saving gets the DS PromoLabel
+  "Best value"). Grey delivery / Click & Collect box, 56 px black CTA + outlined wishlist circle,
+  "Also add to your cart" (one example accessory, swipe for the next — the mock hides the
+  arrows), myWMF Club Points bar, Klarna bar, 2×2 shopping benefits (stacked on mobile).
+- **Below the fold** — **Product Details** accordion (open by default): feature cards + long
+  description + "Compare our Range" (pan PDPs only); then collapsed accordions **Scope of
+  delivery / Technical data / Reviews / Documents & downloads**; recommendation rows
+  ("Suitable alternatives" = live tiles from the same category, "Ideally complements");
+  FAQ. The old HoneyComb mock's USP strip, banners, UGC, testimonial, recipes and how-to video
+  were dropped with v2.
+- **Bundle template** — any product whose sku is a shop bundle (`bundle-<sku>-<sku>…`: `p12`,
+  `p30`, `p43`, and `p44`, the live Aparto cooking set from wmf.com/de/de) gets: the DS
+  PromoLabel **"Bundle savings"** on the gallery (only when it saves money); a plain black set
+  price — never a strikethrough or 30-day reduction, since the saving is against the items'
+  total, not a price cut — with **"You save €21.80 (10%) compared to buying individually"**; a
+  **"This bundle includes N products"** box, collapsed by default (Figma component `3250:2914`),
+  that expands to one row per item (packshot, qty × name linking to the item PDP where it's in
+  the catalog, its price, and **its own rating** — no aggregated set rating) and a summary
+  (bought individually / set price / your saving); **"Advantages of the set"** bullets in place of
+  the accessory upsell (when the catalog has them — `bundleInfo.advantages`); gallery = set
+  shot + each item's packshot + `bundleInfo.gallery`; feature cards / description from
+  `bundleInfo`; Technical data grouped per item; no Reviews accordion while the bundle has no
+  reviews of its own. "Bought individually" is the live shop's "statt" price (the bundle's
+  `msrp`), else the sum of the item prices when all are known. Bundle items take `price` /
+  `rating` / `reviews` / `tech` from the `bundle` entry, falling back to the catalog product
+  (`id`) or any variant with that `sku`.
+- **Profi Resist** (`p1`, `p11`) keeps the mock's lifestyle gallery ("Watch video" flag) and the
+  six Product Details feature cards; other products show their packshot (+ shared in-use shot),
+  and only the long description.
+- **Set / bundle configurations** — products tied by `bundleGroup` (+ `bundleLabel`, optional
+  `bundleOrder`) show as Options; the current one is selected, the others link to their PDP.
+  Products whose own variants are "Set of N" pick in place. **Colour-variant products** (`p42`)
+  swap packshot, price, Klarna, points and article number.
+- Gallery: sliding track (arrows, thumbs, keys, swipe), progress bar, 114 px bordered thumbs
+  (88 px on mobile), fullscreen zoom viewer.
+- Images: `assets/pdp/` (mock), `assets/pdp/v2/` (v2 icons from Figma), `assets/pdp/bundle-aparto/`
+  and `assets/products/<sku>.jpg` (live shop photos for the Aparto bundle and its items).
 
 ## Search: natural language
 

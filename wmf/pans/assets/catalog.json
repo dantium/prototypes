@@ -410,10 +410,10 @@
    "name": "Fry Pan Set",
    "series": "WMF",
    "type": "Set",
-   "minPrice": 69.99,
+   "minPrice": 59.99,
    "sizes": [],
    "rating": 4.8,
-   "reviews": 146,
+   "reviews": 150,
    "ratingReal": true,
    "default": 0,
    "cats": {
@@ -424,7 +424,7 @@
     {
      "sku": "3201113924",
      "size": "Set of 2",
-     "price": 69.99,
+     "price": 59.99,
      "msrp": 169.99,
      "stock": true,
      "label": null
@@ -3299,7 +3299,7 @@
      "name": "Aparto Pot Set, 5-piece",
      "name_de": "Aparto Topf-Vorteils-Set*, 5-teilig",
      "sku": "7116001673",
-     "price": 125.99,
+     "price": 139.99,
      "rating": 4.2,
      "reviews": 68,
      "tech": [
@@ -3350,7 +3350,7 @@
      "name": "Devil Frying Pan Set, 2-piece, 24 & 28 cm",
      "name_de": "Devil Bratpfannen-Set, 2-teilig, 24 und 28 cm",
      "sku": "3201113924",
-     "price": 53.99,
+     "price": 59.99,
      "rating": 4.8,
      "reviews": 150,
      "tech": [
@@ -3386,7 +3386,7 @@
      "name": "Profi Plus Spatula, 32 cm",
      "name_de": "Profi Plus Pfannenwender, 32 cm",
      "sku": "3201000146",
-     "price": 16.19,
+     "price": 17.99,
      "rating": 4.7,
      "reviews": 213,
      "tech": [

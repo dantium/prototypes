@@ -1419,7 +1419,7 @@
       }
     });
 
-    fetch('assets/catalog.json?v=20261002e')
+    fetch('assets/catalog.json?v=20261002f')
       .then(function (r) { if (!r.ok) throw new Error('HTTP ' + r.status); return r.json(); })
       .then(function (d) {
         DATA = d;

@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>WMF · Tile v2 preview</title>
-  <link rel="stylesheet" href="assets/styles.css?v=20261009b">
+  <link rel="stylesheet" href="assets/styles.css?v=20261009c">
   <style>
     /* review-page furniture only — tile styles come from styles.css */
     body { background: #fff; }
@@ -125,7 +125,7 @@
     }
 
     var PICKS = ['Durado Fry Pan Set', 'Macao Wok Set', 'Profi Resist Fry Pan'];
-    fetch('assets/catalog.json?v=20261009b').then(function (r) { return r.json(); }).then(function (data) {
+    fetch('assets/catalog.json?v=20261009c').then(function (r) { return r.json(); }).then(function (data) {
       var byName = {};
       data.products.forEach(function (p) { byName[p.name] = p; });
       var picks = PICKS.map(function (n) { return byName[n]; }).filter(Boolean);

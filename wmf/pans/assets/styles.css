@@ -669,6 +669,7 @@ body:not(.searching) .quick-filters-bar + .toolbar { border-top: 0; padding-top:
 .comparison .product:nth-of-type(5) { left: 888px; }
 .comparison .product:nth-of-type(6) { left: 1072px; }
 .pan-art { position: relative; width: 141px; height: 85px; margin-left: 10px; }
+.pan-photo { display: block; width: 141px; height: 85px; margin-left: 10px; object-fit: contain; }
 .pan-art::before, .pan-art::after { content: ""; position: absolute; display: block; }
 .pan-art::before { left: 0; top: 1px; width: 76px; height: 76px; border-radius: 50%; border: 3px solid rgba(255,255,255,0.36); box-shadow: inset 0 0 0 4px rgba(0,0,0,0.22), 0 4px 8px rgba(0,0,0,0.28); }
 .pan-art::after { left: 74px; top: 36px; width: 60px; height: 7px; border: 1px solid rgba(0,0,0,0.36); border-radius: 999px; background: linear-gradient(180deg, #f6f6f6, #aeb2b4 45%, #f7f7f7 100%); box-shadow: inset 14px 0 0 rgba(255,255,255,0.68); }

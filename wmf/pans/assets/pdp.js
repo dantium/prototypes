@@ -5,8 +5,8 @@
    window.renderPDP(api) once it arrives; everything product-specific
    renders from the catalog. Bundle products (the shop's
    `bundle-<sku>-<sku>` articles) get the bundle template: set price with
-   the saving vs. buying the items individually, a collapsible
-   "This bundle includes" box with each item's own rating, and the set's
+   the saving vs. buying the items individually, an open Bundle option
+   card listing each item with its own price and rating, and the set's
    advantages in place of the accessory upsell.
    ============================================================ */
 (function () {
@@ -304,7 +304,8 @@
     /* ---------- buy box ---------- */
     var box = document.getElementById('buyBox');
     var accIdx = 0;
-    var setOpen = false;   // "This bundle includes" — collapsed by default
+    /* mobile colour tiles: collapsed to 2 rows, unless the selected colour would be hidden */
+    var colorsOpen = colorSel >= 6;
 
     /* DS RatingStars: whole-star variants (the score text carries the decimal) */
     function starsHTML(r) {
@@ -317,10 +318,6 @@
     function pct(n) { return n + (lang === 'de' ? '\u00a0%' : '%'); }
     function reviewsLabel(r, n) {
       return '(' + dec1(r) + ') ' + n + ' ' + (n === 1 ? t('Review') : t('Reviews'));
-    }
-    /* DS PromoLabel — 20px, pill-right, 10/12 uppercase */
-    function promoLabel(text, variant) {
-      return '<span class="promo-label promo-label--' + variant + '">' + esc(text) + '</span>';
     }
 
     /* configurations of the same product family (single / with accessory / sets),
@@ -401,22 +398,33 @@
       if (isBundle) {
         var save = savingOf(p, v), total = setValue(p, v);
         if (save > 0) {
-          h += '<p class="bb-setsave"><span class="g">' + t('You save %s (%p)').replace('%s', eur(save)).replace('%p', pct(Math.round(save / total * 100))) +
-            '</span> ' + t('compared to buying individually') + '</p>';
+          h += '<p class="bb-setsave">' + t('Bought individually:') + ' ' + eur(total) + '<span class="sep">|</span>' +
+            '<span class="g">' + t('You save %s (%p)').replace('%s', eur(save)).replace('%p', pct(Math.round(save / total * 100))) + '</span></p>';
         }
       }
 
       /* ---- Product selection ---- */
       var selH = '';
-      // colour swatches (66px packshot tiles, selected outlined black)
+      /* colour tiles with the name below (Figma "Colour selector · named tiles"):
+         5 per row on desktop; on mobile 3 per row, and with more than 6 colours
+         the first 2 rows plus a Show all / Show less toggle. Names wrap to
+         2 lines max; rows only grow when a name actually needs the 2nd line. */
       if (p.colors) {
+        var nCol = p.colors.length, canCollapse = nCol > 6;
         selH += '<div class="bb-sel bb-colors"><div class="bb-sel-head"><span class="bb-sel-lbl">' + t('Color:') + '</span>' +
           '<span class="bb-sel-val bb-color-name">' + esc(p.colors[colorSel].name) + '</span></div>' +
-          '<div class="bb-swatches">' + p.colors.map(function (c, i) {
+          '<div class="bb-swatches' + (canCollapse && !colorsOpen ? ' collapsed' : '') + '" id="bbSwatches">' + p.colors.map(function (c, i) {
             return '<button class="bb-swatch' + (i === colorSel ? ' sel' : '') + (c.stock === false ? ' oos' : '') +
-              '" data-color="' + i + '" title="' + esc(c.name + (c.stock === false ? ' · ' + t('Out of stock') : '')) + '" aria-label="' + esc(c.name) + '">' +
-              '<img src="' + img(c.sku) + '" alt=""></button>';
-          }).join('') + '</div></div>';
+              '" data-color="' + i + '" title="' + esc(c.name + (c.stock === false ? ' · ' + t('Out of stock') : '')) + '"' +
+              (i === colorSel ? ' aria-pressed="true"' : ' aria-pressed="false"') + '>' +
+              '<span class="bb-swatch-img"><img src="' + img(c.sku) + '" alt=""></span>' +
+              '<span class="bb-swatch-name">' + esc(c.name) + '</span></button>';
+          }).join('') + '</div>' +
+          (canCollapse
+            ? '<button class="bb-more" data-act="colors-toggle" aria-controls="bbSwatches" aria-expanded="' + colorsOpen + '">' +
+              (colorsOpen ? t('Show less') : t('Show all (%n)').replace('%n', nCol)) + '</button>'
+            : '') +
+          '</div>';
       }
       // size chips with serving guidance — only for a real size choice
       if (p.sizes.length > 1) {
@@ -432,8 +440,6 @@
       }
       // Options — set / bundle configurations (DS Product Option Card)
       selH += optionsHTML();
-      // bundle contents — collapsible box, each item with its own rating
-      if (isBundle && items.length) selH += setBoxHTML(v);
       if (selH) h += '<div class="bb-selection">' + selH + '</div>';
 
       /* ---- Delivery / Click & Collect ---- */
@@ -479,83 +485,91 @@
       return h;
     }
 
-    /* ---- Options: DS Product Option Card (Single / Bundle / Featured bundle).
-       Name + "What's included" (hover or tap shows the contents), price, and for
-       sets the saving vs. the items' total; the largest saving gets Best value. */
-    function optionCard(o, ov, name, contents, isSel, isBest, attrs, tag) {
-      /* the saving shows on sets only (a single bundled with an accessory has no set price) */
-      var save = o.type === 'Set' ? savingOf(o, ov) : 0;
-      var tip = contents && contents.length
-        ? '<span class="opt-tip" role="tooltip"><span class="opt-tip-h">' + t(o.type === 'Set' ? 'Included in this set' : 'Included in this bundle') + '</span>' +
-          contents.map(function (b) { return '<span class="opt-tip-i">' + (b.qty || 1) + ' × ' + esc((lang === 'de' && b.name_de) || t(b.name)) + '</span>'; }).join('') + '</span>'
-        : '';
-      return '<' + tag + ' class="opt' + (isSel ? ' sel' : '') + (ov.stock === false ? ' oos' : '') + '"' + attrs + '>' +
+    /* ---- Options: "Buy box · Option card" (Figma 3296:3250).
+       Type Individual / Set / Bundle; the selected card is outlined black and
+       opens to show what it contains:
+       · Set    — one article: its scope of delivery, no savings
+       · Bundle — separate products sold together (the shop's bundle-<sku>…
+                  articles): each item with its own price and rating, then the
+                  "Bought individually" total. Closed bundles show the saving. */
+    function optKind(o, ov) {
+      if (/^bundle-/.test(ov.sku)) return 'Bundle';
+      return o.bundle && o.bundle.length ? 'Set' : 'Individual';
+    }
+    function optSummary(kind, o) {
+      var its = o.bundle || [];
+      if (kind === 'Bundle') return t(its.length === 1 ? 'Bundle · 1 product' : 'Bundle · %n products').replace('%n', its.length);
+      var pcs = its.reduce(function (s, b) { return s + (b.qty || 1); }, 0);
+      return t('Set · %n pieces').replace('%n', pcs);
+    }
+    function optContents(kind, o, ov) {
+      var its = (o.bundle || []).map(component);
+      if (!its.length) return '';
+      var h = '<span class="opt-contents">';
+      if (kind === 'Set') {
+        var pcs = its.reduce(function (s, c) { return s + c.qty; }, 0);
+        h += '<span class="opt-scope-intro">' + t('%n-piece set:').replace('%n', pcs) + '</span><ul class="opt-scope">' +
+          its.map(function (c) { return '<li>' + c.qty + ' × ' + esc(c.name) + '</li>'; }).join('') + '</ul>';
+      } else {
+        h += '<span class="opt-contents-h">' + t('Included in this bundle') + '</span>';
+        h += its.map(function (c) {
+          var nm = c.qty + ' × ' + esc(c.name);
+          return '<span class="opt-item"><span class="opt-item-img"><img src="' + esc(c.img) + '" alt=""></span>' +
+            '<span class="opt-item-main"><span class="opt-item-line">' +
+              (c.href ? '<a href="' + c.href + '">' + nm + '</a>' : '<span>' + nm + '</span>') +
+              (c.price != null ? '<span class="opt-item-price">' + eur(c.price) + '</span>' : '') + '</span>' +
+              (c.rating != null && c.reviews
+                ? (c.href ? '<a class="opt-item-rating" href="' + c.href + '#reviews">' : '<span class="opt-item-rating">') +
+                  starsHTML(c.rating) + '<span>' + reviewsLabel(c.rating, c.reviews) + '</span>' + (c.href ? '</a>' : '</span>')
+                : '') +
+            '</span></span>';
+        }).join('');
+        var total = setValue(o, ov);
+        if (total && savingOf(o, ov) > 0) {
+          h += '<span class="opt-indiv"><span>' + t('Bought individually') + '</span><span>' + eur(total) + '</span></span>';
+        }
+      }
+      return h + '</span>';
+    }
+    function optionCard(o, ov, name, isSel, attrs, tag) {
+      var kind = optKind(o, ov);
+      var save = kind === 'Bundle' ? savingOf(o, ov) : 0;
+      var total = save ? setValue(o, ov) : 0;
+      var head = '<span class="opt-head">' +
         '<span class="opt-img"><img src="' + img(ov.sku) + '" alt=""></span>' +
         '<span class="opt-body"><span class="opt-name">' + esc(name) + '</span>' +
-          (tip ? '<span class="opt-inc" data-inc role="button" tabindex="0" aria-expanded="false">' + t("What's included") + '</span>' : '') + '</span>' +
-        '<span class="opt-price">' + (isBest ? promoLabel(t('Best value'), 'sale') : '') +
-          '<span>' + eur(ov.price) + '</span>' +
-          (save > 0 ? '<span class="opt-save">' + t('You save %s').replace('%s', eur(save)) + '</span>' : '') +
-        '</span>' + tip + '</' + tag + '>';
+          (kind !== 'Individual' ? '<span class="opt-sum">' + esc(optSummary(kind, o)) + '</span>' : '') + '</span>' +
+        '<span class="opt-price"><span>' + eur(ov.price) + '</span>' +
+          (save > 0 ? '<span class="opt-save">' + t('You save %s (%p)').replace('%s', eur(save)).replace('%p', pct(Math.round(save / total * 100))) + '</span>' : '') +
+        '</span></span>';
+      var body = isSel ? optContents(kind, o, ov) : '';
+      /* the open card holds links (item names / ratings), so it can't itself be a link */
+      if (isSel) tag = 'div';
+      return '<' + tag + ' class="opt opt--' + kind.toLowerCase() + (isSel ? ' sel' : '') + (ov.stock === false ? ' oos' : '') + '"' + attrs + '>' +
+        head + body + '</' + tag + '>';
     }
     function optionsHTML() {
       var cards = '';
       if (setVariants) {
-        var bestIdx = -1, bestSav = 0;
-        p.variants.forEach(function (vv, i) { var s = savingOf(p, vv); if (s > bestSav) { bestSav = s; bestIdx = i; } });
         cards = p.variants.map(function (vv, i) {
-          return optionCard(p, vv, nameOf(p) + ' · ' + t(vv.size), p.bundle, i === sel, i === bestIdx,
-            ' data-i="' + i + '"' + (i === sel ? ' aria-current="true"' : ''), 'button');
+          return optionCard(p, vv, nameOf(p) + ' · ' + t(vv.size), i === sel,
+            i === sel ? ' aria-current="true"' : ' data-i="' + i + '" type="button"', 'button');
         }).join('');
       } else if (bundleOpts.length > 1) {
-        var bestId = null, best = 0;
-        bundleOpts.forEach(function (o) {
-          var ov = o.variants[o.default] || o.variants[0];
-          if (o.type === 'Set') { var s = savingOf(o, ov); if (s > best) { best = s; bestId = o.id; } }
-        });
         cards = bundleOpts.map(function (o) {
           var ov = o.variants[o.default] || o.variants[0];
           var mine = o.id === p.id;
-          return optionCard(o, ov, nameOf(o), o.bundle, mine, o.id === bestId,
-            mine ? ' aria-current="true"' : ' href="product.html?id=' + o.id + '"', mine ? 'span' : 'a');
+          return optionCard(o, ov, nameOf(o), mine,
+            mine ? ' aria-current="true"' : ' href="product.html?id=' + o.id + '"', 'a');
         }).join('');
+      } else if (p.bundle && p.bundle.length) {
+        /* a set / bundle with no sibling configurations: just its own open card */
+        return '<div class="bb-sel bb-options"><div class="opt-rows">' +
+          optionCard(p, curVariant(), nameOf(p), true, ' aria-current="true"', 'div') + '</div></div>';
       }
       if (!cards) return '';
       return '<div class="bb-sel bb-options"><div class="bb-sel-head"><span class="bb-sel-lbl">' + t('Options') + '</span></div>' +
         '<div class="opt-rows">' + cards + '</div></div>';
-    }
-
-    /* ---- "This bundle includes" (Figma component 3250:2914): collapsed header
-       with item thumbnails; expanded rows show each item's price and its own
-       rating (no aggregated set rating), then the set value summary. ---- */
-    function setBoxHTML(v) {
-      var n = items.length;
-      var total = setValue(p, v), save = savingOf(p, v);
-      var h = '<div class="setbox' + (setOpen ? ' open' : '') + '">' +
-        '<button class="setbox-head" data-act="setbox" aria-expanded="' + setOpen + '">' +
-        '<span class="setbox-thumbs">' + items.slice(0, 4).map(function (c) { return '<span><img src="' + esc(c.img) + '" alt=""></span>'; }).join('') + '</span>' +
-        '<span class="setbox-title">' + t(n === 1 ? 'This bundle includes 1 product' : 'This bundle includes %n products').replace('%n', n) + '</span>' +
-        '<span class="setbox-chev">' + ICONS.chevDown + '</span></button>' +
-        '<div class="setbox-body">';
-      h += items.map(function (c) {
-        var nm = c.qty + ' × ' + esc(c.name);
-        return '<div class="setbox-item"><span class="setbox-img"><img src="' + esc(c.img) + '" alt=""></span>' +
-          '<span class="setbox-main"><span class="setbox-line">' +
-            (c.href ? '<a href="' + c.href + '">' + nm + '</a>' : '<span>' + nm + '</span>') +
-            (c.price != null ? '<span class="setbox-price">' + eur(c.price) + '</span>' : '') + '</span>' +
-            (c.rating != null && c.reviews
-              ? (c.href ? '<a class="setbox-rating" href="' + c.href + '#reviews">' : '<span class="setbox-rating">') +
-                starsHTML(c.rating) + '<span>' + reviewsLabel(c.rating, c.reviews) + '</span>' + (c.href ? '</a>' : '</span>')
-              : '') +
-          '</span></div>';
-      }).join('');
-      if (save > 0) {
-        h += '<div class="setbox-sum">' +
-          '<div><span>' + t('Bought individually') + '</span><span>' + eur(total) + '</span></div>' +
-          '<div class="b"><span>' + t('Set price') + '</span><span>' + eur(v.price) + '</span></div>' +
-          '<div class="g"><span>' + t('Your saving') + '</span><span>' + eur(save) + ' (' + pct(Math.round(save / total * 100)) + ')</span></div></div>';
-      }
-      return h + '</div></div>';
     }
 
     function renderBuyBox() { box.innerHTML = buyBoxHTML(); }
@@ -574,23 +588,7 @@
       }
     }
 
-    function closeIncluded() {
-      [].forEach.call(box.querySelectorAll('.opt-tip.open'), function (x) { x.classList.remove('open'); });
-      [].forEach.call(box.querySelectorAll('.opt-inc[aria-expanded="true"]'), function (x) { x.setAttribute('aria-expanded', 'false'); });
-    }
     box.addEventListener('click', function (e) {
-      /* "What's included" toggle — pins the contents card open (mobile tap) and
-         must run before the card's select/navigate, whose default it cancels */
-      var inc = e.target.closest('[data-inc]');
-      if (inc) {
-        e.preventDefault();
-        var opt = inc.closest('.opt');
-        var tip = opt && opt.querySelector('.opt-tip');
-        var wasOpen = tip && tip.classList.contains('open');
-        closeIncluded();
-        if (tip && !wasOpen) { tip.classList.add('open'); inc.setAttribute('aria-expanded', 'true'); }
-        return;
-      }
       var swatch = e.target.closest('.bb-swatch');
       if (swatch) {
         colorSel = +swatch.dataset.color;
@@ -612,11 +610,11 @@
         act.classList.add('added'); act.textContent = t('Added ✓');
         setTimeout(function () { act.classList.remove('added'); act.textContent = t('Add to cart'); }, 1400);
       }
-      else if (a === 'setbox') {
-        setOpen = !setOpen;
-        var sb = act.closest('.setbox');
-        sb.classList.toggle('open', setOpen);
-        act.setAttribute('aria-expanded', setOpen);
+      else if (a === 'colors-toggle') {
+        colorsOpen = !colorsOpen;
+        renderBuyBox();
+        var tg = box.querySelector('[data-act="colors-toggle"]');
+        if (tg) tg.focus();
       }
       else if (a === 'acc-add') { bumpCart(); }
       else if (a === 'wish') { act.classList.toggle('on'); }
@@ -627,17 +625,6 @@
       else if (a === 'review-info') { openModal(reviewInfoHTML()); }
       else if (a === 'shipping') { e.preventDefault(); openModal(shippingHTML()); }
     });
-    /* keyboard-toggle the "What's included" card, and dismiss it on outside click */
-    box.addEventListener('keydown', function (e) {
-      if ((e.key === 'Enter' || e.key === ' ') && e.target.closest && e.target.closest('[data-inc]')) {
-        e.preventDefault(); e.target.click();
-      }
-    });
-    document.addEventListener('click', function (e) {
-      if (e.target.closest && (e.target.closest('[data-inc]') || e.target.closest('.opt-tip'))) return;
-      closeIncluded();
-    });
-
     /* colour name previews the hovered swatch (+ any price difference vs the
        selected colour), reverting to the selected on leave */
     box.addEventListener('mouseover', function (e) {

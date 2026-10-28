@@ -853,14 +853,7 @@
     if (altTrack) {
       if (alts.length) {
         altTrack.innerHTML = alts.map(api.cardHTML).join('');
-        altTrack.addEventListener('click', function (e) {
-          var sw = e.target.closest('.swatch'); if (!sw) return;
-          var card = sw.closest('.card');
-          var prod = byId(card.getAttribute('data-id'));
-          if (!prod) return;
-          prod._sel = parseInt(sw.dataset.i, 10);
-          card.outerHTML = api.cardHTML(prod);
-        });
+        // Shared card interactions are delegated by app.js.
       } else {
         var blk = document.getElementById('xsAlternativesBlock'); if (blk) blk.hidden = true;
       }

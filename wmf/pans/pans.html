@@ -4,10 +4,10 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>WMF · Pans</title>
-  <link rel="stylesheet" href="assets/styles.css?v=20261015a">
+  <link rel="stylesheet" href="assets/styles.css?v=20261028b">
   <script>window.PAGE = { kind: 'plp', category: 'pans', promo: false };</script>
-  <script src="assets/i18n-de.js?v=20261015a"></script>
-  <script src="assets/app.js?v=20261015a" defer></script>
+  <script src="assets/i18n-de.js?v=20261028b"></script>
+  <script src="assets/app.js?v=20261028b" defer></script>
 </head>
 <body>
 
@@ -32,6 +32,11 @@
           <h1 class="page-title" data-i18n>Pans</h1>
           <p class="page-sub" data-i18n>From everyday frying to woks, grill and serving pans — the full WMF and Silit pan range. Choose a category below, or browse everything in one place.</p>
         </div>
+        <div class="plp-header-actions cat-only">
+          <button class="text-link" type="button" data-i18n onclick="openFinder()">Pan finder</button>
+          <a class="text-link" href="frying-pans.html#compare" data-i18n>Compare pans</a>
+        </div>
+
         <!-- category hero image removed for now
         <div class="page-hero">
           <img src="assets/hero.png" alt="Chef flambéing in a WMF pan">
@@ -56,21 +61,14 @@
         </div>
       </section>
 
-      <!-- ============= QUICK FILTERS (row above the filter + results toolbar) ============= -->
-      <div class="quick-filters-bar cat-only">
-        <p class="qf-title" data-i18n>Frequently selected criteria</p>
-        <!-- Quick filters: curated shortcuts to the most-used facets (populated by app.js) -->
-        <div class="quick-filters" id="quickFilters" role="group" aria-label="Frequently selected criteria"></div>
-      </div>
-
       <!-- ============= TOOLBAR ============= -->
       <div class="toolbar">
         <div class="toolbar-left">
           <button class="pill pill--plain pill--square filter-open-btn" data-i18n="Filter" onclick="onFilterBtn()">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke-width="1.6" stroke-linecap="round"><path d="M4 7h13"/><path d="M4 12h16"/><path d="M4 17h9"/><circle cx="18" cy="7" r="2.3" fill="#fff"/><circle cx="15" cy="17" r="2.3" fill="#fff"/></svg>
+            <img src="assets/plp/filter.svg" alt="" width="24" height="24">
             Filter
           </button>
-          <button class="pill pill--square cat-only" data-i18n onclick="openFinder()">Pan Finder</button>
+          <div class="quick-filters cat-only" id="quickFilters" role="group" aria-label="Quick filters"></div>
         </div>
         <div class="toolbar-right">
           <span class="product-count" id="productCount"></span>

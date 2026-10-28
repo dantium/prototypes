@@ -58,13 +58,14 @@ from the live shop (`/de/en/products/pans.html` + `/products/pans/frying-pans.ht
 each). Product photos are in `assets/products/<sku>.jpg` (filename = SKU).
 
 Real per-SKU data:
-- **names, prices, MSRP** — price rendering follows the Figma Price Display component
-  (`1621:6329`): the Discount variant (red price, "Save N%" chip, italic "€… (last 30 days
-  lowest price)") shows only for variants flagged `"sale": true` in the JSON. Nearly every
-  scraped product carries an MSRP, so sale display is opt-in — flagged today: the two products
-  the shop itself labels SALE (p24, p26) plus the two the mock features discounted (p1, p10).
-  Everything else renders the Default variant (black price, "Including VAT"); MSRPs stay in
-  the data.
+- **names, prices, MSRP** — cards use the published Figma Price Summary **Size=Card**
+  (`3463:4846`), matching the PDP's price-summary structure at card scale. Standard prices
+  are black with VAT underneath. Sale-flagged variants show a red price, last-lowest-price
+  reference and a red reduction (whole percentages rounded down below €100, euro saving
+  from €100). The prototype keeps the existing sale data basis (`lowest30` when supplied,
+  otherwise the catalog's original `msrp` demo comparison); production must supply actual
+  30-day price history. Bundles use their bought-individually total and green saving.
+  RRP appears only for NL/ES; DACH cards omit it. No struck reference or card info icon.
 - **labels** — `NEW` / `BESTSELLER` / `BUNDLE` / `SALE` from the shop's datalayer → corner badges
 - **stock** — datalayer `product_stock` + PDP `offers.availability` → per-variant In/Out of stock
 - **position** — the shop's own category ordering → the "Recommended" sort
@@ -226,3 +227,28 @@ extending `STOPWORDS` / `INTENT` in [assets/app.js](assets/app.js).
 - PDP: Watch video / Size Guide / Klarna Learn more / recipe cards / document downloads are
   visual affordances only (nothing to open in a static prototype); the wishlist heart toggles
   but persists nothing; the design mock's "HEAT-RESPOSIVE" typo is corrected to RESPONSIVE.
+
+## Approved PLP handover update — 28 October 2026
+
+[Figma PLP](https://www.figma.com/design/8oCPrBtDcVBGzxhSrNYlTT/WMF-Mockups-PANS?node-id=3866-7354)
+and [card variants](https://www.figma.com/design/8oCPrBtDcVBGzxhSrNYlTT/WMF-Mockups-PANS?node-id=3882-3602).
+
+- `cardHTML` is the shared card component used by PLPs and PDP recommendations. Price state
+  and selected-SKU availability determine its variant. Catalog data and product links remain dynamic.
+- Native WMF Rotis Web: collection 12/16 Regular, title 15/22 Medium, Small RatingStars,
+  current price 20/30 Bold, supporting price lines 12/16 Regular with 2 px gaps. Image-to-copy
+  spacing 8 px; price region 4 px; size and availability rows 8 px; grid row gap 32 px.
+- Pan finder and Compare pans are bold underlined links in the introductory header. Filter,
+  quick chips, count and sort share one sticky desktop toolbar. Narrow toolbars scroll chips;
+  phone controls use a second chip row. The desktop facet rail scrolls below the toolbar.
+- Quick filters (Induction, Intense searing, Gentle frying, 28 cm, In stock) and Clear all use
+  the same selection state as sidebar facets. Cooktop offers Induction, Gas, Electric,
+  Glass ceramic and Halogen; Halogen has zero matches until catalog compatibility is supplied.
+- Out-of-stock cards omit the cart action and show **Out of stock · selected size** followed
+  by a bold underlined **Notify me** link. Its centered dialog contains the initiating product
+  and size, validates email, and demonstrates activation. Native modal focus trapping,
+  Escape, close button, backdrop dismissal and return focus are supported. Only the SKU
+  activation is kept in sessionStorage; the email is never saved or sent. A visible preview
+  note makes this clear. Connect the production stock-alert API before using this as a service.
+- Pan finder demonstrates three steps in a modal (cooking style, cooktop, size) and applies
+  the existing catalog facets when complete. It is a local prototype flow, not a Neocom integration.

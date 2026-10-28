@@ -392,7 +392,6 @@
   var PAGE_SIZE = 12, shown = PAGE_SIZE, searchQ = '';
 
   var BAG_S = '<svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="#1c1c1c" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 8h12l1 12.5H5L6 8Z"/><path d="M9 8a3 3 0 0 1 6 0"/></svg>';
-  var BELL_S = '<svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="#1c1c1c" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 9a6 6 0 1 0-12 0c0 6-2.5 7-2.5 7h17S18 15 18 9Z"/><path d="M10 19.5a2.2 2.2 0 0 0 4 0"/></svg>';
 
   /* ---- session cart + back-in-stock notify (UX-study #8 / #18) ----
      Quantities live in sessionStorage so tiles, the header badge and the
@@ -413,7 +412,6 @@
     el.textContent = n;
     el.hidden = !n;
   }
-  var HEART_S = '<svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="#1c1c1c" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20.8 5.6a5 5 0 0 0-7.1 0L12 7.3l-1.7-1.7a5 5 0 0 0-7.1 7.1L12 21.5l8.8-8.8a5 5 0 0 0 0-7.1Z"/></svg>';
   /* merchandising tile (Figma PLP): text low in the dark half, whole tile links to the comparison */
   var PROMO = '<a class="promo-tile" href="frying-pans.html#compare" aria-label="Choose the right pan for the job — compare our range">' +
     '<img src="assets/promo-bg.png" alt="">' +
@@ -431,19 +429,6 @@
   }
 
   /* info labels: real/derived today (sets), PIM attributes when the data lands */
-  /* v2 tile (UX-study #7): technique-driven "Ideal for" line */
-  var IDEAL_FOR = {
-    'Intense Searing': 'Searing protein and vegetables',
-    'Gentle Frying':   'Delicate food like eggs and fish',
-    'All Purpose':     'All-round everyday cooking'
-  };
-  function idealFor(p) {
-    var tech = Array.isArray(p.technique) ? p.technique[0] : p.technique;
-    var text = IDEAL_FOR[tech];
-    if (!text) return '';
-    return '<p class="card-ideal"><b>' + t('Ideal for:') + '</b> ' + esc(t(text)) + '</p>';
-  }
-
   function infoLabels(p, v) {
     var out = [];
     if (/^Set of \d/.test(v.size)) out.push(v.size);
@@ -455,15 +440,41 @@
     return out.slice(0, 2).map(function (x) { return '<span class="label">' + esc(t(x)) + '</span>'; }).join('');
   }
 
+  function cardPriceState(p, v) {
+    if (/^bundle-/.test(v.sku)) return 'Bundle';
+    if (isSale(v)) return 'Reduction';
+    if ((COUNTRY === 'NL' || COUNTRY === 'ES') && v.msrp > v.price) return 'RRP';
+    return 'Standard';
+  }
+  function cardPriceHTML(p, v) {
+    var state = cardPriceState(p, v), comparison = '';
+    if (state === 'Reduction') {
+      var basis = v.lowest30 || v.msrp;
+      var reduction = v.price < 100 ? Math.floor((1 - v.price / basis) * 100) + '%' : eur(basis - v.price);
+      comparison = '<div class="card-reference"><span>' + t('Last lowest price:') + '</span><span>' + eur(basis) + '</span><span class="card-reduction">−' + reduction + '</span></div>';
+    } else if (state === 'RRP') {
+      comparison = '<div class="card-reference"><span>' + t('RRP:') + '</span><span>' + eur(v.msrp) + '</span></div>';
+    } else if (state === 'Bundle' && v.msrp > v.price) {
+      var save = v.msrp - v.price;
+      comparison = '<div class="card-reference"><span>' + t('Bought individually:') + ' ' + eur(v.msrp) + '</span><span class="card-saving">' + t('You save %s (%p)').replace('%s', eur(save)).replace('%p', Math.floor(save / v.msrp * 100) + '%') + '</span></div>';
+    }
+    return '<div class="card-price" data-price="' + state + '"><span class="price' + (state === 'Reduction' ? ' sale' : '') + '">' + eur(v.price) + '</span><span class="card-vat">' + t('VAT included, plus shipping') + '</span>' + comparison + '</div>';
+  }
+  function cardRatingHTML(p) {
+    if (p.rating == null) return '<div class="card-rating" aria-hidden="true"></div>';
+    var stars = '';
+    for (var i = 0; i < 5; i++) {
+      var fill = Math.max(0, Math.min(1, p.rating - i)) * 100;
+      stars += '<span class="card-star"><img src="assets/plp/star-empty.svg" alt="" width="14" height="14"><span style="width:' + fill + '%"><img src="assets/plp/star-full.svg" alt="" width="14" height="14"></span></span>';
+    }
+    return '<div class="card-rating" aria-label="' + p.rating.toFixed(1) + ' / 5"><span class="card-stars" aria-hidden="true">' + stars + '</span><span class="rating-count">' + p.rating.toFixed(1) + ' (' + p.reviews + ')</span></div>';
+  }
   function cardHTML(p) {
-    var v = variantOf(p);
-    var onSale = isSale(v);
-    var save = onSale ? Math.round((1 - v.price / v.msrp) * 100) : 0;
-    var labels = infoLabels(p, v);
+    var v = variantOf(p), labels = infoLabels(p, v), pdpHref = 'product.html?id=' + p.id;
     var swatches = p.variants.map(function (vv, i) {
       var sel = i === (p._sel == null ? p.default : p._sel);
-      return '<span class="swatch' + (sel ? ' sel' : '') + (vv.stock ? '' : ' oos') + '" data-i="' + i + '"' +
-        (vv.stock ? '' : ' title="' + t('Out of stock') + '"') + '>' + esc(t(vv.size)) + '</span>';
+      return '<button type="button" class="swatch' + (sel ? ' sel' : '') + (vv.stock ? '' : ' oos') + '" data-i="' + i + '" aria-pressed="' + sel + '"' +
+        (vv.stock ? '' : ' title="' + t('Out of stock') + '"') + '>' + esc(t(vv.size)) + '</button>';
     }).join('');
     /* colour variants as small image swatches (capped, +N marker); the
        product's own colour is outlined, tapping another swaps the tile */
@@ -479,55 +490,22 @@
       colorRow = '<div class="card-colors"><span class="lbl">' + t('Color:') + '</span>' + shown +
         (extra > 0 ? '<span class="card-more">+' + extra + '</span>' : '') + '</div>';
     }
-    var pdpHref = 'product.html?id=' + p.id;
-    /* Condensed v2 tile (UX-study #7): overlay badges carry the attributes,
-       an "Ideal for" line explains the technique, stock sits on the series
-       row, size swatches stay on the tile. Colour selection lives on the
-       PDP. Sale tiles keep the EU Omnibus disclosure. */
-    return '<article class="card card--v2" data-id="' + p.id + '">' +
-      '<div class="card-media">' +
-        /* the track is the mobile swipe gallery; on desktop the images
-           overlay as before (product shot + in-use photo on hover) */
-        '<div class="media-track">' +
-          '<img class="pan" src="' + img(v.sku) + '" alt="' + esc(p.brand + ' ' + nameOf(p)) + '" loading="lazy">' +
-          '<img class="pan-inuse" src="assets/inuse.jpg" alt="" aria-hidden="true">' +
-        '</div>' +
-        badgeFor(v) +
+    var alertOn = NOTIFY.indexOf(v.sku) >= 0;
+    return '<article class="card card--plp" data-id="' + p.id + '" data-availability="' + (v.stock ? 'In stock' : 'Out of stock') + '">' +
+      '<div class="card-media"><div class="media-track">' +
+        '<img class="pan" src="' + img(v.sku) + '" alt="' + esc(p.brand + ' ' + nameOf(p)) + '" loading="lazy">' +
+        '<img class="pan-inuse" src="assets/inuse.jpg" alt="" aria-hidden="true"></div>' + badgeFor(v) +
         '<a class="card-link" href="' + pdpHref + '" aria-label="' + esc(p.brand + ' ' + nameOf(p)) + '"></a>' +
         '<div class="card-actions">' +
-        (v.stock
-          /* in stock: basket button carries this product's cart quantity (#8) */
-          ? '<button class="round add-bag" aria-label="' + t('Add to basket') + '">' + BAG_S +
-            ((CART[p.id] || 0) ? '<span class="cart-count">' + CART[p.id] + '</span>' : '') + '</button>'
-          /* out of stock: distinct bell — register for a back-in-stock alert (#18) */
-          : '<button class="round notify-bell' + (NOTIFY.indexOf(p.id) >= 0 ? ' is-on' : '') + '"' +
-            ' aria-pressed="' + (NOTIFY.indexOf(p.id) >= 0) + '"' +
-            ' aria-label="' + t('Notify me when available') + '"' +
-            ' title="' + t(NOTIFY.indexOf(p.id) >= 0 ? "We'll notify you" : 'Notify me when available') + '">' + BELL_S + '</button>') +
-        '<button class="round" aria-label="' + t('Add to wishlist') + '">' + HEART_S + '</button></div>' +
-        (labels ? '<div class="card-labels">' + labels + '</div>' : '') +
-      '</div>' +
-      /* mobile gallery progress bar (live-shop pattern); hidden on desktop */
+        (v.stock ? '<button class="round add-bag" aria-label="' + t('Add to basket') + '">' + BAG_S +
+          ((CART[p.id] || 0) ? '<span class="cart-count">' + CART[p.id] + '</span>' : '') + '</button>' : '') +
+        '<button class="round card-wishlist" aria-pressed="false" aria-label="' + t('Add to wishlist') + '"><img src="assets/plp/heart.svg" alt="" width="21.219" height="21.755"></button></div>' +
+        (labels ? '<div class="card-labels">' + labels + '</div>' : '') + '</div>' +
       '<div class="media-scrub" aria-hidden="true"><span></span></div>' +
-      '<div class="card-body">' +
-        /* series/collection row carries the stock indicator on the right */
-        '<div class="card-top"><span class="card-eyebrow">' + esc(p.series || p.brand) + '</span>' +
-        '<div class="stock' + (v.stock ? '' : ' out') + '"><span class="dot"></span>' + (v.stock ? t('In stock') : t('Out of stock')) + '</div></div>' +
-        '<h3 class="card-name"><a href="' + pdpHref + '">' + esc(nameOf(p)) + '</a></h3>' +
-        /* Price Display component (Figma 1621:6329) — Default / Discount variants */
-        '<div class="card-price"><span class="price' + (onSale ? ' sale' : '') + '">' + eur(v.price) + '</span>' +
-        (onSale ? '<span class="discount">' + t('Save %n%').replace('%n', save) + '</span>' : '') + '</div>' +
-        /* EU Omnibus disclosure — must accompany every strike/discount price */
-        (onSale ? '<p class="card-was">' + eur(v.msrp) + ' ' + t('(last 30 days lowest price)') + '</p>' : '') +
-        /* real Bazaarvoice ratings from the PDPs; products without reviews show none */
-        (p.rating != null
-          ? '<div class="card-rating"><span class="stars" style="--pct:' + Math.round(p.rating / 5 * 100) + '%"></span>' +
-            '<span class="rating-count">' + p.rating.toFixed(1) + ' (' + p.reviews + ')</span></div>'
-          : '') +
-        idealFor(p) +
-        /* sizes only — a set's variants are configurations, offered on the PDP */
-        (p.variants.length > 1 && p.sizes.length > 1 ? '<div class="card-sizes"><span class="lbl">' + t('Size:') + '</span>' + swatches + '</div>' : '') +
-        colorRow +
+      '<div class="card-body"><span class="card-eyebrow">' + esc(p.series || p.brand) + '</span>' +
+        '<h3 class="card-name"><a href="' + pdpHref + '">' + esc(nameOf(p)) + '</a></h3>' + cardRatingHTML(p) + cardPriceHTML(p, v) +
+        (p.variants.length > 1 && p.sizes.length > 1 ? '<div class="card-sizes"><span class="lbl">' + t('Size Variants:') + '</span>' + swatches + '</div>' : '') + colorRow +
+        (!v.stock ? '<div class="card-availability"><span>' + t('Out of stock') + '</span><span class="card-stock-size">· ' + esc(t(v.size)) + '</span><button class="text-link notify-link" type="button">' + t(alertOn ? 'Notification activated' : 'Notify me') + '</button></div>' : '') +
       '</div></article>';
   }
 
@@ -671,55 +649,48 @@
     return p ? { card: card, p: p } : null;
   }
 
-  /* ---- back-in-stock email popover (UX-study #18) ----
-     The bell opens an email capture; submitting registers the reminder
-     (gold bell). Prototype only — the address is not stored or sent. */
-  function closeNotifyPop() {
-    var pop = document.querySelector('.notify-pop');
-    if (pop) {
-      var bell = pop.closest('.card') && pop.closest('.card').querySelector('.notify-bell');
-      if (bell) bell.classList.remove('is-on');   // re-render restores it when registered
-      pop.remove();
-    }
-    document.removeEventListener('click', onDocClickPop, true);
-    document.removeEventListener('keydown', onEscPop);
+  /* Native dialogs trap focus and return it to the initiating control.
+     This static usability prototype saves SKU activation only, never email. */
+  function bindDialogDismiss(dialog) {
+    dialog.addEventListener('click', function (e) {
+      var r = dialog.getBoundingClientRect();
+      if (e.target.closest('[data-dialog-close]') || (e.target === dialog &&
+          (e.clientX < r.left || e.clientX > r.right || e.clientY < r.top || e.clientY > r.bottom))) dialog.close();
+    });
+    dialog.addEventListener('close', function () { document.body.classList.remove('plp-dialog-open'); });
   }
-  function onDocClickPop(e) {
-    if (!e.target.closest('.notify-pop') && !e.target.closest('.notify-bell')) closeNotifyPop();
-  }
-  function onEscPop(e) { if (e.key === 'Escape') closeNotifyPop(); }
-  function openNotifyPop(card, p, bell) {
-    closeNotifyPop();
-    bell.classList.add('is-on');   // bell lights up while the popover is open
-    var pop = document.createElement('div');
-    pop.className = 'notify-pop';
-    pop.innerHTML =
-      '<button class="np-close" aria-label="' + t('Close') + '">' + I.x + '</button>' +
-      '<div class="np-head">' +
-        '<p>' + t('Enter your email address and we will inform you when the product is available again.') + '</p></div>' +
-      '<div class="np-form">' +
-        '<input type="email" placeholder="' + t('E-mail address') + '" autocomplete="email">' +
-        '<button class="np-submit">' + t('Remind me') + '</button></div>';
-    card.appendChild(pop);
-    var input = pop.querySelector('input');
-    input.focus();
-    function submit() {
-      var val = input.value.trim();
-      if (!/^\S+@\S+\.\S+$/.test(val)) { input.classList.add('is-error'); input.focus(); return; }
-      NOTIFY.push(p.id);
+  function openNotifyPop(card, p, trigger) {
+    var v = variantOf(p), dialog = document.createElement('dialog');
+    dialog.className = 'stock-dialog';
+    dialog.setAttribute('aria-labelledby', 'stockDialogTitle');
+    dialog.innerHTML = '<div class="stock-dialog-head"><h2 id="stockDialogTitle">' + t('Back-in-stock notification') + '</h2><button type="button" class="dialog-close" data-dialog-close aria-label="' + t('Close') + '">×</button></div>' +
+      '<p>' + t('Leave your email and we’ll let you know when your selected pan is back in stock.') + '</p>' +
+      '<div class="stock-dialog-product"><img src="' + img(v.sku) + '" alt="" width="72" height="72"><div><p>' + esc(nameOf(p)) + '</p><span>' + esc(t(v.size)) + '</span></div></div>' +
+      '<form class="stock-form" novalidate><label for="stockEmail">' + t('Email address') + '</label><input id="stockEmail" name="email" type="email" autocomplete="email" placeholder="you@example.com" required aria-describedby="stockEmailError"><p class="stock-email-error" id="stockEmailError" role="alert" hidden>' + t('Please enter a valid email address.') + '</p><button class="dialog-primary" type="submit">' + t('Notify me') + '</button></form>' +
+      '<p class="stock-dialog-note">' + t('We’ll send one stock alert for this product and size. This does not subscribe you to marketing emails.') + '</p><p class="prototype-note">' + t('Prototype preview — no email is sent.') + '</p>';
+    document.body.appendChild(dialog);
+    bindDialogDismiss(dialog);
+    dialog.addEventListener('close', function () {
+      dialog.remove();
+      if (trigger.isConnected) trigger.focus({ preventScroll: true });
+    });
+    var input = dialog.querySelector('input'), error = dialog.querySelector('.stock-email-error');
+    input.addEventListener('input', function () { input.removeAttribute('aria-invalid'); error.hidden = true; });
+    dialog.querySelector('form').addEventListener('submit', function (e) {
+      e.preventDefault(); input.value = input.value.trim();
+      if (!input.checkValidity()) { input.setAttribute('aria-invalid', 'true'); error.hidden = false; input.focus(); return; }
+      if (NOTIFY.indexOf(v.sku) < 0) NOTIFY.push(v.sku);
       saveStore(NOTIFY_STORE, NOTIFY);
-      pop.innerHTML = '<div class="np-head np-ok">' +
-        '<p>' + t("Thanks — we'll email you when it's back in stock.") + '</p></div>';
-      setTimeout(function () { closeNotifyPop(); card.outerHTML = cardHTML(p); }, 1600);
-    }
-    pop.querySelector('.np-submit').addEventListener('click', submit);
-    input.addEventListener('keydown', function (e) { if (e.key === 'Enter') submit(); });
-    input.addEventListener('input', function () { input.classList.remove('is-error'); });
-    pop.querySelector('.np-close').addEventListener('click', closeNotifyPop);
-    setTimeout(function () {
-      document.addEventListener('click', onDocClickPop, true);
-      document.addEventListener('keydown', onEscPop);
-    }, 0);
+      trigger.textContent = t('Notification activated');
+      dialog.querySelector('#stockDialogTitle').textContent = t('Notification activated');
+      dialog.querySelector('form').remove();
+      dialog.querySelector('p').textContent = t('We’ll let you know when this product and size are available again.');
+      dialog.insertAdjacentHTML('beforeend', '<button type="button" class="dialog-primary" data-dialog-close>' + t('Continue shopping') + '</button>');
+      dialog.querySelector('.dialog-primary').focus();
+    });
+    document.body.classList.add('plp-dialog-open');
+    dialog.showModal();
+    input.focus();
   }
   if (grid) {
     // mobile tile gallery: keep each card's progress bar in sync with its
@@ -731,32 +702,27 @@
       var thumb = card.querySelector('.media-scrub span'); if (!thumb) return;
       thumb.style.transform = 'translateX(' + (tk.scrollLeft / tk.clientWidth * 100) + '%)';
     }, true);
-    grid.addEventListener('click', function (e) {
+  }
+  document.addEventListener('click', function (e) {
       var chip = e.target.closest('.search-chip[data-q]');
-      if (chip) { submitSearch(chip.getAttribute('data-q')); return; }
+      if (chip && grid && grid.contains(chip)) { submitSearch(chip.getAttribute('data-q')); return; }
       var bag = e.target.closest('.add-bag');
       if (bag) {
         var hitB = cardProduct(bag); if (!hitB) return;
         CART[hitB.p.id] = (CART[hitB.p.id] || 0) + 1;
         saveStore(CART_STORE, CART); updateCartBadge();
         hitB.card.outerHTML = cardHTML(hitB.p);
+        var updatedBag = document.querySelector('.card[data-id="' + hitB.p.id + '"] .add-bag');
+        if (updatedBag) updatedBag.focus({ preventScroll: true });
         return;
       }
-      var bell = e.target.closest('.notify-bell');
-      if (bell) {
-        var hitN = cardProduct(bell); if (!hitN) return;
-        var ni = NOTIFY.indexOf(hitN.p.id);
-        if (ni >= 0) {
-          // registered → tapping the gold bell unregisters
-          NOTIFY.splice(ni, 1);
-          saveStore(NOTIFY_STORE, NOTIFY);
-          hitN.card.outerHTML = cardHTML(hitN.p);
-        } else {
-          openNotifyPop(hitN.card, hitN.p, bell);
-        }
+      var notify = e.target.closest('.notify-link');
+      if (notify) {
+        var hitN = cardProduct(notify); if (hitN) openNotifyPop(hitN.card, hitN.p, notify);
         return;
       }
-      if (e.target.closest('.notify-pop')) return;   // popover handles its own clicks
+      var wish = e.target.closest('.card-wishlist');
+      if (wish) { wish.setAttribute('aria-pressed', wish.getAttribute('aria-pressed') !== 'true'); return; }
       // colour swatch: colours are sibling products on the live shop — swap the tile
       var cw = e.target.closest('.card-swatch[data-sku]');
       if (cw) {
@@ -769,8 +735,9 @@
       var hit = cardProduct(sw); if (!hit) return;
       hit.p._sel = parseInt(sw.dataset.i, 10);
       hit.card.outerHTML = cardHTML(hit.p);
-    });
-  }
+      var updated = document.querySelector('.card[data-id="' + hit.p.id + '"] .swatch.sel');
+      if (updated) updated.focus({ preventScroll: true });
+  });
   if (showMoreBtn) showMoreBtn.addEventListener('click', function () { shown += PAGE_SIZE; renderGrid(); });
 
   function setSearch(q, skipScroll) {
@@ -1017,7 +984,7 @@
 
   /* option ordering from the Figma rail (alphabetical otherwise) */
   var OPTION_ORDER = {
-    cooktop:   ['Induction', 'Gas', 'Electric', 'Glass ceramic'],
+    cooktop:   ['Induction', 'Gas', 'Electric', 'Glass ceramic', 'Halogen'],
     material:  ['Stainless Steel 3-ply', 'Stainless Steel 1-ply', 'Fusiontec', 'Cast Aluminium', 'Cast Iron'],
     technique: ['Intense Searing', 'Gentle Frying', 'All Purpose'],
     surface:   ['Non-stick', 'Ceramic', 'Uncoated'],
@@ -1046,6 +1013,8 @@
     var attrGroup = function (def) {
       var vals = uniq(LIST.reduce(function (a, p) { return a.concat(valuesOf(p, def.key)); }, [])).sort(orderSort(def.key));
       if (!vals.length) return null;
+      // Keep the approved cooktop choices visible; counts use catalog values.
+      if (def.key === 'cooktop' && vals.indexOf('Halogen') < 0) vals.push('Halogen');
       return { key: def.key, title: def.title, open: def.open, options: vals.map(function (v) {
         return { label: v, test: function (p) { return valuesOf(p, def.key).indexOf(v) >= 0; } }; }) };
     };
@@ -1056,14 +1025,13 @@
                   .sort(function (a, b) { return rank(a) - rank(b); });
     var series = uniq(LIST.map(function (p) { return p.series; })).sort();
 
-    /* group order follows the Figma rail; all groups start collapsed.
-       Cooktop type leads — the study's #1 missing filter. */
+    /* Group order follows the approved Figma rail. */
     FACETS = [
-      pim.cooktop,
       pim.material,
       { key: 'size', title: 'Size', open: false, options: sizes.map(function (s) {
         return { label: s, hint: SIZE_HINTS[s], test: function (p) { return p.sizes.indexOf(s) >= 0; } }; }) },
       pim.technique,
+      pim.cooktop,
       { key: 'price', title: 'Price', open: false, options: [
         { label: 'Under €50',   test: function (p) { return p.minPrice < 50; } },
         { label: '€50 – €100',  test: function (p) { return p.minPrice >= 50 && p.minPrice < 100; } },
@@ -1162,17 +1130,14 @@
   /* ---- quick filters: curated shortcut chips for the most-used facets ----
      Each entry points at an existing rail facet (key + option label) so a chip
      and its rail checkbox stay in sync through the same `selected` state.
-     Suffix rule mirrors the Figma comp: size chips show the serving-size hint,
-     every other chip shows a live product count. */
+     Labels and order follow the approved results toolbar. */
   var quickFiltersEl = document.getElementById('quickFilters');
   var QUICK_FILTERS = [
-    { key: 'cooktop',   label: 'Induction' },
-    { key: 'size',      label: '28 cm' },
-    { key: 'size',      label: '24 cm' },
-    { key: 'surface',   label: 'Non-stick' },
-    { key: 'surface',   label: 'Ceramic' },
-    { key: 'material',  label: 'Stainless Steel 3-ply', text: 'Stainless steel' },
-    { key: 'technique', label: 'Gentle Frying',         text: 'Gentle frying' }
+    { key: 'cooktop', label: 'Induction' },
+    { key: 'technique', label: 'Intense Searing', text: t('Intense searing') },
+    { key: 'technique', label: 'Gentle Frying', text: t('Gentle frying') },
+    { key: 'size', label: '28 cm' },
+    { key: 'availability', label: 'In stock' }
   ];
 
   function qfOption(qf) {
@@ -1188,16 +1153,12 @@
       if (!o) return '';                                   // option not in this catalog — skip
       var on = (selected[qf.key] || []).indexOf(qf.label) >= 0;
       var text = qf.text || t(qf.label);
-      var suffix = (qf.key === 'size' && SIZE_HINTS[qf.label])
-        ? t(SIZE_HINTS[qf.label])
-        : '(' + LIST.filter(o.test).length + ')';
       return '<button class="qf-chip' + (on ? ' is-active' : '') + '" type="button"' +
         ' data-key="' + qf.key + '" data-label="' + esc(qf.label) + '" aria-pressed="' + on + '">' +
         '<span class="qf-text">' + esc(text) + '</span>' +
-        '<span class="qf-count">' + esc(suffix) + '</span>' +
         (on ? '<span class="qf-x" aria-hidden="true">' + I.xs + '</span>' : '') +
         '</button>';
-    }).join('');
+    }).join('') + (Object.keys(selected).some(function (key) { return selected[key].length; }) ? '<button class="qf-chip" type="button" data-af-clear>' + t('Clear all') + '</button>' : '');
     updateHScrolls();   // chip widths changed — refresh arrow visibility
   }
 
@@ -1288,6 +1249,7 @@
     if (quickFiltersEl) {
       quickFiltersEl.addEventListener('click', function (e) {
         var btn = e.target.closest('.qf-chip'); if (!btn) return;
+        if (btn.hasAttribute('data-af-clear')) { Object.keys(selected).forEach(function (key) { selected[key] = []; }); applyFilters(); return; }
         var key = btn.getAttribute('data-key');
         var arr = selected[key]; if (!arr) return;
         var label = btn.getAttribute('data-label');
@@ -1312,42 +1274,52 @@
     });
   }
 
-  /* ---- Pan Finder modal (UX-study #17) ----
-     Opens on-site, no page change. The slot holds the Neocom guided-selling
-     widget on live; the prototype shows a placeholder in its place. */
-  function mountFinder() {
-    if (document.getElementById('finderOverlay')) return;
-    var el = document.createElement('div');
-    el.id = 'finderOverlay';
-    el.className = 'finder-overlay';
-    el.setAttribute('aria-hidden', 'true');
-    el.setAttribute('role', 'dialog');
-    el.setAttribute('aria-label', t('Pan Finder'));
-    el.innerHTML =
-      '<div class="finder-scrim" data-finder-close></div>' +
-      '<div class="finder-panel">' +
-        '<div class="finder-head"><h2>' + t('Pan Finder') + '</h2>' +
-        '<button class="finder-close" aria-label="' + t('Close') + '" data-finder-close>' + I.x + '</button></div>' +
-        '<div class="finder-body"><div class="finder-slot">Neocom Finder Widget</div></div>' +
-      '</div>';
-    el.addEventListener('click', function (e) {
-      if (e.target.closest('[data-finder-close]')) window.closeFinder();
-    });
-    document.body.appendChild(el);
+  /* Finder stays in a modal; the final step applies the catalog facets. */
+  var finderDialog, finderStep = 0, finderAnswers = {};
+  function renderFinder() {
+    var sizeGroup = FACETS.find(function (g) { return g.key === 'size'; });
+    var hobGroup = FACETS.find(function (g) { return g.key === 'cooktop'; });
+    var steps = [
+      { key: 'technique', title: 'What do you like to cook?', hint: 'Choose the cooking style you use most often.', label: 'Your cooking style', options: [
+        ['Intense Searing', 'Intense searing · Meat and potatoes'], ['Gentle Frying', 'Gentle frying · Fish, eggs and vegetables'], ['All Purpose', 'Everyday cooking · A little of everything']] },
+      { key: 'cooktop', title: 'Which cooktop do you use?', hint: 'Choose your cooktop type.', label: 'Your cooktop', options: (hobGroup ? hobGroup.options : []).map(function (o) { return [o.label, o.label]; }) },
+      { key: 'size', title: 'Which size suits you?', hint: 'Choose your preferred pan size.', label: 'Your pan size', options: [['', 'Any size']].concat((sizeGroup ? sizeGroup.options : []).map(function (o) { return [o.label, o.label]; })) }
+    ];
+    var step = steps[finderStep];
+    finderDialog.innerHTML = '<div class="stock-dialog-head"><h2 id="finderTitle">' + t('Find your frying pan') + '</h2><button class="dialog-close" type="button" data-dialog-close aria-label="' + t('Close') + '">×</button></div>' +
+      '<p class="finder-step">' + t('Step %n of 3').replace('%n', finderStep + 1) + ' · ' + t(step.label) + '</p>' +
+      '<h3>' + t(step.title) + '</h3><p>' + t(step.hint) + '</p><div class="finder-choices" role="group" aria-label="' + t(step.title) + '">' +
+      step.options.map(function (o) { var on = finderAnswers[step.key] === o[0]; return '<button class="finder-choice" type="button" data-answer="' + esc(o[0]) + '" aria-pressed="' + on + '">' + esc(t(o[1])) + '</button>'; }).join('') + '</div>' +
+      '<div class="finder-controls">' + (finderStep ? '<button class="text-link" type="button" data-finder-back>' + t('Back') + '</button>' : '') +
+      '<button class="dialog-primary" type="button" data-finder-next' + (finderAnswers[step.key] === undefined ? ' disabled' : '') + '>' + t(finderStep === 2 ? 'Show matching pans' : 'Continue') + '</button></div>';
+    finderDialog.onclick = function (e) {
+      var answer = e.target.closest('[data-answer]');
+      if (answer) {
+        finderAnswers[step.key] = answer.dataset.answer;
+        finderDialog.querySelectorAll('[data-answer]').forEach(function (b) { b.setAttribute('aria-pressed', b === answer); });
+        finderDialog.querySelector('[data-finder-next]').disabled = false;
+      }
+      if (e.target.closest('[data-finder-back]')) { finderStep--; renderFinder(); }
+      if (e.target.closest('[data-finder-next]')) {
+        if (finderStep < 2) { finderStep++; renderFinder(); }
+        else {
+          Object.keys(selected).forEach(function (key) { selected[key] = []; });
+          Object.keys(finderAnswers).forEach(function (key) { if (selected[key] && finderAnswers[key]) selected[key] = [finderAnswers[key]]; });
+          setSearch('', true); applyFilters(); finderDialog.close();
+          document.querySelector('.toolbar').scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      }
+    };
   }
   window.openFinder = function () {
-    mountFinder();
-    document.getElementById('finderOverlay').setAttribute('aria-hidden', 'false');
-    document.body.classList.add('finder-open');
+    if (!finderDialog) {
+      finderDialog = document.createElement('dialog'); finderDialog.className = 'finder-dialog';
+      finderDialog.setAttribute('aria-labelledby', 'finderTitle'); document.body.appendChild(finderDialog); bindDialogDismiss(finderDialog);
+    }
+    finderStep = 0; finderAnswers = {}; renderFinder();
+    document.body.classList.add('plp-dialog-open'); finderDialog.showModal();
   };
-  window.closeFinder = function () {
-    var el = document.getElementById('finderOverlay');
-    if (el) el.setAttribute('aria-hidden', 'true');
-    document.body.classList.remove('finder-open');
-  };
-  document.addEventListener('keydown', function (e) {
-    if (e.key === 'Escape' && document.body.classList.contains('finder-open')) window.closeFinder();
-  });
+  window.closeFinder = function () { if (finderDialog) finderDialog.close(); };
 
   /* ---- filter drawer (mobile) / rail collapse (desktop) ---- */
   window.onFilterBtn = function () {
@@ -1399,7 +1371,11 @@
 
     // paging arrows for the horizontally scrolling rows (mobile)
     setupHScroll(document.querySelector('.catnav-track'), 'cats');
-    setupHScroll(document.getElementById('quickFilters'), 'chips');
+    var toolbar = document.querySelector('.toolbar');
+    if (toolbar) {
+      var setToolbarHeight = function () { document.documentElement.style.setProperty('--plp-toolbar-height', toolbar.offsetHeight + 'px'); };
+      new ResizeObserver(setToolbarHeight).observe(toolbar); setToolbarHeight();
+    }
     window.addEventListener('load', updateHScrolls);   // tile images change row width
 
     // FAQ accordions (frying-pans page only)

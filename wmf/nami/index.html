@@ -34,11 +34,13 @@ body[data-logo="left"] .site-header{gap:28px}body[data-logo="left"] .brand{posit
 @media(min-width:761px) and (max-width:1100px){#header-utilities .wide-utility[aria-label="My account"]{display:flex}.header-left,.header-right,body[data-logo="left"] .header-left,body[data-logo="left"] .header-right{gap:14px}}
 
 .selected-facet{display:inline-flex;align-items:center;gap:24px;padding:12px 18px;border:1px solid #bbb;background:#f4f2ee;font-size:18px}.selected-facet a{font-size:24px;text-decoration:none;padding:0 5px}.category-facet{margin:0;padding:0}
+
+.review-bar{justify-content:flex-end}
 </style>
 </head>
 <body>
   <a class="skip" href="#main">Skip to content</a>
-  <div class="review-bar"><span>WMF <span class="muted">/</span> NAMI <span class="concept-label">MENU PROTOTYPE</span></span><nav aria-label="Prototype controls"><label class="logo-control">Logo <select id="logo-position" aria-label="Logo position"><option value="center">Centred</option><option value="left">Left aligned</option></select></label><a href="#home">Home</a><button data-action="about">About</button></nav></div>
+  <div class="review-bar"><nav aria-label="Prototype controls"><label class="logo-control">Logo <select id="logo-position" aria-label="Logo position"><option value="center">Centred</option><option value="left">Left aligned</option></select></label></nav></div>
   <header class="site-header">
     <nav class="header-left" aria-label="Shop"><button id="products-toggle" aria-expanded="false" aria-controls="navigation" data-action="menu"><span class="desktop-label">Products</span><span class="mobile-label">☰ <span>Menu</span></span></button><button id="collections-toggle" class="desktop-label" data-action="collections" aria-expanded="false" aria-controls="navigation">Collections</button><a class="desktop-label" href="#offers">Offers</a></nav>
     <a class="brand" href="#home" aria-label="WMF home"><img id="brand-logo" alt="WMF"></a>

@@ -50,6 +50,25 @@ body[data-logo="left"] .site-header{gap:28px}body[data-logo="left"] .brand{posit
 #navigation .nav-default .menu-promotion-copy span{position:static;color:inherit;text-shadow:none;font-size:16px}
 #navigation .nav-rail .menu-section-heading{flex-wrap:nowrap}
 #navigation .shared-menu-rail .menu-section-heading h2{font-size:28px}
+
+/* Collections use the NAMI full-width editorial card grid. */
+#navigation.is-collections{display:block;overflow:auto}
+.collection-mega{max-width:1600px;margin:0 auto;padding:34px 5vw 38px}
+.collection-mega .menu-section-heading{margin-bottom:28px}
+.collection-mega-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:18px}
+.collection-mega-card{position:relative;display:flex;align-items:flex-end;min-height:190px;aspect-ratio:1.9;overflow:hidden;background:#333;color:white;border-radius:3px;text-decoration:none}
+.collection-mega-card>img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 45%;transition:transform .25s}
+.collection-mega-card::after{content:'';position:absolute;inset:0;background:linear-gradient(180deg,transparent 10%,#0003 35%,#000d 100%)}
+.collection-mega-copy{position:relative;z-index:1;padding:20px;width:100%}
+.collection-mega-copy h3{font-size:25px;line-height:1.08;text-transform:uppercase;margin:0 0 10px}
+.collection-mega-copy p{font-size:17px;line-height:1.3;margin:0}
+.collection-mega-card:hover img{transform:scale(1.035)}
+.collection-mega-card:hover h3{text-decoration:underline;text-underline-offset:4px}
+.collection-mega-card:focus-visible{outline-offset:3px}
+@media(min-width:761px) and (max-width:1100px){.collection-mega-grid{grid-template-columns:repeat(3,minmax(0,1fr))}.collection-mega{padding:28px}.collection-mega-copy{padding:16px}.collection-mega-copy h3{font-size:23px}}
+@media(max-width:760px){.collection-mega{padding:20px 24px 30px}.collection-mega-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}.collection-mega-copy{padding:16px}.collection-mega-copy h3{font-size:23px}.collection-mega-copy p{font-size:16px}.collection-mega .menu-section-heading{margin:12px 0 24px}}
+@media(max-width:480px){.collection-mega-grid{grid-template-columns:1fr}.collection-mega-card{min-height:185px;aspect-ratio:1.8}}
+.collection-mega-card{min-width:0;width:100%}
 </style>
 </head>
 <body>
@@ -112,7 +131,7 @@ function menuPromotions(section='products'){
  return `<div class="menu-promotions">${sets[section].map(([title,copy,img,href])=>`<a class="menu-promotion" href="${href}"><div class="menu-promotion-image">${photo(img,'')}</div><div class="menu-promotion-copy"><h3>${escape(title)}</h3><p>${escape(copy)}</p><span>Explore ${iconArrow()}</span></div></a>`).join('')}</div>`
 }
 function detailMenu(){const f=F.get(state.navFamily);if(!f)return `<div class="nav-detail nav-default">${menuPromotions('products')}</div>`;const ranges=rangeLinks(f.id),facets=facetSections(f.id,true);return `<div class="nav-detail"><button class="mobile-back" data-action="nav-back">‹ Back</button>${menuHeading(f.label,pathFor(f.id))}<div class="category-menu-columns"><div>${f.types.length?'<h3 class="nav-type-heading">Shop by type</h3>':''}<ul class="type-list">${f.types.map(id=>`<li><a href="${pathFor(f.id,id)}">${escape(R.get(id).label)} ${iconArrow()}</a></li>`).join('')}</ul></div>${ranges||facets?`<div class="category-ranges">${facets}${ranges?`<h3 class="nav-type-heading">Shop by range</h3><div class="context-range-links">${ranges}</div>`:''}</div>`:''}</div><a class="nav-discover" href="#discover/${f.id}">→ Explore ${escape(f.label.toLowerCase())}</a></div>`}
-function collectionMenu(){return `<div class="nav-rail shared-menu-rail"><button class="mobile-back" data-action="nav-root">‹ Back</button>${menuHeading('Collections','#collections')}<ul class="shared-menu-links collection-menu-links">${D.collections.map(c=>`<li><a href="#selection/${c.id}"><span><strong>${escape(c.label)}</strong><small>${escape(collectionIntro(c))}</small></span>${iconArrow()}</a></li>`).join('')}</ul></div><div class="nav-detail nav-default">${menuPromotions('collections')}</div>`}
+function collectionMenu(){return `<div class="collection-mega"><button class="mobile-back" data-action="nav-root">‹ Back</button>${menuHeading('Collections','#collections')}<div class="collection-mega-grid">${D.collections.map(c=>`<a class="collection-mega-card" href="#selection/${c.id}">${photo(c.id==='hosting-dining'?F.get('cutlery').image:c.image,'')}<div class="collection-mega-copy"><h3>${escape(c.label)}</h3><p>${escape(collectionIntro(c))}</p></div></a>`).join('')}</div></div>`}
 function familyPhoto(f){return photo(f.image,f.label,f.image.includes('TasteMatters')?'photo':'')}
 
 function iconArrow(){return '<span aria-hidden="true">›</span>'}

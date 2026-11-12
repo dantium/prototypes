@@ -188,6 +188,8 @@ body[data-menu="ideal"] .mm-header,body[data-menu="ideal"] #mm-panel,body[data-m
 /* Collections menu: 13 wmf.com collections plus a card for the rest */
 @media(min-width:1200px){.collection-mega-grid{grid-template-columns:repeat(5,minmax(0,1fr))}.collection-mega-card{aspect-ratio:auto;min-height:170px}.collection-mega-copy h3{font-size:22px}.collection-mega-copy p{font-size:15px}}
 .collection-mega-more{background:#1f1f1f}.collection-mega-more::after{display:none}
+/* The top navigation already says Products, so the desktop rail has no title */
+@media(min-width:761px){#navigation .nav-rail:not(.shared-menu-rail)>.menu-section-heading{display:none}}
 .collection-group-title{font-size:28px;margin:10px 0 18px;padding:0 5vw}.range-directory+.collection-group-title{margin-top:0}
 @media(max-width:760px){.collection-group-title{padding:0 20px;font-size:24px}}
 </style>

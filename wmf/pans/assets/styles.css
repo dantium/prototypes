@@ -530,23 +530,6 @@ body.nav-open .nav-drawer { transform: none; }
 .card-swatch.oos img { opacity: .4; }
 .card-more { font-size: 12px; font-weight: 300; color: #6a6a6a; }
 
-/* ---- Promo tile inside grid (Figma: heading low on the dark half, no button) ---- */
-.promo-tile {
-  position: relative; overflow: hidden; min-height: 100%;
-  display: flex; align-items: flex-end; justify-content: center;
-  background: #1c1c1c;
-}
-.promo-tile img {
-  position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover;
-  transition: transform .4s ease;
-}
-.promo-tile:hover img { transform: scale(1.025); }
-.promo-tile h3 {
-  position: relative; z-index: 1; margin: 0; padding: 0 16px 13%;
-  text-align: center; color: #fff;
-  font-size: 27px; line-height: 1.5; font-weight: 300;
-  letter-spacing: 0.14em; text-transform: uppercase;
-}
 
 .show-more-row { display: flex; flex-direction: column; align-items: center; gap: 14px; padding: 42px 0 8px; }
 .show-more-count { margin: 0; font-size: 13px; font-weight: 300; letter-spacing: .04em; color: #666; }
@@ -1029,6 +1012,62 @@ body.plp-dialog-open { overflow:hidden; }
 .prototype-note { color:var(--muted); font-size:12px; line-height:16px; }
 .finder-dialog { width:1000px; padding:40px; }
 .finder-dialog[open] { gap:16px; }
+/* ============================================================
+   CONTENT HUB below the grid (buying advice, tips, brand, reviews,
+   FAQ, Pan Finder). Replaces the editorial tile that sat in the grid.
+   ============================================================ */
+.hub { margin-top:96px; padding-top:80px; border-top:1px solid var(--line); display:flex; flex-direction:column; gap:96px; font-family:var(--rotis-web); }
+.hub-head { max-width:720px; margin-bottom:32px; }
+.hub-eyebrow { margin:0 0 8px; font:400 12px/16px var(--rotis-web); letter-spacing:1.2px; text-transform:uppercase; color:var(--muted); }
+.hub-title { margin:0; font:300 32px/40px var(--rotis-web); letter-spacing:.06em; text-transform:uppercase; color:#000; }
+.hub-intro { margin:12px 0 0; font:400 16px/24px var(--rotis-web); color:#1c1c1c; }
+.hub-grid { display:grid; grid-template-columns:repeat(3, minmax(0, 1fr)); gap:24px; }
+.hub h3 { margin:0; font:500 18px/24px var(--rotis-web); color:#000; }
+.hub-grid p { margin:0; font:400 15px/22px var(--rotis-web); color:#1c1c1c; }
+.hub-style { display:flex; flex-direction:column; gap:12px; align-items:flex-start; }
+.hub-style img { width:100%; aspect-ratio:4/3; object-fit:cover; display:block; margin-bottom:4px; }
+.hub-style p { flex:1; }
+.hub-style .text-link { text-align:left; }
+.hub-tip { display:flex; flex-direction:column; gap:12px; padding:28px; background:var(--wash); }
+.hub-num { font:300 28px/32px var(--rotis-web); color:var(--gold-deep); }
+.hub-brand { display:grid; grid-template-columns:1fr 1fr; align-items:center; gap:48px; background:var(--wash); }
+.hub-brand img { width:100%; height:100%; min-height:360px; object-fit:cover; display:block; }
+.hub-brand-text { display:flex; flex-direction:column; align-items:flex-start; gap:16px; padding:40px 48px 40px 0; }
+.hub-brand-text p:not(.hub-eyebrow) { margin:0; font:400 16px/24px var(--rotis-web); }
+.hub-brand-text .hub-eyebrow { margin:0 0 -8px; }
+.hub-review { display:flex; flex-direction:column; gap:10px; padding:28px; border:1px solid var(--line); }
+.hub-stars { color:var(--star); font-size:16px; letter-spacing:2px; }
+.hub-review p.hub-review-meta { flex:1; display:flex; align-items:flex-end; font-size:13px; color:var(--muted); }
+.hub-review-prod { font:700 14px/20px var(--rotis-web); color:#000; text-decoration:underline; text-underline-offset:3px; }
+.hub-faq-list { max-width:880px; border-bottom:1px solid var(--rule); }
+.hub-faq details { border-top:1px solid var(--rule); }
+.hub-faq summary { display:flex; align-items:center; justify-content:space-between; gap:24px; padding:22px 0; font:500 18px/26px var(--rotis-web); cursor:pointer; list-style:none; }
+.hub-faq summary::-webkit-details-marker { display:none; }
+.hub-faq summary::after { content:"+"; flex:none; font:300 28px/1 var(--rotis-web); transition:transform .2s; }
+.hub-faq details[open] summary::after { transform:rotate(45deg); }
+.hub-faq summary:focus-visible { outline:2px solid #000; outline-offset:3px; }
+.hub-faq details p { margin:0; padding:0 48px 24px 0; font:400 16px/24px var(--rotis-web); color:#1c1c1c; }
+.hub-cta { display:flex; align-items:center; justify-content:space-between; gap:32px; padding:40px 48px; background:#212121; color:#fff; }
+.hub-cta h2 { margin:0 0 8px; font:300 28px/36px var(--rotis-web); letter-spacing:.06em; text-transform:uppercase; }
+.hub-cta p { margin:0; font:400 16px/24px var(--rotis-web); color:#e6e6e6; }
+.hub-cta-btn { flex:none; min-height:48px; padding:12px 32px; border:0; border-radius:24px; background:var(--button); color:#000; font:700 16px/20px var(--rotis-web); cursor:pointer; }
+.hub-cta-btn:hover { background:#fff; }
+.hub :where(a, button):focus-visible { outline:2px solid currentColor; outline-offset:3px; }
+@media (max-width:900px) {
+  .hub { margin-top:64px; padding-top:56px; gap:64px; }
+  .hub-title { font-size:26px; line-height:32px; }
+  .hub-grid { grid-template-columns:1fr; gap:16px; }
+  .hub-style { display:grid; grid-template-columns:120px 1fr; column-gap:16px; row-gap:8px; align-items:start; }
+  .hub-style img { grid-row:span 3; margin:0; aspect-ratio:1; }
+  .hub-tip, .hub-review { padding:20px; }
+  .hub-brand { grid-template-columns:1fr; gap:0; }
+  .hub-brand img { min-height:0; aspect-ratio:16/9; }
+  .hub-brand-text { padding:24px 20px 28px; }
+  .hub-faq summary { font-size:16px; line-height:24px; padding:18px 0; }
+  .hub-faq details p { padding-right:0; }
+  .hub-cta { flex-direction:column; align-items:stretch; padding:28px 20px; gap:20px; }
+  .hub-cta h2 { font-size:24px; line-height:30px; }
+}
 /* Mock of the Neocom advisor's first screen (live: Neocom iframe) */
 .nc { border:1px solid #e6e6e6; box-shadow:0 2px 12px rgba(0,0,0,.06); background:#fff; }
 .nc-progress { height:8px; background:#ececf0; }

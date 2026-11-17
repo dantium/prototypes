@@ -413,10 +413,8 @@
     el.textContent = n;
     el.hidden = !n;
   }
-  /* merchandising tile (Figma PLP): text low in the dark half, whole tile links to the comparison */
-  var PROMO = '<a class="promo-tile" href="frying-pans.html#compare" aria-label="Choose the right pan for the job — compare our range">' +
-    '<img src="assets/promo-bg.png" alt="">' +
-    '<h3>' + t('Choose the right pan for the job') + '</h3></a>';
+  /* No editorial tile inside the grid: the UX study found it interrupts
+     browsing. Buying advice now lives in the content hub below the grid. */
 
   /* corner badge = the shop's real product label for the selected variant;
      sale-flagged variants show the Sale badge ahead of any other label */
@@ -647,7 +645,6 @@
     if (!grid) return;
     var list = currentList();
     var cards = list.slice(0, shown).map(cardHTML);
-    if (!searchQ && cards.length >= 2 && PAGE.promo !== false) cards.splice(2, 0, PROMO);
     grid.innerHTML = cards.length ? cards.join('') : noResultsHTML();
     // zero results: strip the page down to the message and its escape routes
     document.body.classList.toggle('searching-empty', !!searchQ && list.length === 0);
@@ -1349,12 +1346,20 @@
     next.addEventListener('click', function () {
       var picked = finderDialog.querySelector('input[name="nc-use"]:checked');
       if (!picked) return;
-      Object.keys(selected).forEach(function (key) { selected[key] = []; });
-      selected.technique = [picked.value];
-      setSearch('', true); applyFilters(); finderDialog.close();
-      document.querySelector('.toolbar').scrollIntoView({ behavior: 'smooth', block: 'start' });
+      finderDialog.close(); showTechnique(picked.value);
     });
   }
+  /* Show only one cooking technique and jump back up to the grid. Used by the
+     Pan Finder mock and by the content hub's cooking-style cards. */
+  function showTechnique(value) {
+    Object.keys(selected).forEach(function (key) { selected[key] = []; });
+    selected.technique = [value];
+    setSearch('', true); applyFilters();
+    // scroll to the results wrapper, not the sticky toolbar (a stuck toolbar
+    // already counts as "in view", which would leave you at the end of the grid)
+    (document.querySelector('.plp-results') || document.querySelector('.toolbar')).scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+  window.hubFilter = showTechnique;
   window.openFinder = function () {
     if (!finderDialog) {
       finderDialog = document.createElement('dialog'); finderDialog.className = 'finder-dialog';

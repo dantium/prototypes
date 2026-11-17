@@ -1274,49 +1274,61 @@
     });
   }
 
-  /* Finder stays in a modal; the final step applies the catalog facets. */
-  var finderDialog, finderStep = 0, finderAnswers = {};
+  /* Pan Finder = Neocom Product Advisor in a modal. There is no pans advisor
+     yet, so this is a static mock of its FIRST SCREEN, modelled on the live
+     pots advisor (wmf.com/de/de/produkte/toepfe/topfberater.html: progress
+     bar, step label, question, image option cards, price chip + "Weiter").
+     On live this whole block is replaced by the Neocom embed:
+       <div data-neocom-id="{pans advisor id}"></div>
+       <script src="https://production.neocomapp.com/neocom.js?id=638e6fd0-cfcf-4e85-a9e1-ed5188bcfb33" async></script>
+     In the mock, "Next" applies the matching Cooking Technique filter. */
+  var FINDER_OPTIONS = [
+    { value: 'All Purpose',    img: 'assets/pdp/adv-versatility.jpg', title: 'Allrounder',     text: 'For lots of different dishes and ideal for everyday use' },
+    { value: 'Intense Searing', img: 'assets/inuse.jpg',           title: 'Searing',        text: 'For steak, crispy potatoes and a golden-brown crust' },
+    { value: 'Gentle Frying',  img: 'assets/pdp/recipe-fish.jpg',  title: 'Gentle frying',  text: 'For fish, eggs and vegetables at moderate heat' }
+  ];
+  var ICON_TAG = '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" aria-hidden="true"><path d="M3 12V3h9l9 9-9 9-9-9Z"/><circle cx="7.5" cy="7.5" r="1.5"/></svg>';
+  var ICON_PEN = '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m4 20 1-4L16 5l3 3L8 19l-4 1Z"/></svg>';
+  var finderDialog;
   function renderFinder() {
-    var sizeGroup = FACETS.find(function (g) { return g.key === 'size'; });
-    var hobGroup = FACETS.find(function (g) { return g.key === 'cooktop'; });
-    var steps = [
-      { key: 'technique', title: 'What do you like to cook?', hint: 'Choose the cooking style you use most often.', label: 'Your cooking style', options: [
-        ['Intense Searing', 'Intense searing · Meat and potatoes'], ['Gentle Frying', 'Gentle frying · Fish, eggs and vegetables'], ['All Purpose', 'Everyday cooking · A little of everything']] },
-      { key: 'cooktop', title: 'Which cooktop do you use?', hint: 'Choose your cooktop type.', label: 'Your cooktop', options: (hobGroup ? hobGroup.options : []).map(function (o) { return [o.label, o.label]; }) },
-      { key: 'size', title: 'Which size suits you?', hint: 'Choose your preferred pan size.', label: 'Your pan size', options: [['', 'Any size']].concat((sizeGroup ? sizeGroup.options : []).map(function (o) { return [o.label, o.label]; })) }
-    ];
-    var step = steps[finderStep];
-    finderDialog.innerHTML = '<div class="stock-dialog-head"><h2 id="finderTitle">' + t('Find your frying pan') + '</h2><button class="dialog-close" type="button" data-dialog-close aria-label="' + t('Close') + '">×</button></div>' +
-      '<p class="finder-step">' + t('Step %n of 3').replace('%n', finderStep + 1) + ' · ' + t(step.label) + '</p>' +
-      '<h3>' + t(step.title) + '</h3><p>' + t(step.hint) + '</p><div class="finder-choices" role="group" aria-label="' + t(step.title) + '">' +
-      step.options.map(function (o) { var on = finderAnswers[step.key] === o[0]; return '<button class="finder-choice" type="button" data-answer="' + esc(o[0]) + '" aria-pressed="' + on + '">' + esc(t(o[1])) + '</button>'; }).join('') + '</div>' +
-      '<div class="finder-controls">' + (finderStep ? '<button class="text-link" type="button" data-finder-back>' + t('Back') + '</button>' : '') +
-      '<button class="dialog-primary" type="button" data-finder-next' + (finderAnswers[step.key] === undefined ? ' disabled' : '') + '>' + t(finderStep === 2 ? 'Show matching pans' : 'Continue') + '</button></div>';
-    finderDialog.onclick = function (e) {
-      var answer = e.target.closest('[data-answer]');
-      if (answer) {
-        finderAnswers[step.key] = answer.dataset.answer;
-        finderDialog.querySelectorAll('[data-answer]').forEach(function (b) { b.setAttribute('aria-pressed', b === answer); });
-        finderDialog.querySelector('[data-finder-next]').disabled = false;
-      }
-      if (e.target.closest('[data-finder-back]')) { finderStep--; renderFinder(); }
-      if (e.target.closest('[data-finder-next]')) {
-        if (finderStep < 2) { finderStep++; renderFinder(); }
-        else {
-          Object.keys(selected).forEach(function (key) { selected[key] = []; });
-          Object.keys(finderAnswers).forEach(function (key) { if (selected[key] && finderAnswers[key]) selected[key] = [finderAnswers[key]]; });
-          setSearch('', true); applyFilters(); finderDialog.close();
-          document.querySelector('.toolbar').scrollIntoView({ behavior: 'smooth', block: 'start' });
-        }
-      }
-    };
+    finderDialog.innerHTML = '<div class="stock-dialog-head"><h2 id="finderTitle">' + t('Pan Finder') + '</h2><button class="dialog-close" type="button" data-dialog-close aria-label="' + t('Close') + '">×</button></div>' +
+      '<div class="nc">' +
+        '<div class="nc-progress" aria-hidden="true"><span></span></div>' +
+        '<div class="nc-body">' +
+          '<p class="nc-step">' + t('Usage') + '</p>' +
+          '<h3 class="nc-q" id="ncQ">' + t('Looking for an all-round pan, or one for something specific?') + '</h3>' +
+          '<div class="nc-opts" role="radiogroup" aria-labelledby="ncQ">' +
+            FINDER_OPTIONS.map(function (o) {
+              return '<label class="nc-opt"><input type="radio" name="nc-use" value="' + esc(o.value) + '">' +
+                '<span class="nc-img"><img src="' + o.img + '" alt="" loading="lazy"></span>' +
+                '<span class="nc-txt"><strong>' + t(o.title) + '</strong><span>' + t(o.text) + '</span></span></label>';
+            }).join('') +
+          '</div>' +
+        '</div>' +
+        '<div class="nc-foot">' +
+          '<span class="nc-chip"><i>' + ICON_TAG + '</i>' + t('Price') + ' 25 – 200 €<button type="button" aria-label="' + t('Change price range') + '">' + ICON_PEN + '</button></span>' +
+          '<button class="nc-next" type="button" disabled>' + t('Next') + '</button>' +
+        '</div>' +
+      '</div>';
+    var next = finderDialog.querySelector('.nc-next');
+    finderDialog.querySelectorAll('input[name="nc-use"]').forEach(function (r) {
+      r.addEventListener('change', function () { next.disabled = false; });
+    });
+    next.addEventListener('click', function () {
+      var picked = finderDialog.querySelector('input[name="nc-use"]:checked');
+      if (!picked) return;
+      Object.keys(selected).forEach(function (key) { selected[key] = []; });
+      selected.technique = [picked.value];
+      setSearch('', true); applyFilters(); finderDialog.close();
+      document.querySelector('.toolbar').scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
   }
   window.openFinder = function () {
     if (!finderDialog) {
       finderDialog = document.createElement('dialog'); finderDialog.className = 'finder-dialog';
       finderDialog.setAttribute('aria-labelledby', 'finderTitle'); document.body.appendChild(finderDialog); bindDialogDismiss(finderDialog);
     }
-    finderStep = 0; finderAnswers = {}; renderFinder();
+    renderFinder();
     document.body.classList.add('plp-dialog-open'); finderDialog.showModal();
   };
   window.closeFinder = function () { if (finderDialog) finderDialog.close(); };

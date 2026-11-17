@@ -427,16 +427,18 @@
     return '<span class="badge' + cls + '">' + esc(t(text)) + '</span>';
   }
 
-  /* info labels: real/derived today (sets), PIM attributes when the data lands */
+  /* info labels on the image: cooktop first (UX-study key finding), then the
+     cooking technique / coating; max two so they fit a 2-column mobile tile.
+     Set size is left off: the product name already says it. */
   function infoLabels(p, v) {
-    var out = [];
-    if (/^Set of \d/.test(v.size)) out.push(v.size);
+    var out = [], cook = cooktopLabel(p);
+    if (cook) out.push(cook);
     ['technique', 'surface'].forEach(function (key) {
       var val = p[key];
       if (!val) return;
-      (Array.isArray(val) ? val : [val]).slice(0, 2 - out.length).forEach(function (x) { out.push(x); });
+      (Array.isArray(val) ? val : [val]).forEach(function (x) { out.push('<span class="label">' + esc(t(x)) + '</span>'); });
     });
-    return out.slice(0, 2).map(function (x) { return '<span class="label">' + esc(t(x)) + '</span>'; }).join('');
+    return out.slice(0, 2).join('');
   }
 
   function cardPriceState(p, v) {
@@ -468,23 +470,20 @@
     }
     return '<div class="card-rating" aria-label="' + p.rating.toFixed(1) + ' / 5"><span class="card-stars" aria-hidden="true">' + stars + '</span><span class="rating-count">' + p.rating.toFixed(1) + ' (' + p.reviews + ')</span></div>';
   }
-  /* Cooktop line (UX-study key finding): icon + plain text from the product's
-     cooktop data (PIM on live). All four types incl. induction = the full
-     message; no induction = a clear warning; nothing listed = no line. */
-  var ICON_HOB = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><rect x="2.5" y="4.5" width="19" height="15" rx="2"/><circle cx="12" cy="12" r="4.5"/><circle cx="12" cy="12" r="1.8"/></svg>';
+  /* Cooktop badge from the product's cooktop data (PIM on live): induction
+     works = "Induction" (the full sentence as its accessible name); no
+     induction = a clear "Not for induction"; nothing listed = no badge. */
+  var ICON_HOB = '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><rect x="2.5" y="4.5" width="19" height="15" rx="2"/><circle cx="12" cy="12" r="4.5"/><circle cx="12" cy="12" r="1.8"/></svg>';
   var ALL_HOBS = ['Induction', 'Gas', 'Electric', 'Glass ceramic'];
-  function cardCooktopHTML(p) {
+  function cooktopLabel(p) {
     var c = p.cooktop || [];
     if (!c.length) return '';
-    var induction = c.indexOf('Induction') >= 0, txt;
-    if (ALL_HOBS.every(function (h) { return c.indexOf(h) >= 0; })) {
-      txt = '<span class="long">' + t('Suitable for all cooktops, including induction') + '</span><span class="short">' + t('All cooktops incl. induction') + '</span>';
-    } else if (!induction) {
-      txt = t('Not suitable for induction');
-    } else {
-      txt = c.map(function (h) { return t(h); }).join(', ');
-    }
-    return '<p class="card-cooktop' + (induction ? '' : ' no-induction') + '">' + ICON_HOB + '<span>' + txt + '</span></p>';
+    var induction = c.indexOf('Induction') >= 0;
+    var full = !induction ? t('Not suitable for induction')
+      : ALL_HOBS.every(function (h) { return c.indexOf(h) >= 0; }) ? t('Suitable for all cooktops, including induction')
+      : t('Suitable for') + ' ' + c.map(function (h) { return t(h); }).join(', ');
+    return '<span class="label label--cooktop' + (induction ? '' : ' no-induction') + '" title="' + esc(full) + '">' + ICON_HOB +
+      '<span aria-hidden="true">' + t(induction ? 'Induction' : 'Not for induction') + '</span><span class="sr-only">' + esc(full) + '</span></span>';
   }
   var HEART = '<svg width="21" height="22" viewBox="0 0 21.219 21.755" aria-hidden="true"><path d="M10.608 5.127C10.478 4.404 9.686 1.312 6.926 0.622C4.166 -0.068 1.508 2.554 0.768 4.999C-0.415 8.927 2.327 12.868 4.725 15.734C5.824 17.044 7.013 18.277 8.282 19.423C8.988 20.117 9.768 20.731 10.608 21.255C11.45 20.731 12.231 20.115 12.937 19.418C14.206 18.274 15.395 17.043 16.494 15.734C18.894 12.873 21.634 8.934 20.451 5.003C19.715 2.554 17.067 -0.072 14.293 0.622C11.519 1.316 10.74 4.403 10.608 5.127Z" stroke="#000" stroke-linejoin="round"/></svg>';
   function wishBtnHTML(p) {
@@ -525,7 +524,7 @@
         (labels ? '<div class="card-labels">' + labels + '</div>' : '') + '</div>' +
       '<div class="media-scrub" aria-hidden="true"><span></span></div>' +
       '<div class="card-body"><span class="card-eyebrow">' + esc(p.series || p.brand) + '</span>' +
-        '<h3 class="card-name"><a href="' + pdpHref + '">' + esc(nameOf(p)) + '</a></h3>' + cardRatingHTML(p) + cardPriceHTML(p, v) + cardCooktopHTML(p) +
+        '<h3 class="card-name"><a href="' + pdpHref + '">' + esc(nameOf(p)) + '</a></h3>' + cardRatingHTML(p) + cardPriceHTML(p, v) +
         (p.variants.length > 1 && p.sizes.length > 1 ? '<div class="card-sizes"><span class="lbl">' + t('Size Variants:') + '</span>' + swatches + '</div>' : '') + colorRow +
         (!v.stock ? '<div class="card-availability"><span>' + t('Out of stock') + '</span><span class="card-stock-size">· ' + esc(t(v.size)) + '</span><button class="text-link notify-link" type="button">' + t(alertOn ? 'Notification activated' : 'Notify me') + '</button></div>' : '') +
       '</div></article>';

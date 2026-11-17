@@ -977,12 +977,10 @@ body.searching-empty .plp { grid-template-columns: 1fr; }
 /* wishlist: outlined heart; filled black once saved */
 .card-wishlist svg path { fill:none; transition:fill .15s; }
 .card-wishlist[aria-pressed="true"] svg path { fill:#000; }
-/* cooktop line under the price */
-.card--plp .card-cooktop { display:flex; align-items:flex-start; gap:6px; margin:6px 0 0; font:400 12px/16px var(--rotis-web); color:#212121; }
-.card-cooktop svg { flex:none; margin-top:0; }
-.card-cooktop .short { display:none; }
-.card--plp .card-body { container-type:inline-size; }
-@container (max-width: 250px) { .card-cooktop .long { display:none; } .card-cooktop .short { display:inline; } }
+/* cooktop badge: leads the image labels, hob icon + short text */
+.label--cooktop { gap:5px; padding-left:8px; }
+.label--cooktop svg { flex:none; }
+.label--cooktop.no-induction { border-style:dashed; }
 .card--plp .round { background:var(--wash); box-shadow:none; }
 .card--plp .round:hover { background:#ede3b8; }
 .card--plp .badge, .card--plp .label { font-weight:400; }

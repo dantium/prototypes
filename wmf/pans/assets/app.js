@@ -396,12 +396,13 @@
   /* ---- session cart + back-in-stock notify (UX-study #8 / #18) ----
      Quantities live in sessionStorage so tiles, the header badge and the
      PDP stay in sync across category switches. */
-  var CART_STORE = 'wmf.plp.cart', NOTIFY_STORE = 'wmf.plp.notify';
+  var CART_STORE = 'wmf.plp.cart', NOTIFY_STORE = 'wmf.plp.notify', WISH_STORE = 'wmf.plp.wish';
   function loadStore(key, fallback) {
     try { return JSON.parse(sessionStorage.getItem(key)) || fallback; } catch (e) { return fallback; }
   }
   var CART = loadStore(CART_STORE, {});
   var NOTIFY = loadStore(NOTIFY_STORE, []);
+  var WISH = loadStore(WISH_STORE, []);   // product ids on the wishlist (heart filled black)
   function saveStore(key, val) { try { sessionStorage.setItem(key, JSON.stringify(val)); } catch (e) {} }
   function cartTotal() {
     return Object.keys(CART).reduce(function (s, k) { return s + CART[k]; }, 0);
@@ -469,6 +470,29 @@
     }
     return '<div class="card-rating" aria-label="' + p.rating.toFixed(1) + ' / 5"><span class="card-stars" aria-hidden="true">' + stars + '</span><span class="rating-count">' + p.rating.toFixed(1) + ' (' + p.reviews + ')</span></div>';
   }
+  /* Cooktop line (UX-study key finding): icon + plain text from the product's
+     cooktop data (PIM on live). All four types incl. induction = the full
+     message; no induction = a clear warning; nothing listed = no line. */
+  var ICON_HOB = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><rect x="2.5" y="4.5" width="19" height="15" rx="2"/><circle cx="12" cy="12" r="4.5"/><circle cx="12" cy="12" r="1.8"/></svg>';
+  var ALL_HOBS = ['Induction', 'Gas', 'Electric', 'Glass ceramic'];
+  function cardCooktopHTML(p) {
+    var c = p.cooktop || [];
+    if (!c.length) return '';
+    var induction = c.indexOf('Induction') >= 0, txt;
+    if (ALL_HOBS.every(function (h) { return c.indexOf(h) >= 0; })) {
+      txt = '<span class="long">' + t('Suitable for all cooktops, including induction') + '</span><span class="short">' + t('All cooktops incl. induction') + '</span>';
+    } else if (!induction) {
+      txt = t('Not suitable for induction');
+    } else {
+      txt = c.map(function (h) { return t(h); }).join(', ');
+    }
+    return '<p class="card-cooktop' + (induction ? '' : ' no-induction') + '">' + ICON_HOB + '<span>' + txt + '</span></p>';
+  }
+  var HEART = '<svg width="21" height="22" viewBox="0 0 21.219 21.755" aria-hidden="true"><path d="M10.608 5.127C10.478 4.404 9.686 1.312 6.926 0.622C4.166 -0.068 1.508 2.554 0.768 4.999C-0.415 8.927 2.327 12.868 4.725 15.734C5.824 17.044 7.013 18.277 8.282 19.423C8.988 20.117 9.768 20.731 10.608 21.255C11.45 20.731 12.231 20.115 12.937 19.418C14.206 18.274 15.395 17.043 16.494 15.734C18.894 12.873 21.634 8.934 20.451 5.003C19.715 2.554 17.067 -0.072 14.293 0.622C11.519 1.316 10.74 4.403 10.608 5.127Z" stroke="#000" stroke-linejoin="round"/></svg>';
+  function wishBtnHTML(p) {
+    var on = WISH.indexOf(p.id) >= 0;
+    return '<button class="round card-wishlist" aria-pressed="' + on + '" aria-label="' + t(on ? 'Remove from wishlist' : 'Add to wishlist') + '">' + HEART + '</button>';
+  }
   function cardHTML(p) {
     var v = variantOf(p), labels = infoLabels(p, v), pdpHref = 'product.html?id=' + p.id;
     var swatches = p.variants.map(function (vv, i) {
@@ -499,11 +523,11 @@
         '<div class="card-actions">' +
         (v.stock ? '<button class="round add-bag" aria-label="' + t('Add to basket') + '">' + BAG_S +
           ((CART[p.id] || 0) ? '<span class="cart-count">' + CART[p.id] + '</span>' : '') + '</button>' : '') +
-        '<button class="round card-wishlist" aria-pressed="false" aria-label="' + t('Add to wishlist') + '"><img src="assets/plp/heart.svg" alt="" width="21.219" height="21.755"></button></div>' +
+        wishBtnHTML(p) + '</div>' +
         (labels ? '<div class="card-labels">' + labels + '</div>' : '') + '</div>' +
       '<div class="media-scrub" aria-hidden="true"><span></span></div>' +
       '<div class="card-body"><span class="card-eyebrow">' + esc(p.series || p.brand) + '</span>' +
-        '<h3 class="card-name"><a href="' + pdpHref + '">' + esc(nameOf(p)) + '</a></h3>' + cardRatingHTML(p) + cardPriceHTML(p, v) +
+        '<h3 class="card-name"><a href="' + pdpHref + '">' + esc(nameOf(p)) + '</a></h3>' + cardRatingHTML(p) + cardPriceHTML(p, v) + cardCooktopHTML(p) +
         (p.variants.length > 1 && p.sizes.length > 1 ? '<div class="card-sizes"><span class="lbl">' + t('Size Variants:') + '</span>' + swatches + '</div>' : '') + colorRow +
         (!v.stock ? '<div class="card-availability"><span>' + t('Out of stock') + '</span><span class="card-stock-size">· ' + esc(t(v.size)) + '</span><button class="text-link notify-link" type="button">' + t(alertOn ? 'Notification activated' : 'Notify me') + '</button></div>' : '') +
       '</div></article>';
@@ -722,7 +746,15 @@
         return;
       }
       var wish = e.target.closest('.card-wishlist');
-      if (wish) { wish.setAttribute('aria-pressed', wish.getAttribute('aria-pressed') !== 'true'); return; }
+      if (wish) {
+        var hitW = cardProduct(wish); if (!hitW) return;
+        var wi = WISH.indexOf(hitW.p.id), on = wi < 0;
+        if (on) WISH.push(hitW.p.id); else WISH.splice(wi, 1);
+        saveStore(WISH_STORE, WISH);
+        wish.setAttribute('aria-pressed', on);
+        wish.setAttribute('aria-label', t(on ? 'Remove from wishlist' : 'Add to wishlist'));
+        return;
+      }
       // colour swatch: colours are sibling products on the live shop — swap the tile
       var cw = e.target.closest('.card-swatch[data-sku]');
       if (cw) {

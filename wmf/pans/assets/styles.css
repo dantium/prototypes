@@ -991,7 +991,15 @@ body.searching-empty .plp { grid-template-columns: 1fr; }
 .card-availability { display:flex; flex-wrap:wrap; align-items:center; gap:0 8px; padding-top:8px; font:400 14px/21px var(--rotis-web); }
 .card-availability .notify-link { margin-left:8px; }
 .card-stock-size { color:var(--muted); }
-.card-wishlist[aria-pressed="true"] { background:#ede3b8; }
+/* wishlist: outlined heart; filled black once saved */
+.card-wishlist svg path { fill:none; transition:fill .15s; }
+.card-wishlist[aria-pressed="true"] svg path { fill:#000; }
+/* cooktop line under the price */
+.card--plp .card-cooktop { display:flex; align-items:flex-start; gap:6px; margin:6px 0 0; font:400 12px/16px var(--rotis-web); color:#212121; }
+.card-cooktop svg { flex:none; margin-top:0; }
+.card-cooktop .short { display:none; }
+.card--plp .card-body { container-type:inline-size; }
+@container (max-width: 250px) { .card-cooktop .long { display:none; } .card-cooktop .short { display:inline; } }
 .card--plp .round { background:var(--wash); box-shadow:none; }
 .card--plp .round:hover { background:#ede3b8; }
 .card--plp .badge, .card--plp .label { font-weight:400; }

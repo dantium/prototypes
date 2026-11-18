@@ -38,8 +38,8 @@ window.WMF_I18N_DE = {
   'Back': 'Zurück',
   'Halogen': 'Halogen',
   /* ---- pans content hub ---- */
-  "Which pan suits the way you cook?": "Welche Pfanne passt zu Ihrer Art zu kochen?",
-  "Start with the food you cook most often. Each cooking style works best with a different pan surface.": "Gehen Sie von den Gerichten aus, die Sie am häufigsten kochen. Jeder Kochstil gelingt am besten mit einer anderen Pfannenoberfläche.",
+  "The right pan for every dish": "Die richtige Pfanne für jedes Gericht",
+  "From a golden crust on a steak to gently fried eggs and fish: choose how you like to cook, and we’ll show you the WMF pans made for it.": "Von der goldbraunen Kruste am Steak bis zu sanft gebratenen Eiern und Fisch: Wählen Sie, wie Sie gerne kochen, und wir zeigen Ihnen die passenden WMF Pfannen.",
   "For eggs, fish and vegetables at moderate heat": "Für Eier, Fisch und Gemüse bei mittlerer Hitze",
   "Everyday cooking": "Kochen im Alltag",
   "For a little of everything, every day": "Für alles, was täglich auf den Tisch kommt",

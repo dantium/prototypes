@@ -1263,7 +1263,8 @@
       b.type = 'button';
       b.className = 'hscroll-arrow hscroll-arrow--' + (dir < 0 ? 'prev' : 'next');
       b.setAttribute('aria-label', t(dir < 0 ? 'Scroll left' : 'Scroll right'));
-      b.innerHTML = I.chev;
+      // same chevron as the DS carousel button (and the review slider)
+      b.innerHTML = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg>';
       b.addEventListener('click', function () {
         scroller.scrollBy({ left: dir * Math.round(scroller.clientWidth * 0.7), behavior: 'smooth' });
       });

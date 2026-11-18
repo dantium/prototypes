@@ -249,14 +249,14 @@ body.nav-open .nav-drawer { transform: none; }
    buttons reuse the .round card-action style + menu chevron)
    ============================================================ */
 .hscroll { position: relative; }
+/* DS carousel button (button-left / button-right): 45 px #53555a circle, thin white chevron */
 .hscroll-arrow {
   position: absolute; top: 50%; transform: translateY(-50%); z-index: 4;
-  width: 38px; height: 38px; border-radius: 50%; padding: 0;
-  background: #fff; border: 0; display: none; place-items: center;
-  color: #1c1c1c; box-shadow: 0 2px 6px rgba(0,0,0,.13); cursor: pointer;
-  transition: box-shadow .15s;
+  width: 45px; height: 45px; border-radius: 50%; padding: 0;
+  background: #53555a; border: 0; display: none; place-items: center;
+  color: #fff; cursor: pointer; transition: background .15s;
 }
-.hscroll-arrow:hover { box-shadow: 0 3px 11px rgba(0,0,0,.22); }
+.hscroll-arrow:hover, .hub-arrow:hover:not(:disabled) { background: #1c1c1c; }
 .hscroll-arrow svg { display: block; }
 .hscroll-arrow--prev { left: -10px; }
 .hscroll-arrow--next { right: -10px; }
@@ -268,7 +268,7 @@ body.nav-open .nav-drawer { transform: none; }
   .hscroll--chips .hscroll-arrow--prev { left: -16px; }
   .hscroll--chips .hscroll-arrow--next { right: -16px; }
   /* centre the category arrows on the tile image, not image + label */
-  .hscroll--cats .hscroll-arrow { top: 44%; }
+  .hscroll--cats .hscroll-arrow { top: 36px; }   /* middle of the 71 px tile image */
 }
 
 /* ============================================================
@@ -1103,8 +1103,8 @@ body.plp-dialog-open { overflow:hidden; }
 .hub-recipe-row::-webkit-scrollbar { display:none; }
 .hub-recipe-row > .hub-recipe { flex:0 0 calc((100% - 32px) / 3); scroll-snap-align:start; }
 .hscroll--recipes .hscroll-arrow { top:calc((100cqi - 32px) / 3 * .75 / 2); }   /* centre of the 4:3 image */
-.hscroll--recipes .hscroll-arrow--prev { left:-19px; }
-.hscroll--recipes .hscroll-arrow--next { right:-19px; }
+.hscroll--recipes .hscroll-arrow--prev { left:-22px; }
+.hscroll--recipes .hscroll-arrow--next { right:-22px; }
 .hscroll--recipes.has-prev .hscroll-arrow--prev,
 .hscroll--recipes.has-next .hscroll-arrow--next { display:grid; }
 .hub-recipe { display:flex; flex-direction:column; gap:10px; color:#000; text-decoration:none; }
@@ -1125,9 +1125,10 @@ body.plp-dialog-open { overflow:hidden; }
 /* same as the live wmf.com 50/50 module (PageBuilder "Text + Image"):
    full-bleed, 612 px tall, image two thirds, text third on light grey,
    24 px spaced heading, 20/30 body, cream pill */
-.hub-brand { display:grid; grid-template-columns:2fr 1fr; align-items:stretch; min-height:612px; margin:80px calc(50% - 50vw); padding:0; background:var(--wash); text-align:left; }
-.hub-brand img { width:100%; height:100%; min-height:612px; object-fit:cover; display:block; }
-.hub-brand-text { display:flex; flex-direction:column; justify-content:center; align-items:flex-start; gap:24px; padding:48px 61px; }
+/* 50/50 image + text, inside the page container, on white */
+.hub-brand { display:grid; grid-template-columns:1fr 1fr; align-items:center; margin:80px 0; padding:0; background:#fff; text-align:left; }
+.hub-brand img { width:100%; height:auto; aspect-ratio:4/3; object-fit:cover; display:block; }
+.hub-brand-text { display:flex; flex-direction:column; justify-content:center; align-items:flex-start; gap:24px; padding:48px 64px; }
 .hub-brand .hub-title { margin:0; font-size:24px; line-height:31px; letter-spacing:.2em; text-align:left; }
 .hub-brand-text p { margin:0; font:400 20px/30px var(--rotis-web); }
 /* guide: types, size, material and surface, range; each row name links to
@@ -1136,7 +1137,7 @@ body.plp-dialog-open { overflow:hidden; }
 .hub-guide-body { max-width:908px; margin:16px auto 0; text-align:left; }
 .hub-guide h3 { margin:56px 0 16px; font:400 24px/32px var(--rotis-web); letter-spacing:.12em; text-transform:uppercase; }
 .hub-guide-body p { margin:12px 0 0; font:400 16px/24px var(--rotis-web); color:#1c1c1c; }
-.hub-guide-body .hub-guide-intro { margin:0 0 20px; max-width:760px; }
+.hub-guide-body .hub-guide-intro { margin:0 0 20px; }
 .hub-row-link { display:inline; padding:0; border:0; background:none; color:#000; font:700 16px/24px var(--rotis-web); text-align:left; text-decoration:underline; text-underline-offset:3px; cursor:pointer; }
 .hub-row-link:hover { color:var(--muted); }
 .hub-row-name { font:700 16px/24px var(--rotis-web); color:#000; }
@@ -1172,9 +1173,8 @@ body.plp-dialog-open { overflow:hidden; }
   .hub-dots { margin-top:28px; }
   .hub-faq-list { margin-top:32px; }
   .hub-faq details p { padding-right:0; }
-  .hub-brand { grid-template-columns:1fr; min-height:0; margin:56px -22px; padding:0; }
-  .hub-brand img { height:auto; min-height:0; aspect-ratio:4/3; }
-  .hub-brand-text { padding:32px 22px 40px; gap:16px; }
+  .hub-brand { grid-template-columns:1fr; margin:56px 0; padding:0; }
+  .hub-brand-text { padding:28px 0 0; gap:16px; }
   .hub-brand .hub-title { font-size:22px; line-height:28px; letter-spacing:.15em; }
   .hub-brand-text p { font-size:16px; line-height:24px; }
   .hub-guide { padding:56px 0; }

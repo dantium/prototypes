@@ -736,8 +736,14 @@
     dialog.innerHTML = '<div class="stock-dialog-head"><h2 id="stockDialogTitle">' + t('Back-in-stock notification') + '</h2><button type="button" class="dialog-close" data-dialog-close aria-label="' + t('Close') + '">×</button></div>' +
       '<p>' + t('Leave your email and we’ll let you know when your selected pan is back in stock.') + '</p>' +
       '<div class="stock-dialog-product"><img src="' + img(v.sku) + '" alt="" width="72" height="72"><div><p>' + esc(nameOf(p)) + '</p><span>' + esc(t(v.size)) + '</span></div></div>' +
-      '<form class="stock-form" novalidate><label for="stockEmail">' + t('Email address') + '</label><input id="stockEmail" name="email" type="email" autocomplete="email" placeholder="you@example.com" required aria-describedby="stockEmailError"><p class="stock-email-error" id="stockEmailError" role="alert" hidden>' + t('Please enter a valid email address.') + '</p><button class="dialog-primary" type="submit">' + t('Notify me') + '</button></form>' +
-      '<p class="stock-dialog-note">' + t('We’ll send one stock alert for this product and size. This does not subscribe you to marketing emails.') + '</p><p class="prototype-note">' + t('Prototype preview — no email is sent.') + '</p>';
+      '<form class="stock-form" novalidate><label for="stockEmail">' + t('Email address') + '</label><input id="stockEmail" name="email" type="email" autocomplete="email" placeholder="you@example.com" required aria-describedby="stockEmailError"><p class="stock-email-error" id="stockEmailError" role="alert" hidden>' + t('Please enter a valid email address.') + '</p>' +
+        /* legal copy and newsletter opt-in as on the live wmf.com form (name
+           fields left out on purpose); wording to be confirmed by Legal */
+        '<p class="stock-legal">' + t('If the product is not back in stock within 3 months, your request is deleted automatically. The price valid when you order applies.') + '</p>' +
+        '<p class="stock-legal">' + t('By signing up, I accept the %t and %p.').replace('%t', '<a href="https://www.wmf.com/de/de/rechtliches/agb.html" target="_blank" rel="noopener">' + t('terms and conditions') + '</a>').replace('%p', '<a href="https://www.wmf.com/de/de/rechtliches/datenschutzerklaerung.html" target="_blank" rel="noopener">' + t('privacy policy') + '</a>') + '</p>' +
+        '<label class="stock-optin"><input type="checkbox" name="newsletter"><span><strong>' + t('Receive the WMF newsletter') + '</strong>' + t('I consent to WMF creating personal profiles from my personal data, purchase and usage behaviour, and sending me personalised offers and a newsletter about products and special promotions by email, and using this data for advertising on social media (e.g. Facebook). I can revoke this consent at any time.') + '</span></label>' +
+        '<button class="dialog-primary" type="submit">' + t('Notify me') + '</button></form>' +
+      '<p class="prototype-note">' + t('Prototype preview — no email is sent.') + '</p>';
     document.body.appendChild(dialog);
     bindDialogDismiss(dialog);
     dialog.addEventListener('close', function () {

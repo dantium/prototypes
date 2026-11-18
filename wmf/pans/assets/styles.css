@@ -1021,7 +1021,14 @@ body.plp-dialog-open { overflow:hidden; }
 .stock-dialog-product span, .stock-dialog-note { font-size:14px; line-height:18px; }
 .stock-dialog-product span { color:var(--muted); }
 .stock-form { display:flex; flex-direction:column; gap:8px; }
-.stock-form input { font:400 16px/20px var(--rotis-web); padding:0 16px; height:48px; width:100%; border:1px solid var(--muted); border-radius:4px; }
+.stock-form input { font:400 16px/20px var(--rotis-web); padding:0 16px; height:48px; width:100%; border:1px solid var(--muted); border-radius:0; }
+/* legal copy and newsletter opt-in (live wmf.com form) */
+.stock-legal { margin:8px 0 0 !important; font-size:14px; line-height:20px; color:#1c1c1c; }
+.stock-legal a { color:#000; text-decoration:underline; text-underline-offset:2px; }
+.stock-optin { display:grid; grid-template-columns:20px 1fr; gap:12px; align-items:start; margin-top:8px; font-size:13px; line-height:19px; color:#1c1c1c; cursor:pointer; }
+.stock-optin input[type=checkbox] { appearance:none; -webkit-appearance:none; width:20px; height:20px; margin:0; padding:0; border:1px solid #000; border-radius:0; background:#fff center/14px no-repeat; cursor:pointer; }
+.stock-optin input[type=checkbox]:checked { background-color:#000; background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23fff' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M4.5 12.5l5 5 10-11'/%3E%3C/svg%3E"); }
+.stock-optin strong { display:block; margin-bottom:4px; font-size:14px; line-height:20px; font-weight:700; color:#000; }
 .stock-form input[aria-invalid="true"] { border-color:var(--sale); }
 .stock-email-error { color:var(--sale); font-size:14px; }
 .dialog-primary { flex:none; display:block; min-height:48px; border:0; border-radius:24px; width:100%; padding:12px 24px; background:#ede3b8; color:#000; font:700 16px/20px var(--rotis-web); }

@@ -144,6 +144,12 @@ window.WMF_I18N_DE = {
   "Eggs, fish and pancakes at low to medium heat. Delicate food comes away easily.": "Eier, Fisch und Pfannkuchen bei niedriger bis mittlerer Hitze. Empfindliche Lebensmittel lösen sich leicht.",
   "Fish, vegetables and eggs at moderate heat, with a little fat.": "Fisch, Gemüse und Eier bei mittlerer Hitze, mit etwas Fett.",
   "Good to know": "Gut zu wissen",
+  "If the product is not back in stock within 3 months, your request is deleted automatically. The price valid when you order applies.": "Ist der Artikel nicht innerhalb von 3 Monaten wieder verfügbar, wird Ihre Anfrage automatisch gelöscht. Es gilt der Preis zum Zeitpunkt der Bestellung.",
+  "By signing up, I accept the %t and %p.": "Mit der Anmeldung akzeptiere ich die %t und die %p.",
+  "terms and conditions": "AGB",
+  "privacy policy": "Datenschutzerklärung",
+  "Receive the WMF newsletter": "WMF Newsletter erhalten",
+  "I consent to WMF creating personal profiles from my personal data, purchase and usage behaviour, and sending me personalised offers and a newsletter about products and special promotions by email, and using this data for advertising on social media (e.g. Facebook). I can revoke this consent at any time.": "Ich willige ein, dass WMF aus meinen personenbezogenen Daten sowie meinem Kauf- und Nutzungsverhalten persönliche Profile erstellt, mir personalisierte Angebote und einen Newsletter zu Produkten und Aktionen per E-Mail sendet und diese Daten für Werbung in sozialen Medien (z. B. Facebook) nutzt. Diese Einwilligung kann ich jederzeit widerrufen.",
   /* ---- page titles ---- */
   'WMF · Home': 'WMF · Startseite',
   'WMF · Pans': 'WMF · Pfannen',

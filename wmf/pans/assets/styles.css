@@ -990,12 +990,14 @@ body.searching-empty .plp { grid-template-columns: 1fr; }
 .card-wishlist svg path { fill:none; transition:fill .15s; }
 .card-wishlist[aria-pressed="true"] svg path { fill:#000; }
 /* cooktop line after the tile details, with a hover/tap list of cooktops */
-.card-hob { position:relative; padding-top:10px; }
+.card-hob { position:relative; align-self:flex-start; margin-top:10px; }
 .card-hob-btn { display:inline-flex; align-items:center; gap:6px; padding:0; border:0; background:none; color:#000; font:400 12px/16px var(--rotis-web); cursor:pointer; }
 .card-hob-btn svg { flex:none; }
 .card-hob-btn span { text-decoration:underline dotted; text-underline-offset:3px; }
-.hob-pop { display:none; position:absolute; left:0; bottom:100%; z-index:30; min-width:210px; padding:16px 18px; background:#fff; border:1px solid #c2c2c2; box-shadow:0 6px 18px rgba(0,0,0,.12); text-align:left; }
+.hob-pop { display:none; position:absolute; left:0; bottom:100%; margin-bottom:6px; z-index:30; min-width:210px; padding:16px 18px; background:#fff; border:1px solid #c2c2c2; box-shadow:0 6px 18px rgba(0,0,0,.12); text-align:left; }
 .card-hob:hover .hob-pop, .card-hob:focus-within .hob-pop, .card-hob.open .hob-pop { display:block; }
+/* invisible bridge over the 6px gap so the list stays open while the pointer moves up */
+.hob-pop::after { content:""; position:absolute; left:0; right:0; top:100%; height:8px; }
 .hob-pop-title { margin:0 0 8px; font:700 14px/20px var(--rotis-web); }
 .hob-pop ul { margin:0; padding:0; list-style:none; }
 .hob-pop li { display:flex; align-items:center; gap:8px; padding:4px 0; font:400 14px/20px var(--rotis-web); }
@@ -1066,13 +1068,21 @@ body.plp-dialog-open { overflow:hidden; }
 .hub-quotes-row { display:flex; align-items:center; justify-content:center; gap:40px; margin-top:40px; }
 .hub-quotes-track { display:flex; width:820px; max-width:100%; overflow-x:auto; scroll-snap-type:x mandatory; scrollbar-width:none; }
 .hub-quotes-track::-webkit-scrollbar { display:none; }
-.hub-quote { flex:0 0 100%; scroll-snap-align:start; margin:0; display:flex; flex-direction:column; align-items:center; gap:20px; }
+.hub-quote { flex:0 0 100%; scroll-snap-align:start; margin:0; display:flex; flex-direction:column; align-items:center; gap:16px; }
+.hub-quote-meta { display:flex; align-items:center; justify-content:center; flex-wrap:wrap; gap:4px 12px; font:400 14px/20px var(--rotis-web); color:#000; }
 .hub-stars { color:var(--star); font-size:20px; line-height:20px; letter-spacing:2px; }
+.hub-quote-title { margin:0; font:700 20px/28px var(--rotis-web); color:#000; }
 .hub-quote blockquote { margin:0; }
 .hub-quote blockquote p { margin:0; font:400 20px/30px var(--rotis-web); letter-spacing:.01em; }
 .hub-quote blockquote p::before { content:"\201C"; } .hub-quote blockquote p::after { content:"\201D"; }
-.hub-quote figcaption { font:400 14px/21px var(--rotis-web); color:#6f6f6f; }
-.hub-quote figcaption a { color:inherit; text-decoration:underline; text-underline-offset:3px; }
+/* reviewed product: thumbnail + name, links to the PDP */
+.hub-quote-prod { display:inline-flex; align-items:center; gap:14px; margin-top:8px; padding:8px 16px 8px 8px; border:1px solid #c2c2c2; background:#fff; color:#000; text-align:left; text-decoration:none; transition:border-color .15s; }
+.hub-quote-prod:hover { border-color:#000; }
+.hub-quote-prod img { flex:none; width:56px; height:56px; object-fit:contain; background:#fff; }
+.hub-quote-prod > span { display:flex; flex-direction:column; gap:2px; }
+.hub-quote-prod small { font:400 12px/16px var(--rotis-web); color:#000; }
+.hub-quote-prod strong { font:700 16px/22px var(--rotis-web); text-decoration:underline; text-underline-offset:3px; }
+.hub-quote-prod svg { flex:none; margin-left:8px; }
 .hub-arrow { flex:none; display:grid; place-items:center; width:45px; height:45px; border:0; border-radius:50%; background:#53555a; color:#fff; cursor:pointer; }
 .hub-arrow:disabled { opacity:.3; cursor:default; }
 .hub-dots { display:flex; justify-content:center; gap:6px; margin-top:40px; }
@@ -1094,7 +1104,7 @@ body.plp-dialog-open { overflow:hidden; }
 .hub-othercats { text-align:left; }
 .hub-othercats .hub-title { text-align:center; margin-bottom:32px; }
 /* 6 · brand (DS Text + Image) */
-.hub-brand { display:grid; grid-template-columns:1fr 1fr; align-items:center; padding:0; text-align:left; }
+.hub-brand { display:grid; grid-template-columns:1fr 1fr; align-items:center; padding:80px 0; text-align:left; }
 .hub-brand img { width:100%; height:520px; object-fit:cover; display:block; }
 .hub-brand-text { display:flex; flex-direction:column; align-items:flex-start; gap:24px; padding:48px 48px 48px 64px; }
 .hub-brand .hub-title { margin:0; }
@@ -1107,6 +1117,7 @@ body.plp-dialog-open { overflow:hidden; }
 .hub-guide-body p { margin:12px 0 0; font:400 16px/24px var(--rotis-web); color:#1c1c1c; }
 .hub-row-link { display:inline; padding:0; border:0; background:none; color:#000; font:700 16px/24px var(--rotis-web); text-align:left; text-decoration:underline; text-underline-offset:3px; cursor:pointer; }
 .hub-row-link:hover { color:var(--muted); }
+.hub-row-name { font:700 16px/24px var(--rotis-web); color:#000; }
 .hub-table { width:100%; margin-top:12px; border-collapse:collapse; font:400 16px/24px var(--rotis-web); }
 .hub-table th, .hub-table td { padding:10px 16px 10px 0; border-bottom:1px solid var(--rule); text-align:left; vertical-align:top; }
 .hub-table thead th { border-bottom-color:#000; font-weight:700; }
@@ -1133,6 +1144,7 @@ body.plp-dialog-open { overflow:hidden; }
   .hub-quotes-row { gap:0; margin-top:28px; }
   .hub-arrow { display:none; }
   .hub-quote blockquote p { font-size:18px; line-height:27px; }
+  .hub-quote-title { font-size:18px; line-height:26px; }
   .hub-dots { margin-top:28px; }
   .hub-faq-list { margin-top:32px; }
   .hub-faq details p { padding-right:0; }

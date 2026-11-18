@@ -471,19 +471,19 @@
     return '<div class="card-rating" aria-label="' + p.rating.toFixed(1) + ' / 5"><span class="card-stars" aria-hidden="true">' + stars + '</span><span class="rating-count">' + p.rating.toFixed(1) + ' (' + p.reviews + ')</span></div>';
   }
   /* Cooktop badge from the product's cooktop data (PIM on live): induction
-     works = "Induction" (the full sentence as its accessible name); no
+     works on every hob = "All cooktops" (the full sentence as its accessible name); no
      induction = a clear "Not for induction"; nothing listed = no badge. */
-  var ICON_HOB = '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><rect x="2.5" y="4.5" width="19" height="15" rx="2"/><circle cx="12" cy="12" r="4.5"/><circle cx="12" cy="12" r="1.8"/></svg>';
   var ALL_HOBS = ['Induction', 'Gas', 'Electric', 'Glass ceramic'];
   function cooktopLabel(p) {
     var c = p.cooktop || [];
     if (!c.length) return '';
     var induction = c.indexOf('Induction') >= 0;
+    var all = ALL_HOBS.every(function (h) { return c.indexOf(h) >= 0; });
     var full = !induction ? t('Not suitable for induction')
-      : ALL_HOBS.every(function (h) { return c.indexOf(h) >= 0; }) ? t('Suitable for all cooktops, including induction')
+      : all ? t('Suitable for all cooktops, including induction')
       : t('Suitable for') + ' ' + c.map(function (h) { return t(h); }).join(', ');
-    return '<span class="label label--cooktop' + (induction ? '' : ' no-induction') + '" title="' + esc(full) + '">' + ICON_HOB +
-      '<span aria-hidden="true">' + t(induction ? 'Induction' : 'Not for induction') + '</span><span class="sr-only">' + esc(full) + '</span></span>';
+    return '<span class="label label--cooktop' + (induction ? '' : ' no-induction') + '" title="' + esc(full) + '">' +
+      '<span aria-hidden="true">' + t(!induction ? 'Not for induction' : all ? 'All cooktops' : 'Induction') + '</span><span class="sr-only">' + esc(full) + '</span></span>';
   }
   var HEART = '<svg width="21" height="22" viewBox="0 0 21.219 21.755" aria-hidden="true"><path d="M10.608 5.127C10.478 4.404 9.686 1.312 6.926 0.622C4.166 -0.068 1.508 2.554 0.768 4.999C-0.415 8.927 2.327 12.868 4.725 15.734C5.824 17.044 7.013 18.277 8.282 19.423C8.988 20.117 9.768 20.731 10.608 21.255C11.45 20.731 12.231 20.115 12.937 19.418C14.206 18.274 15.395 17.043 16.494 15.734C18.894 12.873 21.634 8.934 20.451 5.003C19.715 2.554 17.067 -0.072 14.293 0.622C11.519 1.316 10.74 4.403 10.608 5.127Z" stroke="#000" stroke-linejoin="round"/></svg>';
   function wishBtnHTML(p) {

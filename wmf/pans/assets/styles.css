@@ -977,9 +977,7 @@ body.searching-empty .plp { grid-template-columns: 1fr; }
 /* wishlist: outlined heart; filled black once saved */
 .card-wishlist svg path { fill:none; transition:fill .15s; }
 .card-wishlist[aria-pressed="true"] svg path { fill:#000; }
-/* cooktop badge: leads the image labels, hob icon + short text */
-.label--cooktop { gap:5px; padding-left:8px; }
-.label--cooktop svg { flex:none; }
+/* cooktop badge: leads the image labels */
 .label--cooktop.no-induction { border-style:dashed; }
 .card--plp .round { background:var(--wash); box-shadow:none; }
 .card--plp .round:hover { background:#ede3b8; }

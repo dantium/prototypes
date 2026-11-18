@@ -274,6 +274,7 @@ window.WMF_I18N_DE = {
   'Remove from wishlist': 'Von der Wunschliste entfernen',
   'Suitable for all cooktops, including induction': 'Für alle Herdarten geeignet, inkl. Induktion',
   'Not for induction': 'Nicht für Induktion',
+  'All cooktops': 'Alle Herdarten',
   'Suitable for': 'Geeignet für',
   'Not suitable for induction': 'Nicht für Induktion geeignet',
   'Notify me when available': 'Benachrichtigen, wenn wieder verfügbar',

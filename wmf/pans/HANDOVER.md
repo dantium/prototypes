@@ -46,6 +46,20 @@ Nothing else in the mega menu changes.
 | Add to cart | Updates header only | Also drives the shared cart state behind the tile + header badges |
 | Colour | Colour picker in the buy box | Unchanged — PDP picker drives packshot / price / SKU; pan PLP cards show size choices; the existing Pots colour swatches remain available and the PDP retains its colour picker |
 
+## Category story (brand module) — PLP + PDP
+
+One CMS block per category, rendered by the same component on the category page and on every PDP in that category (the PDP uses the product's most specific category; no block → nothing renders). Prototype: `STORIES` / `renderStory` in `assets/app.js`.
+
+| Part | Spec |
+|---|---|
+| Content fields | Eyebrow · headline · lead (≤ 260 chars) · CTA (separate PLP and PDP link) · 3 proof points (term + one line) · film or image |
+| Media | Ambient muted loop, 6–12 s, no sound or on-screen text. Two cuts: 16:9 desktop (≥ 1280 w) and 9:16 mobile, each with a poster JPG. Image-only blocks use the poster alone |
+| Playback | Loads on demand; plays only while ≥ 35 % on screen; never autoplays for reduced motion or data saver; DS 45 px pause/play button always visible (WCAG 2.2.2) |
+| Layout | Desktop: 21:9 stage (min 520 px), copy over a left scrim, proof row on #f4f4f4 below. ≤ 700 px: edge to edge, 2:3 stage with the 9:16 cut, copy over a bottom scrim, proofs stacked |
+| Data | "{n} of {total}" proof counts induction pans in the category from PIM, so it stays true as the range changes |
+| Placement | PLP: after the cooking-style chooser. PDP: after Product information, before the cross-sell |
+| Prototype films | Cut from WMF's Fusiontec / Tim Raue awareness film (wmf.com media library) — stand-ins until a pan film is shot |
+
 ## Search
 
 | Change | Current site | New |

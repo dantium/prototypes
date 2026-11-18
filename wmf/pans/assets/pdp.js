@@ -859,6 +859,16 @@
       }
     }
 
+    /* ---------- category story: the same brand module as the PLP ---------- */
+    var storyEl = document.getElementById('pdpStory');
+    if (storyEl && window.WMF_renderStories) {
+      storyEl.setAttribute('data-story', catKey);
+      window.WMF_renderStories({ context: 'pdp' });
+      if (!document.getElementById('pdpStory')) {   // no story for this category
+        var sw = document.querySelector('.pdp-story-wrap'); if (sw) sw.remove();
+      }
+    }
+
     /* ---------- boot ---------- */
     renderStage(); renderThumbs(); renderBuyBox(); renderTech();
   }

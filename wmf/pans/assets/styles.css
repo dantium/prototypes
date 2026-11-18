@@ -1122,15 +1122,55 @@ body.plp-dialog-open { overflow:hidden; }
 .hub-othercats { text-align:left; }
 .hub-othercats .hub-title { text-align:center; margin-bottom:32px; }
 /* 6 · brand (DS Text + Image) */
-/* same as the live wmf.com 50/50 module (PageBuilder "Text + Image"):
-   full-bleed, 612 px tall, image two thirds, text third on light grey,
-   24 px spaced heading, 20/30 body, cream pill */
-/* 50/50 image + text, inside the page container, on white */
-.hub-brand { display:grid; grid-template-columns:1fr 1fr; align-items:center; margin:80px 0; padding:0; background:#fff; text-align:left; }
-.hub-brand img { width:100%; height:auto; aspect-ratio:4/3; object-fit:cover; display:block; }
-.hub-brand-text { display:flex; flex-direction:column; justify-content:center; align-items:flex-start; gap:24px; padding:48px 64px; }
-.hub-brand .hub-title { margin:0; font-size:24px; line-height:31px; letter-spacing:.2em; text-align:left; }
-.hub-brand-text p { margin:0; font:400 20px/30px var(--rotis-web); }
+/* Category story — shared brand module (PLP + PDP, app.js renderStory).
+   Film stage with the headline over a left-hand scrim (desktop) or a
+   bottom scrim (mobile, 9:16 cut), DS 45 px pause button, then three
+   category proof points on the DS container grey. */
+.cat-story { margin:80px 0; text-align:left; font-family:var(--rotis-web); color:#000; }
+.cat-story-stage { position:relative; overflow:hidden; display:flex; align-items:flex-end; aspect-ratio:21/9; min-height:520px; background:#1c1c1c; color:#fff; }
+.cat-story-media { position:absolute; inset:0; width:100%; height:100%; object-fit:cover; }
+.cat-story-stage::after { content:""; position:absolute; inset:0; pointer-events:none; background:linear-gradient(90deg, rgba(0,0,0,.74) 0%, rgba(0,0,0,.48) 36%, rgba(0,0,0,0) 66%); }
+.cat-story-copy { position:relative; z-index:1; max-width:600px; padding:64px; display:flex; flex-direction:column; align-items:flex-start; gap:16px; }
+.cat-story-eyebrow { margin:0; font:700 14px/20px var(--rotis-web); letter-spacing:.2em; text-transform:uppercase; color:rgba(255,255,255,.85); }
+.cat-story-title { margin:0; font:700 44px/52px var(--rotis-web); color:#fff; }
+.cat-story-lead { margin:0; font:400 18px/28px var(--rotis-web); color:rgba(255,255,255,.92); }
+.cat-story-cta { margin-top:12px; }
+.cat-story-toggle { position:absolute; z-index:2; right:24px; bottom:24px; width:45px; height:45px; padding:0; border:0; border-radius:50%; display:grid; place-items:center; background:#53555a; color:#fff; cursor:pointer; transition:background .15s; }
+.cat-story-toggle[hidden] { display:none; }
+.cat-story-toggle:hover { background:#1c1c1c; }
+.cat-story-toggle:focus-visible, .cat-story-cta:focus-visible { outline:2px solid #fff; outline-offset:3px; }
+.cat-story-proof { list-style:none; margin:0; padding:0; display:grid; grid-template-columns:repeat(3, 1fr); background:#f4f4f4; }
+.cat-story-proof li { display:flex; flex-direction:column; gap:6px; padding:32px 40px; border-left:1px solid rgba(0,0,0,.12); }
+.cat-story-proof li:first-child { border-left:0; }
+.cat-story-proof strong { font:700 24px/30px var(--rotis-web); }
+.cat-story-proof span { font:400 16px/24px var(--rotis-web); color:#333; }
+/* PDP: same width as the PDP sections, before the cross-sell wash */
+.pdp-story-wrap { max-width:1440px; padding:0 80px; }
+.cat-story--pdp { margin:0 0 80px; }
+@media (max-width:1180px) {
+  .cat-story-copy { padding:48px; max-width:520px; }
+  .cat-story-title { font-size:36px; line-height:44px; }
+  .cat-story-proof li { padding:28px 28px; }
+  .pdp-story-wrap { padding:0 40px; }
+}
+@media (max-width:700px) {
+  /* edge to edge on phones: the film gets the full width */
+  .cat-story { margin:56px -22px; }
+  .cat-story--pdp { margin:0 -16px 48px; }
+  .pdp-story-wrap { padding:0 16px; }
+  .cat-story-stage { aspect-ratio:2/3; min-height:0; }   /* 9:16 cut, room for film above the copy */
+  .cat-story-stage::after { background:linear-gradient(0deg, rgba(0,0,0,.8) 0%, rgba(0,0,0,.55) 45%, rgba(0,0,0,0) 78%); }
+  .cat-story-copy { padding:24px 22px 28px; gap:12px; }
+  .cat-story-eyebrow { font-size:12px; line-height:16px; }
+  .cat-story-title { font-size:28px; line-height:34px; }
+  .cat-story-lead { font-size:16px; line-height:24px; }
+  .cat-story-cta { margin-top:8px; }
+  .cat-story-toggle { top:16px; right:16px; bottom:auto; }
+  .cat-story-proof { grid-template-columns:1fr; }
+  .cat-story-proof li { padding:20px 22px; border-left:0; border-top:1px solid rgba(0,0,0,.12); }
+  .cat-story-proof li:first-child { border-top:0; }
+  .cat-story-proof strong { font-size:20px; line-height:26px; }
+}
 /* guide: types, size, material and surface, range; each row name links to
    its category or sets the matching filter (replaces the shop-by block) */
 .hub-guide { padding:80px 0; }
@@ -1173,10 +1213,6 @@ body.plp-dialog-open { overflow:hidden; }
   .hub-dots { margin-top:28px; }
   .hub-faq-list { margin-top:32px; }
   .hub-faq details p { padding-right:0; }
-  .hub-brand { grid-template-columns:1fr; margin:56px 0; padding:0; }
-  .hub-brand-text { padding:28px 0 0; gap:16px; }
-  .hub-brand .hub-title { font-size:22px; line-height:28px; letter-spacing:.15em; }
-  .hub-brand-text p { font-size:16px; line-height:24px; }
   .hub-guide { padding:56px 0; }
   .hub-guide h3 { margin:40px 0 12px; font-size:20px; line-height:28px; letter-spacing:.1em; }
   .hub-table tbody th { width:40%; }

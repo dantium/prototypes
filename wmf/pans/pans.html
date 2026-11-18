@@ -4,10 +4,10 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>WMF · Pans</title>
-  <link rel="stylesheet" href="assets/styles.css?v=20261119w">
+  <link rel="stylesheet" href="assets/styles.css?v=20261119y">
   <script>window.PAGE = { kind: 'plp', category: 'pans', promo: false };</script>
-  <script src="assets/i18n-de.js?v=20261119w"></script>
-  <script src="assets/app.js?v=20261119w" defer></script>
+  <script src="assets/i18n-de.js?v=20261119y"></script>
+  <script src="assets/app.js?v=20261119y" defer></script>
   <!-- FAQ structured data for the content hub (EN; live shop serves the page language) -->
   <script type="application/ld+json">
 {
@@ -213,15 +213,9 @@
           </div>
         </section>
 
-        <!-- 5 · Brand: DS PageBuilder Text + Image (image left) -->
-        <section class="hub-sec hub-brand" aria-labelledby="hubBrandTitle">
-          <img src="assets/pdp/adv-searing.jpg" alt="Flames rising from a WMF pan on a gas cooktop" loading="lazy">
-          <div class="hub-brand-text">
-            <h2 class="hub-title" id="hubBrandTitle" data-i18n>Quality and design since 1853</h2>
-            <p data-i18n>Founded in Geislingen in 1853, WMF brings the standards of professional kitchens into the home: carefully chosen materials such as Cromargan® stainless steel, precise workmanship and a clean, minimalist design that looks as good on the table as it does on the cooktop. Inspired by professionals. Designed for home.</p>
-            <a class="hub-pill" href="https://aboutwmf.com/de/unternehmen/historie/" target="_blank" rel="noopener" data-i18n>Discover our history</a>
-          </div>
-        </section>
+        <!-- Category story: shared brand module (app.js STORIES / renderStory), also on the PDP.
+             Film + headline + three category proof points, rendered from one content block per category. -->
+        <section data-story="pans"></section>
 
         <!-- 3 · Reviews: quote slider (DS atoms, as on the landing page).
              Real reviews from wmf.com/de (catalog reviewItems), not samples. -->

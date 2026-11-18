@@ -1282,6 +1282,123 @@
     update();
   }
 
+  /* ---- Category story (brand module) ----
+     One content block per category, shared by the PLP and the PDP (the
+     PDP picks its product's most specific category). In the shop this is
+     a CMS block keyed by category, so both templates read the same
+     content. Media: an ambient, muted film with a 16:9 desktop cut and a
+     9:16 mobile cut (the format wmf.com already uses on its Meisterwerke
+     pages), with a poster for each. It plays only while on screen, never
+     for reduced motion or data saver, and always has a pause button.
+     Prototype films are cut from WMF's Fusiontec / Tim Raue awareness
+     film (wmf.com/media/wmf_upload/videos/), standing in until a pan
+     film exists. {n} / {total} are counted from the catalog. */
+  var STORIES = {
+    'pans': {
+      eyebrow: 'WMF pans',
+      title: 'Inspired by professionals. Designed for home.',
+      lead: 'Professional kitchens need pans that take high heat, quick turns and long services. We bring the same standards to your cooktop, with materials chosen for each way of cooking and a clean design that goes from stove to table.',
+      media: { film: 'assets/story/pans', alt: 'A chef and his team cooking with WMF cookware in a professional kitchen' },
+      cta: { label: 'Read the pan guide', href: 'https://www.wmf.com/de/de/inspirationen/pfannen/pfannen-abc.html', external: true },
+      ctaPdp: { label: 'Explore all pans', href: 'pans.html' },
+      proof: [
+        { term: 'Since 1853', text: 'Founded in Geislingen, with more than 170 years of metal craft.' },
+        { term: '3 surfaces', text: 'Uncoated, non-stick and ceramic, so each dish gets the surface it needs.' },
+        { term: '{n} of {total}', text: 'pans in our range work on induction cooktops.', count: 'pans' }
+      ]
+    },
+    'frying-pans': {
+      eyebrow: 'WMF frying pans',
+      title: 'Made for the moment food hits the pan',
+      lead: 'A good crust needs a pan that keeps its heat when cold food goes in. Pans such as Profi Resist pair a multi-layer body with the TransTherm® universal base, which spreads heat across the base and holds it as you cook.',
+      media: { film: 'assets/story/frying', alt: 'Vegetables tossed in a wok and pans heating on a cooktop' },
+      cta: { label: 'Discover Profi Resist', href: 'https://www.wmf.com/de/de/kollektionen/profi-resist.html', external: true },
+      ctaPdp: { label: 'Explore all frying pans', href: 'frying-pans.html' },
+      proof: [
+        { term: '3 surfaces', text: 'Uncoated stainless steel for a deep crust; non-stick and ceramic for eggs, fish and pancakes.' },
+        { term: 'Honeycomb', text: 'On Profi Resist, a raised honeycomb of Cromargan® stainless steel helps protect the PermaDur non-stick coating in daily use.' },
+        { term: '{n} of {total}', text: 'frying pans in our range work on induction cooktops.', count: 'frying-pans' }
+      ]
+    }
+  };
+  var STORY_ICON = {
+    pause: '<svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><rect x="6" y="5" width="4" height="14"/><rect x="14" y="5" width="4" height="14"/></svg>',
+    play: '<svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>'
+  };
+  function storyCount(cat) {
+    var list = ((DATA && DATA.products) || []).filter(function (p) { return p.cats && (cat in p.cats); });
+    return { n: list.filter(function (p) { return (p.cooktop || []).indexOf('Induction') > -1; }).length, total: list.length };
+  }
+  function renderStory(el, opts) {
+    var key = el.getAttribute('data-story');
+    var s = STORIES[key];
+    if (!s) { el.remove(); return; }
+    var ctx = (opts && opts.context) || 'plp';
+    var cta = ctx === 'pdp' ? (s.ctaPdp || s.cta) : s.cta;
+    var id = 'story-' + key + '-title';
+    var film = s.media.film;
+    el.className = 'cat-story cat-story--' + ctx;
+    el.setAttribute('aria-labelledby', id);
+    el.innerHTML =
+      '<div class="cat-story-stage">' +
+        '<video class="cat-story-media" muted loop playsinline preload="none" aria-hidden="true"></video>' +
+        '<div class="cat-story-copy">' +
+          '<p class="cat-story-eyebrow">' + esc(t(s.eyebrow)) + '</p>' +
+          '<h2 class="cat-story-title" id="' + id + '">' + esc(t(s.title)) + '</h2>' +
+          '<p class="cat-story-lead">' + esc(t(s.lead)) + '</p>' +
+          '<a class="hub-pill cat-story-cta" href="' + esc(cta.href) + '"' + (cta.external ? ' target="_blank" rel="noopener"' : '') + '>' + esc(t(cta.label)) + '</a>' +
+        '</div>' +
+        '<button class="cat-story-toggle" type="button" hidden></button>' +
+      '</div>' +
+      '<ul class="cat-story-proof">' + s.proof.map(function (pr) {
+        var term = t(pr.term);
+        if (pr.count) { var c = storyCount(pr.count); term = term.replace('{n}', c.n).replace('{total}', c.total); }
+        return '<li><strong>' + esc(term) + '</strong><span>' + esc(t(pr.text)) + '</span></li>';
+      }).join('') + '</ul>';
+
+    // film: pick the cut for the viewport, play only while visible
+    var video = el.querySelector('video');
+    var btn = el.querySelector('.cat-story-toggle');
+    var mq = window.matchMedia('(max-width: 700px)');
+    var calm = window.matchMedia('(prefers-reduced-motion: reduce)').matches ||
+      !!(navigator.connection && navigator.connection.saveData);
+    var userPaused = calm, visible = false;
+    var setSrc = function () {
+      var cut = mq.matches ? '-9x16' : '-16x9';
+      if (video.getAttribute('data-cut') === cut) return;
+      video.setAttribute('data-cut', cut);
+      video.poster = film + cut + '.jpg';
+      video.src = film + cut + '.mp4';
+      if (visible && !userPaused) video.play().catch(function () {});
+    };
+    var setBtn = function () {
+      var playing = !video.paused;
+      btn.innerHTML = playing ? STORY_ICON.pause : STORY_ICON.play;
+      btn.setAttribute('aria-label', t(playing ? 'Pause film' : 'Play film'));
+    };
+    setSrc();
+    if (mq.addEventListener) mq.addEventListener('change', setSrc);
+    btn.hidden = false;
+    btn.addEventListener('click', function () {
+      if (video.paused) { userPaused = false; video.play().catch(function () {}); }
+      else { userPaused = true; video.pause(); }
+    });
+    video.addEventListener('play', setBtn);
+    video.addEventListener('pause', setBtn);
+    setBtn();
+    if ('IntersectionObserver' in window) {
+      new IntersectionObserver(function (entries) {
+        visible = entries[0].isIntersecting;
+        if (visible && !userPaused) video.play().catch(function () {});
+        else if (!visible) video.pause();
+      }, { threshold: 0.35 }).observe(video);
+    }
+  }
+  function renderStories(opts) {
+    document.querySelectorAll('[data-story]').forEach(function (el) { renderStory(el, opts); });
+  }
+  window.WMF_renderStories = renderStories;
+
   /* ---- filter persistence across category switches (UX-study #5) ----
      Selections are kept for the session and re-applied on the next PLP;
      only options that exist in that category's facets are restored. */
@@ -1554,6 +1671,7 @@
           return;
         }
         LIST = DATA.products.filter(function (p) { return p.cats && (PAGE.category in p.cats); });
+        renderStories({ context: 'plp' });   // category story — needs the catalog for its counts
         buildFacets();
         restoreFilters();   // carry compatible selections over from the last PLP (UX-study #5)
         // deep link from a PDP series eyebrow: ?series= pre-selects the Series facet

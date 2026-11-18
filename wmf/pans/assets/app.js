@@ -1516,6 +1516,7 @@
 
     // paging arrows for the horizontally scrolling rows (mobile)
     setupHScroll(document.querySelector('.catnav-track'), 'cats');
+    setupHScroll(document.querySelector('.hub-recipe-row'), 'recipes');
     var toolbar = document.querySelector('.toolbar');
     if (toolbar) {
       var setToolbarHeight = function () { document.documentElement.style.setProperty('--plp-toolbar-height', toolbar.offsetHeight + 'px'); };

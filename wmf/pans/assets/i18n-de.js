@@ -176,7 +176,11 @@ window.WMF_I18N_DE = {
   "Pan-fried salmon with asparagus and hollandaise": "In der Pfanne gebratener Lachs mit Spargel und Hollandaise-Sauce",
   "Mediterranean prawns with chilli and garlic": "Mediterrane Garnelen mit Chili und Knoblauch",
   "View recipe": "Zum Rezept",
-  "All recipes": "Alle Rezepte",
+  "Rib-eye steak with padrón peppers": "Rib-Eye Steak mit Padrón-Paprikaschoten",
+  "Savoury pancakes with cheese, spinach and feta": "Pikante Pfannkuchen mit Käse-Spinat-Feta-Füllung",
+  "Wiener schnitzel with sautéed radishes": "Wiener Schnitzel mit sautierten Radieschen",
+  "Asian fried rice with cashew nuts": "Asiatische Reispfanne mit Cashewnüssen",
+  "Fried tofu with peanut satay sauce": "Gebratener Tofu mit Erdnuss-Satay-Soße",
   /* ---- page titles ---- */
   'WMF · Home': 'WMF · Startseite',
   'WMF · Pans': 'WMF · Pfannen',

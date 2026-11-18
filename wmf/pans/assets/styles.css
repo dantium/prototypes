@@ -1097,7 +1097,16 @@ body.plp-dialog-open { overflow:hidden; }
 .hub-faq details[open] summary::after { transform:rotate(45deg); }
 .hub-faq details p { margin:0; padding:0 48px 20px 0; font:400 16px/24px var(--rotis-web); color:#1c1c1c; }
 /* recipes strip */
-.hub-recipe-row { display:grid; grid-template-columns:repeat(3, minmax(0, 1fr)); gap:16px; max-width:1064px; margin:48px auto 0; text-align:left; }
+/* three cards per view on desktop; the rest scroll in with the arrows (setupHScroll) */
+.hscroll--recipes { max-width:1064px; margin:48px auto 0; container-type:inline-size; }
+.hub-recipe-row { display:flex; gap:16px; overflow-x:auto; scroll-snap-type:x mandatory; scrollbar-width:none; text-align:left; }
+.hub-recipe-row::-webkit-scrollbar { display:none; }
+.hub-recipe-row > .hub-recipe { flex:0 0 calc((100% - 32px) / 3); scroll-snap-align:start; }
+.hscroll--recipes .hscroll-arrow { top:calc((100cqi - 32px) / 3 * .75 / 2); }   /* centre of the 4:3 image */
+.hscroll--recipes .hscroll-arrow--prev { left:-19px; }
+.hscroll--recipes .hscroll-arrow--next { right:-19px; }
+.hscroll--recipes.has-prev .hscroll-arrow--prev,
+.hscroll--recipes.has-next .hscroll-arrow--next { display:grid; }
 .hub-recipe { display:flex; flex-direction:column; gap:10px; color:#000; text-decoration:none; }
 .hub-recipe img { width:100%; height:auto; aspect-ratio:4/3; object-fit:cover; display:block; transition:opacity .15s; }
 .hub-recipe:hover img { opacity:.88; }
@@ -1105,7 +1114,6 @@ body.plp-dialog-open { overflow:hidden; }
 .hub-recipe h3 { font:700 18px/26px var(--rotis-web); }
 .hub-recipe-link { font:700 14px/20px var(--rotis-web); text-decoration:underline; text-underline-offset:3px; }
 .hub-recipe:hover .hub-recipe-link { color:var(--muted); }
-.hub-recipes-all { display:inline-block; margin-top:32px; }
 /* 8 · exit: Pan Finder teaser (DS Text, centred) */
 .hub-text .hub-pill { margin-top:32px; }
 /* frying pans: range comparison and category tiles inside the hub */
@@ -1174,7 +1182,12 @@ body.plp-dialog-open { overflow:hidden; }
   .hub-table tbody th { width:40%; }
   .hub-benefit h3 { margin-top:16px; font-size:18px; line-height:26px; }
   .hub-tips { padding-top:0; }
-  .hub-recipe-row { margin-top:32px; }
+  .hscroll--recipes { margin-top:32px; }
+  .hub-recipe-row { margin-top:0; }
+  .hub-recipe-row > .hub-recipe { flex-basis:78%; }
+  .hscroll--recipes .hscroll-arrow { top:calc(100cqi * .78 * .75 / 2); }
+  .hscroll--recipes .hscroll-arrow--prev { left:-12px; }
+  .hscroll--recipes .hscroll-arrow--next { right:-12px; }
   .hub-recipe h3 { font-size:16px; line-height:24px; }
 }
 /* Mock of the Neocom advisor's first screen (live: Neocom iframe) */

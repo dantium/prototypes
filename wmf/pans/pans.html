@@ -4,10 +4,10 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>WMF · Pans</title>
-  <link rel="stylesheet" href="assets/styles.css?v=20261119l">
+  <link rel="stylesheet" href="assets/styles.css?v=20261119s">
   <script>window.PAGE = { kind: 'plp', category: 'pans', promo: false };</script>
-  <script src="assets/i18n-de.js?v=20261119l"></script>
-  <script src="assets/app.js?v=20261119l" defer></script>
+  <script src="assets/i18n-de.js?v=20261119s"></script>
+  <script src="assets/app.js?v=20261119s" defer></script>
   <!-- FAQ structured data for the content hub (EN; live shop serves the page language) -->
   <script type="application/ld+json">
 {
@@ -254,6 +254,70 @@
           <div class="hub-dots" aria-hidden="true"><span class="on"></span><span></span><span></span></div>
         </section>
 
+        <!-- Guide + shop-by in one (rows without a link have no products in the prototype catalog; on live they link to the filter): pan type, size, material, surface, range. Each
+             name links to its category or sets the matching filter. Static HTML so
+             search engines and AI search can read it. -->
+        <section class="hub-sec hub-guide" aria-labelledby="hubGuideTitle">
+          <h2 class="hub-title" id="hubGuideTitle" data-i18n>A guide to WMF pans</h2>
+          <p class="hub-lead" data-i18n>Which pan suits you depends on what you cook, how much you cook and how you like to cook it. Start with the pan type and size, then choose the material and surface, then the range.</p>
+          <div class="hub-guide-body" id="hubGuideBody">
+            <h3 data-i18n>Pan type</h3>
+            <p class="hub-guide-intro" data-i18n>Most kitchens get by with two or three pans. A frying pan has low, flared sides, so a spatula slides underneath easily and steam can escape, which helps food brown rather than stew. A braising pan has higher, straight sides for sauces and dishes that simmer. A wok is deep and curved, so you can keep ingredients moving over high heat, and a serving pan goes straight from the cooktop to the table.</p>
+            <table class="hub-table">
+              <thead><tr><th scope="col" data-i18n>Pan type</th><th scope="col" data-i18n>Good for</th></tr></thead>
+              <tbody>
+                <tr><th scope="row"><a class="hub-row-link" href="frying-pans.html" data-i18n>Frying pan</a></th><td data-i18n>Everyday frying: steak, eggs, potatoes, vegetables</td></tr>
+                <tr><th scope="row"><a class="hub-row-link" href="pans.html" data-i18n>Braising pan</a></th><td data-i18n>Sauces, braising and larger portions, thanks to the high rim</td></tr>
+                <tr><th scope="row"><a class="hub-row-link" href="pans.html?q=serving" data-i18n>Serving pan</a></th><td data-i18n>Cooking and serving at the table, with two side handles</td></tr>
+                <tr><th scope="row"><a class="hub-row-link" href="pans.html?q=grill" data-i18n>Grill pan</a></th><td data-i18n>Grill marks on meat, fish and vegetables</td></tr>
+                <tr><th scope="row"><a class="hub-row-link" href="pans.html?q=wok" data-i18n>Wok</a></th><td data-i18n>Stir-frying at high heat</td></tr>
+                <tr><th scope="row"><a class="hub-row-link" href="pans.html?q=fry%20pan%20set" data-i18n>Pan set</a></th><td data-i18n>Two or three sizes for different dishes</td></tr>
+              </tbody>
+            </table>
+            <h3 data-i18n>Size guide</h3>
+            <p class="hub-guide-intro" data-i18n>Choose the size by how many people you usually cook for, not by the biggest dish you make once a year. If a pan is too small, food piles up and steams instead of browning; if it is much bigger than the cooking zone, the edges stay cooler than the centre. Many households pair a 24 cm pan for everyday cooking with a 28 cm pan for larger meals.</p>
+            <table class="hub-table">
+              <thead><tr><th scope="col" data-i18n>Size</th><th scope="col" data-i18n>Good for</th></tr></thead>
+              <tbody>
+                <tr><th scope="row"><button class="hub-row-link" type="button" onclick="hubShow('size','20 cm')">20 cm</button></th><td data-i18n>1–2 people, eggs and small portions</td></tr>
+                <tr><th scope="row"><button class="hub-row-link" type="button" onclick="hubShow('size','24 cm')">24 cm</button></th><td data-i18n>2–3 people, everyday frying</td></tr>
+                <tr><th scope="row"><button class="hub-row-link" type="button" onclick="hubShow('size','28 cm')">28 cm</button></th><td data-i18n>3–4 people, larger portions and steaks</td></tr>
+                <tr><th scope="row"><button class="hub-row-link" type="button" onclick="hubShow('size',['32 cm','36 cm'])" data-i18n>32 cm and up</button></th><td data-i18n>4 or more people and stir-fries: mostly woks</td></tr>
+              </tbody>
+            </table>
+            <p data-i18n>The size is the diameter at the rim; the flat base that sits on the cooktop is smaller. Choose a base that matches your cooking zone.</p>
+            <h3 data-i18n>Material and surface</h3>
+            <p class="hub-guide-intro" data-i18n>The quickest way to choose is to decide whether you want a coating. Uncoated pans take high heat and leave browned bits in the pan that turn into a sauce with a splash of wine or stock. Coated pans let eggs, fish and pancakes slide off with very little fat; they do best at moderate heat, and most are best used with wooden or silicone utensils. A multi-layer base spreads heat across the whole surface, so the centre does not scorch while the edges stay cool.</p>
+            <table class="hub-table">
+              <thead><tr><th scope="col" data-i18n>Material and surface</th><th scope="col" data-i18n>Good for</th></tr></thead>
+              <tbody>
+                <tr class="hub-table-group"><th scope="rowgroup" colspan="2" data-i18n>Uncoated</th></tr>
+                <tr><th scope="row"><button class="hub-row-link" type="button" onclick="hubShow({material:['Stainless Steel 1-ply','Stainless Steel 3-ply','Stainless Steel'],surface:'Uncoated'})" data-i18n>Stainless steel</button></th><td data-i18n>High heat, searing and pan sauces; food can stick until it has browned. 1-ply is a single layer of Cromargan® stainless steel; 3-ply has three bonded layers up to the rim, so heat spreads into the sides.</td></tr>
+                <tr><th scope="row"><button class="hub-row-link" type="button" onclick="hubShow('material','Fusiontec')" data-i18n>Fusiontec®</button></th><td data-i18n>WMF’s own material: a steel core fused with a mineral compound, with no separate coating. For searing and everyday cooking, in several colours.</td></tr>
+                <tr><th scope="row"><span class="hub-row-name" data-i18n>Silargan®</span></th><td data-i18n>Silit’s own material: a steel core fused with a functional ceramic layer, with no separate coating.</td></tr>
+                <tr class="hub-table-group"><th scope="rowgroup" colspan="2" data-i18n>Coated</th></tr>
+                <tr><th scope="row"><button class="hub-row-link" type="button" onclick="hubShow('series',['Profi Resist'])" data-i18n>Stainless steel with honeycomb</button></th><td data-i18n>A raised stainless-steel honeycomb with a non-stick coating in between, for searing with easier release.</td></tr>
+                <tr><th scope="row"><button class="hub-row-link" type="button" onclick="hubShow({material:['Stainless Steel 1-ply','Stainless Steel 3-ply','Stainless Steel'],surface:'Non-stick'})" data-i18n>Stainless steel with non-stick</button></th><td data-i18n>Eggs, fish and pancakes at low to medium heat. Delicate food comes away easily.</td></tr>
+                <tr><th scope="row"><button class="hub-row-link" type="button" onclick="hubShow({material:['Stainless Steel 1-ply','Stainless Steel 3-ply','Stainless Steel'],surface:'Ceramic'})" data-i18n>Stainless steel with ceramic</button></th><td data-i18n>Fish, vegetables and eggs at moderate heat, with a little fat.</td></tr>
+                <tr><th scope="row"><button class="hub-row-link" type="button" onclick="hubShow('material','Cast Aluminium')" data-i18n>Aluminium or cast aluminium</button></th><td data-i18n>Light and quick to heat, with a non-stick or ceramic surface for gentle frying. Cast aluminium is not for induction.</td></tr>
+              </tbody>
+            </table>
+            <h3 data-i18n>Range</h3>
+            <p class="hub-guide-intro" data-i18n>Each range combines a material, a surface and a handle design for a particular way of cooking. If you sear often, look at the uncoated and honeycomb ranges; if you mostly cook eggs, fish and vegetables, a ceramic or non-stick range will suit you. Pans in the same range share one look, so you can add sizes over time and they still belong together.</p>
+            <table class="hub-table">
+              <thead><tr><th scope="col" data-i18n>Range</th><th scope="col" data-i18n>Material and surface</th><th scope="col" data-i18n>Cooking style</th></tr></thead>
+              <tbody>
+                <tr><th scope="row"><button class="hub-row-link" type="button" onclick="hubShow('series',['Profi Resist','Ultimate Profi Resist'])">Profi Resist</button></th><td data-i18n>3-ply stainless steel, honeycomb non-stick or ceramic surface</td><td data-i18n>All-round</td></tr>
+                <tr><th scope="row"><button class="hub-row-link" type="button" onclick="hubShow('series',['Fusiontec','Fusiontec Mineral','Fusiontec Mineral Pro'])">Fusiontec Mineral</button></th><td data-i18n>Fusiontec®</td><td data-i18n>All-round</td></tr>
+                <tr><th scope="row"><button class="hub-row-link" type="button" onclick="hubShow('series','Steak Profi')">Steak Profi</button></th><td data-i18n>Uncoated stainless steel</td><td data-i18n>Intense searing</td></tr>
+                <tr><th scope="row"><button class="hub-row-link" type="button" onclick="hubShow('series','Durado')">Durado</button></th><td data-i18n>Stainless steel, ceramic surface</td><td data-i18n>Gentle frying</td></tr>
+                <tr><th scope="row"><button class="hub-row-link" type="button" onclick="hubShow('series','Devil')">Devil</button></th><td data-i18n>Stainless steel, ceramic surface</td><td data-i18n>Gentle frying</td></tr>
+                <tr><th scope="row"><button class="hub-row-link" type="button" onclick="hubShow('series',['PermaDur Excellent','PermaDur Premium'])">PermaDur</button></th><td data-i18n>Cast aluminium, non-stick surface</td><td data-i18n>Gentle frying</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
         <!-- 4 · FAQ: DS PageBuilder FAQ (Collapse). Same Q&A as the FAQPage JSON-LD. -->
         <section class="hub-sec hub-faq" aria-labelledby="hubFaqTitle">
           <h2 class="hub-title" id="hubFaqTitle" data-i18n>Frequently asked questions</h2>
@@ -285,76 +349,6 @@
           </div>
         </section>
 
-        <!-- Guide + shop-by in one (rows without a link have no products in the prototype catalog; on live they link to the filter): pan type, size, material, surface, range. Each
-             name links to its category or sets the matching filter. Static HTML so
-             search engines and AI search can read it. -->
-        <section class="hub-sec hub-guide" aria-labelledby="hubGuideTitle">
-          <h2 class="hub-title" id="hubGuideTitle" data-i18n>A guide to WMF pans</h2>
-          <p class="hub-lead" data-i18n>Which pan suits you depends on what you cook, how much you cook and how you like to cook it. Start with the pan type and size, then choose the material, the surface and the range.</p>
-          <div class="hub-guide-body" id="hubGuideBody">
-            <h3 data-i18n>Pan type</h3>
-            <table class="hub-table">
-              <thead><tr><th scope="col" data-i18n>Pan type</th><th scope="col" data-i18n>Good for</th></tr></thead>
-              <tbody>
-                <tr><th scope="row"><a class="hub-row-link" href="frying-pans.html" data-i18n>Frying pan</a></th><td data-i18n>Everyday frying: steak, eggs, potatoes, vegetables</td></tr>
-                <tr><th scope="row"><a class="hub-row-link" href="pans.html" data-i18n>Braising pan</a></th><td data-i18n>Sauces, braising and larger portions, thanks to the high rim</td></tr>
-                <tr><th scope="row"><a class="hub-row-link" href="pans.html?q=serving" data-i18n>Serving pan</a></th><td data-i18n>Cooking and serving at the table, with two side handles</td></tr>
-                <tr><th scope="row"><a class="hub-row-link" href="pans.html?q=grill" data-i18n>Grill pan</a></th><td data-i18n>Grill marks on meat, fish and vegetables</td></tr>
-                <tr><th scope="row"><a class="hub-row-link" href="pans.html?q=wok" data-i18n>Wok</a></th><td data-i18n>Stir-frying at high heat</td></tr>
-                <tr><th scope="row"><a class="hub-row-link" href="pans.html?q=fry%20pan%20set" data-i18n>Pan set</a></th><td data-i18n>Two or three sizes for different dishes</td></tr>
-              </tbody>
-            </table>
-            <h3 data-i18n>Size guide</h3>
-            <table class="hub-table">
-              <thead><tr><th scope="col" data-i18n>Size</th><th scope="col" data-i18n>Good for</th></tr></thead>
-              <tbody>
-                <tr><th scope="row"><button class="hub-row-link" type="button" onclick="hubShow('size','20 cm')">20 cm</button></th><td data-i18n>1–2 people, eggs and small portions</td></tr>
-                <tr><th scope="row"><button class="hub-row-link" type="button" onclick="hubShow('size','24 cm')">24 cm</button></th><td data-i18n>2–3 people, everyday frying</td></tr>
-                <tr><th scope="row"><button class="hub-row-link" type="button" onclick="hubShow('size','28 cm')">28 cm</button></th><td data-i18n>3–4 people, larger portions and steaks</td></tr>
-                <tr><th scope="row"><button class="hub-row-link" type="button" onclick="hubShow('size',['32 cm','36 cm'])" data-i18n>32 cm and up</button></th><td data-i18n>4 or more people and stir-fries: mostly woks</td></tr>
-              </tbody>
-            </table>
-            <p data-i18n>The size is the diameter at the rim; the flat base that sits on the cooktop is smaller. Choose a base that matches your cooking zone.</p>
-            <h3 data-i18n>Material</h3>
-            <table class="hub-table">
-              <thead><tr><th scope="col" data-i18n>Material</th><th scope="col" data-i18n>Good to know</th></tr></thead>
-              <tbody>
-                <tr><th scope="row"><button class="hub-row-link" type="button" onclick="hubShow('material','Stainless Steel 1-ply')" data-i18n>Stainless steel, 1-ply</button></th><td data-i18n>A single layer of Cromargan® stainless steel: the classic WMF pan for everyday cooking.</td></tr>
-                <tr><th scope="row"><button class="hub-row-link" type="button" onclick="hubShow('material','Stainless Steel 3-ply')" data-i18n>Stainless steel, 3-ply</button></th><td data-i18n>Three bonded layers up to the rim, so heat spreads from the base into the sides.</td></tr>
-                <tr><th scope="row"><span class="hub-row-name" data-i18n>Aluminium</span></th><td data-i18n>Light to handle and always coated, for gentle frying.</td></tr>
-                <tr><th scope="row"><button class="hub-row-link" type="button" onclick="hubShow('material','Cast Aluminium')" data-i18n>Cast aluminium</button></th><td data-i18n>Lighter than stainless steel and always coated. Not for induction.</td></tr>
-                <tr><th scope="row"><span class="hub-row-name" data-i18n>Carbon steel</span></th><td data-i18n>Uncoated and robust. It builds up a patina with use that helps food release; dry it and oil it lightly after washing.</td></tr>
-                <tr><th scope="row"><span class="hub-row-name" data-i18n>Cast iron</span></th><td data-i18n>Heavy and holds heat for a long time: good for searing and for keeping food warm at the table.</td></tr>
-                <tr><th scope="row"><button class="hub-row-link" type="button" onclick="hubShow('material','Fusiontec')" data-i18n>Fusiontec®</button></th><td data-i18n>WMF’s own material for searing and everyday cooking, in several colours.</td></tr>
-                <tr><th scope="row"><span class="hub-row-name" data-i18n>Silargan®</span></th><td data-i18n>Silit’s own material: a steel core fused with a functional ceramic layer.</td></tr>
-              </tbody>
-            </table>
-            <h3 data-i18n>Surface</h3>
-            <table class="hub-table">
-              <thead><tr><th scope="col" data-i18n>Surface</th><th scope="col" data-i18n>Good for</th></tr></thead>
-              <tbody>
-                <tr><th scope="row"><button class="hub-row-link" type="button" onclick="hubShow('surface','Uncoated')" data-i18n>Uncoated</button></th><td data-i18n>High heat, searing and pan sauces. Food can stick until it has browned.</td></tr>
-                <tr><th scope="row"><button class="hub-row-link" type="button" onclick="hubShow('series',['Profi Resist'])" data-i18n>Honeycomb</button></th><td data-i18n>A raised stainless-steel honeycomb with a non-stick coating in between, for searing with easier release.</td></tr>
-                <tr><th scope="row"><button class="hub-row-link" type="button" onclick="hubShow('surface','Non-stick')" data-i18n>Non-stick</button></th><td data-i18n>Eggs, fish and pancakes at low to medium heat. Delicate food comes away easily.</td></tr>
-                <tr><th scope="row"><button class="hub-row-link" type="button" onclick="hubShow('surface','Ceramic')" data-i18n>Ceramic</button></th><td data-i18n>Fish, vegetables and eggs at moderate heat, with a little fat.</td></tr>
-                <tr><th scope="row"><span class="hub-row-name" data-i18n>Enamel</span></th><td data-i18n>A glassy layer fired onto the metal. Smooth and easy to wipe clean.</td></tr>
-              </tbody>
-            </table>
-            <h3 data-i18n>Range</h3>
-            <table class="hub-table">
-              <thead><tr><th scope="col" data-i18n>Range</th><th scope="col" data-i18n>Material and surface</th><th scope="col" data-i18n>Cooking style</th></tr></thead>
-              <tbody>
-                <tr><th scope="row"><button class="hub-row-link" type="button" onclick="hubShow('series',['Profi Resist','Ultimate Profi Resist'])">Profi Resist</button></th><td data-i18n>3-ply stainless steel, honeycomb non-stick or ceramic surface</td><td data-i18n>All-round</td></tr>
-                <tr><th scope="row"><button class="hub-row-link" type="button" onclick="hubShow('series',['Fusiontec','Fusiontec Mineral','Fusiontec Mineral Pro'])">Fusiontec Mineral</button></th><td data-i18n>Fusiontec®</td><td data-i18n>All-round</td></tr>
-                <tr><th scope="row"><button class="hub-row-link" type="button" onclick="hubShow('series','Steak Profi')">Steak Profi</button></th><td data-i18n>Uncoated stainless steel</td><td data-i18n>Intense searing</td></tr>
-                <tr><th scope="row"><button class="hub-row-link" type="button" onclick="hubShow('series','Durado')">Durado</button></th><td data-i18n>Stainless steel, ceramic surface</td><td data-i18n>Gentle frying</td></tr>
-                <tr><th scope="row"><button class="hub-row-link" type="button" onclick="hubShow('series','Devil')">Devil</button></th><td data-i18n>Stainless steel, ceramic surface</td><td data-i18n>Gentle frying</td></tr>
-                <tr><th scope="row"><button class="hub-row-link" type="button" onclick="hubShow('series',['PermaDur Excellent','PermaDur Premium'])">PermaDur</button></th><td data-i18n>Cast aluminium, non-stick surface</td><td data-i18n>Gentle frying</td></tr>
-              </tbody>
-            </table>
-          </div>
-        </section>
-
         <!-- Tips per surface: DS PageBuilder Benefit Slider (image, title, body),
              directly below the guide. Advice depends on the surface, so each
              card names one and links to those pans. -->
@@ -380,6 +374,34 @@
               <button class="text-link" type="button" onclick="hubShow('surface','Ceramic')" data-i18n>Show ceramic pans</button>
             </article>
           </div>
+        </section>
+
+        <!-- Recipes strip: three real wmf.com pan recipes (links open the live
+             recipe pages), second from the bottom of the editorial area -->
+        <section class="hub-sec hub-recipes" aria-labelledby="hubRecipesTitle">
+          <h2 class="hub-title" id="hubRecipesTitle" data-i18n>Recipes for your pan</h2>
+          <p class="hub-lead" data-i18n>Ideas from the WMF kitchen to try in your new pan.</p>
+          <div class="hub-recipe-row hub-scroll">
+            <a class="hub-recipe" href="https://www.wmf.com/de/de/rezepte/englisches-fruehstueck-aus-der-pfanne-1079242.html" target="_blank" rel="noopener">
+              <img src="assets/hub/recipe-breakfast.jpg" alt="" width="714" height="535" loading="lazy">
+              <span class="hub-recipe-time"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg><span>35 min</span></span>
+              <h3 data-i18n>English breakfast from the pan</h3>
+              <span class="hub-recipe-link" data-i18n>View recipe</span>
+            </a>
+            <a class="hub-recipe" href="https://www.wmf.com/de/de/rezepte/in-der-pfanne-gebratener-lachs-mit-spargel-und-hollandaise-sauce-1087618.html" target="_blank" rel="noopener">
+              <img src="assets/hub/recipe-salmon.jpg" alt="" width="714" height="535" loading="lazy">
+              <span class="hub-recipe-time"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg><span>15 min</span></span>
+              <h3 data-i18n>Pan-fried salmon with asparagus and hollandaise</h3>
+              <span class="hub-recipe-link" data-i18n>View recipe</span>
+            </a>
+            <a class="hub-recipe" href="https://www.wmf.com/de/de/rezepte/mediterrane-garnelen-mit-chili-und-knoblauch-694090.html" target="_blank" rel="noopener">
+              <img src="assets/hub/recipe-prawns.jpg" alt="" width="714" height="535" loading="lazy">
+              <span class="hub-recipe-time"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg><span>30 min</span></span>
+              <h3 data-i18n>Mediterranean prawns with chilli and garlic</h3>
+              <span class="hub-recipe-link" data-i18n>View recipe</span>
+            </a>
+          </div>
+          <a class="text-link hub-recipes-all" href="https://www.wmf.com/de/de/rezepte.html" target="_blank" rel="noopener" data-i18n>All recipes</a>
         </section>
 
         <!-- 8 · Exit: Pan Finder teaser, DS PageBuilder Text (centred), last on

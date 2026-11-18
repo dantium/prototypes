@@ -48,15 +48,16 @@ Nothing else in the mega menu changes.
 
 ## Category story (brand module) — PLP + PDP
 
-One CMS block per category, rendered by the same component on the category page and on every PDP in that category (the PDP uses the product's most specific category; no block → nothing renders). Prototype: `STORIES` / `renderStory` in `assets/app.js`.
+One CMS block per top-level category (pans now; pots, knives later), rendered by the same component on the category page, its sub-categories (frying pans, woks ...) and every PDP in it. No block → nothing renders. Prototype: `STORIES` / `STORY_PARENT` / `renderStory` in `assets/app.js`.
 
 | Part | Spec |
 |---|---|
-| Content fields | Eyebrow · headline · lead (≤ 260 chars) · CTA (separate PLP and PDP link) · 3 proof points (term + one line) · film or image |
+| Content fields | Headline · lead (≤ 260 chars) · 3 brand points (title + one line) · film or image · CTA "Learn more about WMF" (DS Button Secondary, outline, inverted to white on the film). Copy follows the brand book (pp. 6, 9, 28): the cookware promise as the headline; points = German tradition since 1853 · Metal crafting with Cromargan® · Design thought through in every detail |
 | Media | Ambient muted loop, 6–12 s, no sound or on-screen text. Two cuts: 16:9 desktop (≥ 1280 w) and 9:16 mobile, each with a poster JPG. Image-only blocks use the poster alone |
 | Playback | Loads on demand; plays only while ≥ 35 % on screen; never autoplays for reduced motion or data saver; DS 45 px pause/play button always visible (WCAG 2.2.2) |
-| Layout | Desktop: 21:9 stage (min 520 px), copy over a left scrim, proof row on #f4f4f4 below. ≤ 700 px: edge to edge, 2:3 stage with the 9:16 cut, copy over a bottom scrim, proofs stacked |
-| Data | "{n} of {total}" proof counts induction pans in the category from PIM, so it stays true as the range changes |
+| Layout | Desktop: 2:1 stage (min 600 px), copy over a left scrim, brand points in a row along the bottom of the film over a bottom scrim, no divider. ≤ 700 px: edge to edge, the 9:16 cut fills the top and fades into a #1c1c1c band; copy starts over the film, brand points stack in the band. Pause button top right |
+| Motion | Grow on scroll: the frame starts inside the page column (inset by the gutter or 16 % of the width each side, 10 % on phones, whichever is larger) and opens to the full window width as it scrolls in, finishing when its top is about a quarter down the viewport; the film eases from a 12 % zoom. Copy and points stay on the page column. Clip-path only, no layout change. Reduced motion: shown full width at once, no motion |
+| CTA | Goes to a brand awareness page that doesn't exist yet. The prototype links to `#brand-page` as a placeholder |
 | Placement | PLP: after the cooking-style chooser. PDP: after Product information, before the cross-sell |
 | Prototype films | Cut from WMF's Fusiontec / Tim Raue awareness film (wmf.com media library) — stand-ins until a pan film is shot |
 

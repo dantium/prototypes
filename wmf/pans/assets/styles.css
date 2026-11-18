@@ -1124,52 +1124,73 @@ body.plp-dialog-open { overflow:hidden; }
 /* 6 · brand (DS Text + Image) */
 /* Category story — shared brand module (PLP + PDP, app.js renderStory).
    Film stage with the headline over a left-hand scrim (desktop) or a
-   bottom scrim (mobile, 9:16 cut), DS 45 px pause button, then three
-   category proof points on the DS container grey. */
+   bottom scrim (mobile, 9:16 cut), DS 45 px pause button. The three
+   brand points (heritage, quality, design) sit on the film along the
+   bottom (desktop) or in the dark band under it (mobile). */
 .cat-story { margin:80px 0; text-align:left; font-family:var(--rotis-web); color:#000; }
-.cat-story-stage { position:relative; overflow:hidden; display:flex; align-items:flex-end; aspect-ratio:21/9; min-height:520px; background:#1c1c1c; color:#fff; }
+/* one dark stage: film behind, copy and brand points on top */
+.cat-story-stage { position:relative; overflow:hidden; display:flex; flex-direction:column; justify-content:flex-end; aspect-ratio:2/1; min-height:600px; background:#1c1c1c; color:#fff; }
 .cat-story-media { position:absolute; inset:0; width:100%; height:100%; object-fit:cover; }
-.cat-story-stage::after { content:""; position:absolute; inset:0; pointer-events:none; background:linear-gradient(90deg, rgba(0,0,0,.74) 0%, rgba(0,0,0,.48) 36%, rgba(0,0,0,0) 66%); }
-.cat-story-copy { position:relative; z-index:1; max-width:600px; padding:64px; display:flex; flex-direction:column; align-items:flex-start; gap:16px; }
-.cat-story-eyebrow { margin:0; font:700 14px/20px var(--rotis-web); letter-spacing:.2em; text-transform:uppercase; color:rgba(255,255,255,.85); }
+.cat-story-stage::after { content:""; position:absolute; inset:0; pointer-events:none; background:
+  linear-gradient(0deg, rgba(0,0,0,.82) 0%, rgba(0,0,0,.5) 28%, rgba(0,0,0,0) 52%),
+  linear-gradient(90deg, rgba(0,0,0,.7) 0%, rgba(0,0,0,.42) 36%, rgba(0,0,0,0) 66%); }
+.cat-story-copy { position:relative; z-index:1; max-width:600px; padding:64px 64px 0; display:flex; flex-direction:column; align-items:flex-start; gap:16px; }
 .cat-story-title { margin:0; font:700 44px/52px var(--rotis-web); color:#fff; }
 .cat-story-lead { margin:0; font:400 18px/28px var(--rotis-web); color:rgba(255,255,255,.92); }
-.cat-story-cta { margin-top:12px; }
-.cat-story-toggle { position:absolute; z-index:2; right:24px; bottom:24px; width:45px; height:45px; padding:0; border:0; border-radius:50%; display:grid; place-items:center; background:#53555a; color:#fff; cursor:pointer; transition:background .15s; }
+/* DS Button, Secondary (outline), inverted for the dark stage */
+.cat-story-cta { margin-top:12px; display:inline-flex; align-items:center; justify-content:center; min-width:194px; height:40px; padding:0 24px; border:1px solid #fff; border-radius:9999px; background:transparent; color:#fff; font:700 15px/20px var(--rotis-web); letter-spacing:.3px; text-transform:uppercase; text-decoration:none; transition:background .15s, color .15s; }
+.cat-story-cta:hover { background:#fff; color:#000; }
+.cat-story-toggle { position:absolute; z-index:2; top:24px; right:24px; width:45px; height:45px; padding:0; border:0; border-radius:50%; display:grid; place-items:center; background:#53555a; color:#fff; cursor:pointer; transition:background .15s; }
 .cat-story-toggle[hidden] { display:none; }
 .cat-story-toggle:hover { background:#1c1c1c; }
 .cat-story-toggle:focus-visible, .cat-story-cta:focus-visible { outline:2px solid #fff; outline-offset:3px; }
-.cat-story-proof { list-style:none; margin:0; padding:0; display:grid; grid-template-columns:repeat(3, 1fr); background:#f4f4f4; }
-.cat-story-proof li { display:flex; flex-direction:column; gap:6px; padding:32px 40px; border-left:1px solid rgba(0,0,0,.12); }
-.cat-story-proof li:first-child { border-left:0; }
-.cat-story-proof strong { font:700 24px/30px var(--rotis-web); }
-.cat-story-proof span { font:400 16px/24px var(--rotis-web); color:#333; }
-/* PDP: same width as the PDP sections, before the cross-sell wash */
+.cat-story-proof { position:relative; z-index:1; list-style:none; margin:48px 64px 0; padding:0 0 56px; display:grid; grid-template-columns:repeat(3, 1fr); gap:0 48px; }
+.cat-story-proof li { display:flex; flex-direction:column; gap:8px; }
+.cat-story-proof strong { font:700 22px/28px var(--rotis-web); color:#fff; }
+.cat-story-proof span { font:400 16px/24px var(--rotis-web); color:rgba(255,255,255,.85); }
+/* PDP: same module inside the page container */
 .pdp-story-wrap { max-width:1440px; padding:0 80px; }
 .cat-story--pdp { margin:0 0 80px; }
+/* Grow on scroll (app.js setupStoryBleed): the module bleeds to the window
+   edges and is clipped back to the page column; --story-p (0 → 1) opens the
+   clip to full width as the film scrolls in, and the film eases from a slight
+   zoom. Copy and points stay on the page column. Reduced motion: --story-p 1.
+   --story-gl / --story-gr = column gutters, --story-sl / --story-sr = start
+   insets (at least the gutter), --story-iy = matching top/bottom inset. */
+.cat-story { --story-pad:64px; --story-max:600px; --story-tog:24px; --story-p:1; }
+.cat-story.is-bleed { margin-left:calc(-1 * var(--story-gl)); margin-right:calc(-1 * var(--story-gr)); }
+.cat-story.is-bleed .cat-story-stage { --q:calc(1 - var(--story-p)); clip-path:inset(calc(var(--story-iy) * var(--q)) calc(var(--story-sr) * var(--q)) calc(var(--story-iy) * var(--q)) calc(var(--story-sl) * var(--q))); will-change:clip-path; }
+.cat-story.is-bleed .cat-story-media { transform:scale(calc(1 + .12 * var(--q))); transform-origin:50% 40%; will-change:transform; }
+/* copy rests on the page column; while the frame is narrower it moves in with it */
+.cat-story.is-bleed .cat-story-copy, .cat-story.is-bleed .cat-story-proof { --xl:calc(var(--story-gl) + (var(--story-sl) - var(--story-gl)) * var(--q)); --xr:calc(var(--story-gr) + (var(--story-sr) - var(--story-gr)) * var(--q)); }
+.cat-story.is-bleed .cat-story-copy { padding-left:calc(var(--xl) + var(--story-pad)); max-width:calc(var(--xl) + var(--story-max)); }
+.cat-story.is-bleed .cat-story-proof { margin-left:calc(var(--xl) + var(--story-pad)); margin-right:calc(var(--xr) + var(--story-pad)); }
+.cat-story.is-bleed .cat-story-toggle { top:calc(var(--story-iy) * var(--q) + var(--story-tog)); right:calc(var(--story-sr) * var(--q) + var(--story-tog)); }
 @media (max-width:1180px) {
-  .cat-story-copy { padding:48px; max-width:520px; }
+  .cat-story { --story-pad:48px; --story-max:520px; }
+  .cat-story-copy { padding:48px 48px 0; max-width:520px; }
   .cat-story-title { font-size:36px; line-height:44px; }
-  .cat-story-proof li { padding:28px 28px; }
+  .cat-story-proof { margin:40px 48px 0; padding:0 0 48px; gap:0 32px; }
   .pdp-story-wrap { padding:0 40px; }
 }
 @media (max-width:700px) {
-  /* edge to edge on phones: the film gets the full width */
+  /* edge to edge on phones; the film fills the top and fades into the
+     dark band that holds the brand points */
   .cat-story { margin:56px -22px; }
   .cat-story--pdp { margin:0 -16px 48px; }
   .pdp-story-wrap { padding:0 16px; }
-  .cat-story-stage { aspect-ratio:2/3; min-height:0; }   /* 9:16 cut, room for film above the copy */
-  .cat-story-stage::after { background:linear-gradient(0deg, rgba(0,0,0,.8) 0%, rgba(0,0,0,.55) 45%, rgba(0,0,0,0) 78%); }
-  .cat-story-copy { padding:24px 22px 28px; gap:12px; }
-  .cat-story-eyebrow { font-size:12px; line-height:16px; }
+  .cat-story-stage { aspect-ratio:auto; min-height:0; justify-content:flex-start; padding-top:88%; }
+  .cat-story-media { bottom:auto; height:auto; aspect-ratio:2/3; -webkit-mask-image:linear-gradient(0deg, transparent 0%, #000 45%); mask-image:linear-gradient(0deg, transparent 0%, #000 45%); }
+  .cat-story-stage::after { bottom:auto; aspect-ratio:2/3; background:linear-gradient(0deg, rgba(28,28,28,.6) 0%, rgba(28,28,28,.4) 30%, rgba(28,28,28,0) 62%); }
+  .cat-story-copy { padding:0 22px; gap:12px; }
   .cat-story-title { font-size:28px; line-height:34px; }
   .cat-story-lead { font-size:16px; line-height:24px; }
   .cat-story-cta { margin-top:8px; }
-  .cat-story-toggle { top:16px; right:16px; bottom:auto; }
-  .cat-story-proof { grid-template-columns:1fr; }
-  .cat-story-proof li { padding:20px 22px; border-left:0; border-top:1px solid rgba(0,0,0,.12); }
-  .cat-story-proof li:first-child { border-top:0; }
+  .cat-story-toggle { top:16px; right:16px; }
+  .cat-story-proof { grid-template-columns:1fr; gap:24px; margin:40px 22px 0; padding:0 0 36px; }
+  .cat-story-proof li { gap:4px; }
   .cat-story-proof strong { font-size:20px; line-height:26px; }
+  .cat-story { --story-pad:0px; --story-max:100vw; --story-tog:16px; }
 }
 /* guide: types, size, material and surface, range; each row name links to
    its category or sets the matching filter (replaces the shop-by block) */

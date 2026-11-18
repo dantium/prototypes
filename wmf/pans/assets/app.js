@@ -1283,58 +1283,45 @@
   }
 
   /* ---- Category story (brand module) ----
-     One content block per category, shared by the PLP and the PDP (the
-     PDP picks its product's most specific category). In the shop this is
-     a CMS block keyed by category, so both templates read the same
-     content. Media: an ambient, muted film with a 16:9 desktop cut and a
-     9:16 mobile cut (the format wmf.com already uses on its Meisterwerke
-     pages), with a poster for each. It plays only while on screen, never
-     for reduced motion or data saver, and always has a pause button.
-     Prototype films are cut from WMF's Fusiontec / Tim Raue awareness
-     film (wmf.com/media/wmf_upload/videos/), standing in until a pan
-     film exists. {n} / {total} are counted from the catalog. */
+     One content block per top-level category (pans, later pots, knives
+     ...), shared by the category page, its sub-categories (frying pans,
+     woks ...) and every PDP in it. In the shop this is a CMS block keyed
+     by category. Copy follows the brand book: the cookware promise as
+     the headline, and the brand pillars (German tradition, metal crafting,
+     iconic design) as the three points. Media: an ambient, muted film with
+     a 16:9 desktop cut and a 9:16 mobile cut (the format wmf.com already
+     uses on its Meisterwerke pages), with a poster for each. It plays only
+     while on screen, never for reduced motion or data saver, and always
+     has a pause button. Prototype film is cut from WMF's Fusiontec / Tim
+     Raue awareness film (wmf.com/media/wmf_upload/videos/), standing in
+     until a pan film exists. */
+  // Placeholder: the brand awareness page is still to be made.
+  var STORY_CTA = { label: 'Learn more about WMF', href: '#brand-page' };
   var STORIES = {
     'pans': {
-      eyebrow: 'WMF pans',
       title: 'Inspired by professionals. Designed for home.',
-      lead: 'Professional kitchens need pans that take high heat, quick turns and long services. We bring the same standards to your cooktop, with materials chosen for each way of cooking and a clean design that goes from stove to table.',
+      lead: 'WMF pans bring the quality of professional kitchen standards into your home, in a pure, minimal design. Uncoated, non-stick or ceramic: there is a pan for every way you cook.',
       media: { film: 'assets/story/pans', alt: 'A chef and his team cooking with WMF cookware in a professional kitchen' },
-      cta: { label: 'Read the pan guide', href: 'https://www.wmf.com/de/de/inspirationen/pfannen/pfannen-abc.html', external: true },
-      ctaPdp: { label: 'Explore all pans', href: 'pans.html' },
       proof: [
-        { term: 'Since 1853', text: 'Founded in Geislingen, with more than 170 years of metal craft.' },
-        { term: '3 surfaces', text: 'Uncoated, non-stick and ceramic, so each dish gets the surface it needs.' },
-        { term: '{n} of {total}', text: 'pans in our range work on induction cooktops.', count: 'pans' }
-      ]
-    },
-    'frying-pans': {
-      eyebrow: 'WMF frying pans',
-      title: 'Made for the moment food hits the pan',
-      lead: 'A good crust needs a pan that keeps its heat when cold food goes in. Pans such as Profi Resist pair a multi-layer body with the TransTherm® universal base, which spreads heat across the base and holds it as you cook.',
-      media: { film: 'assets/story/frying', alt: 'Vegetables tossed in a wok and pans heating on a cooktop' },
-      cta: { label: 'Discover Profi Resist', href: 'https://www.wmf.com/de/de/kollektionen/profi-resist.html', external: true },
-      ctaPdp: { label: 'Explore all frying pans', href: 'frying-pans.html' },
-      proof: [
-        { term: '3 surfaces', text: 'Uncoated stainless steel for a deep crust; non-stick and ceramic for eggs, fish and pancakes.' },
-        { term: 'Honeycomb', text: 'On Profi Resist, a raised honeycomb of Cromargan® stainless steel helps protect the PermaDur non-stick coating in daily use.' },
-        { term: '{n} of {total}', text: 'frying pans in our range work on induction cooktops.', count: 'frying-pans' }
+        { term: 'German tradition since 1853', text: 'For more than 170 years, we have joined our traditions with new ideas.' },
+        { term: 'Metal crafting with Cromargan®', text: 'Most of our pans are crafted from Cromargan® high-quality stainless steel, a WMF trademark since 1930.' },
+        { term: 'Design thought through in every detail', text: 'Authentic to metal and clean in line, so a pan is as much at home on the table as on the stove.' }
       ]
     }
   };
+  // sub-categories show their parent category's story
+  var STORY_PARENT = { 'frying-pans': 'pans' };
   var STORY_ICON = {
     pause: '<svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><rect x="6" y="5" width="4" height="14"/><rect x="14" y="5" width="4" height="14"/></svg>',
     play: '<svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>'
   };
-  function storyCount(cat) {
-    var list = ((DATA && DATA.products) || []).filter(function (p) { return p.cats && (cat in p.cats); });
-    return { n: list.filter(function (p) { return (p.cooktop || []).indexOf('Induction') > -1; }).length, total: list.length };
-  }
   function renderStory(el, opts) {
     var key = el.getAttribute('data-story');
+    if (!STORIES[key] && STORY_PARENT[key]) key = STORY_PARENT[key];
     var s = STORIES[key];
     if (!s) { el.remove(); return; }
     var ctx = (opts && opts.context) || 'plp';
-    var cta = ctx === 'pdp' ? (s.ctaPdp || s.cta) : s.cta;
+    var cta = s.cta || STORY_CTA;
     var id = 'story-' + key + '-title';
     var film = s.media.film;
     el.className = 'cat-story cat-story--' + ctx;
@@ -1343,18 +1330,15 @@
       '<div class="cat-story-stage">' +
         '<video class="cat-story-media" muted loop playsinline preload="none" aria-hidden="true"></video>' +
         '<div class="cat-story-copy">' +
-          '<p class="cat-story-eyebrow">' + esc(t(s.eyebrow)) + '</p>' +
           '<h2 class="cat-story-title" id="' + id + '">' + esc(t(s.title)) + '</h2>' +
           '<p class="cat-story-lead">' + esc(t(s.lead)) + '</p>' +
-          '<a class="hub-pill cat-story-cta" href="' + esc(cta.href) + '"' + (cta.external ? ' target="_blank" rel="noopener"' : '') + '>' + esc(t(cta.label)) + '</a>' +
+          '<a class="cat-story-cta" href="' + esc(cta.href) + '"' + (cta.external ? ' target="_blank" rel="noopener"' : '') + '>' + esc(t(cta.label)) + '</a>' +
         '</div>' +
         '<button class="cat-story-toggle" type="button" hidden></button>' +
-      '</div>' +
-      '<ul class="cat-story-proof">' + s.proof.map(function (pr) {
-        var term = t(pr.term);
-        if (pr.count) { var c = storyCount(pr.count); term = term.replace('{n}', c.n).replace('{total}', c.total); }
-        return '<li><strong>' + esc(term) + '</strong><span>' + esc(t(pr.text)) + '</span></li>';
-      }).join('') + '</ul>';
+        '<ul class="cat-story-proof">' + s.proof.map(function (pr) {
+          return '<li><strong>' + esc(t(pr.term)) + '</strong><span>' + esc(t(pr.text)) + '</span></li>';
+        }).join('') + '</ul>' +
+      '</div>';
 
     // film: pick the cut for the viewport, play only while visible
     var video = el.querySelector('video');
@@ -1393,6 +1377,49 @@
         else if (!visible) video.pause();
       }, { threshold: 0.35 }).observe(video);
     }
+    setupStoryBleed(el);
+  }
+  // Grow on scroll: bleed the module to the window edges, then open the clip
+  // from the page column to full width as the stage scrolls into view.
+  function setupStoryBleed(el) {
+    var stage = el.querySelector('.cat-story-stage');
+    var par = el.parentElement;
+    if (!stage || !par || !window.CSS || !CSS.supports('clip-path', 'inset(1px)')) return;
+    var calm = window.matchMedia('(prefers-reduced-motion: reduce)');
+    var raf = 0;
+    var measure = function () {
+      var pr = par.getBoundingClientRect(), cs = getComputedStyle(par);
+      var cw = document.documentElement.clientWidth;
+      var gl = Math.max(0, pr.left + parseFloat(cs.paddingLeft));
+      var gr = Math.max(0, cw - (pr.right - parseFloat(cs.paddingRight)));
+      // start a little inside the page column so the growth reads on any width
+      var start = cw * (cw <= 700 ? 0.1 : 0.16);
+      var sl = Math.max(gl, start), sr = Math.max(gr, start);
+      el.style.setProperty('--story-gl', gl + 'px');
+      el.style.setProperty('--story-gr', gr + 'px');
+      el.style.setProperty('--story-sl', sl.toFixed(1) + 'px');
+      el.style.setProperty('--story-sr', sr.toFixed(1) + 'px');
+      el.classList.add('is-bleed');
+      // top/bottom inset that keeps the frame's proportions while it grows
+      el.style.setProperty('--story-iy', (stage.offsetHeight * (sl + sr) / (2 * cw)).toFixed(1) + 'px');
+      update();
+    };
+    var update = function () {
+      raf = 0;
+      var p = 1;
+      if (!calm.matches) {
+        var vh = window.innerHeight, top = stage.getBoundingClientRect().top;
+        p = Math.min(1, Math.max(0, (vh - top) / (vh * 0.75)));
+        p = p * p * (3 - 2 * p);   // ease in and out
+      }
+      el.style.setProperty('--story-p', p.toFixed(4));
+    };
+    var onScroll = function () { if (!raf) raf = requestAnimationFrame(update); };
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', measure);
+    if (calm.addEventListener) calm.addEventListener('change', update);
+    if ('ResizeObserver' in window) new ResizeObserver(measure).observe(stage);
+    measure();
   }
   function renderStories(opts) {
     document.querySelectorAll('[data-story]').forEach(function (el) { renderStory(el, opts); });

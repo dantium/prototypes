@@ -446,7 +446,7 @@ body.nav-open .nav-drawer { transform: none; }
   transition: box-shadow .15s, background .15s;
 }
 /* Cart quantity stays on the product's cart action. */
-.round .cart-count { top:-2px; right:-3px; bottom:auto; min-width:20px; height:20px; font:400 14px/20px var(--rotis-web); background:#ede3b8; }
+.round .cart-count { top:-2px; right:-3px; bottom:auto; min-width:20px; height:20px; font:400 14px/20px var(--rotis-web); background:#ede3b8; box-shadow:0 0 0 2px #fff; }
 .round:hover { background: #fff; box-shadow: 0 3px 11px rgba(0,0,0,.22); }
 .round svg { display: block; }
 /* whole media area links to the PDP (sits above the hover shot, below the buttons) */
@@ -505,30 +505,41 @@ body.nav-open .nav-drawer { transform: none; }
 /* price sits directly under the title — body gap only, no extra padding */
 .card--v2 .card-price { padding-top: 0; }
 
-.card-sizes { display: flex; align-items: center; gap: 7px; flex-wrap: wrap; padding-top: 4px; }
+/* variant options: label on its own line, options on one line below */
+.card-opts { display: flex; flex-direction: column; align-items: stretch; gap: 6px; padding-top: 8px; }
+.card-opt-row { display: flex; align-items: center; gap: 7px; flex-wrap: nowrap; overflow: hidden; min-width: 0; }
+.card-opt-row > * { flex: none; }
+.card-opt-row > [hidden] { display: none; }
 .card-sizes .lbl { font-size: 12px; font-weight: 300; color: #333; }
 .swatch {
   display: inline-flex; align-items: center; justify-content: center;
   min-width: 37px; height: 21px; padding: 0 6px;
-  border: 1px solid var(--line); border-radius: 6px; background: #fff;
+  border: 1px solid #c2c2c2; border-radius: 0; background: #fff;
   font-size: 12px; font-weight: 300; color: #000; cursor: pointer;
+  transition: border-color .15s;
 }
-.swatch.sel { border-color: var(--ink-2); }
+/* same states as the PDP size chips (.bb-size): square, grey border,
+   darker on hover, black when selected, dashed + grey text when sold out */
+.swatch:hover { border-color: #8a8a8a; }
+.swatch.sel { border-color: #000; }
 .swatch.oos { border-style: dashed; color: #9a9a96; }
 
 /* colour variant swatches on the card (image tiles + a +N marker) */
-.card-colors { display: flex; align-items: center; gap: 7px; flex-wrap: wrap; padding-top: 4px; }
 .card-colors .lbl { font-size: 12px; font-weight: 300; color: #333; }
 .card-swatch {
   width: 26px; height: 26px; padding: 2px;
-  border: 1px solid var(--line); border-radius: 4px; background: #fff; flex: none;
+  position: relative; border: 1px solid #c2c2c2; border-radius: 0; background: #fff; flex: none;
+  transition: border-color .15s;
 }
 .card-swatch img { width: 100%; height: 100%; object-fit: contain; }
 .card-swatch[data-sku] { cursor: pointer; }
-.card-swatch.sel { border-color: var(--black); box-shadow: inset 0 0 0 1px var(--black); }
-.card-swatch.oos { border-style: dashed; }
+/* same states as the PDP colour swatches (.bb-swatch) */
+.card-swatch[data-sku]:hover { border-color: #8a8a8a; }
+.card-swatch.sel, .card-swatch.sel:hover { border-color: #000; }
 .card-swatch.oos img { opacity: .4; }
-.card-more { font-size: 12px; font-weight: 300; color: #6a6a6a; }
+.card-swatch.oos::after { content: ""; position: absolute; inset: 0; background: linear-gradient(to top right, transparent calc(50% - .5px), #c2c2c2 50%, transparent calc(50% + .5px)); }
+.card-more { font: 400 12px/16px var(--rotis-web); color: #000; text-decoration: underline; text-underline-offset: 2px; white-space: nowrap; }
+.card-more:hover { color: var(--muted); }
 
 
 .show-more-row { display: flex; flex-direction: column; align-items: center; gap: 14px; padding: 42px 0 8px; }
@@ -968,17 +979,28 @@ body.searching-empty .plp { grid-template-columns: 1fr; }
 .card-reference { display:flex; flex-wrap:wrap; column-gap:4px; row-gap:0; }
 .card-reference .card-reduction { color:var(--sale); margin-left:4px; }
 .card-reference .card-saving { color:var(--stock); }
-.card--plp .card-sizes { gap:7px; padding-top:8px; }
-.card--plp .card-sizes .lbl { font:400 12px/16px var(--rotis-web); color:#000; }
+.card--plp .card-opts .lbl { font:400 12px/16px var(--rotis-web); color:#000; }
 .card--plp .swatch { min-width:37px; height:auto; min-height:19px; padding:1px 4px; font:400 12px/16px var(--rotis-web); }
 .card-availability { display:flex; flex-wrap:wrap; align-items:center; gap:0 8px; padding-top:8px; font:400 14px/21px var(--rotis-web); }
 .card-availability .notify-link { margin-left:8px; }
-.card-stock-size { color:var(--muted); }
+/* out of stock: red dot + text (same dot as the PDP stock line) */
+.card-oos { display:inline-flex; align-items:center; gap:6px; }
+.card-oos .dot { width:7px; height:7px; border-radius:50%; background:var(--sale); flex:none; }
 /* wishlist: outlined heart; filled black once saved */
 .card-wishlist svg path { fill:none; transition:fill .15s; }
 .card-wishlist[aria-pressed="true"] svg path { fill:#000; }
-/* cooktop badge: leads the image labels */
-.label--cooktop.no-induction { border-style:dashed; }
+/* cooktop line after the tile details, with a hover/tap list of cooktops */
+.card-hob { position:relative; padding-top:10px; }
+.card-hob-btn { display:inline-flex; align-items:center; gap:6px; padding:0; border:0; background:none; color:#000; font:400 12px/16px var(--rotis-web); cursor:pointer; }
+.card-hob-btn svg { flex:none; }
+.card-hob-btn span { text-decoration:underline dotted; text-underline-offset:3px; }
+.hob-pop { display:none; position:absolute; left:0; bottom:100%; z-index:30; min-width:210px; padding:16px 18px; background:#fff; border:1px solid #c2c2c2; box-shadow:0 6px 18px rgba(0,0,0,.12); text-align:left; }
+.card-hob:hover .hob-pop, .card-hob:focus-within .hob-pop, .card-hob.open .hob-pop { display:block; }
+.hob-pop-title { margin:0 0 8px; font:700 14px/20px var(--rotis-web); }
+.hob-pop ul { margin:0; padding:0; list-style:none; }
+.hob-pop li { display:flex; align-items:center; gap:8px; padding:4px 0; font:400 14px/20px var(--rotis-web); }
+.hob-pop li svg { flex:none; }
+.hob-pop li.no { color:#9a9a96; }
 .card--plp .round { background:var(--wash); box-shadow:none; }
 .card--plp .round:hover { background:#ede3b8; }
 .card--plp .badge, .card--plp .label { font-weight:400; }
@@ -1009,60 +1031,113 @@ body.plp-dialog-open { overflow:hidden; }
 .finder-dialog { width:1000px; padding:40px; }
 .finder-dialog[open] { gap:16px; }
 /* ============================================================
-   CONTENT HUB below the grid (buying advice, tips, brand, reviews,
-   FAQ, Pan Finder). Replaces the editorial tile that sat in the grid.
+   CONTENT HUB below the grid, in the style of the Intense/Gentle
+   landing page (DS PageBuilder modules): Slider Teaser chooser,
+   Benefit cards, quote slider, FAQ, centred Text, Text + Image,
+   and the category guide text collapsed behind "Read more".
    ============================================================ */
-.hub { margin-top:96px; padding-top:80px; border-top:1px solid var(--line); display:flex; flex-direction:column; gap:96px; font-family:var(--rotis-web); }
-.hub-head { max-width:720px; margin-bottom:32px; }
-.hub-eyebrow { margin:0 0 8px; font:400 12px/16px var(--rotis-web); letter-spacing:1.2px; text-transform:uppercase; color:var(--muted); }
-.hub-title { margin:0; font:300 32px/40px var(--rotis-web); letter-spacing:.06em; text-transform:uppercase; color:#000; }
-.hub-intro { margin:12px 0 0; font:400 16px/24px var(--rotis-web); color:#1c1c1c; }
-.hub-grid { display:grid; grid-template-columns:repeat(3, minmax(0, 1fr)); gap:24px; }
-.hub h3 { margin:0; font:500 18px/24px var(--rotis-web); color:#000; }
-.hub-grid p { margin:0; font:400 15px/22px var(--rotis-web); color:#1c1c1c; }
-.hub-style { display:flex; flex-direction:column; gap:12px; align-items:flex-start; }
-.hub-style img { width:100%; aspect-ratio:4/3; object-fit:cover; display:block; margin-bottom:4px; }
-.hub-style p { flex:1; }
-.hub-style .text-link { text-align:left; }
-.hub-tip { display:flex; flex-direction:column; gap:12px; padding:28px; background:var(--wash); }
-.hub-num { font:300 28px/32px var(--rotis-web); color:var(--gold-deep); }
-.hub-brand { display:grid; grid-template-columns:1fr 1fr; align-items:center; gap:48px; background:var(--wash); }
-.hub-brand img { width:100%; height:100%; min-height:360px; object-fit:cover; display:block; }
-.hub-brand-text { display:flex; flex-direction:column; align-items:flex-start; gap:16px; padding:40px 48px 40px 0; }
-.hub-brand-text p:not(.hub-eyebrow) { margin:0; font:400 16px/24px var(--rotis-web); }
-.hub-brand-text .hub-eyebrow { margin:0 0 -8px; }
-.hub-review { display:flex; flex-direction:column; gap:10px; padding:28px; border:1px solid var(--line); }
-.hub-stars { color:var(--star); font-size:16px; letter-spacing:2px; }
-.hub-review p.hub-review-meta { flex:1; display:flex; align-items:flex-end; font-size:13px; color:var(--muted); }
-.hub-review-prod { font:700 14px/20px var(--rotis-web); color:#000; text-decoration:underline; text-underline-offset:3px; }
-.hub-faq-list { max-width:880px; border-bottom:1px solid var(--rule); }
+.hub { scroll-margin-top:24px; margin-top:96px; display:flex; flex-direction:column; font-family:var(--rotis-web); text-align:center; color:#000; }
+.hub-sec { padding:80px 0; }
+/* full-bleed grey band without breaking out of the page container */
+.hub-band { background:var(--wash); box-shadow:0 0 0 100vmax var(--wash); clip-path:inset(0 -100vmax); }
+.hub-title { margin:0 auto; max-width:1000px; text-wrap:balance; font:400 36px/46px var(--rotis-web); letter-spacing:.2em; text-transform:uppercase; color:#000; }
+.hub-lead { margin:16px auto 0; max-width:760px; font:400 20px/30px var(--rotis-web); }
+.hub h3 { margin:0; }
+.hub-pill { display:inline-flex; align-items:center; justify-content:center; min-width:194px; height:40px; padding:0 24px; border:0; border-radius:9999px; background:var(--button); color:#000; font:700 15px/20px var(--rotis-web); letter-spacing:.3px; text-transform:uppercase; text-decoration:none; cursor:pointer; }
+.hub-pill:hover { background:#e2d59c; }
+.hub :where(a, button, [tabindex]):focus-visible { outline:2px solid #000; outline-offset:3px; }
+/* 1 · chooser (Slider Teaser cards) */
+.hub-teasers { display:grid; grid-template-columns:repeat(3, minmax(0, 344px)); justify-content:center; gap:16px; margin-top:48px; }
+.hub-teaser { position:relative; aspect-ratio:344/453; overflow:hidden; background:#000; color:#fff; }
+.hub-teaser img { position:absolute; inset:0; width:100%; height:100%; object-fit:cover; display:block; }
+.hub-teaser::after { content:""; position:absolute; inset:0; background:linear-gradient(to bottom, rgba(0,0,0,0) 30%, rgba(0,0,0,.55) 55%, rgba(0,0,0,.85) 100%); }
+.hub-teaser-copy { position:absolute; left:16px; right:16px; bottom:48px; z-index:1; display:flex; flex-direction:column; align-items:center; gap:16px; }
+.hub-teaser h3 { font:400 26px/34px var(--rotis-web); letter-spacing:.16em; text-wrap:balance; text-transform:uppercase; color:#fff; }
+.hub-teaser p { margin:0 0 8px; font:400 16px/24px var(--rotis-web); letter-spacing:.01em; color:#fff; }
+.hub-teaser .hub-pill:hover { background:#fff; }
+/* 3 · reviews (quote slider) */
+.hub-quotes-row { display:flex; align-items:center; justify-content:center; gap:40px; margin-top:40px; }
+.hub-quotes-track { display:flex; width:820px; max-width:100%; overflow-x:auto; scroll-snap-type:x mandatory; scrollbar-width:none; }
+.hub-quotes-track::-webkit-scrollbar { display:none; }
+.hub-quote { flex:0 0 100%; scroll-snap-align:start; margin:0; display:flex; flex-direction:column; align-items:center; gap:20px; }
+.hub-stars { color:var(--star); font-size:20px; line-height:20px; letter-spacing:2px; }
+.hub-quote blockquote { margin:0; }
+.hub-quote blockquote p { margin:0; font:400 20px/30px var(--rotis-web); letter-spacing:.01em; }
+.hub-quote blockquote p::before { content:"\201C"; } .hub-quote blockquote p::after { content:"\201D"; }
+.hub-quote figcaption { font:400 14px/21px var(--rotis-web); color:#6f6f6f; }
+.hub-quote figcaption a { color:inherit; text-decoration:underline; text-underline-offset:3px; }
+.hub-arrow { flex:none; display:grid; place-items:center; width:45px; height:45px; border:0; border-radius:50%; background:#53555a; color:#fff; cursor:pointer; }
+.hub-arrow:disabled { opacity:.3; cursor:default; }
+.hub-dots { display:flex; justify-content:center; gap:6px; margin-top:40px; }
+.hub-dots span { width:15px; height:2px; background:#d1d1d1; transition:width .2s, background .2s; }
+.hub-dots span.on { width:54px; background:var(--gold); }
+/* 4 · FAQ (DS FAQ, Collapse) */
+.hub-faq-list { max-width:908px; margin:48px auto 0; border-bottom:1px solid var(--rule); text-align:left; }
 .hub-faq details { border-top:1px solid var(--rule); }
-.hub-faq summary { display:flex; align-items:center; justify-content:space-between; gap:24px; padding:22px 0; font:500 18px/26px var(--rotis-web); cursor:pointer; list-style:none; }
+.hub-faq summary { display:flex; align-items:center; justify-content:space-between; gap:24px; padding:14px 0; font:700 16px/24px var(--rotis-web); cursor:pointer; list-style:none; }
 .hub-faq summary::-webkit-details-marker { display:none; }
-.hub-faq summary::after { content:"+"; flex:none; font:300 28px/1 var(--rotis-web); transition:transform .2s; }
+.hub-faq summary::after { content:"+"; flex:none; font:300 24px/1 var(--rotis-web); transition:transform .2s; }
 .hub-faq details[open] summary::after { transform:rotate(45deg); }
-.hub-faq summary:focus-visible { outline:2px solid #000; outline-offset:3px; }
-.hub-faq details p { margin:0; padding:0 48px 24px 0; font:400 16px/24px var(--rotis-web); color:#1c1c1c; }
-.hub-cta { display:flex; align-items:center; justify-content:space-between; gap:32px; padding:40px 48px; background:#212121; color:#fff; }
-.hub-cta h2 { margin:0 0 8px; font:300 28px/36px var(--rotis-web); letter-spacing:.06em; text-transform:uppercase; }
-.hub-cta p { margin:0; font:400 16px/24px var(--rotis-web); color:#e6e6e6; }
-.hub-cta-btn { flex:none; min-height:48px; padding:12px 32px; border:0; border-radius:24px; background:var(--button); color:#000; font:700 16px/20px var(--rotis-web); cursor:pointer; }
-.hub-cta-btn:hover { background:#fff; }
-.hub :where(a, button):focus-visible { outline:2px solid currentColor; outline-offset:3px; }
+.hub-faq details p { margin:0; padding:0 48px 20px 0; font:400 16px/24px var(--rotis-web); color:#1c1c1c; }
+/* 8 · exit: Pan Finder teaser (DS Text, centred) */
+.hub-text .hub-pill { margin-top:32px; }
+/* frying pans: range comparison and category tiles inside the hub */
+.hub .hub-compare { padding:80px 0; text-align:left; }
+.hub .hub-compare .comparison__title { text-align:center; }
+.hub-othercats { text-align:left; }
+.hub-othercats .hub-title { text-align:center; margin-bottom:32px; }
+/* 6 · brand (DS Text + Image) */
+.hub-brand { display:grid; grid-template-columns:1fr 1fr; align-items:center; padding:0; text-align:left; }
+.hub-brand img { width:100%; height:520px; object-fit:cover; display:block; }
+.hub-brand-text { display:flex; flex-direction:column; align-items:flex-start; gap:24px; padding:48px 48px 48px 64px; }
+.hub-brand .hub-title { margin:0; }
+.hub-brand-text p { margin:0; font:400 20px/30px var(--rotis-web); }
+/* guide: types, size, material and surface, range; each row name links to
+   its category or sets the matching filter (replaces the shop-by block) */
+.hub-guide { padding:80px 0; }
+.hub-guide-body { max-width:908px; margin:16px auto 0; text-align:left; }
+.hub-guide h3 { margin:56px 0 16px; font:400 24px/32px var(--rotis-web); letter-spacing:.12em; text-transform:uppercase; }
+.hub-guide-body p { margin:12px 0 0; font:400 16px/24px var(--rotis-web); color:#1c1c1c; }
+.hub-row-link { display:inline; padding:0; border:0; background:none; color:#000; font:700 16px/24px var(--rotis-web); text-align:left; text-decoration:underline; text-underline-offset:3px; cursor:pointer; }
+.hub-row-link:hover { color:var(--muted); }
+.hub-table { width:100%; margin-top:12px; border-collapse:collapse; font:400 16px/24px var(--rotis-web); }
+.hub-table th, .hub-table td { padding:10px 16px 10px 0; border-bottom:1px solid var(--rule); text-align:left; vertical-align:top; }
+.hub-table thead th { border-bottom-color:#000; font-weight:700; }
+.hub-table tbody th { width:30%; font-weight:700; }
+/* tips per surface (Benefit cards), below the guide */
+.hub-tips { padding-top:0; }
+.hub-benefits { display:grid; grid-template-columns:repeat(3, minmax(0, 304px)); justify-content:center; gap:16px; margin-top:48px; text-align:left; }
+.hub-benefit img { width:100%; aspect-ratio:1; object-fit:cover; display:block; }
+.hub-benefit h3 { margin-top:20px; font:700 20px/32px var(--rotis-web); }
+.hub-benefit p { margin:8px 0 0; font:400 16px/24px var(--rotis-web); }
+.hub-benefit .text-link { margin-top:16px; text-align:left; }
+.hub-more { margin-top:24px; }
 @media (max-width:900px) {
-  .hub { margin-top:64px; padding-top:56px; gap:64px; }
-  .hub-title { font-size:26px; line-height:32px; }
-  .hub-grid { grid-template-columns:1fr; gap:16px; }
-  .hub-style { display:grid; grid-template-columns:120px 1fr; column-gap:16px; row-gap:8px; align-items:start; }
-  .hub-style img { grid-row:span 3; margin:0; aspect-ratio:1; }
-  .hub-tip, .hub-review { padding:20px; }
-  .hub-brand { grid-template-columns:1fr; gap:0; }
-  .hub-brand img { min-height:0; aspect-ratio:16/9; }
-  .hub-brand-text { padding:24px 20px 28px; }
-  .hub-faq summary { font-size:16px; line-height:24px; padding:18px 0; }
+  .hub { margin-top:64px; }
+  .hub-sec { padding:56px 0; }
+  .hub-title { font-size:26px; line-height:34px; letter-spacing:.15em; }
+  .hub-lead { font-size:16px; line-height:24px; }
+  /* cards become a swipeable row that bleeds to the screen edges */
+  .hub-scroll { display:flex; justify-content:flex-start; gap:12px; margin-top:32px; margin-inline:-22px; padding-inline:22px; scroll-padding-inline:22px; overflow-x:auto; scroll-snap-type:x mandatory; scrollbar-width:none; }
+  .hub-scroll::-webkit-scrollbar { display:none; }
+  .hub-scroll > * { flex:0 0 78%; scroll-snap-align:start; }
+  .hub-teaser-copy { left:20px; right:20px; bottom:32px; gap:12px; }
+  .hub-teaser h3 { font-size:22px; line-height:30px; }
+  .hub-quotes-row { gap:0; margin-top:28px; }
+  .hub-arrow { display:none; }
+  .hub-quote blockquote p { font-size:18px; line-height:27px; }
+  .hub-dots { margin-top:28px; }
+  .hub-faq-list { margin-top:32px; }
   .hub-faq details p { padding-right:0; }
-  .hub-cta { flex-direction:column; align-items:stretch; padding:28px 20px; gap:20px; }
-  .hub-cta h2 { font-size:24px; line-height:30px; }
+  .hub-brand { grid-template-columns:1fr; }
+  .hub-brand img { height:auto; aspect-ratio:4/3; }
+  .hub-brand-text { padding:28px 0 0; gap:16px; }
+  .hub-brand-text p { font-size:16px; line-height:24px; }
+  .hub-guide { padding:56px 0; }
+  .hub-guide h3 { margin:40px 0 12px; font-size:20px; line-height:28px; letter-spacing:.1em; }
+  .hub-table tbody th { width:40%; }
+  .hub-benefit h3 { margin-top:16px; font-size:18px; line-height:26px; }
+  .hub-tips { padding-top:0; }
 }
 /* Mock of the Neocom advisor's first screen (live: Neocom iframe) */
 .nc { border:1px solid #e6e6e6; box-shadow:0 2px 12px rgba(0,0,0,.06); background:#fff; }

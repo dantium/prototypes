@@ -391,7 +391,9 @@
   var showMoreBtn = document.getElementById('showMoreBtn');
   var PAGE_SIZE = 12, shown = PAGE_SIZE, searchQ = '';
 
-  var BAG_S = '<svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="#1c1c1c" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 8h12l1 12.5H5L6 8Z"/><path d="M9 8a3 3 0 0 1 6 0"/></svg>';
+  /* tile icon buttons: bag and heart drawn on the same 24px grid, same
+     1.5 stroke, optically centred in the 44px circle */
+  var BAG_S = '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5.2 8.5h13.6l1 12H4.2l1-12Z"/><path d="M8.75 8.5V7a3.25 3.25 0 0 1 6.5 0v1.5"/></svg>';
 
   /* ---- session cart + back-in-stock notify (UX-study #8 / #18) ----
      Quantities live in sessionStorage so tiles, the header badge and the
@@ -427,12 +429,11 @@
     return '<span class="badge' + cls + '">' + esc(t(text)) + '</span>';
   }
 
-  /* info labels on the image: cooktop first (UX-study key finding), then the
-     cooking technique / coating; max two so they fit a 2-column mobile tile.
-     Set size is left off: the product name already says it. */
+  /* info labels on the image: cooking technique / coating; max two so they
+     fit a 2-column mobile tile. Set size is left off: the product name already
+     says it. Cooktops have their own line at the foot of the tile. */
   function infoLabels(p, v) {
-    var out = [], cook = cooktopLabel(p);
-    if (cook) out.push(cook);
+    var out = [];
     ['technique', 'surface'].forEach(function (key) {
       var val = p[key];
       if (!val) return;
@@ -470,22 +471,30 @@
     }
     return '<div class="card-rating" aria-label="' + p.rating.toFixed(1) + ' / 5"><span class="card-stars" aria-hidden="true">' + stars + '</span><span class="rating-count">' + p.rating.toFixed(1) + ' (' + p.reviews + ')</span></div>';
   }
-  /* Cooktop badge from the product's cooktop data (PIM on live): induction
-     works on every hob = "All cooktops" (the full sentence as its accessible name); no
-     induction = a clear "Not for induction"; nothing listed = no badge. */
+  /* Cooktop line at the foot of the tile (UX-study key finding): hob icon +
+     short text; hover, focus or tap opens a list of every cooktop type with
+     induction first, ticked or crossed. Data: product cooktop field (PIM). */
   var ALL_HOBS = ['Induction', 'Gas', 'Electric', 'Glass ceramic'];
-  function cooktopLabel(p) {
+  var ICON_HOB = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><rect x="2.75" y="2.75" width="18.5" height="18.5"/><circle cx="8" cy="8" r="2.75"/><circle cx="16.25" cy="8.25" r="2"/><circle cx="7.75" cy="16.25" r="2"/><circle cx="16" cy="16" r="2.75"/></svg>';
+  var TICK = '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.5 12.5l5 5 10-11"/></svg>';
+  var CROSS = '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>';
+  function cardHobHTML(p) {
     var c = p.cooktop || [];
     if (!c.length) return '';
     var induction = c.indexOf('Induction') >= 0;
     var all = ALL_HOBS.every(function (h) { return c.indexOf(h) >= 0; });
-    var full = !induction ? t('Not suitable for induction')
-      : all ? t('Suitable for all cooktops, including induction')
-      : t('Suitable for') + ' ' + c.map(function (h) { return t(h); }).join(', ');
-    return '<span class="label label--cooktop' + (induction ? '' : ' no-induction') + '" title="' + esc(full) + '">' +
-      '<span aria-hidden="true">' + t(!induction ? 'Not for induction' : all ? 'All cooktops' : 'Induction') + '</span><span class="sr-only">' + esc(full) + '</span></span>';
+    var label = !induction ? t('Not for induction') : all ? t('All cooktops') : c.map(function (h) { return t(h); }).join(', ');
+    var rows = ALL_HOBS.map(function (h) {
+      var ok = c.indexOf(h) >= 0;
+      return '<li class="' + (ok ? 'yes' : 'no') + '">' + (ok ? TICK : CROSS) + '<span>' + t(h) + '</span><span class="sr-only">: ' + t(ok ? 'suitable' : 'not suitable') + '</span></li>';
+    }).join('');
+    var id = 'hob-' + p.id;
+    return '<div class="card-hob' + (induction ? '' : ' no-induction') + '">' +
+      '<button type="button" class="card-hob-btn" aria-expanded="false" aria-controls="' + id + '">' + ICON_HOB + '<span>' + label + '</span></button>' +
+      '<div class="hob-pop" id="' + id + '" role="region" aria-label="' + t('Suitable cooktops') + '"><p class="hob-pop-title">' + t('Suitable cooktops') + '</p><ul>' + rows + '</ul></div></div>';
   }
-  var HEART = '<svg width="21" height="22" viewBox="0 0 21.219 21.755" aria-hidden="true"><path d="M10.608 5.127C10.478 4.404 9.686 1.312 6.926 0.622C4.166 -0.068 1.508 2.554 0.768 4.999C-0.415 8.927 2.327 12.868 4.725 15.734C5.824 17.044 7.013 18.277 8.282 19.423C8.988 20.117 9.768 20.731 10.608 21.255C11.45 20.731 12.231 20.115 12.937 19.418C14.206 18.274 15.395 17.043 16.494 15.734C18.894 12.873 21.634 8.934 20.451 5.003C19.715 2.554 17.067 -0.072 14.293 0.622C11.519 1.316 10.74 4.403 10.608 5.127Z" stroke="#000" stroke-linejoin="round"/></svg>';
+
+  var HEART = '<svg width="22" height="22" viewBox="0 0 24 24" aria-hidden="true"><path d="M20.1 5.3a4.9 4.9 0 0 0-6.9 0L12 6.5l-1.2-1.2a4.9 4.9 0 0 0-6.9 6.9l1.2 1.2L12 20.3l6.9-6.9 1.2-1.2a4.9 4.9 0 0 0 0-6.9Z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/></svg>';
   function wishBtnHTML(p) {
     var on = WISH.indexOf(p.id) >= 0;
     return '<button class="round card-wishlist" aria-pressed="' + on + '" aria-label="' + t(on ? 'Remove from wishlist' : 'Add to wishlist') + '">' + HEART + '</button>';
@@ -497,19 +506,18 @@
       return '<button type="button" class="swatch' + (sel ? ' sel' : '') + (vv.stock ? '' : ' oos') + '" data-i="' + i + '" aria-pressed="' + sel + '"' +
         (vv.stock ? '' : ' title="' + t('Out of stock') + '"') + '>' + esc(t(vv.size)) + '</button>';
     }).join('');
-    /* colour variants as small image swatches (capped, +N marker); the
-       product's own colour is outlined, tapping another swaps the tile */
+    /* colour variants as small image swatches; the product's own colour is
+       outlined, tapping another swaps the tile. Options sit on their own row
+       under the label; fitOptRows() hides what doesn't fit behind "+N more". */
+    var MORE = '<a class="card-more" href="' + pdpHref + '" hidden></a>';
     var colorRow = '';
     if (p.colors && p.colors.length) {
-      var CLIM = 4;
-      var shown = p.colors.slice(0, CLIM).map(function (c, i) {
+      var colorSw = p.colors.map(function (c, i) {
         var sel = i === (p.defaultColor || 0);
         return '<span class="card-swatch' + (sel ? ' sel' : '') + (c.stock === false ? ' oos' : '') +
           '" data-sku="' + esc(c.sku) + '" title="' + esc(c.name) + '"><img src="' + img(c.sku) + '" alt="' + esc(c.name) + '"></span>';
       }).join('');
-      var extra = p.colors.length - CLIM;
-      colorRow = '<div class="card-colors"><span class="lbl">' + t('Color:') + '</span>' + shown +
-        (extra > 0 ? '<span class="card-more">+' + extra + '</span>' : '') + '</div>';
+      colorRow = '<div class="card-opts card-colors"><span class="lbl">' + t('Color:') + '</span><div class="card-opt-row">' + colorSw + MORE + '</div></div>';
     }
     var alertOn = NOTIFY.indexOf(v.sku) >= 0;
     return '<article class="card card--plp" data-id="' + p.id + '" data-availability="' + (v.stock ? 'In stock' : 'Out of stock') + '">' +
@@ -525,8 +533,9 @@
       '<div class="media-scrub" aria-hidden="true"><span></span></div>' +
       '<div class="card-body"><span class="card-eyebrow">' + esc(p.series || p.brand) + '</span>' +
         '<h3 class="card-name"><a href="' + pdpHref + '">' + esc(nameOf(p)) + '</a></h3>' + cardRatingHTML(p) + cardPriceHTML(p, v) +
-        (p.variants.length > 1 && p.sizes.length > 1 ? '<div class="card-sizes"><span class="lbl">' + t('Size Variants:') + '</span>' + swatches + '</div>' : '') + colorRow +
-        (!v.stock ? '<div class="card-availability"><span>' + t('Out of stock') + '</span><span class="card-stock-size">· ' + esc(t(v.size)) + '</span><button class="text-link notify-link" type="button">' + t(alertOn ? 'Notification activated' : 'Notify me') + '</button></div>' : '') +
+        (p.variants.length > 1 && p.sizes.length > 1 ? '<div class="card-opts card-sizes"><span class="lbl">' + t('Size Variants:') + '</span><div class="card-opt-row">' + swatches + MORE + '</div></div>' : '') + colorRow +
+        (!v.stock ? '<div class="card-availability"><span class="card-oos"><span class="dot" aria-hidden="true"></span>' + t('Out of stock') + '</span><button class="text-link notify-link" type="button">' + t(alertOn ? 'Notification activated' : 'Notify me') + '</button></div>' : '') +
+        cardHobHTML(p) +
       '</div></article>';
   }
 
@@ -640,11 +649,52 @@
       '<div class="sh-actions"><button class="sh-clear" data-sh-clear>' + t('Clear search') + '</button></div></div>';
   }
 
+  /* Variant rows on tiles: one line only. Hide options from the end (never
+     the selected one) until the row fits, and say how many are hidden in a
+     "+N more" link to the PDP. Runs after every render and on resize. */
+  /* cooktop popup: CSS shows it on hover/focus; a tap or Enter pins it open */
+  document.addEventListener('click', function (e) {
+    var btn = e.target.closest && e.target.closest('.card-hob-btn');
+    document.querySelectorAll('.card-hob.open').forEach(function (h) {
+      if (!btn || h !== btn.parentNode) { h.classList.remove('open'); h.querySelector('.card-hob-btn').setAttribute('aria-expanded', 'false'); }
+    });
+    if (btn) {
+      var open = btn.parentNode.classList.toggle('open');
+      btn.setAttribute('aria-expanded', open);
+    }
+  });
+  document.addEventListener('keydown', function (e) {
+    if (e.key !== 'Escape') return;
+    document.querySelectorAll('.card-hob.open').forEach(function (h) { h.classList.remove('open'); h.querySelector('.card-hob-btn').setAttribute('aria-expanded', 'false'); });
+  });
+
+  function fitOptRows(root) {
+    (root || document).querySelectorAll('.card-opt-row').forEach(function (row) {
+      var more = row.querySelector('.card-more');
+      var items = [].slice.call(row.children).filter(function (el) { return el !== more; });
+      items.forEach(function (el) { el.hidden = false; });
+      if (more) more.hidden = true;
+      if (row.scrollWidth <= row.clientWidth + 1 || !more) return;
+      more.hidden = false;
+      var hideable = items.filter(function (el) { return !el.classList.contains('sel'); }).reverse();
+      var n = 0;
+      while (row.scrollWidth > row.clientWidth + 1 && n < hideable.length) {
+        hideable[n].hidden = true; n++;
+        more.textContent = t('+%n more').replace('%n', n);
+      }
+      more.setAttribute('aria-label', t('%n more options').replace('%n', n));
+    });
+  }
+  var fitTimer;
+  window.addEventListener('resize', function () { clearTimeout(fitTimer); fitTimer = setTimeout(function () { fitOptRows(); }, 120); });
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(function () { fitOptRows(); });
+
   function renderGrid() {
     if (!grid) return;
     var list = currentList();
     var cards = list.slice(0, shown).map(cardHTML);
     grid.innerHTML = cards.length ? cards.join('') : noResultsHTML();
+    fitOptRows(grid);
     // zero results: strip the page down to the message and its escape routes
     document.body.classList.toggle('searching-empty', !!searchQ && list.length === 0);
     updateSearchHead(list.length);
@@ -756,13 +806,14 @@
       if (cw) {
         var hitC = cardProduct(cw); if (!hitC) return;
         var sib = DATA.products.find(function (x) { return x.variants.some(function (vv) { return vv.sku === cw.dataset.sku; }); });
-        if (sib && sib !== hitC.p) hitC.card.outerHTML = cardHTML(sib);
+        if (sib && sib !== hitC.p) { hitC.card.outerHTML = cardHTML(sib); fitOptRows(grid); }
         return;
       }
       var sw = e.target.closest('.swatch'); if (!sw) return;
       var hit = cardProduct(sw); if (!hit) return;
       hit.p._sel = parseInt(sw.dataset.i, 10);
       hit.card.outerHTML = cardHTML(hit.p);
+      fitOptRows(grid);
       var updated = document.querySelector('.card[data-id="' + hit.p.id + '"] .swatch.sel');
       if (updated) updated.focus({ preventScroll: true });
   });
@@ -1350,15 +1401,55 @@
   }
   /* Show only one cooking technique and jump back up to the grid. Used by the
      Pan Finder mock and by the content hub's cooking-style cards. */
-  function showTechnique(value) {
+  function showTechnique(value) { showFilter('technique', [value]); }
+  /* Clear all filters, set one group (one or more values) or several groups
+     ({ material: [...], surface: [...] }), then jump to the grid. Used by the
+     links in the hub's guide tables and tips. */
+  function showFilter(group, values) {
     Object.keys(selected).forEach(function (key) { selected[key] = []; });
-    selected.technique = [value];
+    if (typeof group === 'object') Object.keys(group).forEach(function (k) { selected[k] = [].concat(group[k]); });
+    else selected[group] = [].concat(values);
     setSearch('', true); applyFilters();
     // scroll to the results wrapper, not the sticky toolbar (a stuck toolbar
     // already counts as "in view", which would leave you at the end of the grid)
     (document.querySelector('.plp-results') || document.querySelector('.toolbar')).scrollIntoView({ behavior: 'smooth', block: 'start' });
   }
   window.hubFilter = showTechnique;
+  window.hubShow = showFilter;
+
+  /* Content hub: review quote slider (scroll-snap track, so touch swipes work;
+     arrows step one quote, dots follow the scroll position) */
+  (function setupHubQuotes() {
+    var track = document.querySelector('.hub-quotes-track');
+    if (!track) return;
+    var dots = [].slice.call(document.querySelectorAll('.hub-dots span'));
+    var arrows = [].slice.call(document.querySelectorAll('.hub-arrow'));
+    arrows.forEach(function (b) {
+      b.setAttribute('aria-label', t(b.getAttribute('data-dir') === '1' ? 'Next review' : 'Previous review'));
+      b.addEventListener('click', function () {
+        track.scrollBy({ left: Number(b.getAttribute('data-dir')) * track.clientWidth, behavior: 'smooth' });
+      });
+    });
+    function sync() {
+      var i = Math.round(track.scrollLeft / Math.max(1, track.clientWidth));
+      dots.forEach(function (d, k) { d.classList.toggle('on', k === i); });
+      arrows[0].disabled = i <= 0;
+      arrows[1].disabled = i >= dots.length - 1;
+    }
+    track.addEventListener('scroll', function () { window.requestAnimationFrame(sync); }, { passive: true });
+    sync();
+  })();
+  /* Content hub: guide text collapsed behind "Read more" (text stays in the DOM) */
+  (function setupHubGuide() {
+    var btn = document.querySelector('.hub-more'), body = document.getElementById('hubGuideBody');
+    if (!btn || !body) return;
+    btn.addEventListener('click', function () {
+      var open = btn.getAttribute('aria-expanded') !== 'true';
+      btn.setAttribute('aria-expanded', open);
+      body.classList.toggle('open', open);
+      btn.textContent = t(open ? 'Read less' : 'Read more');
+    });
+  })();
   window.openFinder = function () {
     if (!finderDialog) {
       finderDialog = document.createElement('dialog'); finderDialog.className = 'finder-dialog';
@@ -1443,7 +1534,7 @@
       }
     });
 
-    fetch('assets/catalog.json?v=20261015a')
+    fetch('assets/catalog.json?v=20261118a')
       .then(function (r) { if (!r.ok) throw new Error('HTTP ' + r.status); return r.json(); })
       .then(function (d) {
         DATA = d;

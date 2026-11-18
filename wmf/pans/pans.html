@@ -4,16 +4,32 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>WMF · Pans</title>
-  <link rel="stylesheet" href="assets/styles.css?v=20261118b">
+  <link rel="stylesheet" href="assets/styles.css?v=20261119b">
   <script>window.PAGE = { kind: 'plp', category: 'pans', promo: false };</script>
-  <script src="assets/i18n-de.js?v=20261118b"></script>
-  <script src="assets/app.js?v=20261118b" defer></script>
+  <script src="assets/i18n-de.js?v=20261119b"></script>
+  <script src="assets/app.js?v=20261119b" defer></script>
   <!-- FAQ structured data for the content hub (EN; live shop serves the page language) -->
   <script type="application/ld+json">
 {
   "@context": "https://schema.org",
   "@type": "FAQPage",
   "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Which pan suits which food?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "For steak, crispy potatoes and anything that needs a golden-brown crust, choose uncoated stainless steel or a honeycomb-structured surface. For fish, eggs and vegetables at moderate heat, a non-stick or ceramic surface makes delicate food easier to turn. If you cook a little of everything, start with an all-round pan in the size you use most."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Stainless steel or coated: what is the difference?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Uncoated stainless steel suits high heat and builds a crust, but food can stick until it has browned. A non-stick or ceramic surface lets delicate food come away easily at moderate heat and needs gentler care. Many kitchens use one of each."
+      }
+    },
     {
       "@type": "Question",
       "name": "Why does meat stick to a new stainless-steel pan?",
@@ -24,18 +40,10 @@
     },
     {
       "@type": "Question",
-      "name": "Which pan works well for fish, eggs and vegetables?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "A non-stick or ceramic pan makes delicate food easier to turn. Cook at moderate heat. If you mostly sear and make pan sauces, uncoated stainless steel may suit you better."
-      }
-    },
-    {
-      "@type": "Question",
       "name": "Which pans work on induction?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Induction needs a pan with a magnetic base. Each product tile shows which cooktops the pan suits, and you can filter by cooktop type above."
+        "text": "Induction needs a pan with a magnetic base: if a magnet sticks to the base, the pan works on induction. Each product tile shows which cooktops the pan suits, and you can filter by cooktop type above."
       }
     },
     {
@@ -43,7 +51,7 @@
       "name": "Which pan size should I choose?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "As a guide: 20 cm for 1–2 people, 24 cm for 2–3 people and 28 cm for 3–4 people. Sets combine two sizes for different dishes."
+        "text": "The size given is the diameter at the rim; the flat base that sits on the cooktop is smaller. Choose a base that matches your cooking zone. As a guide: 20 cm for 1–2 people, 24 cm for 2–3 people and 28 cm for 3–4 people."
       }
     },
     {
@@ -56,7 +64,7 @@
     }
   ]
 }
-  </script>
+</script>
 </head>
 <body>
 
@@ -83,7 +91,8 @@
         </div>
         <div class="plp-header-actions cat-only">
           <button class="text-link" type="button" data-i18n onclick="openFinder()">Pan finder</button>
-          <a class="text-link" href="frying-pans.html#compare" data-i18n>Compare pans</a>
+          <a class="text-link" href="#hub" data-i18n>Learn more about WMF pans</a>
+          <!-- range comparison covers frying pans only, so it lives on frying-pans.html -->
         </div>
 
         <!-- category hero image removed for now
@@ -169,122 +178,92 @@
            study: it interrupted browsing). Built from existing patterns; all
            copy is static HTML so search engines and AI search can read it.
            Hidden while searching (.cat-only). -->
-      <div class="hub cat-only">
+      <div class="hub cat-only" id="hub">
 
-        <section class="hub-sec" aria-labelledby="hubStyleTitle">
-          <div class="hub-head">
-            <p class="hub-eyebrow" data-i18n>Pan buying guide</p>
-            <h2 class="hub-title" id="hubStyleTitle" data-i18n>Which pan suits the way you cook?</h2>
-            <p class="hub-intro" data-i18n>Start with the food you cook most often. Each cooking style works best with a different pan surface.</p>
-          </div>
-          <div class="hub-grid">
-            <article class="hub-style">
-              <img src="assets/inuse.jpg" alt="Steak searing in a WMF pan" loading="lazy">
-              <h3 data-i18n>Searing</h3>
-              <p data-i18n>Steak, crispy potatoes and anything that needs a golden-brown crust. Look for uncoated stainless steel or a honeycomb-structured surface.</p>
-              <button class="text-link" type="button" onclick="hubFilter('Intense Searing')" data-i18n>Show pans for searing</button>
+        <!-- 1 · Chooser: DS PageBuilder Slider Teaser (three routing cards, as on
+             the Intense/Gentle landing page). Each button filters the grid. -->
+        <section class="hub-sec hub-band" aria-labelledby="hubStyleTitle">
+          <h2 class="hub-title" id="hubStyleTitle" data-i18n>Which pan suits the way you cook?</h2>
+          <p class="hub-lead" data-i18n>Start with the food you cook most often. Each cooking style works best with a different pan surface.</p>
+          <div class="hub-teasers hub-scroll">
+            <article class="hub-teaser">
+              <img src="assets/hub/teaser-intense.jpg" alt="Steak searing in a stainless-steel pan on a gas flame" loading="lazy">
+              <div class="hub-teaser-copy">
+                <h3 data-i18n>Intense searing</h3>
+                <p data-i18n>For steak, crispy potatoes and a golden-brown crust</p>
+                <button class="hub-pill" type="button" onclick="hubFilter('Intense Searing')" data-i18n>Show pans</button>
+              </div>
             </article>
-            <article class="hub-style">
-              <img src="assets/pdp/recipe-fish.jpg" alt="Fish and vegetables in a WMF pan" loading="lazy">
-              <h3 data-i18n>Gentle frying</h3>
-              <p data-i18n>Fish, eggs and vegetables at moderate heat. A non-stick or ceramic surface helps delicate food come away easily.</p>
-              <button class="text-link" type="button" onclick="hubFilter('Gentle Frying')" data-i18n>Show pans for gentle frying</button>
+            <article class="hub-teaser">
+              <img src="assets/hub/teaser-gentle.jpg" alt="Salmon fillet frying gently in a pan" loading="lazy">
+              <div class="hub-teaser-copy">
+                <h3 data-i18n>Gentle frying</h3>
+                <p data-i18n>For eggs, fish and vegetables at moderate heat</p>
+                <button class="hub-pill" type="button" onclick="hubFilter('Gentle Frying')" data-i18n>Show pans</button>
+              </div>
             </article>
-            <article class="hub-style">
-              <img src="assets/pdp/adv-versatility.jpg" alt="A WMF pan in the oven" loading="lazy">
-              <h3 data-i18n>Everyday cooking</h3>
-              <p data-i18n>A little of everything, every day. Choose an all-round pan in the size you use most.</p>
-              <button class="text-link" type="button" onclick="hubFilter('All Purpose')" data-i18n>Show all-round pans</button>
+            <article class="hub-teaser">
+              <img src="assets/hub/teaser-everyday.jpg" alt="A pan with steak, egg and vegetables held over a cooktop" loading="lazy">
+              <div class="hub-teaser-copy">
+                <h3 data-i18n>Everyday cooking</h3>
+                <p data-i18n>For a little of everything, every day</p>
+                <button class="hub-pill" type="button" onclick="hubFilter('All Purpose')" data-i18n>Show pans</button>
+              </div>
             </article>
           </div>
         </section>
 
-        <section class="hub-sec" aria-labelledby="hubTipsTitle">
-          <div class="hub-head">
-            <p class="hub-eyebrow" data-i18n>Practical tips</p>
-            <h2 class="hub-title" id="hubTipsTitle" data-i18n>Better results with any pan</h2>
+        <!-- 3 · Reviews: quote slider (DS atoms, as on the landing page).
+             Real reviews from wmf.com/de (catalog reviewItems), not samples. -->
+        <section class="hub-sec hub-band hub-quotes" aria-labelledby="hubReviewsTitle" aria-roledescription="carousel">
+          <h2 class="hub-title" id="hubReviewsTitle" data-i18n>What customers say</h2>
+          <div class="hub-quotes-row">
+            <button class="hub-arrow" type="button" data-dir="-1" aria-label="Previous review"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg></button>
+            <div class="hub-quotes-track" tabindex="0">
+              <figure class="hub-quote" aria-roledescription="slide" aria-label="1 / 3">
+                <span class="hub-stars" role="img" aria-label="5 / 5">★★★★★</span>
+                <blockquote><p data-i18n>After buying the large wok and the 28 cm pan and being very happy with the results, we added the 24 cm as well. You need nothing else. It heats up quickly, especially on induction. Thumbs up.</p></blockquote>
+                <figcaption>Werner · 25.04.26 · <a href="product.html?id=p1" data-i18n-html="hub.prod.p1">Profi Resist Fry Pan</a></figcaption>
+              </figure>
+              <figure class="hub-quote" aria-roledescription="slide" aria-label="2 / 3">
+                <span class="hub-stars" role="img" aria-label="5 / 5">★★★★★</span>
+                <blockquote><p data-i18n>Easy to use, good non-stick effect. Perfect for scrambled eggs or pancakes.</p></blockquote>
+                <figcaption>Strife · 03.02.26 · <a href="product.html?id=p11" data-i18n-html="hub.prod.p11">Profi Resist Fry Pan with Spatula</a></figcaption>
+              </figure>
+              <figure class="hub-quote" aria-roledescription="slide" aria-label="3 / 3">
+                <span class="hub-stars" role="img" aria-label="5 / 5">★★★★★</span>
+                <blockquote><p data-i18n>The wok is huge. Vegetables are done incredibly quickly. Meat too, quick and well cooked. The wok does not get scalding at the sides.</p></blockquote>
+                <figcaption>Stephan · 13.03.23 · <a href="product.html?id=p7" data-i18n-html="hub.prod.p7">Wok</a></figcaption>
+              </figure>
+            </div>
+            <button class="hub-arrow" type="button" data-dir="1" aria-label="Next review"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg></button>
           </div>
-          <div class="hub-grid">
-            <article class="hub-tip">
-              <span class="hub-num" aria-hidden="true">01</span>
-              <h3 data-i18n>Food sticking?</h3>
-              <p data-i18n>Preheat the pan over medium heat rather than on maximum, add the fat, then the food. On uncoated stainless steel, wait until a crust forms before turning: the food then comes away more easily.</p>
-            </article>
-            <article class="hub-tip">
-              <span class="hub-num" aria-hidden="true">02</span>
-              <h3 data-i18n>Which fat at which heat?</h3>
-              <p data-i18n>Refined rapeseed oil suits high-heat searing. Butter burns more easily, so use it at moderate heat or add it at the end for flavour.</p>
-            </article>
-            <article class="hub-tip">
-              <span class="hub-num" aria-hidden="true">03</span>
-              <h3 data-i18n>Cleaning by surface</h3>
-              <p data-i18n>Uncoated stainless steel: soak any residue in warm water first. Coated pans: let them cool, then use mild washing-up liquid and a soft sponge. Always follow the care instructions for your model.</p>
-            </article>
-          </div>
+          <div class="hub-dots" aria-hidden="true"><span class="on"></span><span></span><span></span></div>
         </section>
 
-        <section class="hub-sec hub-brand" aria-labelledby="hubBrandTitle">
-          <img src="assets/hero.png" alt="Chef flambéing in a WMF pan" loading="lazy">
-          <div class="hub-brand-text">
-            <p class="hub-eyebrow" data-i18n>WMF since 1853</p>
-            <h2 class="hub-title" id="hubBrandTitle" data-i18n>Made by metal specialists</h2>
-            <p data-i18n>WMF has worked with metal since 1853. Today the pan range spans Cromargan® stainless steel, coated and ceramic surfaces and Fusiontec®, each suited to a different way of cooking.</p>
-            <a class="text-link" href="pans.html?q=fusiontec" data-i18n>Explore Fusiontec pans</a>
-          </div>
-        </section>
-
-        <section class="hub-sec" aria-labelledby="hubReviewsTitle">
-          <div class="hub-head">
-            <p class="hub-eyebrow" data-i18n>Customer reviews</p>
-            <h2 class="hub-title" id="hubReviewsTitle" data-i18n>What customers say</h2>
-          </div>
-          <!-- Real reviews from wmf.com/de (catalog reviewItems), not samples. -->
-          <div class="hub-grid">
-            <article class="hub-review">
-              <span class="hub-stars" role="img" aria-label="5 / 5">★★★★★</span>
-              <h3 data-i18n>Among the best pans I have ever had</h3>
-              <p data-i18n>After buying the large wok and the 28 cm pan and being very happy with the results, we added the 24 cm as well. You need nothing else. It heats up quickly, especially on induction. Thumbs up.</p>
-              <p class="hub-review-meta">Werner · 25.04.26</p>
-              <a class="hub-review-prod" href="product.html?id=p1" data-i18n-html="hub.prod.p1">Profi Resist Fry Pan</a>
-            </article>
-            <article class="hub-review">
-              <span class="hub-stars" role="img" aria-label="5 / 5">★★★★★</span>
-              <h3 data-i18n>Good pan</h3>
-              <p data-i18n>Easy to use, good non-stick effect. Perfect for scrambled eggs or pancakes.</p>
-              <p class="hub-review-meta">Strife · 03.02.26</p>
-              <a class="hub-review-prod" href="product.html?id=p11" data-i18n-html="hub.prod.p11">Profi Resist Fry Pan with Spatula</a>
-            </article>
-            <article class="hub-review">
-              <span class="hub-stars" role="img" aria-label="5 / 5">★★★★★</span>
-              <h3 data-i18n>Brilliant cooking</h3>
-              <p data-i18n>The wok is huge. Vegetables are done incredibly quickly. Meat too, quick and well cooked. The wok does not get scalding at the sides.</p>
-              <p class="hub-review-meta">Stephan · 13.03.23</p>
-              <a class="hub-review-prod" href="product.html?id=p7" data-i18n-html="hub.prod.p7">Wok</a>
-            </article>
-          </div>
-        </section>
-
+        <!-- 4 · FAQ: DS PageBuilder FAQ (Collapse). Same Q&A as the FAQPage JSON-LD. -->
         <section class="hub-sec hub-faq" aria-labelledby="hubFaqTitle">
-          <div class="hub-head">
-            <p class="hub-eyebrow" data-i18n>Good to know</p>
-            <h2 class="hub-title" id="hubFaqTitle" data-i18n>Frequently asked questions</h2>
-          </div>
+          <h2 class="hub-title" id="hubFaqTitle" data-i18n>Frequently asked questions</h2>
           <div class="hub-faq-list">
+            <details>
+              <summary data-i18n>Which pan suits which food?</summary>
+              <p data-i18n>For steak, crispy potatoes and anything that needs a golden-brown crust, choose uncoated stainless steel or a honeycomb-structured surface. For fish, eggs and vegetables at moderate heat, a non-stick or ceramic surface makes delicate food easier to turn. If you cook a little of everything, start with an all-round pan in the size you use most.</p>
+            </details>
+            <details>
+              <summary data-i18n>Stainless steel or coated: what is the difference?</summary>
+              <p data-i18n>Uncoated stainless steel suits high heat and builds a crust, but food can stick until it has browned. A non-stick or ceramic surface lets delicate food come away easily at moderate heat and needs gentler care. Many kitchens use one of each.</p>
+            </details>
             <details>
               <summary data-i18n>Why does meat stick to a new stainless-steel pan?</summary>
               <p data-i18n>With uncoated stainless steel, the heat, the amount of fat and the moment you turn the food all play a part. Meat often sticks at first and comes away once a crust has formed. Preheat the pan carefully and follow the advice for your model.</p>
             </details>
             <details>
-              <summary data-i18n>Which pan works well for fish, eggs and vegetables?</summary>
-              <p data-i18n>A non-stick or ceramic pan makes delicate food easier to turn. Cook at moderate heat. If you mostly sear and make pan sauces, uncoated stainless steel may suit you better.</p>
-            </details>
-            <details>
               <summary data-i18n>Which pans work on induction?</summary>
-              <p data-i18n>Induction needs a pan with a magnetic base. Each product tile shows which cooktops the pan suits, and you can filter by cooktop type above.</p>
+              <p data-i18n>Induction needs a pan with a magnetic base: if a magnet sticks to the base, the pan works on induction. Each product tile shows which cooktops the pan suits, and you can filter by cooktop type above.</p>
             </details>
             <details>
               <summary data-i18n>Which pan size should I choose?</summary>
-              <p data-i18n>As a guide: 20 cm for 1–2 people, 24 cm for 2–3 people and 28 cm for 3–4 people. Sets combine two sizes for different dishes.</p>
+              <p data-i18n>The size given is the diameter at the rim; the flat base that sits on the cooktop is smaller. Choose a base that matches your cooking zone. As a guide: 20 cm for 1–2 people, 24 cm for 2–3 people and 28 cm for 3–4 people.</p>
             </details>
             <details>
               <summary data-i18n>Can pans go in the dishwasher?</summary>
@@ -293,12 +272,113 @@
           </div>
         </section>
 
-        <section class="hub-cta" aria-labelledby="hubCtaTitle">
-          <div>
-            <h2 id="hubCtaTitle" data-i18n>Still not sure?</h2>
-            <p data-i18n>Answer a few questions and the Pan Finder suggests pans that match how you cook.</p>
+        <!-- 5 · Brand: DS PageBuilder Text + Image (image left) -->
+        <section class="hub-sec hub-brand" aria-labelledby="hubBrandTitle">
+          <img src="assets/pdp/adv-searing.jpg" alt="Flames rising from a WMF pan on a gas cooktop" loading="lazy">
+          <div class="hub-brand-text">
+            <h2 class="hub-title" id="hubBrandTitle" data-i18n>Made by metal specialists</h2>
+            <p data-i18n>WMF has worked with metal since 1853. Today the pan range spans Cromargan® stainless steel, coated and ceramic surfaces and Fusiontec®, each suited to a different way of cooking.</p>
+            <a class="hub-pill" href="https://aboutwmf.com/de/unternehmen/historie/" target="_blank" rel="noopener" data-i18n>Discover our history</a>
           </div>
-          <button class="hub-cta-btn" type="button" onclick="openFinder()" data-i18n>Start the Pan Finder</button>
+        </section>
+
+        <!-- Guide + shop-by in one: pan type, size, material, surface, range. Each
+             name links to its category or sets the matching filter. Static HTML so
+             search engines and AI search can read it. -->
+        <section class="hub-sec hub-guide" aria-labelledby="hubGuideTitle">
+          <h2 class="hub-title" id="hubGuideTitle" data-i18n>A guide to WMF pans</h2>
+          <p class="hub-lead" data-i18n>Which pan suits you depends on what you cook, how much you cook and how you like to cook it. Start with the pan type and size, then choose the material, the surface and the range.</p>
+          <div class="hub-guide-body" id="hubGuideBody">
+            <h3 data-i18n>Pan type</h3>
+            <table class="hub-table">
+              <thead><tr><th scope="col" data-i18n>Pan type</th><th scope="col" data-i18n>Good for</th></tr></thead>
+              <tbody>
+                <tr><th scope="row"><a class="hub-row-link" href="frying-pans.html" data-i18n>Frying pan</a></th><td data-i18n>Everyday frying: steak, eggs, potatoes, vegetables</td></tr>
+                <tr><th scope="row"><a class="hub-row-link" href="pans.html" data-i18n>Braising pan</a></th><td data-i18n>Sauces, braising and larger portions, thanks to the high rim</td></tr>
+                <tr><th scope="row"><a class="hub-row-link" href="pans.html?q=serving" data-i18n>Serving pan</a></th><td data-i18n>Cooking and serving at the table, with two side handles</td></tr>
+                <tr><th scope="row"><a class="hub-row-link" href="pans.html?q=grill" data-i18n>Grill pan</a></th><td data-i18n>Grill marks on meat, fish and vegetables</td></tr>
+                <tr><th scope="row"><a class="hub-row-link" href="pans.html?q=wok" data-i18n>Wok</a></th><td data-i18n>Stir-frying at high heat</td></tr>
+                <tr><th scope="row"><a class="hub-row-link" href="pans.html?q=fry%20pan%20set" data-i18n>Pan set</a></th><td data-i18n>Two or three sizes for different dishes</td></tr>
+              </tbody>
+            </table>
+            <h3 data-i18n>Size guide</h3>
+            <table class="hub-table">
+              <thead><tr><th scope="col" data-i18n>Size</th><th scope="col" data-i18n>Good for</th></tr></thead>
+              <tbody>
+                <tr><th scope="row"><button class="hub-row-link" type="button" onclick="hubShow('size','20 cm')">20 cm</button></th><td data-i18n>1–2 people, eggs and small portions</td></tr>
+                <tr><th scope="row"><button class="hub-row-link" type="button" onclick="hubShow('size','24 cm')">24 cm</button></th><td data-i18n>2–3 people, everyday frying</td></tr>
+                <tr><th scope="row"><button class="hub-row-link" type="button" onclick="hubShow('size','28 cm')">28 cm</button></th><td data-i18n>3–4 people, larger portions and steaks</td></tr>
+                <tr><th scope="row"><button class="hub-row-link" type="button" onclick="hubShow('size',['32 cm','36 cm'])" data-i18n>32 cm and up</button></th><td data-i18n>4 or more people and stir-fries: mostly woks</td></tr>
+              </tbody>
+            </table>
+            <p data-i18n>The size is the diameter at the rim; the flat base that sits on the cooktop is smaller. Choose a base that matches your cooking zone.</p>
+            <h3 data-i18n>Material</h3>
+            <table class="hub-table">
+              <thead><tr><th scope="col" data-i18n>Material</th><th scope="col" data-i18n>Good to know</th></tr></thead>
+              <tbody>
+                <tr><th scope="row"><button class="hub-row-link" type="button" onclick="hubShow('material','Stainless Steel 1-ply')" data-i18n>Stainless steel, 1-ply</button></th><td data-i18n>A single layer of Cromargan® stainless steel: the classic WMF pan for everyday cooking.</td></tr>
+                <tr><th scope="row"><button class="hub-row-link" type="button" onclick="hubShow('material','Stainless Steel 3-ply')" data-i18n>Stainless steel, 3-ply</button></th><td data-i18n>Three bonded layers up to the rim, so heat spreads from the base into the sides.</td></tr>
+                <tr><th scope="row"><button class="hub-row-link" type="button" onclick="hubShow('material','Cast Aluminium')" data-i18n>Cast aluminium</button></th><td data-i18n>Lighter than stainless steel and always coated. Not for induction.</td></tr>
+                <tr><th scope="row"><button class="hub-row-link" type="button" onclick="hubShow('material','Fusiontec')" data-i18n>Fusiontec®</button></th><td data-i18n>WMF’s own material for searing and everyday cooking, made in Germany in several colours.</td></tr>
+              </tbody>
+            </table>
+            <h3 data-i18n>Surface</h3>
+            <table class="hub-table">
+              <thead><tr><th scope="col" data-i18n>Surface</th><th scope="col" data-i18n>Good for</th></tr></thead>
+              <tbody>
+                <tr><th scope="row"><button class="hub-row-link" type="button" onclick="hubShow('surface','Uncoated')" data-i18n>Uncoated</button></th><td data-i18n>High heat, searing and pan sauces. Food can stick until it has browned.</td></tr>
+                <tr><th scope="row"><button class="hub-row-link" type="button" onclick="hubShow('surface','Non-stick')" data-i18n>Non-stick</button></th><td data-i18n>Eggs, fish and pancakes at low to medium heat. Delicate food comes away easily.</td></tr>
+                <tr><th scope="row"><button class="hub-row-link" type="button" onclick="hubShow('surface','Ceramic')" data-i18n>Ceramic</button></th><td data-i18n>Fish, vegetables and eggs at moderate heat, with a little fat.</td></tr>
+              </tbody>
+            </table>
+            <h3 data-i18n>Range</h3>
+            <table class="hub-table">
+              <thead><tr><th scope="col" data-i18n>Range</th><th scope="col" data-i18n>Material and surface</th><th scope="col" data-i18n>Cooking style</th></tr></thead>
+              <tbody>
+                <tr><th scope="row"><button class="hub-row-link" type="button" onclick="hubShow('series',['Profi Resist','Ultimate Profi Resist'])">Profi Resist</button></th><td data-i18n>3-ply stainless steel, honeycomb non-stick or ceramic surface</td><td data-i18n>All-round</td></tr>
+                <tr><th scope="row"><button class="hub-row-link" type="button" onclick="hubShow('series',['Fusiontec','Fusiontec Mineral','Fusiontec Mineral Pro'])">Fusiontec Mineral</button></th><td data-i18n>Fusiontec®</td><td data-i18n>All-round</td></tr>
+                <tr><th scope="row"><button class="hub-row-link" type="button" onclick="hubShow('series','Steak Profi')">Steak Profi</button></th><td data-i18n>Uncoated stainless steel</td><td data-i18n>Intense searing</td></tr>
+                <tr><th scope="row"><button class="hub-row-link" type="button" onclick="hubShow('series','Durado')">Durado</button></th><td data-i18n>Stainless steel, ceramic surface</td><td data-i18n>Gentle frying</td></tr>
+                <tr><th scope="row"><button class="hub-row-link" type="button" onclick="hubShow('series','Devil')">Devil</button></th><td data-i18n>Stainless steel, ceramic surface</td><td data-i18n>Gentle frying</td></tr>
+                <tr><th scope="row"><button class="hub-row-link" type="button" onclick="hubShow('series',['PermaDur Excellent','PermaDur Premium'])">PermaDur</button></th><td data-i18n>Cast aluminium, non-stick surface</td><td data-i18n>Gentle frying</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <!-- Tips per surface: DS PageBuilder Benefit Slider (image, title, body),
+             directly below the guide. Advice depends on the surface, so each
+             card names one and links to those pans. -->
+        <section class="hub-sec hub-tips" aria-labelledby="hubTipsTitle">
+          <h2 class="hub-title" id="hubTipsTitle" data-i18n>Getting the best from each surface</h2>
+          <div class="hub-benefits hub-scroll">
+            <article class="hub-benefit">
+              <img src="assets/pdp/recipe-steak.jpg" alt="Steak with a browned crust in a stainless-steel pan" loading="lazy">
+              <h3 data-i18n>Uncoated stainless steel</h3>
+              <p data-i18n>Preheat over medium heat, add the fat, then the food. Wait until a crust forms before turning: the food then comes away more easily. Soak any residue in warm water before washing.</p>
+              <button class="text-link" type="button" onclick="hubShow('surface','Uncoated')" data-i18n>Show uncoated pans</button>
+            </article>
+            <article class="hub-benefit">
+              <img src="assets/pdp/adv-robust.jpg" alt="A spatula in a pan with a dark non-stick surface" loading="lazy">
+              <h3 data-i18n>Non-stick</h3>
+              <p data-i18n>Cook at low to medium heat and do not heat the empty pan on high. Let the pan cool, then wash it by hand with mild washing-up liquid and a soft sponge.</p>
+              <button class="text-link" type="button" onclick="hubShow('surface','Non-stick')" data-i18n>Show non-stick pans</button>
+            </article>
+            <article class="hub-benefit">
+              <img src="assets/pdp/recipe-fish.jpg" alt="Fish and vegetables cooking in a pan" loading="lazy">
+              <h3 data-i18n>Ceramic</h3>
+              <p data-i18n>Add a little fat, even for delicate food, and keep to moderate heat. Let the pan cool, then wash it by hand with a soft sponge.</p>
+              <button class="text-link" type="button" onclick="hubShow('surface','Ceramic')" data-i18n>Show ceramic pans</button>
+            </article>
+          </div>
+        </section>
+
+        <!-- 8 · Exit: Pan Finder teaser, DS PageBuilder Text (centred), last on
+             the page for anyone who reached the end without deciding. -->
+        <section class="hub-sec hub-band hub-text" aria-labelledby="hubCtaTitle">
+          <h2 class="hub-title" id="hubCtaTitle" data-i18n>Still not sure?</h2>
+          <p class="hub-lead" data-i18n>Answer a few questions and the Pan Finder suggests pans that match how you cook.</p>
+          <button class="hub-pill" type="button" onclick="openFinder()" data-i18n>Start the Pan Finder</button>
         </section>
 
       </div>

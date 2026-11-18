@@ -1096,7 +1096,7 @@
    "ratingReal": true,
    "default": 0,
    "cats": {
-    "pans": 41
+    "pans": 4.5
    },
    "variants": [
     {
@@ -1592,7 +1592,7 @@
    "ratingReal": true,
    "default": 0,
    "cats": {
-    "frying-pans": 40
+    "frying-pans": 4.5
    },
    "variants": [
     {

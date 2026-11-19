@@ -1211,6 +1211,10 @@ body.plp-dialog-open { overflow:hidden; }
 .hub-guide-media--pack img { object-fit:contain; padding:16px; mix-blend-mode:multiply; }
 .hub-row-link { display:inline; padding:0; border:0; background:none; color:#000; font:700 16px/24px var(--rotis-web); text-align:left; text-decoration:underline; text-underline-offset:3px; cursor:pointer; }
 .hub-row-link:hover { color:var(--muted); }
+/* filter links inside running text (FAQ answers) */
+.hub-inline-link { display:inline; padding:0; border:0; background:none; color:inherit; font:inherit; text-decoration:underline; text-underline-offset:3px; cursor:pointer; }
+.hub-inline-link:hover { color:var(--muted); }
+.hub-inline-link:focus-visible { outline:2px solid #000; outline-offset:2px; }
 .hub-row-name { font:700 16px/24px var(--rotis-web); color:#000; }
 /* group rows inside a guide table (Uncoated / Coated) */
 .hub-table .hub-table-group th { width:auto; padding:24px 0 8px; border-bottom:1px solid var(--rule); font:700 13px/16px var(--rotis-web); letter-spacing:.08em; text-transform:uppercase; color:#000; }

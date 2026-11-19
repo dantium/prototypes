@@ -4,10 +4,10 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>WMF · Pans</title>
-  <link rel="stylesheet" href="assets/styles.css?v=20261120h">
+  <link rel="stylesheet" href="assets/styles.css?v=20261120i">
   <script>window.PAGE = { kind: 'plp', category: 'pans', promo: false };</script>
-  <script src="assets/i18n-de.js?v=20261120h"></script>
-  <script src="assets/app.js?v=20261120h" defer></script>
+  <script src="assets/i18n-de.js?v=20261120i"></script>
+  <script src="assets/app.js?v=20261120i" defer></script>
   <!-- FAQ structured data for the content hub (EN; live shop serves the page language) -->
   <script type="application/ld+json">
 {
@@ -338,11 +338,11 @@
           <div class="hub-faq-list">
             <details>
               <summary data-i18n>Which pan suits which food?</summary>
-              <p data-i18n>For steak, crispy potatoes and anything that needs a golden-brown crust, choose uncoated stainless steel or a honeycomb-structured surface. For fish, eggs and vegetables at moderate heat, a non-stick or ceramic surface makes delicate food easier to turn. If you cook a little of everything, start with an all-round pan in the size you use most.</p>
+              <p data-i18n-html="faq.food">For steak, crispy potatoes and anything that needs a golden-brown crust, choose <button class="hub-inline-link" type="button" onclick="hubShow({material:['Stainless Steel 1-ply','Stainless Steel 3-ply','Stainless Steel'],surface:'Uncoated'})">uncoated stainless steel</button> or a <button class="hub-inline-link" type="button" onclick="hubShow('series',['Profi Resist','Ultimate Profi Resist'])">honeycomb-structured surface</button>. For fish, eggs and vegetables at moderate heat, a <button class="hub-inline-link" type="button" onclick="hubShow('surface','Non-stick')">non-stick</button> or <button class="hub-inline-link" type="button" onclick="hubShow('surface','Ceramic')">ceramic</button> surface makes delicate food easier to turn. If you cook a little of everything, start with an <button class="hub-inline-link" type="button" onclick="hubFilter('All Purpose')">all-round pan</button> in the size you use most.</p>
             </details>
             <details>
               <summary data-i18n>Stainless steel or coated: what is the difference?</summary>
-              <p data-i18n>Uncoated stainless steel suits high heat and builds a crust, but food can stick until it has browned. A non-stick or ceramic surface lets delicate food come away easily at moderate heat and needs gentler care. Many kitchens use one of each.</p>
+              <p data-i18n-html="faq.coated"><button class="hub-inline-link" type="button" onclick="hubShow({material:['Stainless Steel 1-ply','Stainless Steel 3-ply','Stainless Steel'],surface:'Uncoated'})">Uncoated stainless steel</button> suits high heat and builds a crust, but food can stick until it has browned. A <button class="hub-inline-link" type="button" onclick="hubShow('surface',['Non-stick','Ceramic'])">non-stick or ceramic surface</button> lets delicate food come away easily at moderate heat and needs gentler care. Many kitchens use one of each.</p>
             </details>
             <details>
               <summary data-i18n>Why does meat stick to a new stainless-steel pan?</summary>
@@ -350,11 +350,11 @@
             </details>
             <details>
               <summary data-i18n>Which pans work on induction?</summary>
-              <p data-i18n>Induction needs a pan with a magnetic base: if a magnet sticks to the base, the pan works on induction. Each product tile shows which cooktops the pan suits, and you can filter by cooktop type above.</p>
+              <p data-i18n-html="faq.induction">Induction needs a pan with a magnetic base: if a magnet sticks to the base, the pan works on induction. Each product tile shows which cooktops the pan suits, and you can <button class="hub-inline-link" type="button" onclick="hubShow('cooktop','Induction')">filter by cooktop type</button> above.</p>
             </details>
             <details>
               <summary data-i18n>Which pan size should I choose?</summary>
-              <p data-i18n>The size given is the diameter at the rim; the flat base that sits on the cooktop is smaller. Choose a base that matches your cooking zone. As a guide: 20 cm for 1–2 people, 24 cm for 2–3 people and 28 cm for 3–4 people.</p>
+              <p data-i18n-html="faq.size">The size given is the diameter at the rim; the flat base that sits on the cooktop is smaller. Choose a base that matches your cooking zone. As a guide: <button class="hub-inline-link" type="button" onclick="hubShow('size','20 cm')">20 cm</button> for 1–2 people, <button class="hub-inline-link" type="button" onclick="hubShow('size','24 cm')">24 cm</button> for 2–3 people and <button class="hub-inline-link" type="button" onclick="hubShow('size','28 cm')">28 cm</button> for 3–4 people.</p>
             </details>
             <details>
               <summary data-i18n>Can pans go in the dishwasher?</summary>

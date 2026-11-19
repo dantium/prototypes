@@ -713,6 +713,10 @@ window.WMF_I18N_DE = {
   "Design thought through in every detail": "Design, bis ins Detail durchdacht",
   "Authentic to metal and clean in line, so a pan is as much at home on the table as on the stove.": "Authentisch im Material und klar in der Linie: Eine Pfanne ist auf dem Tisch so zu Hause wie auf dem Herd.",
   "Learn more about WMF": "Mehr über WMF erfahren",
+  "A stainless-steel frying pan over a gas flame, with flames rising from the pan": "Eine Edelstahl-Bratpfanne über einer Gasflamme, aus der Pfanne schlagen Flammen",
+  "Two WMF frying pans, one uncoated and one non-stick": "Zwei WMF Bratpfannen, eine unbeschichtet und eine antihaftbeschichtet",
+  "Cutaway of a multi-layer pan, showing the layers in the base and up the sides": "Schnitt durch eine mehrschichtige Pfanne mit den Schichten im Boden und bis in den Rand",
+  "A steak cooking in a WMF pan with a honeycomb surface": "Ein Steak in einer WMF Pfanne mit Wabenoberfläche",
   "Pause film": "Film pausieren",
   "Play film": "Film abspielen",
   'Weight': 'Gewicht'

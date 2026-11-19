@@ -1199,6 +1199,16 @@ body.plp-dialog-open { overflow:hidden; }
 .hub-guide h3 { margin:56px 0 16px; font:400 24px/32px var(--rotis-web); letter-spacing:.12em; text-transform:uppercase; }
 .hub-guide-body p { margin:12px 0 0; font:400 16px/24px var(--rotis-web); color:#1c1c1c; }
 .hub-guide-body .hub-guide-intro { margin:0 0 20px; }
+/* each guide part: title + intro beside a picture, sides alternate */
+.hub-guide-row { display:grid; grid-template-columns:minmax(0, 1fr) 320px; gap:48px; align-items:center; margin:56px 0 28px; }
+.hub-guide-row--flip { grid-template-columns:320px minmax(0, 1fr); }
+.hub-guide-row--flip .hub-guide-media { order:-1; }
+.hub-guide-row h3 { margin:0 0 16px; }
+.hub-guide-row .hub-guide-intro { margin:0; }
+.hub-guide-media { margin:0; aspect-ratio:4/3; overflow:hidden; background:#f4f4f4; }
+.hub-guide-media img { display:block; width:100%; height:100%; object-fit:cover; }
+/* packshots on white: keep the whole pan and let the grey show through */
+.hub-guide-media--pack img { object-fit:contain; padding:16px; mix-blend-mode:multiply; }
 .hub-row-link { display:inline; padding:0; border:0; background:none; color:#000; font:700 16px/24px var(--rotis-web); text-align:left; text-decoration:underline; text-underline-offset:3px; cursor:pointer; }
 .hub-row-link:hover { color:var(--muted); }
 .hub-row-name { font:700 16px/24px var(--rotis-web); color:#000; }
@@ -1236,6 +1246,12 @@ body.plp-dialog-open { overflow:hidden; }
   .hub-faq details p { padding-right:0; }
   .hub-guide { padding:56px 0; }
   .hub-guide h3 { margin:40px 0 12px; font-size:20px; line-height:28px; letter-spacing:.1em; }
+  /* phones: title, picture, then the intro */
+  .hub-guide-row, .hub-guide-row--flip { grid-template-columns:1fr; gap:0; margin:40px 0 20px; }
+  .hub-guide-text { display:contents; }
+  .hub-guide-row h3 { margin:0 0 12px; }
+  .hub-guide-media, .hub-guide-row--flip .hub-guide-media { order:1; aspect-ratio:3/2; margin-bottom:16px; }
+  .hub-guide-row .hub-guide-intro { order:2; }
   .hub-table tbody th { width:40%; }
   .hub-benefit h3 { margin-top:16px; font-size:18px; line-height:26px; }
   .hub-tips { padding-top:0; }

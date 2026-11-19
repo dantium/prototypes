@@ -100,6 +100,10 @@
       var key = el.getAttribute('data-i18n-html');
       if (T[key]) el.innerHTML = T[key];
     });
+    document.querySelectorAll('[data-i18n-alt]').forEach(function (el) {
+      var key = (el.getAttribute('data-i18n-alt') || el.alt).trim();
+      if (T[key]) el.alt = T[key];
+    });
     document.title = t(document.title);
   }
 

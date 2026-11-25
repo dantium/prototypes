@@ -115,6 +115,9 @@ button.tag{cursor:pointer}
 .club p{margin:0;font-size:17px;line-height:1.35}
 .club ul{margin:0;padding:0;list-style:none;font-size:14px;line-height:1.7;color:#ddd}.club li::before{content:'✓';color:#fff;margin-right:8px}
 .pill{display:inline-flex;align-self:flex-start;background:#fff;color:#111;border-radius:99px;padding:9px 20px;font-size:14px;margin-top:auto}
+/* marketing blocks: wmf.com-style portrait teaser and the MY WMF card */
+.teaser{position:relative;display:block;aspect-ratio:4/5;overflow:hidden;background:#111;color:#fff}.teaser img{width:100%;height:100%;object-fit:cover;transition:transform .4s}.teaser:hover img{transform:scale(1.03)}.teaser::after{content:'';position:absolute;inset:0;background:linear-gradient(0deg,rgba(0,0,0,.72),rgba(0,0,0,.12) 46%,rgba(0,0,0,0) 62%)}.teaser-copy{position:absolute;left:18px;right:18px;bottom:22px;z-index:1;display:flex;flex-direction:column;align-items:center;gap:8px;text-align:center}.teaser-copy b{font-size:19px;line-height:1.3;letter-spacing:.2em;text-transform:uppercase;font-weight:400}.teaser-copy small{font-size:14.5px;line-height:1.35;opacity:.95}.teaser-cta{margin-top:8px;background:#fff;color:#111;border-radius:99px;padding:10px 22px;font:700 12px/1 Arial,sans-serif;letter-spacing:.1em;text-transform:uppercase}.teaser:hover .teaser-cta{background:#111;color:#fff}
+.club{aspect-ratio:auto;padding:20px 20px 22px;gap:12px;text-decoration:none}.club-top{display:flex;align-items:center;justify-content:space-between;gap:12px}.club img{width:70px}.club h3{font-size:19px;line-height:1.25;font-weight:400;margin:2px 0 0}.club ul{display:grid;gap:7px;font-size:14px;line-height:1.3;color:#fff}.club li{display:flex;align-items:center;gap:10px}.club li::before{content:none}.club-ico{width:18px;height:18px;stroke:#fff;stroke-width:1.4;flex:none}.club .pill{margin:0;align-self:center;padding:8px 16px;font-size:13.5px}.club:hover .pill{background:#e9e9e9}
 .mobile-back{display:none}
 /* main */
 main{max-width:1300px;margin:0 auto;padding:56px 24px 80px}
@@ -239,7 +242,7 @@ if(S.view!=='alias')S.view='nami';   // the Cutlery variations were replaced by 
 if(S.market==='de')S.lang='en';
 // UI words in Spanish (my translations); category labels come from the earlier prototype's dictionary (wmf.com/es wording where it exists)
 const UI_ES={'Products':'Productos','Menu':'Menú','Collections':'Colecciones','Offers':'Ofertas','Recipes':'Recetas','Services':'Servicios','Discover':'Descubrir',
- 'See all':'Ver todo','Back':'Atrás','Discover {x}':'Descubre {x}','New':'Nuevo','Variation':'Variante','Alias':'Alias','Type':'Tipo','Cooking style':'Estilo de cocina','Material':'Material','Coating':'Recubrimiento','Knife type':'Tipo de cuchillo','Finish':'Acabado','Also see':'Ver también','Cutlery type':'Tipo de cubierto','For':'Para','Range':'Gama','All products':'Todos los productos','products':'productos','Home':'Inicio',
+ 'See all':'Ver todo','Back':'Atrás','Discover {x}':'Descubre {x}','New':'Nuevo','Variation':'Variante','Alias':'Alias','Type':'Tipo','Cooking style':'Estilo de cocina','Material':'Material','Coating':'Recubrimiento','Knife type':'Tipo de cuchillo','Finish':'Acabado','Also see':'Ver también','Discover more':'Descubrir más','Cutlery type':'Tipo de cubierto','For':'Para','Range':'Gama','All products':'Todos los productos','products':'productos','Home':'Inicio',
  'Join MY WMF':'Únete a MY WMF','Top ranges':'Gamas destacadas','Set offers':'Ofertas en sets','What are you looking for?':'¿Qué estás buscando?','Search':'Buscar','No matches in the menu':'Ningún resultado en el menú'};
 const t=s=>S.lang==='es'?(UI_ES[s]||D.es[s]||s):s;
 const cap=s=>s?s[0].toUpperCase()+s.slice(1):s;   // NAMI has a few lowercase labels (jugs & jars, ovenware)
@@ -293,7 +296,7 @@ function aliasPanel(a){
   <div class="panel-head"><h2 id="panel-title">${esc(tl(a.label))}${aliasTag()}</h2><a class="see-all" href="${ahref(a)}">${esc(t('See all'))} ${esc(tl(a.label).toLowerCase())}${chev}</a><span class="al-path">→ ${esc(aPath(a))}</span></div>
   <div class="panel-body"><div><div class="al-cols">${aliasGroups(a).map(([title,links])=>`<div class="al-grp"><h3>${esc(t(title))}</h3><ul>${links.map(([l,h,n,nw])=>`<li><a href="${h}">${esc(l)}</a>${n!=null?cnt(n):''}${nw?newTag():''}</li>`).join('')}</ul></div>`).join('')}</div>
     ${rng?`<div class="al-ranges"><h3>${esc(t('Top ranges'))}</h3><div class="al-rng-grid">${rng}</div></div>`:''}</div>
-  <div class="promos">${a.image?`<a class="promo" href="${ahref(a)}"><img src="${esc(a.image)}" alt=""><span><span><small>${esc(t('Products'))}</small>${esc(fmt('Discover {x}',tl(a.label)))}</span></span></a>`:''}${S.market==='de'?club():''}</div></div>`;
+  <div class="promos">${teaserFor(a.id,a.label,a.image,ahref(a))}${S.market==='de'?club():''}</div></div>`;
 }
 function railRows(us,u,a){
   const row=(x,attr,cur,sm)=>`<button class="u-row${sm?' sm':''}" ${attr}="${x.id}" aria-current="${cur}"><span>${esc(tl(x.label))}<span class="u-count">${x.count}</span></span>${chev}</button>`;
@@ -334,17 +337,38 @@ function aliasDest(aid,kind,id){
 }
 
 /* ---------- menu ---------- */
-const club=()=>`<div class="club"><img src="${esc(D.club.logo)}" alt="MY WMF"><p>${esc(t('Join MY WMF'))}</p><ul><li>€10 welcome bonus</li><li>Early access to sales</li></ul><a class="pill" href="#/">Join now</a></div>`;
+// Marketing blocks of the menu (Dan, 25 Nov 2026: "more realistic and relatable"): wmf.com's own campaign teasers (the portrait cards
+// of its home page, checked 25 Nov 2026), matched to the menu panel, and the MY WMF card in the style of the earlier prototype.
+const WM='https://www.wmf.com/media/', WS='https://www.wmf.com/de/en/';
+const TEASERS={
+  fusiontec:{title:'Fusiontec cookware',img:WM+'wysiwyg/Teaser_Fusiontec.jpg',page:'masterpieces/fusiontec-cookware.html'},
+  castiron:{title:'Cast iron cookware',line:'The modern take on cast iron',img:WM+'.renditions/wysiwyg/02Campaigns/CastIronLP/Teaser_Flavour.png',page:'inspirations/pots/cast-iron.html'},
+  iconic:{title:'Iconic cookware',img:WM+'wysiwyg/Iconic_teaser.jpg',page:'campaigns/signature/iconic.html'},
+  cromargan:{title:'Cromargan protect',img:WM+'wysiwyg/Cromargan_Teaser.jpg',page:'masterpieces/cromargan-protect-cutlery.html'},
+  knives:{title:'Ultimate Black knives',img:WM+'wysiwyg/Teaser_Damasteel.jpg',page:'masterpieces/ultimate-black-knives.html'},
+  perfection:{title:'Perfection',line:'Coffee delight for all your senses',img:WM+'wysiwyg/Perfection_Teaser.jpg',page:'masterpieces/perfection-coffee-machine.html'},
+  minis:{title:'WMF KITCHENminis',img:WM+'.renditions/wysiwyg/02Campaigns/Kitchenminis/Kitchenminis_LP_Stage_Desktop.jpg',page:'masterpieces/kitchenminis-collection.html',pos:'74% 50%'},
+};
+// which teaser a menu panel shows: by universe id or alias id
+const TEASER_FOR={cookware:'fusiontec',pans:'fusiontec',pots:'castiron','pressure-cookers':'iconic',kitchenware:'cromargan',cutlery:'cromargan',knives:'knives',
+  'beverage-breakfast':'perfection','coffee-machines':'perfection','food-preparation':'minis','cooking-appliances':'minis'};
+function teaserCard(x,inner){   // x: {title, line?, img, pos?}; inner: the link of the panel, used where the campaign page is not this market's
+  const ext=x.page&&S.market==='de';
+  return `<a class="teaser" href="${esc(ext?WS+x.page:inner)}"${ext?' target="_blank" rel="noopener"':''}><img src="${esc(x.img)}" alt="" loading="lazy"${x.pos?` style="object-position:${x.pos}"`:''}>
+    <span class="teaser-copy"><b>${esc(tl(x.title))}</b>${x.line?`<small>${esc(x.line)}</small>`:''}<span class="teaser-cta">${esc(t('Discover more'))}</span></span></a>`;
+}
+function teaserFor(id,label,image,inner){   // the campaign teaser of a panel, or its own category picture in the same card
+  const x=TEASERS[TEASER_FOR[id]];
+  return x?teaserCard(x,inner):image?teaserCard({title:label,img:image},inner):'';
+}
+const CLUB_BENEFITS=['€10 welcome bonus','A birthday gift every year','Collect points and get vouchers','Early access to sales'];
+const icoCheck='<svg class="club-ico" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="m8.2 12.4 2.6 2.6 5-5.2"/></svg>';
+const club=()=>`<a class="club" href="#/"><span class="club-top"><img src="${esc(D.club.logo)}" alt="MY WMF"><span class="pill">Join now</span></span><h3>Members get more from WMF</h3><ul>${CLUB_BENEFITS.slice(0,3).map(b=>`<li>${icoCheck}<span>${esc(b)}</span></li>`).join('')}</ul></a>`;   // compact, so teaser and card fit the menu without scrolling
 const MENU_LIST=[['products','Products'],['collections','Collections'],['offers','Offers'],['recipes','Recipes'],['services','Services'],['discover','Discover']];
 const railLinks=cur=>`<div class="rail-links">${MENU_LIST.filter(m=>m[0]!==cur).map(m=>`<button data-menu="${m[0]}">${esc(t(m[1]))}</button>`).join('')}</div>`;
 function promos(u){
-  const withImg=u.cats.filter(c=>c.image);
-  const a=withImg[0], b=withImg[1];
-  let h='';
-  if(a)h+=`<a class="promo" href="${href(u.id,a.id)}"><img src="${esc(a.image)}" alt=""><span><span><small>${esc(tl(u.label))}</small>${esc(fmt('Discover {x}',tl(a.label)))}</span></span></a>`;
-  if(S.market==='de')h+=club();
-  else if(b)h+=`<a class="promo" href="${href(u.id,b.id)}"><img src="${esc(b.image)}" alt=""><span><span><small>${esc(tl(u.label))}</small>${esc(fmt('Discover {x}',tl(b.label)))}</span></span></a>`;
-  return h;
+  const withImg=u.cats.filter(c=>c.image), a=withImg[0];
+  return teaserFor(u.id,u.label,a&&a.image,href(u.id))+(S.market==='de'?club():'');
 }
 function panel(u){
   return `<button class="mobile-back" data-back>${back}${esc(t('Back'))}</button>
@@ -383,7 +407,7 @@ function collectionsMenu(){
 function sidePromo(sec){
   if(sec==='offers'&&S.market==='de')return club();
   const th=M().collections.themes, c=th.find(x=>x.id===(sec==='recipes'?'italian-kitchen':'coffee-tea'))||th[0];
-  return c?`<a class="promo" href="${href('collections',c.id)}"><img src="${esc(c.image)}" alt=""><span><span><small>${esc(t('Collections'))}</small>${esc(tl(c.label))}</span></span></a>`:'';
+  return c?teaserCard({title:c.label,line:tl(c.description),img:c.image},href('collections',c.id)):'';
 }
 const contentNote=(sec,x)=>sec==='offers'?'A campaign page on wmf.com. What is on offer changes with the campaign, so the menu links to the page, not to a NAMI category.'
   :sec==='recipes'?'A recipe category on wmf.com. Recipes are content, not products, so they sit outside the NAMI product tree.'
@@ -660,6 +684,8 @@ function syncBar(){
   $('#q').placeholder=t('What are you looking for?'); if($('#q').value)renderSugg();
   $('#foot-note').textContent=`Data ${D.generated} · ${S.market==='de'?'wmf.com/de catalogue':'wmf.com/es catalogue'} · ${M().products} products`;
   store.set('wmf-uni-market',S.market);store.set('wmf-uni-lang',S.lang);store.set('wmf-uni-view',S.view);store.set('wmf-uni-tags',S.tags?'1':'0');
+  // keep the address bar in step with the review bar, so the current view can be shared as a link
+  try{const u=new URL(location.href);u.searchParams.set('view',S.view);u.searchParams.set('market',S.market);if(S.market==='es')u.searchParams.set('lang',S.lang);else u.searchParams.delete('lang');if(u.href!==location.href)history.replaceState(null,'',u);}catch(e){}
 }
 $('#review-bar').addEventListener('click',e=>{
   const b=e.target.closest('button'); if(!b)return;

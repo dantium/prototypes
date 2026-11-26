@@ -171,11 +171,12 @@ dialog{border:0;padding:0;max-width:720px;width:calc(100% - 32px)}dialog::backdr
   .rail{border:0;padding:8px 16px 30px}.rail-title{display:block;font-size:26px;letter-spacing:.14em;text-transform:uppercase;margin:12px 0 10px;font-weight:400}
   .u-row{padding:15px 8px;border-bottom:1px solid var(--line);margin:0;font-size:17px}
   .u-row[aria-current="true"]{background:none;font-weight:400}
-  .rail-links{display:block}.rail-links a{display:block;padding:13px 8px;font-size:17px}
+  /* each row has its own line on mobile, so the blocks under the rows drop their top line (no double lines) */
+  .rail-sub{border-top:0;margin-top:12px}.rail-links{display:block;border-top:0;margin-top:10px}.rail-links a{display:block;padding:13px 8px;font-size:17px}
   .panel{padding:8px 16px 40px}
   #menu.level-u .rail{display:none}#menu:not(.level-u) .panel{display:none}
   .mobile-back{display:inline-flex;align-items:center;gap:6px;font-size:15px;padding:10px 0;margin-bottom:6px}
-  .panel-head{flex-direction:column;gap:10px;align-items:flex-start;margin-bottom:20px}
+  .panel-head{flex-direction:column;gap:10px;align-items:flex-start;margin-bottom:20px;border-bottom:0;padding-bottom:0}
   .panel-head h2{font-size:24px;line-height:28px;letter-spacing:.14em}
   .panel-body{display:block}.cats{columns:1}
   .menu-in.full{padding:8px 16px 30px}.col-head h2{font-size:24px;line-height:28px;letter-spacing:.14em}.col-grid{grid-template-columns:1fr 1fr;gap:10px}.col-card{aspect-ratio:1}.col-card small{display:none}.col-card b{font-size:15px}.rng-grid{grid-template-columns:repeat(3,1fr)}.kids{columns:1}

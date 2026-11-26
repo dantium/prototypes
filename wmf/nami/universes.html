@@ -98,6 +98,7 @@ body:not(.tags) .n,body:not(.tags) .tag,body:not(.tags) .u-count{display:none}
 .al-rng{display:flex;flex-direction:column;gap:3px;font-size:14px;line-height:1.25}.al-rng .im{aspect-ratio:1;background:var(--soft);display:block;overflow:hidden;margin-bottom:4px}
 .al-rng img{width:100%;height:100%;object-fit:contain;mix-blend-mode:multiply}.al-rng b{font-weight:700}.al-rng small{font:11px/1.3 Arial,sans-serif;color:#777}.al-rng:hover b{text-decoration:underline}
 .al-to{font:12px Arial,sans-serif;color:#777;margin:-6px 0 4px}
+.al-finder{display:flex;align-items:center;gap:14px;width:min(100%,420px);margin-top:26px;padding:12px 16px 12px 12px;border:1px solid var(--line);color:#111;text-decoration:none;transition:border-color .15s}.al-finder:hover{border-color:#111}.al-finder:hover b{text-decoration:underline;text-underline-offset:3px}.al-finder .finder-ico{width:38px;height:38px;flex:none;padding:9px;border-radius:50%;background:var(--soft);fill:none;stroke:#111;stroke-width:1.4}.al-finder span{flex:1;min-width:0}.al-finder b{display:block;font-size:15.5px;font-weight:700}.al-finder small{display:block;margin-top:2px;font:13px/1.35 Arial,sans-serif;color:#666}.al-finder>svg:last-child{width:14px;height:14px;flex:none;fill:none;stroke:#111;stroke-width:1.6}.chip-rows+.al-finder,.chip-row+.al-finder{margin:18px 0 6px}
 .kind{display:inline-block;font:700 9px/1 Arial,sans-serif;letter-spacing:.06em;text-transform:uppercase;padding:3px 5px;margin-left:7px;vertical-align:1px;border-radius:3px;white-space:nowrap}.al-to .kind{margin:0 3px 0 2px}.k-l{background:#111;color:#fff}.k-f{background:#e1ecfa;color:#1d4f8a}.k-r{background:#efe6fb;color:#55309a}.k-s{background:#e8e8e6;color:#444}.kind-legend{display:flex;flex-wrap:wrap;gap:8px 22px;font:12px Arial,sans-serif;color:#555;margin:-8px 0 20px}.kind-legend .kind{margin:0 4px 0 0}body:not(.tags) .kind,body:not(.tags) .kind-legend{display:none}.map-c>b{font-size:15px}
 .al-note{background:#f2f8ee;border-left:4px solid #8cb874;padding:14px 18px;margin:0 0 18px;max-width:860px;font-size:15px;line-height:1.5}
 .chip-row{display:flex;align-items:baseline;gap:14px;margin-top:10px}.chip-row>span{font:700 11px Arial,sans-serif;letter-spacing:.1em;text-transform:uppercase;color:#666;flex:0 0 96px}.chip-row .chips{margin:0}.chip-rows{margin-top:22px}.chip-rows>.chips{margin:0 0 4px}
@@ -283,19 +284,42 @@ function aliasGroups(a){   // [title, [[label, href, count, isNew, kind]], kind 
   return g;
 }
 // what kind of thing a menu link is: a NAMI level, a navigation filter, a range or a service page
-const KIND={L1:['l','Universe, NAMI level 1'],L2:['l','Category, NAMI level 2'],L3:['l','Subcategory, NAMI level 3'],Filter:['f','Navigation filter: a product attribute in the PIM'],Range:['r','Range: the range field planned for the PIM'],Service:['s','A page of the Services menu']};
+const KIND={L1:['l','Universe, NAMI level 1'],L2:['l','Category, NAMI level 2'],L3:['l','Subcategory, NAMI level 3'],Filter:['f','Navigation filter: a product attribute in the PIM'],Range:['r','Range: the range field planned for the PIM'],Service:['s','A page of the Services menu'],Page:['s','Content page, such as the product finder quiz']};
 const kind=k=>k?`<span class="kind k-${KIND[k][0]}" title="${esc(KIND[k][1])}">${k}</span>`:'';
 const newTag=()=>`<span class="tag new">${esc(t('New'))}</span>`;
 function aliasRanges(a){
   if(a.feature&&a.feature.length)return a.feature.map(f=>`<a class="al-rng" href="${esc(f.href)}"><span class="im"><img src="${esc(f.img)}" srcset="${esc(f.img2||f.img)} 2x" alt="" loading="lazy"></span><b>${esc(f.label)}</b><small>${esc(f.tag||'')}</small></a>`).join('');
   return a.ranges.map(r=>`<a class="al-rng" href="${ahref(a,'range',r.id)}"><span class="im">${r.thumb?`<img src="${esc(IM(r.thumb))}" alt="" loading="lazy">`:''}</span><b>${esc(r.label)}</b><small>${r.count} ${esc(t('products'))}</small></a>`).join('');
 }
+// Product finder (quiz) link of an alias (Dan, 26 Nov 2026: "add a link to the product quiz, e.g. Pans Product Finder"). Germany only:
+// wmf.com/es has no product advisors. `live` = the quiz on wmf.com/de today (checked 26 Nov 2026); pans and knives have none yet.
+const WD='https://www.wmf.com/de/de/';
+const FINDERS={pans:{noun:'pan'},pots:{noun:'pot',live:'produkte/toepfe/topfberater.html',name:'Topfberater'},
+  cutlery:{noun:'cutlery',live:'produkte/bestecke/besteckberater.html',name:'Besteckberater'},knives:{noun:'knife',guide:'inspirationen/messer/messer-kaufberatung.html'},
+  'coffee-machines':{noun:'coffee machine',live:'produkte/kaffeemaschinen/kaffeeberater.html',name:'Kaffeeberater'}};
+const finderOf=a=>S.market==='de'?FINDERS[a.id]:null;
+const finderName=a=>`${tl(a.label)} Product Finder`;
+const icoFinder='<svg class="finder-ico" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9.5"/><path d="m15.5 8.5-2 5-5 2 2-5z"/></svg>';
+function finderLink(a){
+  const f=finderOf(a); if(!f)return '';
+  return `<a class="al-finder" href="${ahref(a,'finder')}">${icoFinder}<span><b>${esc(finderName(a))}</b><small>Answer a few questions and find the right ${esc(f.noun)}</small></span>${chev}</a>`;
+}
+function finderDest(a){
+  const f=finderOf(a), {u,c,s}=aNode(a); if(!f)return home();
+  const now=f.live?`wmf.com/de has this quiz today as the ${esc(f.name)}.`:f.guide?'wmf.com/de has no knife quiz today, only a buying guide.':'wmf.com/de has no pan quiz today, so this one is new.';
+  const out=f.live?`<a class="btn" href="${WD+f.live}" target="_blank" rel="noopener">Open the ${esc(f.name)} on wmf.com</a>`:f.guide?`<a class="btn" href="${WD+f.guide}" target="_blank" rel="noopener">Open the knife buying guide on wmf.com</a>`:'';
+  return `<nav class="crumbs"><a href="#/">${esc(t('Home'))}</a>›<a href="${ahref(a)}">${esc(tl(a.label))}</a>›<span>${esc(finderName(a))}</span></nav>
+   <span class="eyebrow">Alias · product finder link · destination preview</span>
+   <h1>${esc(finderName(a))}</h1><p class="lead">A short quiz: answer a few questions and find the right ${esc(f.noun)}.</p>
+   <div class="al-note"><b>Product finder.</b> This link opens a content page, not a product list. The quiz ends on products from the NAMI ${a.level.toLowerCase()} ${esc(aPath(a))}, so nothing moves in the structure. ${now}</div>
+   ${out} <a class="btn" href="${ahref(a)}" style="background:#fff;color:#111;border:1px solid #111">Back to ${esc(tl(a.label).toLowerCase())}</a>`;
+}
 function aliasPanel(a){
   const rng=aliasRanges(a);
   return `<button class="mobile-back" data-back>${back}${esc(t('Back'))}</button>
   <div class="panel-head"><h2 id="panel-title">${esc(tl(a.label))}${aliasTag()}</h2><a class="see-all" href="${ahref(a)}">${esc(t('See all'))} ${esc(tl(a.label).toLowerCase())}${chev}</a><span class="al-path">→ ${esc(aPath(a))}</span></div>
   <div class="panel-body"><div><div class="al-cols">${aliasGroups(a).map(([title,links])=>`<div class="al-grp"><h3>${esc(t(title))}</h3><ul>${links.map(([l,h,n,nw])=>`<li><a href="${h}">${esc(l)}</a>${n!=null?cnt(n):''}${nw?newTag():''}</li>`).join('')}</ul></div>`).join('')}</div>
-    ${rng?`<div class="al-ranges"><h3>${esc(t('Top ranges'))}</h3><div class="al-rng-grid">${rng}</div></div>`:''}</div>
+    ${rng?`<div class="al-ranges"><h3>${esc(t('Top ranges'))}</h3><div class="al-rng-grid">${rng}</div></div>`:''}${finderLink(a)}</div>
   <div class="promos">${teaserFor(a.id,a.label,a.image,ahref(a))}${S.market==='de'?club():''}</div></div>`;
 }
 function railRows(us,u,a){
@@ -306,17 +330,19 @@ function railRows(us,u,a){
 function aliasMap(){
   const where=S.market==='de'?'Germany':'Spain';
   const li=([l,hr,n,nw,k])=>`<li><a href="${esc(hr)}">${esc(l)}</a>${n!=null?cnt(n):''}${nw?newTag():''}${kind(k)}</li>`;
-  return `<h2 class="sec">Aliases in the menu</h2><p class="sec-note">Top-level entries chosen for ${where}. Each one points to a NAMI category or subcategory and adds its own type, navigation filter and range links. Nothing moves in the structure shown in the menu map below.</p>
-  <p class="kind-legend">${['L1','L2','L3','Filter','Range'].map(k=>`<span>${kind(k)} ${esc(KIND[k][1])}</span>`).join('')}</p>
+  return `<h2 class="sec">Aliases in the menu</h2><p class="sec-note">Top-level entries chosen for ${where}. Each one points to a NAMI category or subcategory and adds its own type, navigation filter and range links${AL().some(finderOf)?', and a link to its product finder quiz':''}. Nothing moves in the structure shown in the menu map below.</p>
+  <p class="kind-legend">${['L1','L2','L3','Filter','Range'].concat(AL().some(finderOf)?['Page']:[]).map(k=>`<span>${kind(k)} ${esc(KIND[k][1])}</span>`).join('')}</p>
   <div class="map">${AL().map(a=>{
     const rng=a.feature&&a.feature.length?a.feature.map(f=>[f.label,f.href]):a.ranges.map(r=>[r.label,ahref(a,'range',r.id),r.count]);
     return `<div class="map-u"><h3><a href="${ahref(a)}">${esc(tl(a.label))}</a>${cnt(a.count)}</h3><div class="al-to">→ ${kind(a.level==='Category'?'L2':'L3')} ${esc(aPath(a))}</div>
     ${aliasGroups(a).map(([title,links,k])=>`<div class="map-c"><b>${esc(t(title))}</b>${kind(k)}<ul>${links.map(li).join('')}</ul></div>`).join('')}
-    ${rng.length?`<div class="map-c"><b>${esc(t('Top ranges'))}</b>${kind('Range')}<ul>${rng.map(li).join('')}</ul></div>`:''}</div>`}).join('')}</div>`;
+    ${rng.length?`<div class="map-c"><b>${esc(t('Top ranges'))}</b>${kind('Range')}<ul>${rng.map(li).join('')}</ul></div>`:''}
+    ${finderOf(a)?`<div class="map-c"><b>Product finder</b>${kind('Page')}<ul><li><a href="${ahref(a,'finder')}">${esc(finderName(a))}</a></li></ul></div>`:''}</div>`}).join('')}</div>`;
 }
 function aliasDest(aid,kind,id){
   const a=AL().find(x=>x.id===aid); if(!a)return home();
   const {u,c,s,node}=aNode(a); if(!node)return home();
+  if(kind==='finder')return finderDest(a);
   const all=a.products||node.products, where=S.market==='de'?'Germany':'Spain', lvl=a.level.toLowerCase();
   let list=all, cur=null, note='';
   if(kind==='type'){cur=a.types.find(x=>x.id===id); if(cur){const sub=cur.sid&&c.subs.find(x=>x.id===cur.sid); list=sub?sub.products:(cur.products||all);
@@ -332,7 +358,7 @@ function aliasDest(aid,kind,id){
    <span class="eyebrow">Alias · ${kind&&cur?kind+' link':'top-level menu entry'} · destination preview</span>
    <h1>${esc(tl(cur?cur.label:a.label))}</h1><p class="lead">${list.length} ${esc(t('products'))} in ${where}, all listed below. Each product links to its wmf.com page.</p>
    <div class="al-note"><b>Alias.</b> This menu entry points to the NAMI ${lvl} ${esc(aPath(a))}. The product list, breadcrumb and canonical URL are that ${lvl}'s; nothing moves in the structure.${note?' '+note:''}</div>
-   ${rows.join('')}${cards(list)}
+   ${rows.join('')}${finderLink(a)}${cards(list)}
    <a class="btn" href="#/">Back to the menu map</a>`;
 }
 

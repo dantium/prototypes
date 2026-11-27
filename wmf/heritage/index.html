@@ -120,12 +120,12 @@ td.num, th.num { font-variant-numeric: tabular-nums; white-space: nowrap; color:
     <h2>Recommendation</h2>
     <ol>
       <li><b>Build one shop-native page, "Our story"</b> (/de/en/our-story.html, /de/de/unsere-geschichte.html), and link it from the footer, the homepage "Since 1853" band, the Masterpieces hub and the PDP brand module. Today "History" sends shoppers to a corporate site with a contact form, and "WMF Brand" opens a list of press releases.</li>
-      <li><b>Lead with what people buy, and use heritage as the proof.</b> The page is organised by product world (cookware, cutlery, design classics, coffee), each with a "since" date, a short heritage hook, today's benefit and a shoppable product row. The brand line "Inspired by professionals. Designed for home." frames the page.</li>
+      <li><b>Lead with what people buy, and use heritage as the proof.</b> The page is organised by product world (cookware, cutlery, design classics, coffee), each with a "since" date, a short heritage hook, today's benefit and links into the shop. The brand line "Inspired by professionals. Designed for home." frames the page.</li>
       <li><b>Close the loop to the shop.</b> No kitchenware competitor combines a well-told history with real commerce links. That gap is WMF's to take: Cromargan®, the Perfect pressure cooker, coffee machines and the Wagenfeld designs are all still on sale.</li>
-      <li><b>Keep the history short, complete and careful.</b> The full chronology becomes one swipeable timeline of six moments after the product sections, with a short, sober note on 1939–1945, which the German corporate chronicle covers and the English one leaves out. Every line and alt text follows the WMF claim rules: no "Made in Germany", no "first in the world", no superlatives.</li>
+      <li><b>Keep the history short and on the shop.</b> The full chronology becomes one swipeable timeline of six moments after the product sections, with no link out to the corporate site. How to handle 1939–1945, which the German corporate chronicle covers and the English one leaves out, is parked for now (see Decisions). Every line and alt text follows the WMF claim rules: no "Made in Germany", no "first in the world", no superlatives.</li>
     </ol>
     <div class="verdict">
-      <div><b>New components needed</b>None. 14 sections, all from live PageBuilder modules. One optional CSS change: a sticky Sub Navigation.</div>
+      <div><b>New components needed</b>None. 11 sections, all from live PageBuilder modules. One optional CSS change: a sticky Sub Navigation.</div>
       <div><b>Content needed</b>Mostly exists: archive photos, the 2023 heritage film, the Taste Matters film, real SKUs. Copy is drafted in the prototype.</div>
     </div>
   </section>
@@ -249,14 +249,14 @@ td.num, th.num { font-variant-numeric: tabular-nums; white-space: nowrap; color:
   <section id="structure">
     <div class="col">
       <h2>5 · Proposed structure</h2>
-      <p>A marketing-led page: four product worlds, each a heritage hook (Text + Image) followed by a shoppable Product Slider, then the brand film, a short history timeline, service and an FAQ. Every module below is live on wmf.com today; the prototype labels each one and explains its purpose.</p>
+      <p>A marketing-led page: four product worlds, each a heritage hook (Text + Image) with CTAs into the matching category or Masterpiece page, then the brand film, a short history timeline, service and an FAQ. Every module below is live on wmf.com today; the prototype labels each one and explains its purpose.</p>
     </div>
     <div class="chapters">
-      <div><span class="y">since 1927</span><div class="t">Cookware</div><p>Sicomatic 1927, Perfect 1984, Cromargan® pots and pans. Shop: Perfect, Iconic, Gourmet Plus.</p></div>
-      <div><span class="y">since 1932</span><div class="t">Cutlery</div><p>Cromargan® 1930, first cutlery 1932, Cromargan protect®. Shop: Boston, Neo.</p></div>
-      <div><span class="y">since 1954</span><div class="t">Design classics</div><p>Wagenfeld, Max und Moritz, the 2026 Lufthansa re-edition. Shop: Wagenfeld, Lufthansa.</p></div>
-      <div><span class="y">since 1927</span><div class="t">Coffee</div><p>Café and hotel machines since 1927, WMF Perfection for home. Shop: Perfection, Kult.</p></div>
-      <div><span class="y">1853–today</span><div class="t">Our history</div><p>Six moments: 1853, 1880, 1904, 1930, 1984, 2019, plus a short note on 1939–1945.</p></div>
+      <div><span class="y">since 1927</span><div class="t">Cookware</div><p>Sicomatic 1927, Perfect 1984, Cromargan® pots and pans. Shop: pressure cookers, Cromargan® cookware.</p></div>
+      <div><span class="y">since 1932</span><div class="t">Cutlery</div><p>Cromargan® 1930, first cutlery 1932, Cromargan protect®. Shop: cutlery sets, Cromargan protect®.</p></div>
+      <div><span class="y">since 1954</span><div class="t">Design classics</div><p>Wagenfeld, Max und Moritz, the 2026 Lufthansa re-edition. Shop: Max und Moritz.</p></div>
+      <div><span class="y">since 1927</span><div class="t">Coffee</div><p>Café and hotel machines since 1927, WMF Perfection for home. Shop: coffee machines, Perfection.</p></div>
+      <div><span class="y">1853–today</span><div class="t">Our history</div><p>Six moments: 1853, 1880, 1904, 1930, 1984, 2019.</p></div>
     </div>
     <div class="tablewrap">
       <table>
@@ -265,13 +265,13 @@ td.num, th.num { font-variant-numeric: tabular-nums; white-space: nowrap; color:
           <tr><td class="num">01</td><td><span class="mod">Stage · video slide</span></td><td>"Since 1853", loop from the heritage film; "Shop our icons" and "Watch the film"</td><td>The "Since" signal, with a shop CTA first</td></tr>
           <tr><td class="num">02</td><td><span class="mod">Text · Centered</span></td><td>"Inspired by professionals. Designed for home." in two sentences</td><td>Brand promise up front</td></tr>
           <tr><td class="num">03</td><td><span class="mod">Sub Navigation + Anchor</span></td><td>Chips: Cookware since 1927 · Cutlery since 1932 · Design classics · Coffee since 1927 · Our history · FAQ</td><td>Shop-led jump bar; sticky as a CSS enhancement</td></tr>
-          <tr><td class="num">04–05</td><td><span class="mod">Text + Image</span> <span class="mod">Product Slider</span></td><td>"Under pressure since 1927"; "Cook with the classics" (Perfect Plus, Perfect Premium, Iconic set, Fusiontec, Gourmet Plus)</td><td>Heritage hook → shop</td></tr>
-          <tr><td class="num">06–08</td><td><span class="mod">Text + Image</span> <span class="mod">Text + Image</span> <span class="mod">Product Slider</span></td><td>"Cromargan® on the table"; "Design that stays on the table"; "Set the table" (Boston, Neo, Wagenfeld, Lufthansa re-edition)</td><td>Design code and icons as products</td></tr>
-          <tr><td class="num">09–10</td><td><span class="mod">Text + Image</span> <span class="mod">Product Slider</span></td><td>"From the café counter to your kitchen"; "Coffee at home" (Perfection 680, 890L, 770, Kult)</td><td>Professional proof for the highest-value category</td></tr>
-          <tr><td class="num">11</td><td><span class="mod">Video</span></td><td>Taste Matters film, with transcript</td><td>Emotional payoff</td></tr>
-          <tr><td class="num">12</td><td><span class="mod">Highlights · 6 cards</span></td><td>"Our history at a glance": 1853 · 1880 · 1904 · 1930 · 1984 · 2019, plus a short text on 1939–1945 and a link to the full chronicle</td><td>The story, short and complete</td></tr>
-          <tr><td class="num">13</td><td><span class="mod">Marketing Banner</span></td><td>"Keep it in use": spare parts and service</td><td>Longevity without a durability claim</td></tr>
-          <tr><td class="num">14</td><td><span class="mod">FAQ · Collapse</span></td><td>Founded? What does WMF stand for? What is Cromargan®? Spare parts? Who owns WMF? Where are products made?</td><td>Search and AI answers; plus AboutPage / Organization schema</td></tr>
+          <tr><td class="num">04</td><td><span class="mod">Text + Image</span></td><td>"Under pressure since 1927"; CTAs to Perfect pressure cookers and Cromargan® cookware</td><td>Heritage hook → shop</td></tr>
+          <tr><td class="num">05–06</td><td><span class="mod">Text + Image</span> <span class="mod">Text + Image</span></td><td>"Cromargan® on the table"; "Design that stays on the table"; CTAs to cutlery sets, Cromargan protect® and Max und Moritz</td><td>Design code and icons as products</td></tr>
+          <tr><td class="num">07</td><td><span class="mod">Text + Image</span></td><td>"From the café counter to your kitchen"; CTAs to coffee machines and Perfection</td><td>Professional proof for the highest-value category</td></tr>
+          <tr><td class="num">08</td><td><span class="mod">Video</span></td><td>Taste Matters film, with transcript</td><td>Emotional payoff</td></tr>
+          <tr><td class="num">09</td><td><span class="mod">Highlights · 6 cards</span></td><td>"Our history at a glance": 1853 · 1880 · 1904 · 1930 · 1984 · 2019</td><td>The story, short, without leaving the shop</td></tr>
+          <tr><td class="num">10</td><td><span class="mod">Marketing Banner</span></td><td>"Keep it in use": spare parts and service</td><td>Longevity without a durability claim</td></tr>
+          <tr><td class="num">11</td><td><span class="mod">FAQ · Collapse</span></td><td>Founded? What does WMF stand for? What is Cromargan®? Spare parts? Who owns WMF? Where are products made?</td><td>Search and AI answers; plus AboutPage / Organization schema</td></tr>
         </tbody>
       </table>
     </div>
@@ -289,12 +289,12 @@ td.num, th.num { font-variant-numeric: tabular-nums; white-space: nowrap; color:
   <section id="decisions" class="col">
     <h2>7 · Decisions needed</h2>
     <ol class="decisions">
-      <li><b>1939–1945: wording and placement</b>Corporate Communications to approve. The proposal is a short, sober text under the history timeline, with no images or products, linking to the full chronicle. Leaving the period out would repeat the gap on the English corporate page.</li>
+      <li><b>1939–1945 (parked)</b>Left out of the prototype for now, along with any link to the corporate chronicle. Revisit with Corporate Communications before launch: leaving the period out repeats the gap on the English corporate page.</li>
       <li><b>"Where are WMF products made?"</b>This is the most-searched origin question. Legal to word a factual answer without a "Made in" claim.</li>
       <li><b>Facts that conflict</b><ul><li>Cromargan protect®: 2008 or 2009?</li><li>Silit acquisition: 1989 or 1998?</li><li>Current patent count.</li><li>The "11,000 pieces" archive figure.</li></ul>The WMF archive should confirm each, and then the corporate pages should be corrected too.</li>
       <li><b>Film</b>Re-cut the 2023 heritage film without the "170 years" end card, add captions, and make a 9:16 version for mobile.</li>
       <li><b>Image rights</b>Archive images and films come from aboutwmf.com. Confirm their use on the shop. The Diane Kruger 2022 campaign image was left out on purpose.</li>
-      <li><b>Product picks</b>Merchandising to choose the lead product in each row and confirm which pans count as Cromargan®.</li>
+      <li><b>Shoppable product rows (dropped for now)</b>The prototype links each section to a category or Masterpiece page instead of showing a Product Slider. A row can be added back under any section if Merchandising wants one.</li>
       <li><b>URL and navigation</b>Confirm the "Our story" slug, and the footer change that replaces "WMF Brand" (a press-release list) with the new page.</li>
     </ol>
   </section>
